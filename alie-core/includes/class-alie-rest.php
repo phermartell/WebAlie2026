@@ -24,6 +24,17 @@ class AlieCore_REST {
 	}
 
 	public static function create_lead( WP_REST_Request $request ) {
+		// Rate limit por IP: máx. 5 leads cada 10 minutos (anti-abuso).
+		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+		if ( $ip ) {
+			$key   = 'alie_rate_' . md5( $ip );
+			$count = (int) get_transient( $key );
+			if ( $count >= 5 ) {
+				return new WP_Error( 'rate_limited', 'Demasiadas solicitudes. Intenta más tarde.', array( 'status' => 429 ) );
+			}
+			set_transient( $key, $count + 1, 10 * MINUTE_IN_SECONDS );
+		}
+
 		$nombre   = sanitize_text_field( $request->get_param( 'nombre' ) );
 		$whatsapp = sanitize_text_field( $request->get_param( 'whatsapp' ) );
 		$servicio = sanitize_text_field( $request->get_param( 'servicio' ) );
