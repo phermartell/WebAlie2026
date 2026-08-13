@@ -209,16 +209,16 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
                 <p className="text-center text-xs font-mono uppercase tracking-widest text-white/40 mb-3">
                   ¿Ya eres cliente?
                 </p>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="flex flex-col gap-2.5">
                   <a
                     href={pueblaUrl}
-                    className="text-center text-sm font-bold uppercase tracking-wide text-white/80 hover:text-white border border-white/15 rounded-full py-2.5 transition-all cursor-pointer hover:border-white/30"
+                    className="flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-center text-xs font-bold uppercase leading-snug tracking-wide text-white/85 transition-all cursor-pointer hover:border-white/35 hover:bg-white/10 hover:text-white"
                   >
                     Soy cliente de Puebla
                   </a>
                   <a
                     href={monterreyUrl}
-                    className="text-center text-sm font-bold uppercase tracking-wide text-white/80 hover:text-white border border-white/15 rounded-full py-2.5 transition-all cursor-pointer hover:border-white/30"
+                    className="flex items-center justify-center rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-center text-xs font-bold uppercase leading-snug tracking-wide text-white/85 transition-all cursor-pointer hover:border-white/35 hover:bg-white/10 hover:text-white"
                   >
                     Soy cliente de Monterrey
                   </a>
