@@ -32,7 +32,7 @@ Todo formulario del sitio (presente y futuro) debe:
 
 `RECAPTCHA_SECRET_KEY` nunca se expone al cliente (sin prefijo `NEXT_PUBLIC_`).
 
-## Regla #3: Google Tag Manager controlado desde WordPress
+## Regla #3: Google Tag Manager estático por variable de entorno
 
-El GTM se inyecta en el layout raíz solo si está habilitado en WordPress (Ajustes → Alié Digital → "Habilitar Google Tag Manager"). Durante el desarrollo se mantiene apagado para no contaminar analytics.
+El GTM se inyecta en el layout raíz solo si `NEXT_PUBLIC_GTM_ID` está definido. Durante el desarrollo se deja vacío para no contaminar analytics; en producción se define el ID (p. ej. `GTM-N685Q2H`).
 <!-- END:project-rules -->
