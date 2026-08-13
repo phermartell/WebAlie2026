@@ -70,6 +70,15 @@ class AlieCore_REST {
 		update_post_meta( $post_id, 'mensaje', $mensaje );
 		update_post_meta( $post_id, 'canal', $canal );
 
+		// Notificación por correo (destinatario configurable en Ajustes → Alié Digital).
+		$to = AlieCore_Settings::get_notification_email();
+		if ( $to ) {
+			$subject = 'Nuevo lead desde la web: ' . $title;
+			$body    = "Nombre: {$nombre}\nWhatsApp/Teléfono: {$whatsapp}\nServicio: {$servicio}\nMensaje: {$mensaje}\nCanal: {$canal}\n";
+			$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
+			wp_mail( $to, $subject, $body, $headers );
+		}
+
 		return rest_ensure_response(
 			array(
 				'success' => true,
