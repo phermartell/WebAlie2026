@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { getRecaptchaToken } from "@/lib/recaptcha";
 
 type Variant = "facebook" | "instagram";
 
@@ -57,19 +58,6 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
     };
   }, []);
 
-  const loadRecaptcha = () =>
-    new Promise<void>((resolve) => {
-      if (typeof window === "undefined") return resolve();
-      const w = window as unknown as { grecaptcha?: unknown };
-      if (w.grecaptcha || !siteKey) return resolve();
-      const script = document.createElement("script");
-      script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
-      script.async = true;
-      script.onload = () => resolve();
-      script.onerror = () => resolve();
-      document.head.appendChild(script);
-    });
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (status === "submitting") return;
@@ -84,14 +72,7 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
     setError("");
 
     try {
-      await loadRecaptcha();
-      let recaptchaToken = "";
-      const w = window as unknown as {
-        grecaptcha?: { execute: (key: string, opts: { action: string }) => Promise<string> };
-      };
-      if (w.grecaptcha && siteKey) {
-        recaptchaToken = await w.grecaptcha.execute(siteKey, { action: "submit_lead" });
-      }
+      const recaptchaToken = await getRecaptchaToken(siteKey, "submit_lead");
 
       const res = await fetch("/api/lead", {
         method: "POST",

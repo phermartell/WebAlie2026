@@ -22,4 +22,17 @@ cp ruta/archivo.tsx ruta/archivo.tsx.bak
 4. Si hay que revertir → `cp archivo.tsx.bak archivo.tsx` y eliminar el `.bak`
 
 Nunca usar `git checkout` para revertir cambios a menos que el archivo esté correctamente commiteado.
+
+## Regla #2: reCAPTCHA obligatorio en todo formulario
+
+Todo formulario del sitio (presente y futuro) debe:
+1. Generar un token de reCAPTCHA v3 en el cliente usando el helper compartido `src/lib/recaptcha.ts` (`getRecaptchaToken(siteKey, action)`).
+2. Enviarlo a `POST /api/lead` y validarlo server-side (score ≥ 0.5).
+3. Incluir un campo honeypot oculto anti-bots.
+
+`RECAPTCHA_SECRET_KEY` nunca se expone al cliente (sin prefijo `NEXT_PUBLIC_`).
+
+## Regla #3: Google Tag Manager controlado desde WordPress
+
+El GTM se inyecta en el layout raíz solo si está habilitado en WordPress (Ajustes → Alié Digital → "Habilitar Google Tag Manager"). Durante el desarrollo se mantiene apagado para no contaminar analytics.
 <!-- END:project-rules -->

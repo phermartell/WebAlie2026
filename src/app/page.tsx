@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValueEvent } from "framer-motion";
 import Spaceship from "@/components/Spaceship";
 import ContactModal from "@/components/ContactModal";
+import LeadForm from "@/components/LeadForm";
 /* ── Preloader ── */
 const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
@@ -89,6 +90,7 @@ export default function Home() {
   const mousePosRef = useRef({ x: 0, y: 0 });
   const [activeProject, setActiveProject] = useState(0);
   const [activeSocial, setActiveSocial] = useState<"facebook" | "instagram" | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
@@ -241,8 +243,8 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
 
       {/* ─── SECTOR 1: LA IGNICIÓN ─── */}
       <section id="ignicion" className="relative min-h-[110vh] flex flex-col justify-center items-center text-center px-4 z-10 pt-24">
-        <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-6">
-          <img src="/isotipo_GRADIENT.svg" alt="Alié" className="w-28 h-28 drop-shadow-[0_0_20px_rgba(235,63,27,0.6)]" />
+        <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-8 py-6">
+          <img src="/isotipo_GRADIENT.svg" alt="Alié" className="w-20 h-20 md:w-28 md:h-28 drop-shadow-[0_0_20px_rgba(235,63,27,0.6)]" />
           <div className="hidden lg:flex items-center gap-6">
             <a href="#ignicion" className="text-base font-bold uppercase tracking-widest text-starlight/70 hover:text-white transition-colors">Ignición</a>
             <a href="#combate" className="text-base font-bold uppercase tracking-widest text-starlight/70 hover:text-white transition-colors">Combate</a>
@@ -250,7 +252,45 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
             <a href="#bitacora" className="text-base font-bold uppercase tracking-widest text-starlight/70 hover:text-white transition-colors">Bitácora</a>
             <a href="#puerto-de-enlace" className="text-base font-bold uppercase tracking-widest text-starlight/70 hover:text-white transition-colors">Contacto</a>
           </div>
+          {/* Botón menú móvil */}
+          <button
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Abrir menú"
+            aria-expanded={menuOpen}
+            className="lg:hidden text-white/80 hover:text-white transition-colors cursor-pointer"
+          >
+            {menuOpen ? (
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            ) : (
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
         </nav>
+
+        {/* Menú móvil */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              className="absolute top-20 left-4 right-4 z-40 lg:hidden"
+            >
+              <div className="glass-l2 rounded-2xl p-4 flex flex-col gap-3">
+                <a href="#ignicion" onClick={() => setMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-starlight/80 hover:text-white transition-colors">Ignición</a>
+                <a href="#combate" onClick={() => setMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-starlight/80 hover:text-white transition-colors">Combate</a>
+                <a href="#mapa-estelar" onClick={() => setMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-starlight/80 hover:text-white transition-colors">Mapa Estelar</a>
+                <a href="#bitacora" onClick={() => setMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-starlight/80 hover:text-white transition-colors">Bitácora</a>
+                <a href="#puerto-de-enlace" onClick={() => setMenuOpen(false)} className="text-base font-bold uppercase tracking-widest text-starlight/80 hover:text-white transition-colors">Contacto</a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="relative z-20 mt-12 max-w-5xl">
           <motion.div
@@ -368,14 +408,14 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
             style={{ x: xTransform }} 
             className="flex items-center gap-[4vw] pl-[10vw] pr-[30vw]"
           >
-            <div className="w-[360px] shrink-0 flex flex-col gap-2">
+            <div className="w-[300px] md:w-[360px] shrink-0 flex flex-col gap-2">
               <span className="text-base font-mono tracking-[0.3em] text-tangerine uppercase">Sector 3 · Mapa Estelar</span>
               <h2 className="text-3xl font-black uppercase text-white leading-tight">SELECCIONA TU<br/>DESTINO DE CRECIMIENTO</h2>
               <p className="text-base text-starlight/50 mt-2">8 sistemas de crecimiento para tu empresa B2B.</p>
             </div>
 
             {services.map((svc, i) => (
-              <div key={i} className="w-[360px] shrink-0 glass-liquid rounded-[40px] p-10 flex flex-col gap-6 group cursor-none">
+              <div key={i} className="w-[300px] md:w-[360px] shrink-0 glass-liquid rounded-[40px] p-7 md:p-10 flex flex-col gap-6 group cursor-none">
                 <div className="w-16 h-16 flex items-center justify-center">
                   <img src={svc.icon} alt={svc.name} className="w-14 h-14 object-contain" />
                 </div>
@@ -388,7 +428,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
               </div>
             ))}
 
-            <div className="w-[360px] shrink-0 glass-liquid rounded-[40px] p-10 flex flex-col items-center justify-center gap-5 text-center">
+            <div className="w-[300px] md:w-[360px] shrink-0 glass-liquid rounded-[40px] p-7 md:p-10 flex flex-col items-center justify-center gap-5 text-center">
               <div className="w-16 h-16 rounded-full border-2 border-dashed border-orangeleader/40 flex items-center justify-center">
                 <span className="text-orangeleader text-2xl font-black">+</span>
               </div>
@@ -505,7 +545,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
       {/* ─── SECTOR 5: PUERTO DE ENLACE QUANTUM ─── */}
       <section id="puerto-de-enlace" className="relative min-h-screen flex items-center justify-center px-4 pb-36 pt-16 z-10">
         <div className="max-w-3xl w-full mx-auto pointer-events-auto">
-          <div className="bg-[#101b39]/60 backdrop-blur-3xl border border-white/10 rounded-[50px] p-12 md:p-20 text-center shadow-[0_0_100px_rgba(16,27,57,0.8)] cursor-none">
+          <div className="bg-[#101b39]/60 backdrop-blur-3xl border border-white/10 rounded-[50px] p-7 md:p-20 text-center shadow-[0_0_100px_rgba(16,27,57,0.8)] cursor-none">
             <span className="text-base font-mono tracking-[0.3em] text-orangeleader uppercase block mb-4">ATERRIZAJE 100% REMOTO</span>
             <h2 className="text-3xl md:text-5xl font-black uppercase text-white mb-6">CONEXIÓN DIRECTA VÍA VIDEOLLAMADA.</h2>
             <p className="text-base md:text-base text-starlight/80 mb-10 leading-relaxed font-light">
@@ -514,15 +554,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
               <span className="font-bold text-white">Monterrey:</span> (811) 554 5351 &nbsp;|&nbsp;
               <span className="font-bold text-white">Puebla:</span> (221) 327 9555
             </p>
-            <form className="flex flex-col gap-4 max-w-xl mx-auto cursor-none">
-              <input type="text" placeholder="Nombre" className="w-full bg-black/50 border border-white/20 rounded-full h-12 px-6 text-base text-white placeholder-white/40 focus:outline-none focus:border-orangeleader transition-all cursor-none" />
-              <input type="email" placeholder="Correo corporativo" className="w-full bg-black/50 border border-white/20 rounded-full h-12 px-6 text-base text-white placeholder-white/40 focus:outline-none focus:border-orangeleader transition-all cursor-none" />
-              <input type="text" placeholder="Empresa" className="w-full bg-black/50 border border-white/20 rounded-full h-12 px-6 text-base text-white placeholder-white/40 focus:outline-none focus:border-orangeleader transition-all cursor-none" />
-              <input type="tel" placeholder="Teléfono" className="w-full bg-black/50 border border-white/20 rounded-full h-12 px-6 text-base text-white placeholder-white/40 focus:outline-none focus:border-orangeleader transition-all cursor-none" />
-              <button type="button" className="mt-4 bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full h-14 font-black text-base uppercase tracking-widest shadow-[0_10px_30px_rgba(235,63,27,0.4)] transition-all cursor-none">
-                AGENDAR LLAMADA DE ESTRATEGIA (GOOGLE MEET)
-              </button>
-            </form>
+            <LeadForm />
             <div className="mt-10 pt-6 border-t border-white/10 flex flex-col items-center gap-1 opacity-50">
               <span className="text-base font-bold text-white uppercase">&quot;SUEÑA GRANDE, LLEGA LEJOS&quot;</span>
               <span className="text-base font-mono tracking-widest uppercase">Por un mundo lleno de marcas increíbles</span>
@@ -532,14 +564,14 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
       </section>
 
       {/* ─── BOTONES FLOTANTES (Facebook / Instagram) ─── */}
-      <div className="fixed bottom-6 right-6 z-[90] flex flex-col gap-6">
+      <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[90] flex flex-col gap-4 md:gap-6">
         <motion.button
           onClick={() => setActiveSocial("instagram")}
           aria-label="Escríbenos en Instagram"
           animate={{ y: [0, -12, 0], rotate: [0, -3, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           whileHover={{ scale: 1.1 }}
-          className="w-32 h-32 cursor-pointer drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
+          className="w-24 h-24 md:w-32 md:h-32 cursor-pointer drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
         >
           <img src="/flotantes/flotante-instagram.webp" alt="Instagram" className="w-full h-full object-contain" />
         </motion.button>
@@ -549,7 +581,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
           animate={{ y: [0, -12, 0], rotate: [0, 3, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
           whileHover={{ scale: 1.1 }}
-          className="w-32 h-32 cursor-pointer drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
+          className="w-24 h-24 md:w-32 md:h-32 cursor-pointer drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
         >
           <img src="/flotantes/flotante-messenger.webp" alt="Facebook Messenger" className="w-full h-full object-contain" />
         </motion.button>

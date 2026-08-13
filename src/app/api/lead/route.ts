@@ -5,7 +5,7 @@ interface LeadPayload {
   whatsapp: string;
   servicio: string;
   mensaje: string;
-  canal: "facebook" | "instagram";
+  canal: "facebook" | "instagram" | "web";
   recaptchaToken?: string;
   website?: string;
 }
@@ -22,7 +22,8 @@ export async function POST(req: NextRequest) {
   const whatsapp = (body.whatsapp || "").trim();
   const servicio = (body.servicio || "").trim();
   const mensaje = (body.mensaje || "").trim();
-  const canal = body.canal === "instagram" ? "instagram" : "facebook";
+  const canal =
+    body.canal === "instagram" || body.canal === "web" ? body.canal : "facebook";
 
   // Honeypot anti-bots
   if (body.website && body.website.length > 0) {
@@ -33,9 +34,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: false, error: "Faltan datos obligatorios" }, { status: 400 });
   }
 
-  // 1. Verificar reCAPTCHA v3
+  // 1. Verificar reCAPTCHA v3 (obligatorio para todo formulario)
   const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
-  if (recaptchaSecret && body.recaptchaToken) {
+  if (recaptchaSecret) {
+    if (!body.recaptchaToken) {
+      return NextResponse.json({ success: false, error: "Captcha requerido" }, { status: 400 });
+    }
     try {
       const verifyRes = await fetch("https://www.google.com/recaptcha/api/siteverify", {
         method: "POST",
@@ -50,7 +54,10 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false, error: "Captcha no válido" }, { status: 400 });
       }
     } catch {
-      // Si Google no responde, no bloqueamos el envío (best effort)
+      return NextResponse.json(
+        { success: false, error: "No se pudo verificar el captcha. Intenta de nuevo." },
+        { status: 503 }
+      );
     }
   }
 
@@ -87,7 +94,7 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify({
           nombre,
           telefono: whatsapp,
-          fuente: `Formulario Web Alié - ${canal === "facebook" ? "Facebook" : "Instagram"}`,
+          fuente: `Formulario Web Alié - ${canal === "facebook" ? "Facebook" : canal === "instagram" ? "Instagram" : "Landing"}`,
           estadoLead: "Nuevo",
           origenCampana: canal,
           resumen: `Servicio de interés: ${servicio}. Mensaje: ${mensaje}`,
