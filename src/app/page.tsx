@@ -452,7 +452,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
           {/* Left arrow */}
           <button
             onClick={() => setActiveProject(prev => prev === 0 ? 3 : prev - 1)}
-            className="shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-full glass-liquid flex items-center justify-center
+            className="shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-full glass-liquid hidden md:flex items-center justify-center
                        text-white/60 hover:text-white hover:border-white/30 transition-all cursor-none group"
             aria-label="Proyecto anterior"
           >
@@ -516,7 +516,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
           {/* Right arrow */}
           <button
             onClick={() => setActiveProject(prev => prev === 3 ? 0 : prev + 1)}
-            className="shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-full glass-liquid flex items-center justify-center
+            className="shrink-0 w-10 h-10 md:w-14 md:h-14 rounded-full glass-liquid hidden md:flex items-center justify-center
                        text-white/60 hover:text-white hover:border-white/30 transition-all cursor-none group"
             aria-label="Siguiente proyecto"
           >
