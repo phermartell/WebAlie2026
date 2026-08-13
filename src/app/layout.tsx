@@ -39,14 +39,14 @@ export const metadata: Metadata = {
     description:
       "Creamos páginas web, growth marketing, ecommerce y soluciones digitales para generar demanda y ventas en empresas B2B.",
     url: "https://aliedigital.com/",
-    images: [{ url: "https://aliedigital.com/logo.svg" }],
+    images: [{ url: "https://aliedigital.com/og-home.jpg", width: 1200, height: 630, alt: "Alié Digital — Agencia de Marketing Digital B2B" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Agencia de Marketing Digital B2B en Monterrey y Puebla | Alié Digital",
     description:
       "Páginas web, growth marketing, ecommerce y soluciones digitales para empresas B2B.",
-    images: ["https://aliedigital.com/logo.svg"],
+    images: ["https://aliedigital.com/og-home.jpg"],
   },
 };
 

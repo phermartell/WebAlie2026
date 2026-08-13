@@ -165,7 +165,7 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
               </a>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3.5">
               {/* Honeypot (oculto para humanos) */}
               <input type="text" value={website} onChange={(e) => setWebsite(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
 
