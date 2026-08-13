@@ -90,17 +90,6 @@ export default function Home() {
   const mousePosRef = useRef({ x: 0, y: 0 });
   const [activeProject, setActiveProject] = useState(0);
   const [activeSocial, setActiveSocial] = useState<"facebook" | "instagram" | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [menuOpen]);
-
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
 
@@ -252,35 +241,6 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
 
       {/* ─── SECTOR 1: LA IGNICIÓN ─── */}
       <section id="ignicion" className="relative min-h-[110vh] flex flex-col justify-center items-center text-center px-4 z-10 pt-24">
-        <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-8 py-6">
-          <img src="/isotipo_GRADIENT.svg" alt="Alié" className="w-20 h-20 md:w-28 md:h-28 drop-shadow-[0_0_20px_rgba(235,63,27,0.6)]" />
-          <div className="hidden lg:flex items-center gap-6">
-            <a href="#ignicion" className="text-base font-bold uppercase tracking-widest text-starlight/70 hover:text-white transition-colors">Ignición</a>
-            <a href="#combate" className="text-base font-bold uppercase tracking-widest text-starlight/70 hover:text-white transition-colors">Combate</a>
-            <a href="#mapa-estelar" className="text-base font-bold uppercase tracking-widest text-starlight/70 hover:text-white transition-colors">Mapa Estelar</a>
-            <a href="#bitacora" className="text-base font-bold uppercase tracking-widest text-starlight/70 hover:text-white transition-colors">Bitácora</a>
-            <a href="#puerto-de-enlace" className="text-base font-bold uppercase tracking-widest text-starlight/70 hover:text-white transition-colors">Contacto</a>
-          </div>
-          {/* Botón menú móvil */}
-          <button
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-label="Abrir menú"
-            aria-expanded={menuOpen}
-            className="lg:hidden text-white/80 hover:text-white transition-colors cursor-pointer"
-          >
-            {menuOpen ? (
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
-              </svg>
-            ) : (
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
-        </nav>
-
-
         <div className="relative z-20 mt-12 max-w-5xl">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -550,41 +510,6 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
           </div>
         </div>
       </section>
-
-      {/* Menú fullscreen con temática espacial */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease: "easeInOut" }} className="fixed inset-0 z-[95] lg:hidden flex flex-col bg-[#02040a]/95 backdrop-blur-2xl overflow-hidden" data-lenis-prevent>
-            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,rgba(235,63,27,0.18),transparent_55%)]" />
-            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_bottom_left,rgba(22,38,79,0.65),transparent_60%)]" />
-            <div className="absolute inset-0 pointer-events-none starfield opacity-70" />
-            <div className="relative z-10 flex items-center justify-between px-6 py-6">
-              <motion.img src="/isotipo_GRADIENT.svg" alt="Alié" initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5 }} className="w-16 h-16 drop-shadow-[0_0_24px_rgba(235,63,27,0.7)]" />
-              <button onClick={() => setMenuOpen(false)} aria-label="Cerrar menú" className="w-12 h-12 flex items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 hover:text-white hover:border-white/40 hover:rotate-90 transition-all duration-300 cursor-pointer">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" /></svg>
-              </button>
-            </div>
-            <nav className="relative z-10 flex-1 flex flex-col justify-center px-8 gap-1 overflow-y-auto scrollbar-none">
-              {[
-                { num: "01", label: "Ignición", href: "#ignicion" },
-                { num: "02", label: "Combate", href: "#combate" },
-                { num: "03", label: "Mapa Estelar", href: "#mapa-estelar" },
-                { num: "04", label: "Bitácora", href: "#bitacora" },
-                { num: "05", label: "Puerto de Enlace", href: "#puerto-de-enlace" },
-              ].map((item, i) => (
-                <motion.a key={item.href} href={item.href} onClick={() => setMenuOpen(false)} initial={{ opacity: 0, x: 48 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.12 + i * 0.07, duration: 0.45, ease: "easeOut" }} className="group flex items-baseline gap-4 py-4 border-b border-white/5">
-                  <span className="font-mono text-sm text-orangeleader/70 group-hover:text-orangeleader transition-colors">{item.num}</span>
-                  <span className="text-4xl font-black uppercase tracking-wide text-starlight/80 group-hover:text-white group-hover:translate-x-2 transition-all duration-300">{item.label}</span>
-                </motion.a>
-              ))}
-            </nav>
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.45 }} className="relative z-10 px-8 pb-10 pt-4 flex flex-col gap-5">
-              <a href="#puerto-de-enlace" onClick={() => setMenuOpen(false)} className="inline-flex items-center justify-center rounded-full bg-orangeleader hover:bg-tangerine text-white px-6 py-4 font-black text-sm uppercase tracking-widest shadow-[0_10px_32px_rgba(235,63,27,0.45)] transition-all cursor-pointer">Agendar llamada de estrategia</a>
-              <p className="text-center font-mono text-[11px] uppercase tracking-[0.35em] text-white/30">Sueña grande · Llega lejos</p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* ─── BOTONES FLOTANTES (Facebook / Instagram) ─── */}
       <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[90] flex flex-col gap-4 md:gap-6">

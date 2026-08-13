@@ -3,6 +3,8 @@ import { Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import SpaceLayoutWrapper from "@/components/SpaceLayoutWrapper";
+import SiteNav from "@/components/SiteNav";
+import Footer from "@/components/Footer";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -81,7 +83,11 @@ export default function RootLayout({
             </noscript>
           </>
         )}
-        <SpaceLayoutWrapper>{children}</SpaceLayoutWrapper>
+        <SpaceLayoutWrapper>
+          <SiteNav />
+          {children}
+          <Footer />
+        </SpaceLayoutWrapper>
       </body>
     </html>
   );
