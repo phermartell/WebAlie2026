@@ -532,21 +532,27 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
       </section>
 
       {/* ─── BOTONES FLOTANTES (Facebook / Instagram) ─── */}
-      <div className="fixed bottom-6 right-6 z-[90] flex flex-col gap-4">
-        <button
+      <div className="fixed bottom-6 right-6 z-[90] flex flex-col gap-6">
+        <motion.button
           onClick={() => setActiveSocial("instagram")}
           aria-label="Escríbenos en Instagram"
-          className="w-16 h-16 hover:scale-110 transition-transform cursor-pointer drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
+          animate={{ y: [0, -12, 0], rotate: [0, -3, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          whileHover={{ scale: 1.1 }}
+          className="w-32 h-32 cursor-pointer drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
         >
           <img src="/flotantes/flotante-instagram.webp" alt="Instagram" className="w-full h-full object-contain" />
-        </button>
-        <button
+        </motion.button>
+        <motion.button
           onClick={() => setActiveSocial("facebook")}
           aria-label="Escríbenos por Facebook"
-          className="w-16 h-16 hover:scale-110 transition-transform cursor-pointer drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
+          animate={{ y: [0, -12, 0], rotate: [0, 3, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          whileHover={{ scale: 1.1 }}
+          className="w-32 h-32 cursor-pointer drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
         >
           <img src="/flotantes/flotante-messenger.webp" alt="Facebook Messenger" className="w-full h-full object-contain" />
-        </button>
+        </motion.button>
       </div>
 
       {/* ─── MODAL DE CONTACTO ─── */}
