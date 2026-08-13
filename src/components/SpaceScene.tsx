@@ -11,9 +11,9 @@ const StarfieldController = () => {
 
   useFrame(() => {
     if (groupRef.current) {
-      // The background moves up as you scroll down
+      // Oscilación acotada: las estrellas flotan suavemente sin salir de cámara
       const scrollY = window.scrollY;
-      groupRef.current.position.y = scrollY * 0.05;
+      groupRef.current.position.y = Math.sin(scrollY * 0.0006) * 12;
       
       // Add a slight rotation for dynamism
       groupRef.current.rotation.y = scrollY * 0.0005;
