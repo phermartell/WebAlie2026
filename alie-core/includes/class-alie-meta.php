@@ -385,13 +385,30 @@ class AlieCore_Meta {
 		</select>
 		<?php
 
-		// 3. Botón para exportar a CSV
-		$export_url = add_query_arg( array( 'alie_export' => 'lead' ), admin_url( 'edit.php' ) );
-		echo '<a href="' . esc_url( $export_url ) . '" class="button button-secondary" style="margin-left: 5px; vertical-align: top;">Exportar todo a CSV</a>';
+		// 3. Filtro por rango de fechas
+		$current_date_from = isset( $_GET['filter_date_from'] ) ? sanitize_text_field( $_GET['filter_date_from'] ) : '';
+		$current_date_to = isset( $_GET['filter_date_to'] ) ? sanitize_text_field( $_GET['filter_date_to'] ) : '';
+		?>
+		<span style="margin-left: 5px; vertical-align: middle; background: #fff; padding: 4px 10px; border: 1px solid #8c8f94; border-radius: 4px; display: inline-block;">
+			Desde: <input type="date" name="filter_date_from" value="<?php echo esc_attr( $current_date_from ); ?>" style="border: 0; padding: 0; vertical-align: middle; background: transparent; cursor: pointer;" />
+			Hasta: <input type="date" name="filter_date_to" value="<?php echo esc_attr( $current_date_to ); ?>" style="border: 0; padding: 0; vertical-align: middle; background: transparent; cursor: pointer; margin-left: 5px;" />
+		</span>
+		<?php
+
+		// 4. Botón para exportar a CSV respetando filtros activos
+		$export_args = array( 'alie_export' => 'lead' );
+		if ( ! empty( $_GET['filter_formulario'] ) ) $export_args['filter_formulario'] = $_GET['filter_formulario'];
+		if ( ! empty( $_GET['filter_pagina'] ) ) $export_args['filter_pagina'] = $_GET['filter_pagina'];
+		if ( ! empty( $_GET['filter_date_from'] ) ) $export_args['filter_date_from'] = $_GET['filter_date_from'];
+		if ( ! empty( $_GET['filter_date_to'] ) ) $export_args['filter_date_to'] = $_GET['filter_date_to'];
+		if ( ! empty( $_GET['s'] ) ) $export_args['s'] = $_GET['s'];
+
+		$export_url = add_query_arg( $export_args, admin_url( 'edit.php' ) );
+		echo '<a href="' . esc_url( $export_url ) . '" class="button button-secondary" style="margin-left: 5px; vertical-align: top;">Exportar selección a CSV</a>';
 	}
 
 	/**
-	 * Aplicar los filtros de formulario, página y búsqueda por metadatos al listado de Leads.
+	 * Aplicar los filtros de formulario, página, rango de fechas y búsqueda por metadatos al listado de Leads.
 	 */
 	public static function filter_lead_query( $query ) {
 		global $pagenow;
@@ -421,6 +438,20 @@ class AlieCore_Meta {
 
 		if ( ! empty( $meta_query ) ) {
 			$query->set( 'meta_query', $meta_query );
+		}
+
+		// Filtrar por rango de fechas (post_date)
+		$date_query = array();
+		if ( ! empty( $_GET['filter_date_from'] ) ) {
+			$date_query['after'] = sanitize_text_field( $_GET['filter_date_from'] ) . ' 00:00:00';
+			$date_query['inclusive'] = true;
+		}
+		if ( ! empty( $_GET['filter_date_to'] ) ) {
+			$date_query['before'] = sanitize_text_field( $_GET['filter_date_to'] ) . ' 23:59:59';
+			$date_query['inclusive'] = true;
+		}
+		if ( ! empty( $date_query ) ) {
+			$query->set( 'date_query', array( $date_query ) );
 		}
 
 		// Buscar también en metadatos al usar el buscador nativo
@@ -460,7 +491,7 @@ class AlieCore_Meta {
 	}
 
 	/**
-	 * Procesar la exportación de leads a CSV.
+	 * Procesar la exportación de leads a CSV respetando filtros aplicados.
 	 */
 	public static function handle_csv_export() {
 		if ( is_admin() && isset( $_GET['alie_export'] ) && 'lead' === $_GET['alie_export'] ) {
@@ -468,28 +499,66 @@ class AlieCore_Meta {
 				wp_die( 'No tienes permisos suficientes para exportar leads.' );
 			}
 
+			// Construir query de exportación respetando los filtros actuales
+			$args = array(
+				'post_type'      => 'lead',
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'orderby'        => 'date',
+				'order'          => 'DESC',
+			);
+
+			$meta_query = array();
+			if ( ! empty( $_GET['filter_formulario'] ) ) {
+				$meta_query[] = array(
+					'key'   => 'formulario',
+					'value' => sanitize_text_field( $_GET['filter_formulario'] ),
+				);
+			}
+			if ( ! empty( $_GET['filter_pagina'] ) ) {
+				$meta_query[] = array(
+					'key'   => 'pagina',
+					'value' => sanitize_text_field( $_GET['filter_pagina'] ),
+				);
+			}
+			if ( ! empty( $meta_query ) ) {
+				$args['meta_query'] = $meta_query;
+			}
+
+			$date_query = array();
+			if ( ! empty( $_GET['filter_date_from'] ) ) {
+				$date_query['after'] = sanitize_text_field( $_GET['filter_date_from'] ) . ' 00:00:00';
+				$date_query['inclusive'] = true;
+			}
+			if ( ! empty( $_GET['filter_date_to'] ) ) {
+				$date_query['before'] = sanitize_text_field( $_GET['filter_date_to'] ) . ' 23:59:59';
+				$date_query['inclusive'] = true;
+			}
+			if ( ! empty( $date_query ) ) {
+				$args['date_query'] = array( $date_query );
+			}
+
+			// Buscar si hay término de búsqueda activo
+			if ( ! empty( $_GET['s'] ) ) {
+				$args['s'] = sanitize_text_field( $_GET['s'] );
+				
+				// Aplicar los filtros de JOIN para que get_posts también busque en meta
+				add_filter( 'posts_join', array( __CLASS__, 'search_join' ) );
+				add_filter( 'posts_where', array( __CLASS__, 'search_where' ) );
+				add_filter( 'posts_distinct', array( __CLASS__, 'search_distinct' ) );
+			}
+
+			// Obtener leads filtrados
+			$leads = get_posts( $args );
+
 			// Forzar la descarga del CSV
 			header( 'Content-Type: text/csv; charset=utf-8' );
-			header( 'Content-Disposition: attachment; filename=leads-alie-digital-' . date( 'Y-m-d' ) . '.csv' );
+			header( 'Content-Disposition: attachment; filename=leads-alie-digital-filtrado-' . date( 'Y-m-d' ) . '.csv' );
 
 			$output = fopen( 'php://output', 'w' );
+			fprintf( $output, chr(0xEF).chr(0xBB).chr(0xBF) ); // BOM UTF-8
 
-			// UTF-8 BOM para que Excel detecte correctamente los caracteres con acentos
-			fprintf( $output, chr(0xEF).chr(0xBB).chr(0xBF) );
-
-			// Cabeceras del CSV
 			fputcsv( $output, array( 'Nombre', 'WhatsApp / Teléfono', 'Servicio', 'Formulario', 'Página de Origen', 'Canal', 'Mensaje / Datos Adicionales', 'Fecha de Envío' ) );
-
-			// Obtener todos los leads
-			$leads = get_posts(
-				array(
-					'post_type'      => 'lead',
-					'post_status'    => 'publish',
-					'posts_per_page' => -1,
-					'orderby'        => 'date',
-					'order'          => 'DESC',
-				)
-			);
 
 			foreach ( $leads as $lead ) {
 				$nombre     = get_post_meta( $lead->ID, 'nombre', true );
