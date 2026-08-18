@@ -351,10 +351,20 @@ class AlieCore_Meta {
 			return;
 		}
 
-		// 1. Obtener todos los formularios únicos registrados
-		$formularios = $wpdb->get_col(
+		// 1. Obtener todos los formularios (estáticos + los que existan en BD)
+		$formularios_estaticos = array(
+			'Formulario de Landing (Estrategia)',
+			'Formulario de Cotización (Contacto)',
+			'Modal Messenger (FB)',
+			'Modal Instagram (IG)',
+			'Chat WhatsApp Monterrey',
+			'Chat WhatsApp Puebla',
+		);
+		$formularios_db = $wpdb->get_col(
 			"SELECT DISTINCT meta_value FROM {$wpdb->postmeta} WHERE meta_key = 'formulario' AND meta_value != '' ORDER BY meta_value ASC"
 		);
+		$formularios = array_unique( array_merge( $formularios_estaticos, $formularios_db ) );
+		sort( $formularios );
 
 		$current_form = isset( $_GET['filter_formulario'] ) ? sanitize_text_field( $_GET['filter_formulario'] ) : '';
 		?>
@@ -366,22 +376,57 @@ class AlieCore_Meta {
 		</select>
 		<?php
 
-		// 2. Obtener todas las páginas únicas registradas
-		$paginas = $wpdb->get_col(
+		// 2. Obtener todas las páginas (estáticas principales + las registradas en BD)
+		$paginas_estaticas = array(
+			'/' => 'Inicio (Home)',
+			'/contacto' => 'Contacto',
+			'/puebla' => 'Puebla (Home)',
+			'/monterrey' => 'Monterrey (Home)',
+			'/puebla/growth-marketing-b2b' => 'Puebla - Growth Marketing B2B',
+			'/monterrey/growth-marketing-b2b' => 'Monterrey - Growth Marketing B2B',
+			'/puebla/diseno-de-paginas-web' => 'Puebla - Diseño de Páginas Web',
+			'/monterrey/diseno-de-paginas-web' => 'Monterrey - Diseño de Páginas Web',
+			'/diseno-de-paginas-web' => 'Diseño de Páginas Web (General)',
+			'/growth-marketing-b2b' => 'Growth Marketing B2B (General)',
+		);
+
+		$paginas_db_raw = $wpdb->get_col(
 			"SELECT DISTINCT meta_value FROM {$wpdb->postmeta} WHERE meta_key = 'pagina' AND meta_value != '' ORDER BY meta_value ASC"
 		);
+
+		// Normalizar URLs de base de datos a paths relativos para unificar la lista
+		$paginas_db = array();
+		foreach ( $paginas_db_raw as $url ) {
+			$path = wp_parse_url( $url, PHP_URL_PATH );
+			if ( $path ) {
+				$paginas_db[$path] = $path;
+			}
+		}
+
 		$current_page = isset( $_GET['filter_pagina'] ) ? sanitize_text_field( $_GET['filter_pagina'] ) : '';
 		?>
 		<select name="filter_pagina" style="max-width: 250px;">
 			<option value=""><?php esc_html_e( 'Todas las páginas', 'alie-core' ); ?></option>
-			<?php foreach ( $paginas as $pag ) : 
-				$display_name = wp_parse_url( $pag, PHP_URL_PATH );
-				if ( ! $display_name ) {
-					$display_name = $pag;
-				}
-				?>
-				<option value="<?php echo esc_attr( $pag ); ?>" <?php selected( $current_page, $pag ); ?>><?php echo esc_html( $display_name ); ?></option>
-			<?php endforeach; ?>
+			
+			<!-- Páginas Principales -->
+			<optgroup label="Rutas principales">
+				<?php foreach ( $paginas_estaticas as $path => $label ) : ?>
+					<option value="<?php echo esc_attr( $path ); ?>" <?php selected( $current_page, $path ); ?>><?php echo esc_html( $label ); ?></option>
+				<?php endforeach; ?>
+			</optgroup>
+
+			<!-- Otras páginas capturadas en BD -->
+			<?php 
+			// Quitar las que ya están en el listado estático
+			$paginas_db_restantes = array_diff_key( $paginas_db, $paginas_estaticas );
+			if ( ! empty( $paginas_db_restantes ) ) :
+			?>
+				<optgroup label="Otras rutas registradas">
+					<?php foreach ( $paginas_db_restantes as $path ) : ?>
+						<option value="<?php echo esc_attr( $path ); ?>" <?php selected( $current_page, $path ); ?>><?php echo esc_html( $path ); ?></option>
+					<?php endforeach; ?>
+				</optgroup>
+			<?php endif; ?>
 		</select>
 		<?php
 
@@ -418,7 +463,7 @@ class AlieCore_Meta {
 
 		$meta_query = array();
 
-		// Filtrar por Formulario
+		// Filtrar por Formulario (Búsqueda exacta)
 		if ( ! empty( $_GET['filter_formulario'] ) ) {
 			$meta_query[] = array(
 				'key'     => 'formulario',
@@ -427,12 +472,12 @@ class AlieCore_Meta {
 			);
 		}
 
-		// Filtrar por Página
+		// Filtrar por Página (Búsqueda por coincidencia parcial LIKE para omitir dominio y UTMs)
 		if ( ! empty( $_GET['filter_pagina'] ) ) {
 			$meta_query[] = array(
 				'key'     => 'pagina',
 				'value'   => sanitize_text_field( $_GET['filter_pagina'] ),
-				'compare' => '=',
+				'compare' => 'LIKE',
 			);
 		}
 
@@ -511,14 +556,16 @@ class AlieCore_Meta {
 			$meta_query = array();
 			if ( ! empty( $_GET['filter_formulario'] ) ) {
 				$meta_query[] = array(
-					'key'   => 'formulario',
-					'value' => sanitize_text_field( $_GET['filter_formulario'] ),
+					'key'     => 'formulario',
+					'value'   => sanitize_text_field( $_GET['filter_formulario'] ),
+					'compare' => '=',
 				);
 			}
 			if ( ! empty( $_GET['filter_pagina'] ) ) {
 				$meta_query[] = array(
-					'key'   => 'pagina',
-					'value' => sanitize_text_field( $_GET['filter_pagina'] ),
+					'key'     => 'pagina',
+					'value'   => sanitize_text_field( $_GET['filter_pagina'] ),
+					'compare' => 'LIKE',
 				);
 			}
 			if ( ! empty( $meta_query ) ) {
