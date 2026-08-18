@@ -379,15 +379,26 @@ class AlieCore_Meta {
 		// 2. Obtener todas las páginas (estáticas principales + las registradas en BD)
 		$paginas_estaticas = array(
 			'/' => 'Inicio (Home)',
-			'/contacto' => 'Contacto',
+			'/contacto' => 'Contacto (Formulario completo)',
+			'/agencia' => 'Agencia',
+			'/nosotros' => 'Nosotros',
+			'/casos-de-exito' => 'Casos de éxito',
 			'/puebla' => 'Puebla (Home)',
+			'/puebla/diseno-de-paginas-web' => 'Puebla > Diseño Web',
+			'/puebla/growth-marketing-b2b' => 'Puebla > Growth Marketing',
 			'/monterrey' => 'Monterrey (Home)',
-			'/puebla/growth-marketing-b2b' => 'Puebla - Growth Marketing B2B',
-			'/monterrey/growth-marketing-b2b' => 'Monterrey - Growth Marketing B2B',
-			'/puebla/diseno-de-paginas-web' => 'Puebla - Diseño de Páginas Web',
-			'/monterrey/diseno-de-paginas-web' => 'Monterrey - Diseño de Páginas Web',
-			'/diseno-de-paginas-web' => 'Diseño de Páginas Web (General)',
-			'/growth-marketing-b2b' => 'Growth Marketing B2B (General)',
+			'/monterrey/diseno-de-paginas-web' => 'Monterrey > Diseño Web',
+			'/monterrey/growth-marketing-b2b' => 'Monterrey > Growth Marketing',
+			// Los 8 servicios principales + IA
+			'/diseno-de-paginas-web' => 'Servicio > Diseño Web',
+			'/growth-marketing-b2b' => 'Servicio > Growth B2B',
+			'/seo' => 'Servicio > SEO',
+			'/redes-sociales' => 'Servicio > Redes Sociales',
+			'/paid-media' => 'Servicio > Paid Media',
+			'/identidad-grafica' => 'Servicio > Identidad Gráfica',
+			'/ecommerce' => 'Servicio > E-commerce',
+			'/email-marketing' => 'Servicio > Email Marketing',
+			'/ia' => 'Servicio > Inteligencia Artificial',
 		);
 
 		$paginas_db_raw = $wpdb->get_col(
