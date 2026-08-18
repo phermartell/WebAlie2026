@@ -3,6 +3,8 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValueEvent } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+const MotionImage = motion(Image);
 import Spaceship from "@/components/Spaceship";
 import LeadForm from "@/components/LeadForm";
 import { HOME_SCHEMA } from "@/lib/schema";
@@ -291,9 +293,11 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
               </a>
             </div>
             {/* Decorative planet */}
-            <motion.img
+            <MotionImage
               src="/ilustraciones/planeta1.webp"
               alt="Planeta Alié"
+              width={224}
+              height={224}
               animate={{ y: [-10, 10, -10] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -right-[17.25rem] top-0 w-56 h-56 object-contain opacity-40 hidden lg:block"
@@ -331,9 +335,12 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
                   transition={{ duration: 8 + i * 3, repeat: Infinity, ease: "linear" }}
                   className="w-40 h-40 md:w-60 md:h-60"
                 >
-                  <img
+                  <Image
                     src={asteroidImages[i]}
                     alt={`Asteroide ${asteroidLabels[i]}`}
+                    width={240}
+                    height={240}
+                    priority={i === 0}
                     className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,80,30,0.5)]"
                   />
                 </motion.div>
@@ -353,7 +360,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
             transition={{ delay: 0.1 }}
             className="glass-liquid rounded-[30px] p-10 flex flex-col gap-5 cursor-none"
           >
-            <img src="/iconos/ia.webp" alt="IA" className="w-14 h-14 object-contain" />
+            <Image src="/iconos/ia.webp" alt="IA" width={56} height={56} className="w-14 h-14 object-contain" />
             <span className="text-base font-mono text-cyan-400 uppercase tracking-widest">Propulsor A</span>
             <h3 className="text-xl font-black uppercase text-white">INTELIGENCIA ARTIFICIAL Y VELOCIDAD DE EJECUCIÓN</h3>
             <p className="text-base text-starlight/60 leading-relaxed">
@@ -367,7 +374,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
             transition={{ delay: 0.2 }}
             className="glass-liquid rounded-[30px] p-10 flex flex-col gap-5 cursor-none"
           >
-            <img src="/iconos/growth.webp" alt="Growth" className="w-14 h-14 object-contain" />
+            <Image src="/iconos/growth.webp" alt="Growth" width={56} height={56} className="w-14 h-14 object-contain" />
             <span className="text-base font-mono text-tangerine uppercase tracking-widest">Propulsor B</span>
             <h3 className="text-xl font-black uppercase text-white">GROWTH MARKETING Y CAPTACIÓN CONSTANTE</h3>
             <p className="text-base text-starlight/60 leading-relaxed">
@@ -396,7 +403,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
                 className="w-[300px] md:w-[360px] shrink-0 glass-liquid rounded-[40px] p-7 md:p-10 flex flex-col gap-6 group cursor-none hover:border-orangeleader/40 transition-colors"
               >
                 <div className="w-16 h-16 flex items-center justify-center">
-                  <img src={svc.icon} alt={svc.name} className="w-14 h-14 object-contain" />
+                  <Image src={svc.icon} alt={svc.name} width={56} height={56} className="w-14 h-14 object-contain" />
                 </div>
                 <div>
                   <span className="text-base font-mono text-tangerine/70 uppercase tracking-widest">{svc.alias}</span>
