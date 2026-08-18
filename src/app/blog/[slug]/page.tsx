@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical: url,
     },
     openGraph: {
+      siteName: "Alié Digital",
       title: `${post.title} | Blog Alié Digital`,
       description: post.excerpt,
       url: url,

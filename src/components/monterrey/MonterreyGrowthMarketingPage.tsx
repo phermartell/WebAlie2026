@@ -360,7 +360,7 @@ export default function MonterreyGrowthMarketingPage() {
             <h1 className="text-4xl md:text-7xl font-black uppercase leading-[1.02] tracking-tighter mb-8 max-w-4xl px-2">
               Growth Marketing <br className="hidden md:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orangeleader to-tangerine">
-                Todo En Uno
+                Todo En Uno en Monterrey
               </span>
             </h1>
 
