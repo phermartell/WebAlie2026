@@ -67,7 +67,7 @@ export default function WhatsAppChat({ services, isOpen: externalIsOpen, setIsOp
           canal: "whatsapp",
           recaptchaToken,
           website,
-          pagina: typeof window !== "undefined" ? window.location.pathname : "",
+          pagina: typeof window !== "undefined" ? window.location.href : "",
           formulario: "Chat WhatsApp Monterrey",
         }),
       });

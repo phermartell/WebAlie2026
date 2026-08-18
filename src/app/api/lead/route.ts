@@ -68,13 +68,34 @@ export async function POST(req: NextRequest) {
   const savedTo: string[] = [];
   const errors: string[] = [];
 
-  // Formatear mensaje para WordPress con información de origen
+  // Formatear fecha y hora en la zona de CDMX
+  const now = new Date();
+  const dateStr = now.toLocaleDateString("es-MX", {
+    timeZone: "America/Mexico_City",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const timeStr = now.toLocaleTimeString("es-MX", {
+    timeZone: "America/Mexico_City",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+
+  // Obtener IP y User Agent
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || req.headers.get("x-real-ip") || "";
+  const userAgent = req.headers.get("user-agent") || "";
+
+  // Formatear mensaje para WordPress con información detallada de origen y metadatos de red (estilo Elementor)
   let wpMensaje = mensaje;
-  if (pagina || formulario) {
-    wpMensaje += `\n\n[Detalles de origen]`;
-    if (formulario) wpMensaje += `\nFormulario: ${formulario}`;
-    if (pagina) wpMensaje += `\nPágina: ${pagina}`;
-  }
+  wpMensaje += `\n\n---`;
+  wpMensaje += `\nFecha: ${dateStr}`;
+  wpMensaje += `\nHora: ${timeStr}`;
+  if (formulario) wpMensaje += `\nFormulario: ${formulario}`;
+  if (pagina) wpMensaje += `\nURL de la página: ${pagina}`;
+  if (userAgent) wpMensaje += `\nAgente de usuario: ${userAgent}`;
+  if (ip) wpMensaje += `\nIP remota: ${ip}`;
 
   // 2. Guardar en WordPress (CPT "lead" vía AlieCore)
   const wpUrl = process.env.NEXT_PUBLIC_WP_API_URL;
@@ -110,7 +131,7 @@ export async function POST(req: NextRequest) {
           fuente: `Formulario Web Alié - ${sourceLabel}`,
           estadoLead: "Nuevo",
           origenCampana: canal,
-          resumen: `Servicio: ${servicio}. Mensaje: ${mensaje}${formulario ? ` | Formulario: ${formulario}` : ""}${pagina ? ` | Página: ${pagina}` : ""}`,
+          resumen: `Servicio: ${servicio}. Mensaje: ${mensaje}${formulario ? ` | Formulario: ${formulario}` : ""}${pagina ? ` | Página: ${pagina}` : ""}${ip ? ` | IP: ${ip}` : ""}`,
           zonaHoraria: "America/Mexico_City",
         }),
       });
