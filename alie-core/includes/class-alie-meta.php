@@ -67,6 +67,13 @@ class AlieCore_Meta {
 		// Registrar columnas personalizadas en el listado de Leads
 		add_filter( 'manage_lead_posts_columns', array( 'AlieCore_Meta', 'add_lead_columns' ) );
 		add_action( 'manage_lead_posts_custom_column', array( 'AlieCore_Meta', 'render_lead_columns' ), 10, 2 );
+
+		// Añadir filtros y buscador extendido al listado de Leads
+		add_action( 'restrict_manage_posts', array( 'AlieCore_Meta', 'add_lead_filters' ) );
+		add_action( 'pre_get_posts', array( 'AlieCore_Meta', 'filter_lead_query' ) );
+
+		// Manejar exportación a CSV
+		add_action( 'admin_init', array( 'AlieCore_Meta', 'handle_csv_export' ) );
 	}
 
 	/**
@@ -333,5 +340,184 @@ class AlieCore_Meta {
 		}
 
 		return json_encode( $items, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+	}
+
+	/**
+	 * Añadir dropdowns de filtro en el listado de Leads (Formularios y Páginas) y botón de Exportar.
+	 */
+	public static function add_lead_filters() {
+		global $wpdb, $typenow;
+		if ( 'lead' !== $typenow ) {
+			return;
+		}
+
+		// 1. Obtener todos los formularios únicos registrados
+		$formularios = $wpdb->get_col(
+			"SELECT DISTINCT meta_value FROM {$wpdb->postmeta} WHERE meta_key = 'formulario' AND meta_value != '' ORDER BY meta_value ASC"
+		);
+
+		$current_form = isset( $_GET['filter_formulario'] ) ? sanitize_text_field( $_GET['filter_formulario'] ) : '';
+		?>
+		<select name="filter_formulario">
+			<option value=""><?php esc_html_e( 'Todos los formularios', 'alie-core' ); ?></option>
+			<?php foreach ( $formularios as $form ) : ?>
+				<option value="<?php echo esc_attr( $form ); ?>" <?php selected( $current_form, $form ); ?>><?php echo esc_html( $form ); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<?php
+
+		// 2. Obtener todas las páginas únicas registradas
+		$paginas = $wpdb->get_col(
+			"SELECT DISTINCT meta_value FROM {$wpdb->postmeta} WHERE meta_key = 'pagina' AND meta_value != '' ORDER BY meta_value ASC"
+		);
+		$current_page = isset( $_GET['filter_pagina'] ) ? sanitize_text_field( $_GET['filter_pagina'] ) : '';
+		?>
+		<select name="filter_pagina" style="max-width: 250px;">
+			<option value=""><?php esc_html_e( 'Todas las páginas', 'alie-core' ); ?></option>
+			<?php foreach ( $paginas as $pag ) : 
+				$display_name = wp_parse_url( $pag, PHP_URL_PATH );
+				if ( ! $display_name ) {
+					$display_name = $pag;
+				}
+				?>
+				<option value="<?php echo esc_attr( $pag ); ?>" <?php selected( $current_page, $pag ); ?>><?php echo esc_html( $display_name ); ?></option>
+			<?php endforeach; ?>
+		</select>
+		<?php
+
+		// 3. Botón para exportar a CSV
+		$export_url = add_query_arg( array( 'alie_export' => 'lead' ), admin_url( 'edit.php' ) );
+		echo '<a href="' . esc_url( $export_url ) . '" class="button button-secondary" style="margin-left: 5px; vertical-align: top;">Exportar todo a CSV</a>';
+	}
+
+	/**
+	 * Aplicar los filtros de formulario, página y búsqueda por metadatos al listado de Leads.
+	 */
+	public static function filter_lead_query( $query ) {
+		global $pagenow;
+		if ( ! is_admin() || ! $query->is_main_query() || 'edit.php' !== $pagenow || 'lead' !== $query->get( 'post_type' ) ) {
+			return;
+		}
+
+		$meta_query = array();
+
+		// Filtrar por Formulario
+		if ( ! empty( $_GET['filter_formulario'] ) ) {
+			$meta_query[] = array(
+				'key'     => 'formulario',
+				'value'   => sanitize_text_field( $_GET['filter_formulario'] ),
+				'compare' => '=',
+			);
+		}
+
+		// Filtrar por Página
+		if ( ! empty( $_GET['filter_pagina'] ) ) {
+			$meta_query[] = array(
+				'key'     => 'pagina',
+				'value'   => sanitize_text_field( $_GET['filter_pagina'] ),
+				'compare' => '=',
+			);
+		}
+
+		if ( ! empty( $meta_query ) ) {
+			$query->set( 'meta_query', $meta_query );
+		}
+
+		// Buscar también en metadatos al usar el buscador nativo
+		if ( ! empty( $_GET['s'] ) ) {
+			add_filter( 'posts_join', array( __CLASS__, 'search_join' ) );
+			add_filter( 'posts_where', array( __CLASS__, 'search_where' ) );
+			add_filter( 'posts_distinct', array( __CLASS__, 'search_distinct' ) );
+		}
+	}
+
+	public static function search_join( $join ) {
+		global $wpdb;
+		if ( is_admin() && isset( $_GET['s'] ) && isset( $_GET['post_type'] ) && 'lead' === $_GET['post_type'] ) {
+			$join .= " LEFT JOIN {$wpdb->postmeta} AS aliemeta ON {$wpdb->posts}.ID = aliemeta.post_id ";
+		}
+		return $join;
+	}
+
+	public static function search_where( $where ) {
+		global $wpdb;
+		if ( is_admin() && isset( $_GET['s'] ) && isset( $_GET['post_type'] ) && 'lead' === $_GET['post_type'] ) {
+			$search_term = esc_sql( sanitize_text_field( $_GET['s'] ) );
+			$where = preg_replace(
+				"/\(\s*{$wpdb->posts}\.post_title\s+LIKE\s+('[^']+')\s*\)/",
+				"({$wpdb->posts}.post_title LIKE '%{$search_term}%' OR (aliemeta.meta_key IN ('nombre', 'whatsapp', 'servicio', 'mensaje') AND aliemeta.meta_value LIKE '%{$search_term}%'))",
+				$where
+			);
+		}
+		return $where;
+	}
+
+	public static function search_distinct( $distinct ) {
+		if ( is_admin() && isset( $_GET['s'] ) && isset( $_GET['post_type'] ) && 'lead' === $_GET['post_type'] ) {
+			return 'DISTINCT';
+		}
+		return $distinct;
+	}
+
+	/**
+	 * Procesar la exportación de leads a CSV.
+	 */
+	public static function handle_csv_export() {
+		if ( is_admin() && isset( $_GET['alie_export'] ) && 'lead' === $_GET['alie_export'] ) {
+			if ( ! current_user_can( 'export' ) ) {
+				wp_die( 'No tienes permisos suficientes para exportar leads.' );
+			}
+
+			// Forzar la descarga del CSV
+			header( 'Content-Type: text/csv; charset=utf-8' );
+			header( 'Content-Disposition: attachment; filename=leads-alie-digital-' . date( 'Y-m-d' ) . '.csv' );
+
+			$output = fopen( 'php://output', 'w' );
+
+			// UTF-8 BOM para que Excel detecte correctamente los caracteres con acentos
+			fprintf( $output, chr(0xEF).chr(0xBB).chr(0xBF) );
+
+			// Cabeceras del CSV
+			fputcsv( $output, array( 'Nombre', 'WhatsApp / Teléfono', 'Servicio', 'Formulario', 'Página de Origen', 'Canal', 'Mensaje / Datos Adicionales', 'Fecha de Envío' ) );
+
+			// Obtener todos los leads
+			$leads = get_posts(
+				array(
+					'post_type'      => 'lead',
+					'post_status'    => 'publish',
+					'posts_per_page' => -1,
+					'orderby'        => 'date',
+					'order'          => 'DESC',
+				)
+			);
+
+			foreach ( $leads as $lead ) {
+				$nombre     = get_post_meta( $lead->ID, 'nombre', true );
+				$whatsapp   = get_post_meta( $lead->ID, 'whatsapp', true );
+				$servicio   = get_post_meta( $lead->ID, 'servicio', true );
+				$formulario = get_post_meta( $lead->ID, 'formulario', true );
+				$pagina     = get_post_meta( $lead->ID, 'pagina', true );
+				$canal      = get_post_meta( $lead->ID, 'canal', true );
+				$mensaje    = get_post_meta( $lead->ID, 'mensaje', true );
+				$fecha      = get_the_date( 'Y-m-d H:i:s', $lead->ID );
+
+				fputcsv(
+					$output,
+					array(
+						$nombre,
+						$whatsapp,
+						$servicio,
+						$formulario,
+						$pagina,
+						ucfirst( $canal ),
+						$mensaje,
+						$fecha,
+					)
+				);
+			}
+
+			fclose( $output );
+			exit;
+		}
 	}
 }
