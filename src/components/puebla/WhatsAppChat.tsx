@@ -67,6 +67,8 @@ export default function WhatsAppChat({ services, isOpen: externalIsOpen, setIsOp
           canal: "whatsapp",
           recaptchaToken,
           website,
+          pagina: typeof window !== "undefined" ? window.location.pathname : "",
+          formulario: "Chat WhatsApp Puebla",
         }),
       });
 

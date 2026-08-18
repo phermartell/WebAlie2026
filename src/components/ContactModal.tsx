@@ -85,6 +85,8 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
           canal: variant,
           recaptchaToken,
           website,
+          pagina: typeof window !== "undefined" ? window.location.pathname : "",
+          formulario: variant === "facebook" ? "Modal Messenger (FB)" : "Modal Instagram (IG)",
         }),
       });
 

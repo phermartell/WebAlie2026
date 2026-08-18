@@ -8,6 +8,8 @@ interface LeadPayload {
   canal: "facebook" | "instagram" | "web" | "whatsapp";
   recaptchaToken?: string;
   website?: string;
+  pagina?: string;
+  formulario?: string;
 }
 
 export async function POST(req: NextRequest) {
@@ -24,6 +26,8 @@ export async function POST(req: NextRequest) {
   const mensaje = (body.mensaje || "").trim();
   const canal =
     body.canal === "instagram" || body.canal === "web" || body.canal === "whatsapp" ? body.canal : "facebook";
+  const pagina = (body.pagina || "").trim();
+  const formulario = (body.formulario || "").trim();
 
   // Honeypot anti-bots
   if (body.website && body.website.length > 0) {
@@ -64,6 +68,14 @@ export async function POST(req: NextRequest) {
   const savedTo: string[] = [];
   const errors: string[] = [];
 
+  // Formatear mensaje para WordPress con información de origen
+  let wpMensaje = mensaje;
+  if (pagina || formulario) {
+    wpMensaje += `\n\n[Detalles de origen]`;
+    if (formulario) wpMensaje += `\nFormulario: ${formulario}`;
+    if (pagina) wpMensaje += `\nPágina: ${pagina}`;
+  }
+
   // 2. Guardar en WordPress (CPT "lead" vía AlieCore)
   const wpUrl = process.env.NEXT_PUBLIC_WP_API_URL;
   if (wpUrl) {
@@ -71,7 +83,7 @@ export async function POST(req: NextRequest) {
       const wpRes = await fetch(`${wpUrl.replace(/\/+$/, "")}/wp-json/alie/v1/lead`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, whatsapp, servicio, mensaje, canal }),
+        body: JSON.stringify({ nombre, whatsapp, servicio, mensaje: wpMensaje, canal }),
       });
       if (wpRes.ok) savedTo.push("wordpress");
       else errors.push(`wordpress:${wpRes.status}`);
@@ -85,6 +97,7 @@ export async function POST(req: NextRequest) {
   const crmSecret = process.env.CRM_WEBHOOK_SECRET;
   if (crmUrl && crmSecret) {
     try {
+      const sourceLabel = formulario || (canal === "facebook" ? "Facebook" : canal === "instagram" ? "Instagram" : "Landing");
       const crmRes = await fetch(crmUrl, {
         method: "POST",
         headers: {
@@ -94,10 +107,10 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify({
           nombre,
           telefono: whatsapp,
-          fuente: `Formulario Web Alié - ${canal === "facebook" ? "Facebook" : canal === "instagram" ? "Instagram" : "Landing"}`,
+          fuente: `Formulario Web Alié - ${sourceLabel}`,
           estadoLead: "Nuevo",
           origenCampana: canal,
-          resumen: `Servicio de interés: ${servicio}. Mensaje: ${mensaje}`,
+          resumen: `Servicio: ${servicio}. Mensaje: ${mensaje}${formulario ? ` | Formulario: ${formulario}` : ""}${pagina ? ` | Página: ${pagina}` : ""}`,
           zonaHoraria: "America/Mexico_City",
         }),
       });

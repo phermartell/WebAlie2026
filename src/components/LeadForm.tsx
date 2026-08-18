@@ -54,6 +54,8 @@ export default function LeadForm({ servicioInteres }: { servicioInteres?: string
           canal: "web",
           recaptchaToken,
           website,
+          pagina: typeof window !== "undefined" ? window.location.pathname : "",
+          formulario: "Formulario de Landing (Estrategia)",
         }),
       });
       const data = await res.json();

@@ -73,6 +73,8 @@ export default function ContactoForm() {
           canal: "web",
           recaptchaToken,
           website,
+          pagina: typeof window !== "undefined" ? window.location.pathname : "",
+          formulario: "Formulario de Cotización (Contacto)",
         }),
       });
       const data = await res.json();
