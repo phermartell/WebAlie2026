@@ -9,10 +9,16 @@
   --color-elevatedblue: #16264f;
 
   --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+
+  /* Piso de legibilidad: el texto más pequeño del sitio es de 15px */
+  --text-xs: 0.9375rem; /* 15px */
+  --text-xs--line-height: 1.4;
+  --text-sm: 1rem; /* 16px */
+  --text-sm--line-height: 1.5;
 }
 
 html {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 :root {
@@ -116,3 +122,9 @@ body {
 
 .starfield{background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.8)50%,transparent 50%),radial-gradient(1px 1px at 30% 62%,rgba(255,255,255,.55)50%,transparent 50%),radial-gradient(2px 2px at 50% 12%,rgba(255,255,255,.9)50%,transparent 50%),radial-gradient(1px 1px at 70% 44%,rgba(255,255,255,.65)50%,transparent 50%),radial-gradient(1.5px 1.5px at 84% 74%,rgba(255,255,255,.8)50%,transparent 50%),radial-gradient(1px 1px at 14% 82%,rgba(255,255,255,.5)50%,transparent 50%),radial-gradient(1.5px 1.5px at 60% 90%,rgba(255,255,255,.6)50%,transparent 50%),radial-gradient(1px 1px at 92% 30%,rgba(255,255,255,.5)50%,transparent 50%),radial-gradient(1px 1px at 40% 4%,rgba(255,255,255,.7)50%,transparent 50%),radial-gradient(1px 1px at 76% 20%,rgba(255,255,255,.6)50%,transparent 50%),radial-gradient(2px 2px at 22% 46%,rgba(235,63,27,.7)50%,transparent 50%),radial-gradient(1px 1px at 66% 66%,rgba(255,134,67,.7)50%,transparent 50%);animation:starfield-twinkle 4s ease-in-out infinite alternate}
 @keyframes starfield-twinkle{from{opacity:.45}to{opacity:1}}
+
+/* Flujo de la trayectoria orbital (página /agencia) */
+@keyframes orbit-flow {
+  from { background-position: 0 0; }
+  to { background-position: 0 100px; }
+}

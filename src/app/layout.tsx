@@ -5,6 +5,7 @@ import "./globals.css";
 import SpaceLayoutWrapper from "@/components/SpaceLayoutWrapper";
 import SiteNav from "@/components/SiteNav";
 import Footer from "@/components/Footer";
+import GlobalChat from "@/components/GlobalChat";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -41,14 +42,14 @@ export const metadata: Metadata = {
     description:
       "Creamos páginas web, growth marketing, ecommerce y soluciones digitales para generar demanda y ventas en empresas B2B.",
     url: "https://aliedigital.com/",
-    images: [{ url: "https://aliedigital.com/og-home.jpg", width: 1200, height: 630, alt: "Alié Digital — Agencia de Marketing Digital B2B" }],
+    images: [{ url: "https://aliedigital.com/og-home.webp", width: 1200, height: 630, alt: "Alié Digital — Agencia de Marketing Digital B2B" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Agencia de Marketing Digital B2B en Monterrey y Puebla | Alié Digital",
     description:
       "Páginas web, growth marketing, ecommerce y soluciones digitales para empresas B2B.",
-    images: ["https://aliedigital.com/og-home.jpg"],
+    images: ["https://aliedigital.com/og-home.webp"],
   },
 };
 
@@ -84,9 +85,11 @@ export default function RootLayout({
           </>
         )}
         <SpaceLayoutWrapper>
-          <SiteNav />
-          {children}
-          <Footer />
+          <GlobalChat>
+            <SiteNav />
+            {children}
+            <Footer />
+          </GlobalChat>
         </SpaceLayoutWrapper>
       </body>
     </html>

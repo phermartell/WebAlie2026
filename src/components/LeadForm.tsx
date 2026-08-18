@@ -6,7 +6,7 @@ import { getRecaptchaToken } from "@/lib/recaptcha";
 const inputClass =
   "w-full bg-black/50 border border-white/20 rounded-full h-12 px-6 text-base text-white placeholder-white/40 focus:outline-none focus:border-orangeleader transition-all cursor-text";
 
-export default function LeadForm() {
+export default function LeadForm({ servicioInteres }: { servicioInteres?: string }) {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
   const [correo, setCorreo] = useState("");
@@ -30,6 +30,12 @@ export default function LeadForm() {
     setStatus("submitting");
     setError("");
 
+    // Detectar origen dinámicamente
+    let finalServicio = servicioInteres || "Llamada de estrategia general";
+    if (typeof window !== "undefined") {
+      finalServicio += ` [Ruta: ${window.location.pathname}]`;
+    }
+
     try {
       const recaptchaToken = await getRecaptchaToken(siteKey, "submit_lead");
       const res = await fetch("/api/lead", {
@@ -38,7 +44,7 @@ export default function LeadForm() {
         body: JSON.stringify({
           nombre: nombre.trim(),
           whatsapp: telefono.trim(), // /api/lead usa "whatsapp"; el CRM lo guarda como teléfono
-          servicio: "Agendar llamada de estrategia",
+          servicio: finalServicio,
           mensaje: [
             correo.trim() && `Correo: ${correo.trim()}`,
             empresa.trim() && `Empresa: ${empresa.trim()}`,

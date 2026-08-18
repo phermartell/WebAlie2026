@@ -13,6 +13,7 @@ interface LaserBolt {
   color: string;
   offsetX: number;
   createdAt: number;
+  dir: "up" | "down" | "right";
 }
 
 interface SpaceshipProps {
@@ -29,16 +30,19 @@ const LASER_COLORS = [
 ];
 
 export default function Spaceship({ isWarpSpeed, isLanded, onLaserPosition }: SpaceshipProps) {
-  const [mousePos, setMousePos] = useState(() => ({
-    x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
-    y: typeof window !== "undefined" ? window.innerHeight / 2 : 0,
-  }));
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isMouseDown, setIsMouseDown] = useState(false);
+  const [scrollDir, setScrollDir] = useState<"up" | "down">("down");
   const [lasers, setLasers] = useState<LaserBolt[]>([]);
   const shootIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const laserIdRef = useRef(0);
 
   useEffect(() => {
+    setMousePos({
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    });
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
     };
@@ -62,6 +66,18 @@ export default function Spaceship({ isWarpSpeed, isLanded, onLaserPosition }: Sp
     };
   }, []);
 
+  // Dirección del scroll: hacia arriba la nave apunta hacia arriba
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrollDir(y < lastY ? "up" : "down");
+      lastY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   // Fire lasers at variable intervals while mouse is held
   useEffect(() => {
     if (isMouseDown && !isLanded) {
@@ -73,6 +89,7 @@ export default function Spaceship({ isWarpSpeed, isLanded, onLaserPosition }: Sp
         const w = isWarpSpeed ? (Math.random() * 20 + 16) : (Math.random() * 1.5 + 1);
         const h = isWarpSpeed ? (Math.random() * 1.5 + 1) : (Math.random() * 20 + 16);
         const speed = Math.random() * 0.15 + 0.2;
+        const dir = isWarpSpeed ? "right" : scrollDir === "up" ? "up" : "down";
         const offsets = isDouble
           ? [-(Math.random() * 8 + 8), Math.random() * 8 + 8]
           : [Math.random() * 10 - 5];
@@ -88,6 +105,7 @@ export default function Spaceship({ isWarpSpeed, isLanded, onLaserPosition }: Sp
             color,
             offsetX,
             createdAt: Date.now(),
+            dir,
           }]);
         });
 
@@ -106,7 +124,7 @@ export default function Spaceship({ isWarpSpeed, isLanded, onLaserPosition }: Sp
     } else {
       if (shootIntervalRef.current) clearInterval(shootIntervalRef.current);
     }
-  }, [isMouseDown, isLanded, isWarpSpeed, mousePos.x, mousePos.y]);
+  }, [isMouseDown, isLanded, isWarpSpeed, scrollDir, mousePos.x, mousePos.y]);
 
   // Smooth springs for mouse follow
   const springX = useSpring(mousePos.x, { stiffness: 400, damping: 30 });
@@ -121,7 +139,12 @@ export default function Spaceship({ isWarpSpeed, isLanded, onLaserPosition }: Sp
         const elapsed = (now - l.createdAt) / 1000;
         const duration = l.speed + 0.3;
         const progress = Math.min(elapsed / duration, 1);
-        const currentY = l.y + 20 + progress * 1180;
+        if (l.dir === "right") {
+          return { x: l.x + 20 + progress * 1180, y: l.y + l.offsetX };
+        }
+        const currentY = l.dir === "up"
+          ? l.y - 20 - progress * 1180
+          : l.y + 20 + progress * 1180;
         return { x: l.x + l.offsetX, y: currentY };
       });
       if (currentPositions.length > 0) {
@@ -150,13 +173,17 @@ export default function Spaceship({ isWarpSpeed, isLanded, onLaserPosition }: Sp
           {lasers.map(laser => (
             <motion.div
               key={laser.id}
-              initial={isWarpSpeed 
+              initial={laser.dir === "right"
                 ? { left: laser.x + 20, top: laser.y + laser.offsetX, opacity: 1 }
-                : { left: laser.x + laser.offsetX, top: laser.y + 20, opacity: 1 }
+                : laser.dir === "up"
+                  ? { left: laser.x + laser.offsetX, top: laser.y - 20, opacity: 1 }
+                  : { left: laser.x + laser.offsetX, top: laser.y + 20, opacity: 1 }
               }
-              animate={isWarpSpeed
+              animate={laser.dir === "right"
                 ? { left: laser.x + 1200, opacity: [1, 1, 0] }
-                : { top: laser.y + 1200, opacity: [1, 1, 0] }
+                : laser.dir === "up"
+                  ? { top: laser.y - 1200, opacity: [1, 1, 0] }
+                  : { top: laser.y + 1200, opacity: [1, 1, 0] }
               }
               exit={{ opacity: 0 }}
               transition={{ duration: laser.speed + 0.3, ease: "linear" }}
@@ -177,7 +204,9 @@ export default function Spaceship({ isWarpSpeed, isLanded, onLaserPosition }: Sp
       >
         <motion.div
           animate={{
-            rotate: isWarpSpeed ? 90 : 180,
+            rotate: isWarpSpeed 
+              ? (scrollDir === "up" ? 270 : 90)
+              : (scrollDir === "up" ? 0 : 180),
             scale: isLanded ? 0.8 : 1
           }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}

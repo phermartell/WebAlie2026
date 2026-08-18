@@ -2,9 +2,11 @@
 
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValueEvent } from "framer-motion";
+import Link from "next/link";
 import Spaceship from "@/components/Spaceship";
-import ContactModal from "@/components/ContactModal";
 import LeadForm from "@/components/LeadForm";
+import { HOME_SCHEMA } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 /* ── Preloader ── */
 const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
@@ -80,7 +82,7 @@ const ExplosionParticles = ({ x, y }: { x: number; y: number }) => {
 };
 /* ── Main Home Component ── */
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isWarpSpeed, setIsWarpSpeed] = useState(false);
   const [isLanded, setIsLanded] = useState(false);
 
@@ -89,7 +91,6 @@ export default function Home() {
   const asteroidRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const [activeProject, setActiveProject] = useState(0);
-  const [activeSocial, setActiveSocial] = useState<"facebook" | "instagram" | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
 
@@ -177,21 +178,21 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
   }, [asteroidsDestroyed, destroyAsteroid]);
 
   const services = [
-    { name: "Diseño de Páginas Web", alias: "Órbita", desc: "Creamos páginas web institucionales y páginas de conversión enfocadas en comunicar mejor tu propuesta de valor y generar más oportunidades comerciales. Diseñamos sitios claros, funcionales y optimizados para posicionar y convertir.", icon: "/iconos/orbita.webp" },
-    { name: "Redes Sociales", alias: "Conquista Social", desc: "Gestionamos redes sociales para fortalecer tu presencia digital y atraer audiencia con campañas en Meta Ads. Construimos contenido y anuncios pensados para aumentar visibilidad, interacción y generación de prospectos.", icon: "/iconos/senal.webp" },
-    { name: "Ecommerce", alias: "Galaxia", desc: "Desarrollamos tiendas en línea y plataformas transaccionales preparadas para vender de forma más eficiente. Creamos experiencias de compra claras, rápidas y optimizadas para conversiones.", icon: "/iconos/galaxia.webp" },
-    { name: "Email Marketing", alias: "Pulso", desc: "Diseñamos campañas de email marketing, piezas mensuales y automatizaciones para nutrir contactos y activar ventas. Ayudamos a mantener una comunicación constante con tu base de datos y a mejorar la conversión.", icon: "/iconos/pulso.png" },
-    { name: "Growth Marketing B2B", alias: "Constelación", desc: "Integramos web, redes sociales, pauta y email en paquetes 360° de growth marketing B2B. Es una solución pensada para empresas que necesitan atraer demanda, posicionarse y convertir de forma continua.", icon: "/iconos/constelacion.webp" },
-    { name: "Desarrollo Web", alias: "Estación Espacial", desc: "Creamos desarrollo web a la medida, sistemas en la nube, plataformas SaaS y portales personalizados. Construimos soluciones robustas para empresas que necesitan más que un sitio web tradicional.", icon: "/iconos/estacion.webp" },
-    { name: "Analytics", alias: "Radar Estelar", desc: "Implementamos dashboards de analytics para centralizar indicadores clave de rendimiento en web y redes sociales. Así puedes medir mejor, detectar oportunidades y tomar decisiones con datos.", icon: "/iconos/radar.webp" },
-    { name: "Paid Media", alias: "Propulsión", desc: "Gestionamos campañas de paid media en Google Ads enfocadas en capturar intención de compra y generar leads más valiosos. Optimizamos la inversión publicitaria para obtener mejores resultados comerciales.", icon: "/iconos/propulsion.webp" },
+    { name: "SEO Técnico & AI", alias: "Radar Estelar", desc: "Rankea en Google y motores de IA como ChatGPT y Perplexity. Optimizamos tu código, Schema y contenidos para que los LLMs recomienden tu marca.", icon: "/iconos/radar.webp", href: "/seo" },
+    { name: "Diseño de páginas web", alias: "Órbita", desc: "Creamos sitios web y páginas de conversión enfocados en comunicar tu propuesta de valor y captar oportunidades comerciales. Diseños rápidos y optimizados.", icon: "/iconos/orbita.webp", href: "/diseno-paginas-web" },
+    { name: "Ecommerce", alias: "Galaxia", desc: "Desarrollamos tiendas en línea y plataformas transaccionales robustas preparadas para vender de forma eficiente, rápida y optimizada para conversiones.", icon: "/iconos/galaxia.webp", href: "/ecommerce" },
+    { name: "Paid media", alias: "Propulsión", desc: "Gestionamos campañas de pauta digital en Google Ads y Meta Ads para capturar intención de compra y generar leads calificados de alto valor.", icon: "/iconos/propulsion.webp", href: "/paid-media" },
+    { name: "Redes sociales", alias: "Conquista Social", desc: "Gestionamos redes sociales para fortalecer tu presencia digital y atraer audiencia con contenido y anuncios pensados para aumentar la conversión.", icon: "/iconos/senal.webp", href: "/redes-sociales" },
+    { name: "Email marketing", alias: "Pulso", desc: "Diseñamos campañas y automatizaciones de email marketing para nutrir contactos, reactivar clientes e impulsar ventas continuas sin esfuerzo manual.", icon: "/iconos/pulso.webp", href: "/email-marketing" },
+    { name: "Asistentes IA & Automatizaciones", alias: "Copiloto IA", desc: "Implementamos asistentes virtuales personalizados y flujos de trabajo inteligentes que califican y atienden prospectos 24/7 de forma autónoma con tecnología de IA.", icon: "/iconos/ia.webp", href: "/ia" },
+    { name: "Identidad Gráfica & Branding", alias: "Constelación", desc: "Construimos marcas memorables desde el logotipo, tono de voz y directrices visuales completas. Diseñamos marcas que destacan y transmiten confianza.", icon: "/iconos/constelacion.webp", href: "/identidad-grafica" },
   ];
   const projects = [
     {
       name: "Alianza Francesa Puebla",
       category: "Plataforma Institucional & Difusión Cultural",
       desc: "Portal web enfocado en la difusión cultural y la conversión de prospectos académicos, facilitando la consulta de programas de francés, certificaciones oficiales y la inscripción de la comunidad.",
-      logo: "/logos/afpuebla.png",
+      logo: "/logos/afpuebla.webp",
       video: "/videos/afpuebla.mp4",
       url: "afpuebla.mx",
     },
@@ -215,7 +216,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
       name: "Universidad de Oriente",
       category: "Portal Educativo Multicampus / Captación Institucional",
       desc: "Ecosistema digital de alta concurrencia diseñado para estructurar la oferta académica de múltiples campus, optimizar la experiencia de navegación y acelerar la captación de nuevos alumnos en procesos de admisión.",
-      logo: "/logos/uo.png",
+      logo: "/logos/uo.webp",
       video: "/videos/uo.mp4",
       url: "uo.edu.mx",
     },
@@ -229,15 +230,12 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
 
   return (
     <div ref={containerRef}>
-      <AnimatePresence>
-        {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
-      </AnimatePresence>
-
+      <JsonLd data={HOME_SCHEMA} />
       {explosions.map(ex => (
         <ExplosionParticles key={ex.id} x={ex.x} y={ex.y} />
       ))}
 
-      {!isLoading && <Spaceship isWarpSpeed={isWarpSpeed} isLanded={isLanded} onLaserPosition={handleLaserPosition} />}
+      <Spaceship isWarpSpeed={isWarpSpeed} isLanded={isLanded} onLaserPosition={handleLaserPosition} />
 
       {/* ─── SECTOR 1: LA IGNICIÓN ─── */}
       <section id="ignicion" className="relative min-h-[110vh] flex flex-col justify-center items-center text-center px-4 z-10 pt-24">
@@ -296,7 +294,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
 
         <div className="flex flex-wrap items-center justify-center gap-16 md:gap-24 mb-20">
           {[0, 1, 2].map(i => {
-            const asteroidImages = ["/asteroides/asteroide-1.png", "/asteroides/asteroide-2.png", "/asteroides/asteroide-3.png"];
+            const asteroidImages = ["/asteroides/asteroide-1.webp", "/asteroides/asteroide-2.webp", "/asteroides/asteroide-3.webp"];
             return !asteroidsDestroyed[i] && (
               <div key={i} className="relative flex flex-col items-center gap-3 cursor-none">
                 <motion.div
@@ -341,7 +339,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
             transition={{ delay: 0.2 }}
             className="glass-liquid rounded-[30px] p-10 flex flex-col gap-5 cursor-none"
           >
-            <img src="/iconos/growth.png" alt="Growth" className="w-14 h-14 object-contain" />
+            <img src="/iconos/growth.webp" alt="Growth" className="w-14 h-14 object-contain" />
             <span className="text-base font-mono text-tangerine uppercase tracking-widest">Propulsor B</span>
             <h3 className="text-xl font-black uppercase text-white">GROWTH MARKETING Y CAPTACIÓN CONSTANTE</h3>
             <p className="text-base text-starlight/60 leading-relaxed">
@@ -364,7 +362,11 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
             </div>
 
             {services.map((svc, i) => (
-              <div key={i} className="w-[300px] md:w-[360px] shrink-0 glass-liquid rounded-[40px] p-7 md:p-10 flex flex-col gap-6 group cursor-none">
+              <Link
+                key={i}
+                href={svc.href}
+                className="w-[300px] md:w-[360px] shrink-0 glass-liquid rounded-[40px] p-7 md:p-10 flex flex-col gap-6 group cursor-none hover:border-orangeleader/40 transition-colors"
+              >
                 <div className="w-16 h-16 flex items-center justify-center">
                   <img src={svc.icon} alt={svc.name} className="w-14 h-14 object-contain" />
                 </div>
@@ -373,8 +375,8 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
                   <h3 className="text-lg font-black uppercase text-white mt-1 leading-tight">{svc.name}</h3>
                 </div>
                 <p className="text-base text-starlight/50 leading-relaxed">{svc.desc}</p>
-                <div className="mt-auto h-0.5 w-8 bg-gradient-to-r from-orangeleader to-transparent rounded-full" />
-              </div>
+                <div className="mt-auto h-0.5 w-8 bg-gradient-to-r from-orangeleader to-transparent rounded-full group-hover:w-16 transition-all" />
+              </Link>
             ))}
 
             <div className="w-[300px] md:w-[360px] shrink-0 glass-liquid rounded-[40px] p-7 md:p-10 flex flex-col items-center justify-center gap-5 text-center">
@@ -510,41 +512,6 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
           </div>
         </div>
       </section>
-
-      {/* ─── BOTONES FLOTANTES (Facebook / Instagram) ─── */}
-      <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[90] flex flex-col gap-4 md:gap-6">
-        <motion.button
-          onClick={() => setActiveSocial("instagram")}
-          aria-label="Escríbenos en Instagram"
-          animate={{ y: [0, -12, 0], rotate: [0, -3, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          whileHover={{ scale: 1.1 }}
-          className="w-24 h-24 md:w-32 md:h-32 cursor-pointer drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
-        >
-          <img src="/flotantes/flotante-instagram.webp" alt="Instagram" className="w-full h-full object-contain" />
-        </motion.button>
-        <motion.button
-          onClick={() => setActiveSocial("facebook")}
-          aria-label="Escríbenos por Facebook"
-          animate={{ y: [0, -12, 0], rotate: [0, 3, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-          whileHover={{ scale: 1.1 }}
-          className="w-24 h-24 md:w-32 md:h-32 cursor-pointer drop-shadow-[0_8px_24px_rgba(0,0,0,0.5)]"
-        >
-          <img src="/flotantes/flotante-messenger.webp" alt="Facebook Messenger" className="w-full h-full object-contain" />
-        </motion.button>
-      </div>
-
-      {/* ─── MODAL DE CONTACTO ─── */}
-      <AnimatePresence>
-        {activeSocial && (
-          <ContactModal
-            variant={activeSocial}
-            services={services.map((s) => s.name)}
-            onClose={() => setActiveSocial(null)}
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 }

@@ -5,7 +5,7 @@ interface LeadPayload {
   whatsapp: string;
   servicio: string;
   mensaje: string;
-  canal: "facebook" | "instagram" | "web";
+  canal: "facebook" | "instagram" | "web" | "whatsapp";
   recaptchaToken?: string;
   website?: string;
 }
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
   const servicio = (body.servicio || "").trim();
   const mensaje = (body.mensaje || "").trim();
   const canal =
-    body.canal === "instagram" || body.canal === "web" ? body.canal : "facebook";
+    body.canal === "instagram" || body.canal === "web" || body.canal === "whatsapp" ? body.canal : "facebook";
 
   // Honeypot anti-bots
   if (body.website && body.website.length > 0) {

@@ -1,0 +1,22 @@
+# Alié Digital
+
+> Agencia de Marketing Digital B2B especializada en diseño web, growth marketing, ecommerce e integraciones de IA en Monterrey y Puebla.
+
+## Servicios B2B
+- [SEO Técnico & AI](https://aliedigital.com/seo): Optimización en Google y motores de IA (ChatGPT, Claude, Perplexity) para indexación acelerada.
+- [Diseño de Páginas Web](https://aliedigital.com/diseno-paginas-web): Páginas web veloces y de alta conversión adaptadas a objetivos comerciales B2B.
+- [Ecommerce](https://aliedigital.com/ecommerce): Tiendas en línea robustas, seguras y optimizadas para conversiones de pago ágiles.
+- [Paid Media](https://aliedigital.com/paid-media): Campañas de pauta digital de alta precisión en Google Ads y Meta Ads para captar leads.
+- [Redes Sociales](https://aliedigital.com/redes-sociales): Gestión y contenido estratégico para potenciar marcas y engagement comercial.
+- [Email Marketing & CRM](https://aliedigital.com/email-marketing): Secuencias automatizadas y nutrición de prospectos B2B.
+- [Asistentes IA & Automatizaciones](https://aliedigital.com/ia): Integración de inteligencia artificial y copilotos para atención y calificación 24/7.
+- [Identidad Gráfica & Branding](https://aliedigital.com/identidad-grafica): Construcción de marcas de alta confianza y lineamientos visuales memorables.
+
+## Ubicaciones y Enfoque Regional
+- [Agencia Monterrey](https://aliedigital.com/monterrey): Estrategias de posicionamiento y diseño web adaptadas a empresas industriales y B2B en Monterrey.
+- [Agencia Puebla](https://aliedigital.com/puebla): Soluciones digitales y desarrollo web para sectores de tecnología, servicios y manufactura en Puebla.
+
+## Recursos e Información Corporativa
+- [Bitácora / Blog](https://aliedigital.com/blog): Artículos técnicos de SEO, paid media, automatizaciones y gobernanza de IA.
+- [Casos de Éxito](https://aliedigital.com/casos-de-exito): Testimonios y resultados cuantificables de proyectos desarrollados.
+- [Nosotros / Agencia](https://aliedigital.com/nosotros): Propuesta de valor, equipo y filosofía operativa de Alié Digital.
