@@ -35,12 +35,14 @@ class AlieCore_REST {
 			set_transient( $key, $count + 1, 10 * MINUTE_IN_SECONDS );
 		}
 
-		$nombre   = sanitize_text_field( $request->get_param( 'nombre' ) );
-		$whatsapp = sanitize_text_field( $request->get_param( 'whatsapp' ) );
-		$servicio = sanitize_text_field( $request->get_param( 'servicio' ) );
-		$mensaje  = sanitize_textarea_field( $request->get_param( 'mensaje' ) );
-		$canal    = sanitize_text_field( $request->get_param( 'canal' ) );
-		$website  = sanitize_text_field( $request->get_param( 'website' ) ); // honeypot
+		$nombre     = sanitize_text_field( $request->get_param( 'nombre' ) );
+		$whatsapp   = sanitize_text_field( $request->get_param( 'whatsapp' ) );
+		$servicio   = sanitize_text_field( $request->get_param( 'servicio' ) );
+		$mensaje    = sanitize_textarea_field( $request->get_param( 'mensaje' ) );
+		$canal      = sanitize_text_field( $request->get_param( 'canal' ) );
+		$website    = sanitize_text_field( $request->get_param( 'website' ) ); // honeypot
+		$pagina     = sanitize_text_field( $request->get_param( 'pagina' ) );
+		$formulario = sanitize_text_field( $request->get_param( 'formulario' ) );
 
 		if ( ! empty( $website ) ) {
 			return new WP_Error( 'spam_detected', 'Spam detectado', array( 'status' => 400 ) );
@@ -69,6 +71,8 @@ class AlieCore_REST {
 		update_post_meta( $post_id, 'servicio', $servicio );
 		update_post_meta( $post_id, 'mensaje', $mensaje );
 		update_post_meta( $post_id, 'canal', $canal );
+		update_post_meta( $post_id, 'pagina', $pagina );
+		update_post_meta( $post_id, 'formulario', $formulario );
 
 		// Notificación por correo (destinatario configurable en Ajustes → Alié Digital).
 		$to = AlieCore_Settings::get_notification_email();

@@ -13,11 +13,13 @@ class AlieCore_Meta {
 
 	public static function register() {
 		$fields = array(
-			'nombre'   => 'sanitize_text_field',
-			'whatsapp' => 'sanitize_text_field',
-			'servicio' => 'sanitize_text_field',
-			'mensaje'  => 'sanitize_textarea_field',
-			'canal'    => 'sanitize_text_field',
+			'nombre'     => 'sanitize_text_field',
+			'whatsapp'   => 'sanitize_text_field',
+			'servicio'   => 'sanitize_text_field',
+			'mensaje'    => 'sanitize_textarea_field',
+			'canal'      => 'sanitize_text_field',
+			'pagina'     => 'sanitize_text_field',
+			'formulario' => 'sanitize_text_field',
 		);
 
 		foreach ( $fields as $field => $sanitize_callback ) {
@@ -61,6 +63,70 @@ class AlieCore_Meta {
 		// Registrar hooks para metaboxes en el panel de administración
 		add_action( 'add_meta_boxes', array( 'AlieCore_Meta', 'add_post_meta_boxes' ) );
 		add_action( 'save_post', array( 'AlieCore_Meta', 'save_post_meta' ) );
+
+		// Registrar columnas personalizadas en el listado de Leads
+		add_filter( 'manage_lead_posts_columns', array( 'AlieCore_Meta', 'add_lead_columns' ) );
+		add_action( 'manage_lead_posts_custom_column', array( 'AlieCore_Meta', 'render_lead_columns' ), 10, 2 );
+	}
+
+	/**
+	 * Definir qué columnas se muestran en el listado de Leads (estilo Elementor).
+	 */
+	public static function add_lead_columns( $columns ) {
+		$new_columns = array(
+			'cb'              => $columns['cb'],
+			'title'           => 'Nombre / Identificador',
+			'lead_whatsapp'   => 'WhatsApp / Teléfono',
+			'lead_servicio'   => 'Servicio de Interés',
+			'lead_formulario' => 'Formulario',
+			'lead_pagina'     => 'Página de Origen',
+			'lead_canal'      => 'Canal',
+			'date'            => $columns['date'],
+		);
+		return $new_columns;
+	}
+
+	/**
+	 * Renderizar el contenido de cada celda de las columnas personalizadas.
+	 */
+	public static function render_lead_columns( $column, $post_id ) {
+		switch ( $column ) {
+			case 'lead_whatsapp':
+				echo esc_html( get_post_meta( $post_id, 'whatsapp', true ) );
+				break;
+			case 'lead_servicio':
+				echo esc_html( get_post_meta( $post_id, 'servicio', true ) );
+				break;
+			case 'lead_formulario':
+				echo esc_html( get_post_meta( $post_id, 'formulario', true ) );
+				break;
+			case 'lead_pagina':
+				$pagina = get_post_meta( $post_id, 'pagina', true );
+				if ( ! empty( $pagina ) ) {
+					$short_url = wp_parse_url( $pagina, PHP_URL_PATH );
+					$query     = wp_parse_url( $pagina, PHP_URL_QUERY );
+					if ( $query ) {
+						$short_url .= '?' . substr( $query, 0, 25 ) . '...';
+					}
+					echo '<a href="' . esc_url( $pagina ) . '" target="_blank" title="' . esc_attr( $pagina ) . '">' . esc_html( $short_url ) . ' ↗</a>';
+				} else {
+					echo '<span class="description">—</span>';
+				}
+				break;
+			case 'lead_canal':
+				$canal = get_post_meta( $post_id, 'canal', true );
+				$badge_style = 'display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; text-transform: uppercase;';
+				if ( $canal === 'facebook' ) {
+					echo '<span style="' . $badge_style . ' background: #e7f3ff; color: #1877f2;">Facebook</span>';
+				} elseif ( $canal === 'instagram' ) {
+					echo '<span style="' . $badge_style . ' background: #fdf0f5; color: #e1306c;">Instagram</span>';
+				} elseif ( $canal === 'whatsapp' ) {
+					echo '<span style="' . $badge_style . ' background: #e8f9ee; color: #25d366;">WhatsApp</span>';
+				} else {
+					echo '<span style="' . $badge_style . ' background: #f0f0f1; color: #50575e;">Web</span>';
+				}
+				break;
+		}
 	}
 
 	/**
@@ -124,11 +190,13 @@ class AlieCore_Meta {
 	public static function render_lead_meta_box( $post ) {
 		wp_nonce_field( 'save_alie_lead_meta_nonce', 'alie_lead_meta_nonce' );
 
-		$nombre   = get_post_meta( $post->ID, 'nombre', true );
-		$whatsapp = get_post_meta( $post->ID, 'whatsapp', true );
-		$servicio = get_post_meta( $post->ID, 'servicio', true );
-		$mensaje  = get_post_meta( $post->ID, 'mensaje', true );
-		$canal    = get_post_meta( $post->ID, 'canal', true );
+		$nombre     = get_post_meta( $post->ID, 'nombre', true );
+		$whatsapp   = get_post_meta( $post->ID, 'whatsapp', true );
+		$servicio   = get_post_meta( $post->ID, 'servicio', true );
+		$mensaje    = get_post_meta( $post->ID, 'mensaje', true );
+		$canal      = get_post_meta( $post->ID, 'canal', true );
+		$pagina     = get_post_meta( $post->ID, 'pagina', true );
+		$formulario = get_post_meta( $post->ID, 'formulario', true );
 		?>
 		<table class="form-table">
 			<tr>
@@ -142,6 +210,14 @@ class AlieCore_Meta {
 			<tr>
 				<th><label for="alie_lead_servicio">Servicios de Interés</label></th>
 				<td><input type="text" id="alie_lead_servicio" name="alie_lead_servicio" value="<?php echo esc_attr( $servicio ); ?>" class="regular-text" /></td>
+			</tr>
+			<tr>
+				<th><label for="alie_lead_formulario">Formulario de Origen</label></th>
+				<td><input type="text" id="alie_lead_formulario" name="alie_lead_formulario" value="<?php echo esc_attr( $formulario ); ?>" class="regular-text" /></td>
+			</tr>
+			<tr>
+				<th><label for="alie_lead_pagina">Página de Origen (URL)</label></th>
+				<td><input type="text" id="alie_lead_pagina" name="alie_lead_pagina" value="<?php echo esc_attr( $pagina ); ?>" class="large-text" style="width: 100%;" /></td>
 			</tr>
 			<tr>
 				<th><label for="alie_lead_canal">Canal de Origen</label></th>
@@ -186,9 +262,9 @@ class AlieCore_Meta {
 			}
 		}
 
-		// Guardar metadatos de Lead (Nombre, WhatsApp, Servicio, Canal, Mensaje)
+		// Guardar metadatos de Lead (Nombre, WhatsApp, Servicio, Canal, Mensaje, Página, Formulario)
 		if ( isset( $_POST['alie_lead_meta_nonce'] ) && wp_verify_nonce( $_POST['alie_lead_meta_nonce'], 'save_alie_lead_meta_nonce' ) ) {
-			$fields = array( 'nombre', 'whatsapp', 'servicio', 'canal', 'mensaje' );
+			$fields = array( 'nombre', 'whatsapp', 'servicio', 'canal', 'mensaje', 'pagina', 'formulario' );
 			foreach ( $fields as $field ) {
 				if ( isset( $_POST['alie_lead_' . $field] ) ) {
 					$value = $_POST['alie_lead_' . $field];
