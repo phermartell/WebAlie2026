@@ -101,15 +101,26 @@ export default function Home() {
   useMotionValueEvent(horizontalProgress, "change", (v) => setIsWarpSpeed(v > 0.22 && v < 0.72));
   useMotionValueEvent(scrollYProgress, "change", (v) => setIsLanded(v > 0.95));
 
+  const [isBitacoraVisible, setIsBitacoraVisible] = useState(false);
+  const bitacoraRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => {
-      mousePosRef.current = { x: e.clientX, y: e.clientY };
-    };
-    window.addEventListener("mousemove", onMouseMove);
-    return () => window.removeEventListener("mousemove", onMouseMove);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsBitacoraVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    if (bitacoraRef.current) {
+      observer.observe(bitacoraRef.current);
+    }
+    return () => observer.disconnect();
   }, []);
 
-    // Asteroid respawn timers
+  // Asteroid respawn timers
   const respawnTimers = useRef<(NodeJS.Timeout | null)[]>([null, null, null]);
 
   const destroyAsteroid = useCallback((i: number, centerX: number, centerY: number) => {
@@ -130,6 +141,40 @@ export default function Home() {
       timers.forEach(t => { if (t) clearTimeout(t); });
     };
   }, []);
+
+  useEffect(() => {
+    const checkCollision = () => {
+      const { x: shipX, y: shipY } = mousePosRef.current;
+      asteroidRefs.current.forEach((ref, i) => {
+        if (!ref || asteroidsDestroyed[i]) return;
+        const rect = ref.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const hitRadius = rect.width * 0.55;
+        const dx = shipX - centerX;
+        const dy = shipY - centerY;
+        if (Math.sqrt(dx * dx + dy * dy) < hitRadius) {
+          destroyAsteroid(i, centerX, centerY);
+        }
+      });
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      mousePosRef.current = { x: e.clientX, y: e.clientY };
+      checkCollision();
+    };
+
+    const onScroll = () => {
+      checkCollision();
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [asteroidsDestroyed, destroyAsteroid]);
 
   // Keyboard navigation for project showcase
   useEffect(() => {
@@ -158,24 +203,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
       }
     });
   }, [asteroidsDestroyed, destroyAsteroid]);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const { x: shipX, y: shipY } = mousePosRef.current;
-      asteroidRefs.current.forEach((ref, i) => {
-        if (!ref || asteroidsDestroyed[i]) return;
-        const rect = ref.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const hitRadius = rect.width * 0.55;
-        const dx = shipX - centerX;
-        const dy = shipY - centerY;
-        if (Math.sqrt(dx * dx + dy * dy) < hitRadius) {
-          destroyAsteroid(i, centerX, centerY);
-        }
-      });
-    }, 50);
-    return () => clearInterval(interval);
-  }, [asteroidsDestroyed, destroyAsteroid]);
+
 
   const services = [
     { name: "SEO Técnico & AI", alias: "Radar Estelar", desc: "Rankea en Google y motores de IA como ChatGPT y Perplexity. Optimizamos tu código, Schema y contenidos para que los LLMs recomienden tu marca.", icon: "/iconos/radar.webp", href: "/seo" },
@@ -389,7 +417,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
         </div>
       </section>
       {/* ─── SECTOR 4: BITÁCORA DE MISIÓN ─── */}
-      <section id="bitacora" className="relative min-h-screen flex flex-col items-center justify-center z-10 py-24 px-4">
+      <section id="bitacora" ref={bitacoraRef} className="relative min-h-screen flex flex-col items-center justify-center z-10 py-24 px-4">
         <span className="text-base font-mono tracking-[0.3em] text-orangeleader uppercase mb-10">Sector 4 · Bitácora de Misión</span>
         <h2 className="text-3xl md:text-5xl font-black uppercase text-white mb-6 text-center">
           MARCAS EN ÓRBITA Y<br/>RESULTADOS REALES.
@@ -434,19 +462,21 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
                 </div>
                 {/* Video player — only one mounted at a time */}
                 <div className="aspect-[16/9] bg-[#060a14] flex items-center justify-center relative overflow-hidden">
-                  <video
-                    key={projects[activeProject].video}
-                    preload="none"
-                    muted
-                    loop
-                    playsInline
-                    disableRemotePlayback
-                    autoPlay
-                    poster={projects[activeProject].logo}
-                    className="absolute inset-0 w-full h-full object-contain"
-                  >
-                    <source src={projects[activeProject].video} type="video/mp4" />
-                  </video>
+                  {isBitacoraVisible && (
+                    <video
+                      key={projects[activeProject].video}
+                      preload="none"
+                      muted
+                      loop
+                      playsInline
+                      disableRemotePlayback
+                      autoPlay
+                      poster={projects[activeProject].logo}
+                      className="absolute inset-0 w-full h-full object-contain"
+                    >
+                      <source src={projects[activeProject].video} type="video/mp4" />
+                    </video>
+                  )}
                 </div>
                 {/* Info footer */}
                 <div className="px-6 md:px-10 py-6 shrink-0">
