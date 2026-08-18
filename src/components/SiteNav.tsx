@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { MAIN_NAV } from "@/lib/site";
@@ -32,7 +33,7 @@ export default function SiteNav() {
     <>
       <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-8 py-6">
         <Link href="/" aria-label="Alié Digital — Home">
-          <img src="/isotipo_GRADIENT.svg" alt="Alié" className="w-20 h-20 md:w-28 md:h-28 drop-shadow-[0_0_20px_rgba(235,63,27,0.6)]" />
+          <Image src="/isotipo_GRADIENT.svg" alt="Alié" width={112} height={112} priority className="w-20 h-20 md:w-28 md:h-28 drop-shadow-[0_0_20px_rgba(235,63,27,0.6)]" />
         </Link>
 
         <ul className="hidden lg:flex items-center gap-6">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
 
@@ -144,7 +145,7 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
         {/* Header */}
         <div className={`relative bg-gradient-to-r ${cfg.gradient} px-6 py-6`}>
           <div className="flex items-center gap-4">
-            <img src={cfg.icon} alt={cfg.label} className="w-12 h-12 object-contain drop-shadow-[0_0_16px_rgba(255,255,255,0.4)]" />
+            <Image src={cfg.icon} alt={cfg.label} width={48} height={48} className="w-12 h-12 object-contain drop-shadow-[0_0_16px_rgba(255,255,255,0.4)]" />
             <div className="flex-1">
               <h3 className="text-xl font-black uppercase text-white leading-tight">Escríbenos por {cfg.label}</h3>
               <p className="text-white/70 text-sm font-light">Te respondemos en minutos.</p>

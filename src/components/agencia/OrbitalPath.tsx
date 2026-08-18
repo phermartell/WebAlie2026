@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -90,7 +91,7 @@ function OrbitalPathInner({ planetSrc, planetColor }: OrbitalPathProps) {
         }}
       >
         {planetSrc ? (
-          <img src={planetSrc} className="w-full h-full object-cover" alt="Planeta Orbital" />
+          <Image src={planetSrc} width={32} height={32} className="w-full h-full object-cover" alt="Planeta Orbital" />
         ) : (
           <div 
             className="w-full h-full" 

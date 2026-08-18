@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { BlogPost } from "@/lib/wp";
@@ -33,9 +34,11 @@ export default function BlogCard({ post }: BlogCardProps) {
       {/* Imagen Destacada del Artículo / Contenedor Espacial */}
       <div className="relative aspect-video w-full overflow-hidden bg-oled/50 border-b border-white/5">
         {post.featuredImage ? (
-          <img
+          <Image
             src={post.featuredImage}
             alt={post.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
           />
         ) : (

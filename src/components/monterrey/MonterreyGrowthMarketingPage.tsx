@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useSyncExternalStore } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform, useVelocity, useMotionValue, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import LeadForm from "@/components/LeadForm";
 import { Hud, ShipMark } from "@/components/agencia/hud";
@@ -57,9 +58,7 @@ const MonterreyOrbitalPathInner = () => {
 
       {/* Planet Monterrey at the end of trajectory */}
       <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full border border-cyan-400/50 overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.5)] z-30 flex items-center justify-center bg-black" style={{ top: "90%" }}>
-        <img src="/ilustraciones/planeta1.webp" className="w-full h-full object-cover" alt="Planeta Monterrey" onError={(e) => {
-          (e.target as HTMLImageElement).style.display = 'none';
-        }} />
+        <Image src="/ilustraciones/planeta1.webp" width={32} height={32} className="w-full h-full object-cover" alt="Planeta Monterrey" />
       </div>
 
       {/* Spacecraft following scroll */}
@@ -403,13 +402,12 @@ export default function MonterreyGrowthMarketingPage() {
           </div>
 
           <div className="relative rounded-[40px] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(235,63,27,0.15)] w-full min-h-[300px] md:min-h-[450px] lg:min-h-full flex items-center justify-center bg-black">
-            <img
+            <Image
               src="/monterrey-silla.webp"
               alt="El Cerro de la Silla en el espacio cósmico"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="absolute inset-0 w-full h-full object-cover opacity-80"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "/og-home.webp";
-              }}
             />
             {/* Visual reference representation of Monterrey */}
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/40 to-transparent p-6 text-center z-10">
@@ -426,13 +424,12 @@ export default function MonterreyGrowthMarketingPage() {
       <section className="relative z-10 px-4 md:px-8 py-20 bg-transparent">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           <div className="relative rounded-[40px] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(235,63,27,0.15)] w-full min-h-[300px] md:min-h-[450px] lg:min-h-full flex items-center justify-center bg-black lg:order-1 order-2">
-            <img
+            <Image
               src="/monterrey-silla.webp"
               alt="Cerro de la Silla cósmico"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="absolute inset-0 w-full h-full object-cover opacity-80"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "/og-home.webp";
-              }}
             />
             <div className="absolute inset-0 bg-[#02040a]/20 pointer-events-none" />
           </div>
@@ -561,13 +558,13 @@ export default function MonterreyGrowthMarketingPage() {
           <div className="flex gap-12 animate-marquee-left items-center min-w-full">
             {[...clientLogos, ...clientLogos].map((src, idx) => (
               <div key={idx} className="w-24 md:w-32 shrink-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                <img
+                <Image
                   src={src}
+                  width={128}
+                  height={64}
+                  unoptimized
                   className="w-full h-auto object-contain filter brightness-0 invert"
                   alt="Cliente Alié Digital Monterrey"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
                 />
               </div>
             ))}

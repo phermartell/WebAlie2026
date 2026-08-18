@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { SpotlightCard } from "@/components/agencia/ui";
@@ -526,9 +527,11 @@ export default function SocialMediaPageClient() {
                   onClick={() => setIsZoomed(true)}
                   className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/60 cursor-pointer group mt-4 aspect-video flex items-center justify-center"
                 >
-                  <img
+                  <Image
                     src={screenshots[activeTab].img}
                     alt={screenshots[activeTab].title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 700px"
                     className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-102"
                   />
                   <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -558,9 +561,11 @@ export default function SocialMediaPageClient() {
                 exit={{ scale: 0.95 }}
                 className="relative max-w-7xl max-h-[90vh] w-full h-full flex flex-col justify-center items-center"
               >
-                <img
+                <Image
                   src={screenshots[activeTab].img}
                   alt={screenshots[activeTab].title}
+                  width={1200}
+                  height={800}
                   className="max-w-full max-h-[80vh] object-contain rounded-xl border border-white/10 shadow-2xl"
                 />
                 

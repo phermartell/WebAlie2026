@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useSyncExternalStore } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform, useVelocity, useMotionValue, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import LeadForm from "@/components/LeadForm";
 import { SERVICIOS } from "@/components/agencia/data";
@@ -59,7 +60,7 @@ const MonterreyOrbitalPathInner = () => {
 
       {/* Monterrey Space Planet at the end of trajectory */}
       <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full border border-cyan-400/50 overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.5)] z-30" style={{ top: "90%" }}>
-        <img src="/ilustraciones/planeta1.webp" className="w-full h-full object-cover" alt="Planeta Monterrey" />
+        <Image src="/ilustraciones/planeta1.webp" width={32} height={32} className="w-full h-full object-cover" alt="Planeta Monterrey" />
       </div>
 
       {/* Spacecraft following scroll */}
@@ -480,7 +481,7 @@ export default function MonterreyPage() {
           </div>
 
           <div className="relative rounded-[40px] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(235,63,27,0.15)] aspect-square max-w-md mx-auto">
-            <img
+            <Image
               src="/monterrey-silla.webp"
               alt="Ilustración del Cerro de la Silla en Monterrey bajo un cielo estrellado y espacial"
               className="w-full h-full object-cover"
@@ -521,7 +522,7 @@ export default function MonterreyPage() {
             </div>
 
             <div className="relative rounded-[40px] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(34,211,238,0.15)] aspect-[3/4.5] max-w-sm mx-auto h-[480px]">
-              <img
+              <Image
                 src="/monterrey-fundidora.webp"
                 alt="Silueta del Horno 3 de Fundidora en Monterrey en una constelación de estrellas y planetas"
                 className="w-full h-full object-cover rounded-[40px]"
@@ -814,7 +815,7 @@ export default function MonterreyPage() {
           <div className="flex gap-12 animate-marquee-left items-center min-w-full">
             {[...clientLogos, ...clientLogos].map((src, idx) => (
               <div key={idx} className="w-24 md:w-32 shrink-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                <img src={src} className="w-full h-auto object-contain filter brightness-0 invert" alt="Cliente Alié Monterrey" />
+                <Image src={src} width={128} height={64} unoptimized className="w-full h-auto object-contain filter brightness-0 invert" alt="Cliente Alié Monterrey" />
               </div>
             ))}
           </div>
@@ -825,7 +826,7 @@ export default function MonterreyPage() {
           <div className="flex gap-12 animate-marquee-right items-center min-w-full">
             {[...clientLogos, ...clientLogos].reverse().map((src, idx) => (
               <div key={idx} className="w-24 md:w-32 shrink-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                <img src={src} className="w-full h-auto object-contain filter brightness-0 invert" alt="Cliente Alié Monterrey" />
+                <Image src={src} width={128} height={64} unoptimized className="w-full h-auto object-contain filter brightness-0 invert" alt="Cliente Alié Monterrey" />
               </div>
             ))}
           </div>

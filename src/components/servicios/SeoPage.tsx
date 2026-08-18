@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { SpotlightCard } from "@/components/agencia/ui";
 import OrbitalPath from "@/components/agencia/OrbitalPath";
@@ -526,9 +527,11 @@ export default function SeoPageClient() {
                   Evidencia técnica de las posiciones de liderazgo en los motores de búsqueda logradas a través de nuestra estrategia SEO focalizada.
                 </p>
                 <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-black/40 group mt-4">
-                  <img
+                  <Image
                     src="/casos/morecsa/morecsa-kw.webp"
                     alt="Posicionamiento de Palabras Clave MORECSA"
+                    width={700}
+                    height={400}
                     className="w-full h-auto object-cover opacity-90 transition-transform duration-500 group-hover:scale-102"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
@@ -561,9 +564,11 @@ export default function SeoPageClient() {
               ].map((phase, idx) => (
                 <div key={idx} className="space-y-3">
                   <div className="relative rounded-xl overflow-hidden border border-white/5 bg-black/20 group">
-                    <img
+                    <Image
                       src={phase.img}
                       alt={phase.title}
+                      width={350}
+                      height={200}
                       className="w-full h-auto object-cover opacity-80 transition-transform duration-500 group-hover:scale-102"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />

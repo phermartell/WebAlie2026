@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useSyncExternalStore } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform, useVelocity, useMotionValue, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import LeadForm from "@/components/LeadForm";
 import { Hud, ShipMark } from "@/components/agencia/hud";
@@ -398,9 +399,11 @@ export default function PueblaGrowthMarketingPage() {
           </div>
 
           <div className="relative rounded-[40px] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(235,63,27,0.15)] w-full min-h-[300px] md:min-h-[450px] lg:min-h-full flex items-center justify-center bg-black">
-            <img
+            <Image
               src="/puebla-cholula-space.webp"
               alt="Pirámide de Cholula y el Santuario de los Remedios en el espacio"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="absolute inset-0 w-full h-full object-cover opacity-80"
             />
             {/* Visual reference representation of Cholula Pyramid with church */}
@@ -418,9 +421,11 @@ export default function PueblaGrowthMarketingPage() {
       <section className="relative z-10 px-4 md:px-8 py-20 bg-transparent">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           <div className="relative rounded-[40px] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(235,63,27,0.15)] w-full min-h-[300px] md:min-h-[450px] lg:min-h-full flex items-center justify-center bg-black lg:order-1 order-2">
-            <img
+            <Image
               src="/puebla-popo.webp"
               alt="Volcán Popocatépetl cósmico flotando en el espacio"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="absolute inset-0 w-full h-full object-cover opacity-80"
             />
             <div className="absolute inset-0 bg-[#02040a]/20 pointer-events-none" />
@@ -550,13 +555,12 @@ export default function PueblaGrowthMarketingPage() {
           <div className="flex gap-12 animate-marquee-left items-center min-w-full">
             {[...clientLogos, ...clientLogos].map((src, idx) => (
               <div key={idx} className="w-24 md:w-32 shrink-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                <img
+                <Image
                   src={src}
+                  width={128}
+                  height={64}
                   className="w-full h-auto object-contain filter brightness-0 invert"
                   alt="Cliente Alié Digital Puebla"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
                 />
               </div>
             ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { SpotlightCard } from "@/components/agencia/ui";
 import { useChatModal } from "@/components/ChatModalContext";
 
@@ -79,9 +80,11 @@ export default function Sector01Construyamos() {
           <SpotlightCard className="glass-liquid rounded-[28px] p-6 md:p-8 text-left transition-transform duration-500 hover:scale-[1.02]">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
               <div className="relative shrink-0">
-                <img
+                <Image
                   src="/ilustraciones/botalice.webp"
                   alt="Alice — Oficial de Inteligencia"
+                  width={64}
+                  height={64}
                   className="w-16 h-16 rounded-full border-2 border-orangeleader/50 object-cover"
                 />
                 <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-deepspace rounded-full" />

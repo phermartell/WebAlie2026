@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SERVICES, CITIES } from "@/lib/site";
 
 export default function Footer() {
@@ -7,7 +8,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-14 md:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           <div className="col-span-2 md:col-span-1">
-            <img src="/isotipo_GRADIENT.svg" alt="Alié Digital" className="w-16 h-16 mb-4 drop-shadow-[0_0_16px_rgba(235,63,27,0.5)]" />
+            <Image src="/isotipo_GRADIENT.svg" alt="Alié Digital" width={64} height={64} className="w-16 h-16 mb-4 drop-shadow-[0_0_16px_rgba(235,63,27,0.5)]" />
             <p className="text-base text-starlight/50 leading-relaxed">
               Agencia de marketing digital B2B. Páginas web, growth marketing, ecommerce y soluciones digitales para generar demanda y ventas.
             </p>

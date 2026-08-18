@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useSyncExternalStore } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform, useVelocity, useMotionValue, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import LeadForm from "@/components/LeadForm";
 import { Hud, ShipMark, ServiceIcon } from "@/components/agencia/hud";
@@ -57,9 +58,7 @@ const PueblaOrbitalPathInner = () => {
 
       {/* Talavera Planet at the end of trajectory */}
       <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full border border-cyan-400/50 overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.5)] z-30" style={{ top: "90%" }}>
-        <img src="/puebla-talavera.webp" className="w-full h-full object-cover" alt="Planeta Talavera" onError={(e) => {
-          (e.target as HTMLImageElement).style.display = 'none';
-        }} />
+        <Image src="/puebla-talavera.webp" width={32} height={32} className="w-full h-full object-cover" alt="Planeta Talavera" />
       </div>
 
       {/* Spacecraft following scroll */}
@@ -364,13 +363,12 @@ export default function PueblaDisenoWebPage() {
           </div>
 
           <div className="relative rounded-[40px] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(235,63,27,0.15)] aspect-square max-w-md mx-auto">
-            <img
+            <Image
               src="/puebla-popo.webp"
               alt="Ilustración Popocatépetl flotando en el espacio"
+              fill
+              sizes="(max-width: 768px) 100vw, 448px"
               className="w-full h-full object-cover"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "/og-home.webp";
-              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#02040a]/80 via-transparent to-transparent pointer-events-none" />
           </div>
@@ -561,9 +559,7 @@ export default function PueblaDisenoWebPage() {
           <div className="flex gap-12 animate-marquee-left items-center min-w-full">
             {[...clientLogos, ...clientLogos].map((src, idx) => (
               <div key={idx} className="w-24 md:w-32 shrink-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                <img src={src} className="w-full h-auto object-contain filter brightness-0 invert" alt="Cliente Alié Digital Puebla" onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }} />
+                <Image src={src} width={128} height={64} className="w-full h-auto object-contain filter brightness-0 invert" alt="Cliente Alié Digital Puebla" />
               </div>
             ))}
           </div>
