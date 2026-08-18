@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactLenis, useLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
-import NebulaBackground from "./NebulaBackground";
+import dynamic from "next/dynamic";
 import CalmSpaceBackground from "./CalmSpaceBackground";
-import SpaceScene from "./SpaceScene";
+
+const NebulaBackground = dynamic(() => import("./NebulaBackground"), { ssr: false });
+const SpaceScene = dynamic(() => import("./SpaceScene"), { ssr: false });
 
 function LenisPageTrigger() {
   const lenis = useLenis();
@@ -27,14 +29,24 @@ function LenisPageTrigger() {
 export default function SpaceLayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    checkIsDesktop();
+    window.addEventListener("resize", checkIsDesktop);
+    return () => window.removeEventListener("resize", checkIsDesktop);
+  }, []);
 
   return (
     <ReactLenis root>
       <LenisPageTrigger />
-      {/* Fondo: nebulosa WebGL solo en home; fondo calmo estático en el resto */}
-      {isHome ? <NebulaBackground /> : <CalmSpaceBackground />}
-      {/* Estrellas con parallax de scroll (siempre) */}
-      <SpaceScene />
+      {/* Fondo: nebulosa WebGL solo en home y desktop; fondo calmo estático en el resto */}
+      {isHome && isDesktop ? <NebulaBackground /> : <CalmSpaceBackground />}
+      {/* Estrellas con parallax de scroll (solo en desktop) */}
+      {isDesktop && <SpaceScene />}
       
       {/* Relative z-indexed wrapper for the actual page markup content */}
       <div className="relative z-10 w-full min-h-screen">
