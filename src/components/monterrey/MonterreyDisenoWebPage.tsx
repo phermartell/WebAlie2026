@@ -1,22 +1,26 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useSyncExternalStore } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform, useVelocity, useMotionValue, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import LeadForm from "@/components/LeadForm";
 import { Hud, ShipMark, ServiceIcon } from "@/components/agencia/hud";
 import WhatsAppChat from "@/components/monterrey/WhatsAppChat";
 
-const DESKTOP_QUERY = "(min-width: 768px)";
-
-function subscribe(callback: () => void) {
-  const mq = window.matchMedia(DESKTOP_QUERY);
-  mq.addEventListener("change", callback);
-  return () => mq.removeEventListener("change", callback);
-}
+const useIsDesktop = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(mq.matches);
+    const cb = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", cb);
+    return () => mq.removeEventListener("change", cb);
+  }, []);
+  return isDesktop;
+};
 
 const MonterreyOrbitalPath = () => {
-  const isDesktop = useSyncExternalStore(subscribe, () => window.matchMedia(DESKTOP_QUERY).matches, () => false);
+  const isDesktop = useIsDesktop();
   if (!isDesktop) return null;
   return <MonterreyOrbitalPathInner />;
 };
@@ -73,7 +77,7 @@ const MonterreyOrbitalPathInner = () => {
 
 // Canvas of Interactive Stars reacting to Mouse
 const InteractiveStars = () => {
-  const isDesktop = useSyncExternalStore(subscribe, () => window.matchMedia(DESKTOP_QUERY).matches, () => false);
+  const isDesktop = useIsDesktop();
   if (!isDesktop) return null;
   return <InteractiveStarsInner />;
 };
