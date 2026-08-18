@@ -642,7 +642,7 @@ export default function PueblaPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Hud>Hoja de Ruta // Proceso de Ingeniería</Hud>
             <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-              CÓMO HACEMOS TIRO CON TU PROYECTO
+              Cómo Hacemos Sinergia con tu Proyecto en Puebla
             </h2>
             <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light">
               Nuestra metodología estructurada de 5 fases, diseñada para entregar velocidad y resultados sin perder calidad.

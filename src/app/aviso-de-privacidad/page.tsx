@@ -1,21 +1,38 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Aviso de privacidad | Alié Digital",
-  description: "Aviso de privacidad de Alié Digital, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).",
+  title: "Aviso de Privacidad de Datos y Cookies | Alié Digital",
+  description: "Consulta nuestro aviso de privacidad de Alié Digital. Conoce las políticas de protección, tratamiento, uso y almacenamiento de tus datos personales aquí.",
+  alternates: {
+    canonical: "https://aliedigital.com/aviso-de-privacidad/",
+    languages: {
+      "es-MX": "https://aliedigital.com/aviso-de-privacidad/",
+      "x-default": "https://aliedigital.com/aviso-de-privacidad/",
+    },
+  },
   openGraph: {
-    title: "Aviso de privacidad | Alié Digital",
-    description: "Aviso de privacidad de Alié Digital, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).",
+    type: "website",
+    siteName: "Alié Digital",
+    title: "Aviso de Privacidad de Datos y Cookies Oficial | Alié Digital",
+    description: "Consulta aquí nuestro aviso de privacidad de Alié Digital. Conoce las políticas de protección, tratamiento, uso y almacenamiento de tus datos personales en el sitio.",
     url: "https://aliedigital.com/aviso-de-privacidad/",
-    images: [{ url: "https://aliedigital.com/og-home.webp", width: 1200, height: 630, alt: "Aviso de privacidad | Alié Digital" }],
+    images: [
+      {
+        url: "https://aliedigital.com/og-home.webp",
+        width: 1200,
+        height: 630,
+        alt: "Alié Digital",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aviso de privacidad | Alié Digital",
-    description: "Aviso de privacidad de Alié Digital, conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).",
+    site: "@AlieDigital",
+    title: "Aviso de Privacidad de Datos y Cookies Oficial | Alié Digital",
+    description: "Consulta aquí nuestro aviso de privacidad de Alié Digital. Conoce las políticas de protección, tratamiento, uso y almacenamiento de tus datos personales en el sitio.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};
+};;
 
 export default function AvisoPrivacidadPage() {
   return (

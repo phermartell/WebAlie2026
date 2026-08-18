@@ -387,7 +387,7 @@ export default function MonterreyDisenoWebPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Hud>Especialidades Digitales // Core Capabilities</Hud>
             <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-              NUESTRAS CAPACIDADES WEB
+              Capacidades de Diseño Web en Monterrey
             </h2>
             <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light">
               Desplegamos soluciones de diseño de primer nivel para empresas que no se conforman con lo ordinario.
@@ -476,7 +476,7 @@ export default function MonterreyDisenoWebPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Hud>Hoja de Ruta // Proceso de Despegue</Hud>
             <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-              METODOLOGÍA DE DESARROLLO
+              Nuestra Metodología de Desarrollo en Monterrey
             </h2>
             <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light">
               Nuestra ingeniería de 5 fases estructuradas para garantizar un sitio rápido, seguro y libre de errores.
@@ -580,7 +580,7 @@ export default function MonterreyDisenoWebPage() {
           <div className="glass-liquid border border-white/10 rounded-[48px] p-8 md:p-16 text-center shadow-[0_0_80px_rgba(16,27,57,0.7)]">
             <Hud>ESTACIÓN DE CONTROL DE MONTERREY // CONEXIÓN ESTELAR</Hud>
             <h2 className="text-3xl md:text-5xl font-black uppercase text-white mt-6 mb-6">
-              Agendemos tu estrategia de Despegue
+              Agendemos tu Estrategia de Diseño en Monterrey
             </h2>
             <p className="text-sm md:text-base text-starlight/85 mb-12 leading-relaxed font-light max-w-2xl mx-auto">
               Platiquemos sobre el diseño y velocidad de tu próximo sitio web. Llena el formulario para sincronizar con nuestro CRM y agendar una llamada.

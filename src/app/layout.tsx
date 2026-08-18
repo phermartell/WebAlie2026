@@ -15,9 +15,6 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aliedigital.com"),
-  title: "Agencia de Marketing Digital B2B en Monterrey y Puebla | Alié Digital",
-  description:
-    "Alié Digital es una agencia de marketing digital B2B en Monterrey y Puebla. Creamos páginas web, growth marketing, ecommerce y soluciones digitales para generar demanda y ventas.",
   keywords: [
     "diseño web b2b",
     "agencia de marketing digital",
@@ -32,26 +29,38 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Alié Digital" }],
   robots: "index, follow",
+  title: "Marketing Digital B2B y Desarrollo Web | Alié Digital",
+  description: "Somos Alié Digital, agencia de marketing digital B2B. Creamos páginas web headless, growth marketing y ecommerce para generar leads y acelerar ventas.",
   alternates: {
-    canonical: "/",
+    canonical: "https://aliedigital.com/",
+    languages: {
+      "es-MX": "https://aliedigital.com/",
+      "x-default": "https://aliedigital.com/",
+    },
   },
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Agencia de Marketing Digital B2B en Monterrey y Puebla | Alié Digital",
-    description:
-      "Creamos páginas web, growth marketing, ecommerce y soluciones digitales para generar demanda y ventas en empresas B2B.",
+    title: "Agencia de Marketing Digital B2B y Desarrollo Web | Alié Digital",
+    description: "Somos Alié Digital, una agencia de marketing digital B2B en Monterrey y Puebla. Desarrollamos páginas web headless, growth marketing y ecommerce para escalar tus ventas.",
     url: "https://aliedigital.com/",
-    images: [{ url: "https://aliedigital.com/og-home.webp", width: 1200, height: 630, alt: "Alié Digital — Agencia de Marketing Digital B2B" }],
+    images: [
+      {
+        url: "https://aliedigital.com/og-home.webp",
+        width: 1200,
+        height: 630,
+        alt: "Alié Digital",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agencia de Marketing Digital B2B en Monterrey y Puebla | Alié Digital",
-    description:
-      "Páginas web, growth marketing, ecommerce y soluciones digitales para empresas B2B.",
+    site: "@AlieDigital",
+    title: "Agencia de Marketing Digital B2B y Desarrollo Web | Alié Digital",
+    description: "Somos Alié Digital, una agencia de marketing digital B2B en Monterrey y Puebla. Desarrollamos páginas web headless, growth marketing y ecommerce para escalar tus ventas.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};
+};;
 
 export const viewport: Viewport = {
   width: "device-width",

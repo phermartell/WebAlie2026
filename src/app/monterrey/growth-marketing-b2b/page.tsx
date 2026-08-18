@@ -5,33 +5,37 @@ import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Agencia de Growth Marketing en Monterrey | Alié Digital",
-  description: "Growth Marketing en Monterrey todo en uno: paid media, data, AI, automatización, lifecycle y desarrollo web a la medida alineado a tu presupuesto.",
-  robots: "index, follow",
+  description: "Agencia de growth marketing en Monterrey para empresas B2B. Estrategias de paid media, captación de prospectos y automatización de tu marketing digital.",
   alternates: {
     canonical: "https://aliedigital.com/monterrey/growth-marketing-b2b/",
+    languages: {
+      "es-MX": "https://aliedigital.com/monterrey/growth-marketing-b2b/",
+      "x-default": "https://aliedigital.com/monterrey/growth-marketing-b2b/",
+    },
   },
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Agencia de Growth Marketing en Monterrey | Alié Digital",
-    description: "Growth Marketing en Monterrey todo en uno: paid media, data, AI, automatización, lifecycle y desarrollo web a la medida alineado a tu presupuesto.",
+    title: "Agencia de Growth Marketing B2B en Monterrey | Alié Digital",
+    description: "Agencia especializada en growth marketing en Monterrey para empresas B2B. Estrategias efectivas de paid media, captación de prospectos y automatización de marketing.",
     url: "https://aliedigital.com/monterrey/growth-marketing-b2b/",
     images: [
       {
         url: "https://aliedigital.com/og-home.webp",
         width: 1200,
         height: 630,
-        alt: "Alié Digital — Growth Marketing en Monterrey",
+        alt: "Alié Digital",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agencia de Growth Marketing en Monterrey | Alié Digital",
-    description: "Growth Marketing en Monterrey todo en uno: paid media, data, AI, automatización, lifecycle y desarrollo web a la medida alineado a tu presupuesto.",
+    site: "@AlieDigital",
+    title: "Agencia de Growth Marketing B2B en Monterrey | Alié Digital",
+    description: "Agencia especializada en growth marketing en Monterrey para empresas B2B. Estrategias efectivas de paid media, captación de prospectos y automatización de marketing.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};
+};;
 
 export default function Page() {
   const serviceSchema = createServiceSchema(

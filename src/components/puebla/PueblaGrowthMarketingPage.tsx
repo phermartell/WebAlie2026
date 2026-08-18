@@ -444,7 +444,7 @@ export default function PueblaGrowthMarketingPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Hud>Paquetes Estratégicos // Scoping Todo en Uno</Hud>
             <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-              PAQUETES A TU MEDIDA
+              Paquetes de Growth a tu Medida en Puebla
             </h2>
             <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light font-sans">
               Selecciona el paquete que mejor se alinee con el presupuesto y fase de vuelo de tu empresa. Cero letras chiquitas.
@@ -520,7 +520,7 @@ export default function PueblaGrowthMarketingPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Hud>Componentes del Sistema // The Engine</Hud>
             <h2 className="mt-6 text-3xl md:text-5xl font-black uppercase text-white leading-tight tracking-tight">
-              ¿Qué incluye el sistema de Growth?
+              ¿Qué incluye el Sistema de Growth en Puebla?
             </h2>
           </div>
 
@@ -570,7 +570,7 @@ export default function PueblaGrowthMarketingPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Hud>Fases de Vuelo // Ruta de Colisión</Hud>
             <h2 className="mt-6 text-3xl md:text-5xl font-black uppercase text-white leading-tight tracking-tight">
-              FASES DEL DESPEGUE
+              Fases de Despegue desde Puebla
             </h2>
           </div>
 
@@ -605,7 +605,7 @@ export default function PueblaGrowthMarketingPage() {
         <div className="max-w-4xl mx-auto text-center">
           <Hud>Mesa de Control // Lanzar Misión</Hud>
           <h2 className="mt-6 text-3xl md:text-5xl font-black uppercase text-white tracking-tight mb-4">
-            ¿LISTO PARA EL LANZAMIENTO?
+            ¿Listo para Despegar en Puebla?
           </h2>
           <p className="text-sm text-starlight/70 max-w-lg mx-auto mb-12 font-light font-sans">
             Escríbenos y nuestro equipo analizará tu caso para sugerirte el paquete idóneo para tus objetivos y presupuesto.
@@ -621,9 +621,9 @@ export default function PueblaGrowthMarketingPage() {
       <section className="relative z-10 px-4 md:px-8 py-20 bg-transparent">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <Hud>Bitácora de Soporte // Preguntas Frecuentes</Hud>
+            <Hud>Bitácora de Soporte // Preguntas Frecuentes sobre Growth en Puebla</Hud>
             <h2 className="mt-4 text-3xl md:text-5xl font-black uppercase text-white tracking-tight">
-              Preguntas Frecuentes
+              Preguntas Frecuentes sobre Growth en Puebla
             </h2>
           </div>
 

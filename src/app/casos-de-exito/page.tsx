@@ -4,37 +4,38 @@ import JsonLd from "@/components/JsonLd";
 import { CASOS_SCHEMA } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Casos de éxito | Alié Digital",
-  description:
-    "Campañas reales, resultados medibles y ROI sin excusas. Casos de estudio de Alié Digital en Google Ads, Meta Ads, TikTok, LinkedIn y SEO en sectores de alta competencia, nichos restringidos y mercados B2B complejos.",
-  robots: "index, follow",
+  title: "Casos de Éxito en Marketing Digital B2B | Alié Digital",
+  description: "Casos de estudio reales de Alié Digital. Analiza resultados medibles de nuestras campañas de SEO, Google Ads, Meta Ads y growth marketing para empresas.",
   alternates: {
     canonical: "https://aliedigital.com/casos-de-exito/",
+    languages: {
+      "es-MX": "https://aliedigital.com/casos-de-exito/",
+      "x-default": "https://aliedigital.com/casos-de-exito/",
+    },
   },
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Casos de éxito | Alié Digital",
-    description:
-      "Campañas reales, resultados medibles y ROI sin excusas. Casos de estudio de Alié Digital en sectores de alta competencia, nichos restringidos y mercados B2B complejos.",
+    title: "Casos de Éxito en Marketing Digital y SEO B2B | Alié Digital",
+    description: "Explora los casos de estudio reales de Alié Digital. Analiza resultados medibles de nuestras campañas de SEO técnico, Google Ads, Meta Ads y growth marketing B2B.",
     url: "https://aliedigital.com/casos-de-exito/",
     images: [
       {
         url: "https://aliedigital.com/og-home.webp",
         width: 1200,
         height: 630,
-        alt: "Alié Digital — Casos de éxito",
+        alt: "Alié Digital",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Casos de éxito | Alié Digital",
-    description:
-      "Campañas reales, resultados medibles y ROI sin excusas. Casos de estudio de Alié Digital.",
+    site: "@AlieDigital",
+    title: "Casos de Éxito en Marketing Digital y SEO B2B | Alié Digital",
+    description: "Explora los casos de estudio reales de Alié Digital. Analiza resultados medibles de nuestras campañas de SEO técnico, Google Ads, Meta Ads y growth marketing B2B.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};
+};;
 
 export default function Page() {
   return (

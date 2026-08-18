@@ -4,37 +4,38 @@ import JsonLd from "@/components/JsonLd";
 import { AGENCIA_SCHEMA } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Agencia de marketing digital y diseño web | Alié Digital",
-  description:
-    "Conoce a Alié Digital, agencia de marketing digital y diseño web para empresas que quieren crecer con SEO, estrategia, contenido y soluciones orientadas a conversión.",
-  robots: "index, follow",
+  title: "La Agencia de Marketing Digital B2B | Alié Digital",
+  description: "Conoce Alié Digital, la agencia de marketing digital B2B experta en diseño web, SEO y growth marketing enfocada en la conversión y retorno de inversión.",
   alternates: {
     canonical: "https://aliedigital.com/agencia/",
+    languages: {
+      "es-MX": "https://aliedigital.com/agencia/",
+      "x-default": "https://aliedigital.com/agencia/",
+    },
   },
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Agencia de marketing digital y diseño web | Alié Digital",
-    description:
-      "Conoce a Alié Digital, agencia de marketing digital y diseño web para empresas que quieren crecer con SEO, estrategia, contenido y soluciones orientadas a conversión.",
+    title: "Conoce la Agencia de Marketing Digital B2B | Alié Digital",
+    description: "Conoce Alié Digital, agencia de marketing digital B2B líder en diseño web headless, SEO técnico y growth marketing enfocados en la conversión y retorno de inversión.",
     url: "https://aliedigital.com/agencia/",
     images: [
       {
         url: "https://aliedigital.com/og-home.webp",
         width: 1200,
         height: 630,
-        alt: "Alié Digital — Agencia de marketing digital y diseño web",
+        alt: "Alié Digital",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agencia de marketing digital y diseño web | Alié Digital",
-    description:
-      "Conoce a Alié Digital, agencia de marketing digital y diseño web para empresas que quieren crecer con SEO, estrategia, contenido y soluciones orientadas a conversión.",
+    site: "@AlieDigital",
+    title: "Conoce la Agencia de Marketing Digital B2B | Alié Digital",
+    description: "Conoce Alié Digital, agencia de marketing digital B2B líder en diseño web headless, SEO técnico y growth marketing enfocados en la conversión y retorno de inversión.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};
+};;
 
 export default function Page() {
   return (

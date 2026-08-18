@@ -4,34 +4,38 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Agencia de Growth Marketing en Puebla | Alié Digital",
-  description: "Growth Marketing en Puebla todo en uno: paid media, data, AI, automatización, lifecycle y desarrollo web a la medida alineado a tu presupuesto.",
-  robots: "index, follow",
+  title: "Agencia Growth Marketing B2B en Puebla | Alié Digital",
+  description: "Agencia de growth marketing en Puebla para empresas B2B. Acelera tu captación de leads mediante campañas publicitarias, SEO técnico y automatizaciones.",
   alternates: {
     canonical: "https://aliedigital.com/puebla/growth-marketing-b2b/",
+    languages: {
+      "es-MX": "https://aliedigital.com/puebla/growth-marketing-b2b/",
+      "x-default": "https://aliedigital.com/puebla/growth-marketing-b2b/",
+    },
   },
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Agencia de Growth Marketing en Puebla | Alié Digital",
-    description: "Growth Marketing en Puebla todo en uno: paid media, data, AI, automatización, lifecycle y desarrollo web a la medida alineado a tu presupuesto.",
+    title: "Agencia de Growth Marketing B2B en Puebla | Alié Digital",
+    description: "Agencia de growth marketing en Puebla para empresas B2B. Acelera tu captación de prospectos mediante campañas de paid media, SEO técnico y automatizaciones de IA.",
     url: "https://aliedigital.com/puebla/growth-marketing-b2b/",
     images: [
       {
         url: "https://aliedigital.com/og-home.webp",
         width: 1200,
         height: 630,
-        alt: "Alié Digital — Growth Marketing en Puebla",
+        alt: "Alié Digital",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agencia de Growth Marketing en Puebla | Alié Digital",
-    description: "Growth Marketing en Puebla todo en uno: paid media, data, AI, automatización, lifecycle y desarrollo web a la medida alineado a tu presupuesto.",
+    site: "@AlieDigital",
+    title: "Agencia de Growth Marketing B2B en Puebla | Alié Digital",
+    description: "Agencia de growth marketing en Puebla para empresas B2B. Acelera tu captación de prospectos mediante campañas de paid media, SEO técnico y automatizaciones de IA.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};
+};;
 
 export default function Page() {
   const serviceSchema = createServiceSchema(

@@ -4,31 +4,38 @@ import BlogGrid from "@/components/BlogGrid";
 import { getWpPosts, getWpCategories } from "@/lib/wp";
 
 export const metadata: Metadata = {
-  title: "Bitácoras Estelares — Blog de Marketing Digital B2B & IA | Alié Digital",
-  description:
-    "Playbooks, guías de vuelo y notas de campo sobre SEO técnico, Paid Media, Ecommerce y automatizaciones de Inteligencia Artificial por la tripulación de Alié Digital.",
+  title: "Blog de Marketing Digital B2B, SEO e IA | Alié Digital",
+  description: "Lee las bitácoras y playbooks de Alié Digital. Aprende estrategias sobre SEO técnico, growth marketing, paid media, CRM e Inteligencia Artificial B2B.",
+  alternates: {
+    canonical: "https://aliedigital.com/blog/",
+    languages: {
+      "es-MX": "https://aliedigital.com/blog/",
+      "x-default": "https://aliedigital.com/blog/",
+    },
+  },
   openGraph: {
-    title: "Bitácoras Estelares — Blog de Marketing Digital B2B & IA | Alié Digital",
-    description:
-      "Playbooks, guías de vuelo y notas de campo sobre SEO técnico, Paid Media, Ecommerce y automatizaciones de Inteligencia Artificial.",
+    type: "website",
+    siteName: "Alié Digital",
+    title: "Blog de Marketing Digital B2B, SEO y Automatización | Alié",
+    description: "Aprende con las bitácoras y playbooks de Alié Digital. Descubre estrategias clave de SEO técnico, growth marketing, paid media, CRM e Inteligencia Artificial B2B.",
     url: "https://aliedigital.com/blog/",
     images: [
       {
         url: "https://aliedigital.com/og-home.webp",
         width: 1200,
         height: 630,
-        alt: "Bitácoras Estelares — Alié Digital",
+        alt: "Alié Digital",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bitácoras Estelares — Blog de Marketing Digital B2B & IA | Alié Digital",
-    description:
-      "Playbooks y guías sobre SEO técnico, Paid Media, Ecommerce y automatizaciones con IA.",
+    site: "@AlieDigital",
+    title: "Blog de Marketing Digital B2B, SEO y Automatización | Alié",
+    description: "Aprende con las bitácoras y playbooks de Alié Digital. Descubre estrategias clave de SEO técnico, growth marketing, paid media, CRM e Inteligencia Artificial B2B.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};
+};;
 
 export default async function Page() {
   // Cargar posts y categorías en el servidor
