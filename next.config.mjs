@@ -2,6 +2,12 @@
 const nextConfig = {
   async redirects() {
     return [
+      // 0. Redireccionar sitemap de WordPress antiguo al sitemap nativo de Next.js
+      {
+        source: "/sitemap_index.xml",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
       // 1. Redireccionar posts antiguos alojados bajo /puebla/ hacia la nueva estructura global /blog/
       {
         source: "/puebla/por-que-tu-negocio-en-puebla-necesita-una-pagina-web",
