@@ -64,9 +64,10 @@ class AlieCore_Meta {
 	}
 
 	/**
-	 * Añadir la caja meta a la pantalla de edición de Posts.
+	 * Añadir la caja meta a la pantalla de edición de Posts y Leads.
 	 */
 	public static function add_post_meta_boxes() {
+		// Caja para Entradas (Posts)
 		add_meta_box(
 			'alie_post_fields_meta_box',
 			'Alié Digital - Fuentes y Herramientas de la Publicación',
@@ -75,10 +76,20 @@ class AlieCore_Meta {
 			'normal',
 			'high'
 		);
+
+		// Caja para Leads
+		add_meta_box(
+			'alie_lead_fields_meta_box',
+			'Detalles del Lead',
+			array( 'AlieCore_Meta', 'render_lead_meta_box' ),
+			'lead',
+			'normal',
+			'high'
+		);
 	}
 
 	/**
-	 * Renderizar la interfaz del metabox.
+	 * Renderizar la interfaz del metabox para posts.
 	 */
 	public static function render_post_meta_box( $post ) {
 		// Nonce para verificación de seguridad
@@ -108,14 +119,53 @@ class AlieCore_Meta {
 	}
 
 	/**
+	 * Renderizar la interfaz del metabox para leads.
+	 */
+	public static function render_lead_meta_box( $post ) {
+		wp_nonce_field( 'save_alie_lead_meta_nonce', 'alie_lead_meta_nonce' );
+
+		$nombre   = get_post_meta( $post->ID, 'nombre', true );
+		$whatsapp = get_post_meta( $post->ID, 'whatsapp', true );
+		$servicio = get_post_meta( $post->ID, 'servicio', true );
+		$mensaje  = get_post_meta( $post->ID, 'mensaje', true );
+		$canal    = get_post_meta( $post->ID, 'canal', true );
+		?>
+		<table class="form-table">
+			<tr>
+				<th><label for="alie_lead_nombre">Nombre</label></th>
+				<td><input type="text" id="alie_lead_nombre" name="alie_lead_nombre" value="<?php echo esc_attr( $nombre ); ?>" class="regular-text" /></td>
+			</tr>
+			<tr>
+				<th><label for="alie_lead_whatsapp">WhatsApp / Teléfono</label></th>
+				<td><input type="text" id="alie_lead_whatsapp" name="alie_lead_whatsapp" value="<?php echo esc_attr( $whatsapp ); ?>" class="regular-text" /></td>
+			</tr>
+			<tr>
+				<th><label for="alie_lead_servicio">Servicios de Interés</label></th>
+				<td><input type="text" id="alie_lead_servicio" name="alie_lead_servicio" value="<?php echo esc_attr( $servicio ); ?>" class="regular-text" /></td>
+			</tr>
+			<tr>
+				<th><label for="alie_lead_canal">Canal de Origen</label></th>
+				<td>
+					<select id="alie_lead_canal" name="alie_lead_canal">
+						<option value="web" <?php selected( $canal, 'web' ); ?>>Web (Directo)</option>
+						<option value="facebook" <?php selected( $canal, 'facebook' ); ?>>Facebook</option>
+						<option value="instagram" <?php selected( $canal, 'instagram' ); ?>>Instagram</option>
+						<option value="whatsapp" <?php selected( $canal, 'whatsapp' ); ?>>WhatsApp</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th><label for="alie_lead_mensaje">Mensaje / Datos Adicionales</label></th>
+				<td><textarea id="alie_lead_mensaje" name="alie_lead_mensaje" rows="5" class="large-text"><?php echo esc_textarea( $mensaje ); ?></textarea></td>
+			</tr>
+		</table>
+		<?php
+	}
+
+	/**
 	 * Guardar metadatos desde el panel de edición de WordPress.
 	 */
 	public static function save_post_meta( $post_id ) {
-		// Validar seguridad
-		if ( ! isset( $_POST['alie_post_meta_nonce'] ) || ! wp_verify_nonce( $_POST['alie_post_meta_nonce'], 'save_alie_post_meta_nonce' ) ) {
-			return;
-		}
-
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return;
 		}
@@ -124,16 +174,31 @@ class AlieCore_Meta {
 			return;
 		}
 
-		// Guardar y procesar Fuentes
-		if ( isset( $_POST['alie_fuentes'] ) ) {
-			$fuentes_json = self::textarea_format_to_json( $_POST['alie_fuentes'] );
-			update_post_meta( $post_id, 'fuentes', $fuentes_json );
+		// Guardar metadatos de Post (Fuentes y Herramientas)
+		if ( isset( $_POST['alie_post_meta_nonce'] ) && wp_verify_nonce( $_POST['alie_post_meta_nonce'], 'save_alie_post_meta_nonce' ) ) {
+			if ( isset( $_POST['alie_fuentes'] ) ) {
+				$fuentes_json = self::textarea_format_to_json( $_POST['alie_fuentes'] );
+				update_post_meta( $post_id, 'fuentes', $fuentes_json );
+			}
+			if ( isset( $_POST['alie_herramientas'] ) ) {
+				$herramientas_json = self::textarea_format_to_json( $_POST['alie_herramientas'] );
+				update_post_meta( $post_id, 'herramientas', $herramientas_json );
+			}
 		}
 
-		// Guardar y procesar Herramientas
-		if ( isset( $_POST['alie_herramientas'] ) ) {
-			$herramientas_json = self::textarea_format_to_json( $_POST['alie_herramientas'] );
-			update_post_meta( $post_id, 'herramientas', $herramientas_json );
+		// Guardar metadatos de Lead (Nombre, WhatsApp, Servicio, Canal, Mensaje)
+		if ( isset( $_POST['alie_lead_meta_nonce'] ) && wp_verify_nonce( $_POST['alie_lead_meta_nonce'], 'save_alie_lead_meta_nonce' ) ) {
+			$fields = array( 'nombre', 'whatsapp', 'servicio', 'canal', 'mensaje' );
+			foreach ( $fields as $field ) {
+				if ( isset( $_POST['alie_lead_' . $field] ) ) {
+					$value = $_POST['alie_lead_' . $field];
+					if ( $field === 'mensaje' ) {
+						update_post_meta( $post_id, $field, sanitize_textarea_field( $value ) );
+					} else {
+						update_post_meta( $post_id, $field, sanitize_text_field( $value ) );
+					}
+				}
+			}
 		}
 	}
 
