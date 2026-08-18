@@ -73,6 +73,12 @@ const MonterreyOrbitalPathInner = () => {
 
 // Canvas of Interactive Stars reacting to Mouse
 const InteractiveStars = () => {
+  const isDesktop = useSyncExternalStore(subscribe, () => window.matchMedia(DESKTOP_QUERY).matches, () => false);
+  if (!isDesktop) return null;
+  return <InteractiveStarsInner />;
+};
+
+const InteractiveStarsInner = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
