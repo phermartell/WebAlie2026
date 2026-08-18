@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getRecaptchaToken } from "@/lib/recaptcha";
+import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
 
 interface WhatsAppChatProps {
   services: string[];
@@ -25,6 +25,12 @@ export default function WhatsAppChat({ services, isOpen: externalIsOpen, setIsOp
 
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
   const whatsappNumber = "522213279555";
+
+  useEffect(() => {
+    if (siteKey) {
+      loadRecaptcha(siteKey);
+    }
+  }, [siteKey]);
 
   useEffect(() => {
     if (isOpen) {

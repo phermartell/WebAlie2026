@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { getRecaptchaToken } from "@/lib/recaptcha";
+import { useEffect, useState } from "react";
+import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
 
 const inputClass =
   "w-full bg-black/50 border border-white/20 rounded-full h-12 px-6 text-base text-white placeholder-white/40 focus:outline-none focus:border-orangeleader transition-all cursor-text";
@@ -16,6 +16,12 @@ export default function LeadForm({ servicioInteres }: { servicioInteres?: string
   const [error, setError] = useState("");
 
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
+
+  useEffect(() => {
+    if (siteKey) {
+      loadRecaptcha(siteKey);
+    }
+  }, [siteKey]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

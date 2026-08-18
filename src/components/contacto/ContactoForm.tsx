@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { getRecaptchaToken } from "@/lib/recaptcha";
+import { useEffect, useState } from "react";
+import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
 
 // Consola de selección de servicios (píldoras Bento Switches).
 const SERVICES = [
@@ -34,6 +34,12 @@ export default function ContactoForm() {
   const [error, setError] = useState("");
 
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
+
+  useEffect(() => {
+    if (siteKey) {
+      loadRecaptcha(siteKey);
+    }
+  }, [siteKey]);
 
   const toggleServicio = (s: string) => {
     setServicios((prev) =>

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { getRecaptchaToken } from "@/lib/recaptcha";
+import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
 
 type Variant = "facebook" | "instagram";
 
@@ -48,6 +48,12 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
   const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "").replace(/\/+$/, "");
   const pueblaUrl = siteUrl ? `${siteUrl}/puebla` : "/puebla";
   const monterreyUrl = siteUrl ? `${siteUrl}/monterrey` : "/monterrey";
+
+  useEffect(() => {
+    if (siteKey) {
+      loadRecaptcha(siteKey);
+    }
+  }, [siteKey]);
 
   // Bloquear scroll del fondo mientras el modal está abierto
   useEffect(() => {
