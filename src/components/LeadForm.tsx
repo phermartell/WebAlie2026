@@ -88,7 +88,7 @@ export default function LeadForm({ servicioInteres }: { servicioInteres?: string
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 max-w-xl mx-auto">
+    <form id="CTAContacto" onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 max-w-xl mx-auto">
       {/* Honeypot (oculto para humanos) */}
       <input
         type="text"
