@@ -74,6 +74,9 @@ class AlieCore_Meta {
 
 		// Manejar exportación a CSV
 		add_action( 'admin_init', array( 'AlieCore_Meta', 'handle_csv_export' ) );
+
+		// Confirmación de eliminación de Leads personalizada
+		add_action( 'admin_footer', array( 'AlieCore_Meta', 'render_delete_confirmation_modal' ) );
 	}
 
 	/**
@@ -646,5 +649,141 @@ class AlieCore_Meta {
 			fclose( $output );
 			exit;
 		}
+	}
+
+	/**
+	 * Renderizar el modal HTML, CSS y script JS de confirmación de eliminación.
+	 */
+	public static function render_delete_confirmation_modal() {
+		global $pagenow, $post_type;
+
+		// Mostrar solo en las pantallas de edición y listado del post type 'lead'
+		if ( 'lead' !== $post_type || ( 'edit.php' !== $pagenow && 'post.php' !== $pagenow ) ) {
+			return;
+		}
+
+		?>
+		<div id="alie-delete-modal-overlay" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 999999; justify-content: center; align-items: center; padding: 15px;">
+			<div id="alie-delete-modal-box" style="background: rgba(10, 15, 30, 0.85); backdrop-filter: blur(60px); -webkit-backdrop-filter: blur(60px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; width: 100%; max-width: 420px; overflow: hidden; box-shadow: 0 40px 120px -20px rgba(0,0,0,0.85); color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+				
+				<!-- Header -->
+				<div style="background: linear-gradient(135deg, #101b39 0%, #16264f 100%); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+					<h3 style="font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em; color: #ffffff; margin: 0; line-height: 1;">
+						Confirmar Acción
+					</h3>
+					<button id="alie-delete-modal-close" style="background: transparent; border: 0; color: rgba(255, 255, 255, 0.6); font-size: 24px; line-height: 1; cursor: pointer; padding: 0; transition: color 0.2s;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='rgba(255, 255, 255, 0.6)'">
+						&times;
+					</button>
+				</div>
+
+				<!-- Body -->
+				<div style="padding: 24px 24px;">
+					<p id="alie-delete-modal-message" style="font-size: 14px; color: rgba(255, 255, 255, 0.8); line-height: 1.6; margin-top: 0; margin-bottom: 24px;">
+						¿Estás seguro de que deseas realizar esta acción?
+					</p>
+
+					<!-- Actions -->
+					<div style="display: flex; justify-content: flex-end; gap: 12px;">
+						<button id="alie-delete-modal-cancel" style="padding: 10px 22px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 9999px; cursor: pointer; transition: all 0.2s; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: rgba(255, 255, 255, 0.85);" onmouseover="this.style.borderColor='rgba(255, 255, 255, 0.35)'; this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='#fff';" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.15)'; this.style.background='rgba(255, 255, 255, 0.05)'; this.style.color='rgba(255, 255, 255, 0.85)';">
+							Cancelar
+						</button>
+						<button id="alie-delete-modal-confirm" style="padding: 10px 22px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 9999px; cursor: pointer; transition: all 0.2s; background: #eb3f1b; border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; box-shadow: 0 4px 12px rgba(235, 63, 27, 0.3);" onmouseover="this.style.background='#ff8643'; this.style.boxShadow='0 6px 16px rgba(235, 63, 27, 0.5)';" onmouseout="this.style.background='#eb3f1b'; this.style.boxShadow='0 4px 12px rgba(235, 63, 27, 0.3)';">
+							Eliminar
+						</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			let pendingActionUrl = null;
+
+			const modalOverlay = document.getElementById('alie-delete-modal-overlay');
+			const btnCancel = document.getElementById('alie-delete-modal-cancel');
+			const btnConfirm = document.getElementById('alie-delete-modal-confirm');
+			const modalClose = document.getElementById('alie-delete-modal-close');
+			const modalMessage = document.getElementById('alie-delete-modal-message');
+
+			function showModal(message, onConfirm) {
+				modalMessage.textContent = message;
+				modalOverlay.style.display = 'flex';
+				btnConfirm.onclick = function() {
+					modalOverlay.style.display = 'none';
+					onConfirm();
+				};
+			}
+
+			function closeModal() {
+				modalOverlay.style.display = 'none';
+				pendingActionUrl = null;
+			}
+
+			btnCancel.addEventListener('click', closeModal);
+			modalClose.addEventListener('click', closeModal);
+			modalOverlay.addEventListener('click', function(e) {
+				if (e.target === modalOverlay) closeModal();
+			});
+
+			// Interceptar enlaces individuales de eliminación
+			document.addEventListener('click', function(e) {
+				const target = e.target.closest('a.submitdelete');
+				if (!target) return;
+
+				e.preventDefault();
+				pendingActionUrl = target.getAttribute('href');
+				
+				const isPermanent = pendingActionUrl.indexOf('change_to_trash') === -1 && pendingActionUrl.indexOf('action=trash') === -1;
+				const msg = isPermanent 
+					? '¿Estás seguro de que deseas borrar permanentemente este contacto? Esta acción no se puede deshacer.'
+					: '¿Deseas enviar este contacto a la papelera?';
+
+				showModal(msg, function() {
+					if (pendingActionUrl) {
+						window.location.href = pendingActionUrl;
+					}
+				});
+			});
+
+			// Interceptar envío de formulario de acciones en lote
+			const bulkForm = document.getElementById('posts-filter');
+			if (bulkForm) {
+				bulkForm.addEventListener('submit', function(e) {
+					const actionSelect = document.getElementById('bulk-action-selector-top');
+					const actionSelectBottom = document.getElementById('bulk-action-selector-bottom');
+					
+					const action = actionSelect ? actionSelect.value : '-1';
+					const actionBottom = actionSelectBottom ? actionSelectBottom.value : '-1';
+					
+					const activeAction = action !== '-1' ? action : actionBottom;
+					
+					if (activeAction === 'trash' || activeAction === 'delete') {
+						const checkedBoxes = bulkForm.querySelectorAll('input[name="post[]"]:checked');
+						if (checkedBoxes.length === 0) {
+							return;
+						}
+						
+						e.preventDefault();
+						
+						const isPermanent = activeAction === 'delete';
+						const msg = isPermanent
+							? '¿Estás seguro de que deseas borrar permanentemente los ' + checkedBoxes.length + ' contactos seleccionados? Esta acción no se puede deshacer.'
+							: '¿Deseas enviar los ' + checkedBoxes.length + ' contactos seleccionados a la papelera?';
+							
+						showModal(msg, function() {
+							const tempSubmit = document.createElement('input');
+							tempSubmit.type = 'hidden';
+							tempSubmit.name = action !== '-1' ? 'submit' : 'submit2';
+							tempSubmit.value = 'Aplicar';
+							bulkForm.appendChild(tempSubmit);
+							bulkForm.submit();
+						});
+					}
+				});
+			}
+		});
+		</script>
+		<?php
 	}
 }
