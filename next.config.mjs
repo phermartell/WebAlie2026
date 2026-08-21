@@ -1,5 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "alie2026.local",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "wp.aliedigital.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "*.gravatar.com",
+        pathname: "/**",
+      },
+    ],
+  },
   async redirects() {
     return [
       // 0. Redireccionar sitemap de WordPress antiguo al sitemap nativo de Next.js
