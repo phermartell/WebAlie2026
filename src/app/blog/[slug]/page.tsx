@@ -247,7 +247,7 @@ export default async function Page({ params }: PageProps) {
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-tangerine"></span>
                     </span>
                     <h4 className="font-mono text-[10px] tracking-widest text-tangerine uppercase font-bold">
-                      Resumen Analítico Inteligencia Artificial (IA)
+                      Resumen
                     </h4>
                   </div>
                   <p className="text-starlight/90 text-[11px] sm:text-xs leading-relaxed font-sans italic">
@@ -257,7 +257,7 @@ export default async function Page({ params }: PageProps) {
               )}
 
               {/* Reproductor de Audio del Post */}
-              <PostPlayer postTitle={post.title} postContent={post.content} />
+              <PostPlayer postSlug={post.slug} postTitle={post.title} postContent={post.content} />
 
               {/* Imagen Destacada Enmarcada */}
               {post.featuredImage && (
@@ -329,7 +329,7 @@ export default async function Page({ params }: PageProps) {
                 <section className="pt-8 border-t border-white/10 space-y-4">
                   <h3 className="font-mono text-xs uppercase tracking-widest text-tangerine mb-4 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-tangerine animate-pulse" />
-                    Preguntas Frecuentes (Generadas por IA)
+                    Preguntas Frecuentes
                   </h3>
                   <div className="space-y-3">
                     {post.aiFaqs.map((faq, idx) => (

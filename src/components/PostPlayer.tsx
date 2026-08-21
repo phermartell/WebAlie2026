@@ -3,11 +3,12 @@
 import React, { useState, useEffect, useRef } from "react";
 
 interface PostPlayerProps {
+  postSlug: string;
   postTitle: string;
   postContent: string;
 }
 
-export default function PostPlayer({ postTitle, postContent }: PostPlayerProps) {
+export default function PostPlayer({ postSlug, postTitle, postContent }: PostPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [speed, setSpeed] = useState(1);
@@ -15,13 +16,19 @@ export default function PostPlayer({ postTitle, postContent }: PostPlayerProps) 
   const [statusText, setStatusText] = useState("SISTEMA DE AUDIO LISTO");
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoiceName, setSelectedVoiceName] = useState<string>("");
+  const [useFallback, setUseFallback] = useState(false);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
 
+  // Audio HTML5 Ref
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // SpeechSynthesis Refs para fallback nativo
   const synthRef = useRef<SpeechSynthesis | null>(null);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
   const paragraphsRef = useRef<string[]>([]);
   const currentParagraphIndexRef = useRef(0);
 
-  // Limpiar HTML y separar por párrafos/secciones manejables
+  // 1. Inicializar párrafos para fallback nativo
   useEffect(() => {
     if (typeof window !== "undefined") {
       synthRef.current = window.speechSynthesis;
@@ -30,36 +37,44 @@ export default function PostPlayer({ postTitle, postContent }: PostPlayerProps) 
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = postContent;
     
-    // Remover tablas y bloques que no queremos leer de corrido
     const tables = tempDiv.querySelectorAll("table, script, style");
     tables.forEach(el => el.remove());
 
     const text = tempDiv.innerText || tempDiv.textContent || "";
-    // Separar por saltos de línea para obtener frases/párrafos legibles
     const rawParagraphs = text
       .split(/\n+/)
       .map(p => p.trim())
       .filter(p => p.length > 10);
 
-    // Anteponer el título
     paragraphsRef.current = [`Estás escuchando: ${postTitle}.`, ...rawParagraphs];
 
     return () => {
       if (synthRef.current) {
         synthRef.current.cancel();
       }
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
     };
   }, [postTitle, postContent]);
 
-  // Cargar y ordenar voces en español
+  // 2. Cargar voces en español (fallback nativo)
   useEffect(() => {
     if (!synthRef.current) return;
     
     const updateVoices = () => {
       const allVoices = synthRef.current?.getVoices() || [];
-      const spanish = allVoices.filter(v => v.lang.toLowerCase().startsWith("es"));
       
-      // Ordenar por calidad: Siri -> Google -> Premium -> de México (es-MX) -> otros
+      // Intentar obtener voces de español de EE. UU. (es-US)
+      let spanish = allVoices.filter(v => {
+        const lang = v.lang.toLowerCase().replace("_", "-");
+        return lang === "es-us";
+      });
+
+      if (spanish.length === 0) {
+        spanish = allVoices.filter(v => v.lang.toLowerCase().startsWith("es"));
+      }
+      
       const sortedSpanish = [...spanish].sort((a, b) => {
         const getScore = (v: SpeechSynthesisVoice) => {
           const name = v.name.toLowerCase();
@@ -74,7 +89,6 @@ export default function PostPlayer({ postTitle, postContent }: PostPlayerProps) 
 
       setVoices(sortedSpanish);
       
-      // Seleccionar la mejor voz por defecto si no hay una seleccionada
       if (sortedSpanish.length > 0 && !selectedVoiceName) {
         setSelectedVoiceName(sortedSpanish[0].name);
       }
@@ -86,31 +100,36 @@ export default function PostPlayer({ postTitle, postContent }: PostPlayerProps) 
     }
   }, [selectedVoiceName]);
 
-  // Manejar el cambio de velocidad al vuelo
+  // 3. Manejar cambio de velocidad
   useEffect(() => {
-    if (isPlaying && utteranceRef.current && synthRef.current) {
+    if (audioRef.current) {
+      audioRef.current.playbackRate = speed;
+    }
+    
+    // Fallback nativo
+    if (useFallback && isPlaying && utteranceRef.current && synthRef.current) {
       const currentIndex = currentParagraphIndexRef.current;
       synthRef.current.cancel();
-      playParagraph(currentIndex);
+      playNativeParagraph(currentIndex);
     }
-  }, [speed]);
+  }, [speed, useFallback, isPlaying]);
 
-  // Re-iniciar si cambia la voz seleccionada mientras está reproduciéndose
+  // Fallback nativo: Re-iniciar si cambia la voz seleccionada
   const handleVoiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const nextVoiceName = e.target.value;
     setSelectedVoiceName(nextVoiceName);
     
-    if (isPlaying && synthRef.current) {
+    if (useFallback && isPlaying && synthRef.current) {
       const currentIndex = currentParagraphIndexRef.current;
       synthRef.current.cancel();
-      // Un pequeño retraso para asegurar que la cancelación termine
       setTimeout(() => {
-        playParagraph(currentIndex);
+        playNativeParagraph(currentIndex);
       }, 50);
     }
   };
 
-  const playParagraph = (index: number) => {
+  // Fallback nativo: leer párrafo
+  const playNativeParagraph = (index: number) => {
     if (!synthRef.current || index >= paragraphsRef.current.length) {
       handleStop();
       return;
@@ -119,10 +138,9 @@ export default function PostPlayer({ postTitle, postContent }: PostPlayerProps) 
     currentParagraphIndexRef.current = index;
     const textToRead = paragraphsRef.current[index];
 
-    // Actualizar progreso
     const percent = Math.round((index / paragraphsRef.current.length) * 100);
     setProgress(percent);
-    setStatusText(`LEYENDO SECCIÓN ${index + 1} DE ${paragraphsRef.current.length}`);
+    setStatusText(`NATIVO: LEYENDO SECCIÓN ${index + 1} DE ${paragraphsRef.current.length}`);
 
     const utterance = new SpeechSynthesisUtterance(textToRead);
     utteranceRef.current = utterance;
@@ -131,19 +149,23 @@ export default function PostPlayer({ postTitle, postContent }: PostPlayerProps) 
       const voice = voices.find(v => v.name === selectedVoiceName);
       if (voice) {
         utterance.voice = voice;
+        utterance.lang = voice.lang;
+      } else {
+        utterance.lang = "es-US";
       }
+    } else {
+      utterance.lang = "es-US";
     }
     
-    utterance.lang = "es-MX";
     utterance.rate = speed;
 
     utterance.onend = () => {
-      playParagraph(index + 1);
+      playNativeParagraph(index + 1);
     };
 
     utterance.onerror = (e) => {
       if (e.error !== "interrupted") {
-        console.error("Speech Synthesis Error:", e);
+        console.error("Speech Synthesis Fallback Error:", e);
         handleStop();
       }
     };
@@ -151,34 +173,127 @@ export default function PostPlayer({ postTitle, postContent }: PostPlayerProps) 
     synthRef.current.speak(utterance);
   };
 
-  const handlePlay = () => {
-    if (!synthRef.current || paragraphsRef.current.length === 0) return;
-
+  // Reproducción principal
+  const handlePlay = async () => {
+    // A. Si está en pausa, reanudar
     if (isPaused) {
-      synthRef.current.resume();
+      if (useFallback) {
+        synthRef.current?.resume();
+      } else if (audioRef.current) {
+        audioRef.current.play();
+      }
       setIsPaused(false);
       setIsPlaying(true);
-      setStatusText(`REANUDANDO AUDIO...`);
-    } else {
-      synthRef.current.cancel();
+      setStatusText(useFallback ? "REANUDANDO NATIVO..." : "REPRODUCIENDO AUDIO...");
+      return;
+    }
+
+    // B. Si es reproducción desde cero y ya estamos marcados con fallback
+    if (useFallback) {
+      synthRef.current?.cancel();
       setIsPlaying(true);
       setIsPaused(false);
-      playParagraph(0);
+      playNativeParagraph(0);
+      return;
+    }
+
+    // C. Si tenemos una URL de audio de GCloud en caché en el estado
+    if (audioUrl) {
+      playCloudAudio(audioUrl);
+      return;
+    }
+
+    // D. Solicitar audio al servidor (Google Cloud TTS / Storage)
+    try {
+      setStatusText("SINTETIZANDO AUDIO NATURAL...");
+      const res = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          slug: postSlug,
+          title: postTitle,
+          content: postContent,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("HTTP error " + res.status);
+      }
+
+      const data = await res.json();
+      if (data.success && data.audioUrl) {
+        setAudioUrl(data.audioUrl);
+        playCloudAudio(data.audioUrl);
+      } else {
+        throw new Error(data.error || "No se pudo obtener el audio");
+      }
+    } catch (err) {
+      console.warn("Fallo al obtener audio de Google Cloud, usando fallback local:", err);
+      setUseFallback(true);
+      setIsPlaying(true);
+      setIsPaused(false);
+      playNativeParagraph(0);
     }
   };
 
+  const playCloudAudio = (url: string) => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+
+    const audio = new Audio(url);
+    audioRef.current = audio;
+    audio.playbackRate = speed;
+
+    audio.addEventListener("timeupdate", () => {
+      if (audio.duration) {
+        const percent = Math.round((audio.currentTime / audio.duration) * 100);
+        setProgress(percent);
+      }
+    });
+
+    audio.addEventListener("ended", () => {
+      handleStop();
+    });
+
+    audio.addEventListener("error", (e) => {
+      console.warn("Error en reproducción de GCloud, recurriendo a fallback nativo", e);
+      setUseFallback(true);
+      setIsPlaying(true);
+      setIsPaused(false);
+      playNativeParagraph(0);
+    });
+
+    setStatusText("REPRODUCIENDO AUDIO NATURAL");
+    setIsPlaying(true);
+    setIsPaused(false);
+    audio.play().catch(err => {
+      console.error("Error al iniciar play de audio:", err);
+      // Fallback si el navegador bloquea autoplay
+      setUseFallback(true);
+      playNativeParagraph(0);
+    });
+  };
+
   const handlePause = () => {
-    if (synthRef.current && isPlaying) {
-      synthRef.current.pause();
+    if (isPlaying) {
+      if (useFallback) {
+        synthRef.current?.pause();
+      } else if (audioRef.current) {
+        audioRef.current.pause();
+      }
       setIsPaused(true);
       setIsPlaying(false);
-      setStatusText("TRANSMISIÓN EN PAUSA");
+      setStatusText("AUDIO EN PAUSA");
     }
   };
 
   const handleStop = () => {
-    if (synthRef.current) {
-      synthRef.current.cancel();
+    if (useFallback) {
+      synthRef.current?.cancel();
+    } else if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
     }
     setIsPlaying(false);
     setIsPaused(false);
@@ -214,7 +329,9 @@ export default function PostPlayer({ postTitle, postContent }: PostPlayerProps) 
             )}
           </div>
           <div className="space-y-1">
-            <div className="font-mono text-[9px] tracking-widest text-white/40 uppercase">SINTETIZADOR ESTELAR</div>
+            <div className="font-mono text-[9px] tracking-widest text-white/40 uppercase">
+              {useFallback ? "SINTETIZADOR ESTELAR (LOCAL)" : "SINTETIZADOR ESTELAR"}
+            </div>
             <div className="font-mono text-[10px] text-white font-medium tracking-wide uppercase">
               {statusText}
             </div>
@@ -223,8 +340,8 @@ export default function PostPlayer({ postTitle, postContent }: PostPlayerProps) 
 
         {/* Configuración de voz y controles */}
         <div className="flex flex-wrap items-center gap-3">
-          {/* Selector de Voces */}
-          {voices.length > 1 && (
+          {/* Selector de Voces (Solo si estamos usando el fallback local) */}
+          {useFallback && voices.length > 1 && (
             <select
               value={selectedVoiceName}
               onChange={handleVoiceChange}
