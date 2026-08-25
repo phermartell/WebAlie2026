@@ -128,3 +128,18 @@ body {
   from { background-position: 0 0; }
   to { background-position: 0 100px; }
 }
+
+/* Enlaces del contenido del Blog (Interlinking) */
+.blog-content a {
+  color: var(--color-tangerine, #ff8643);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+  font-weight: 600;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.blog-content a:hover {
+  color: var(--color-orangeleader, #eb3f1b);
+}
+
