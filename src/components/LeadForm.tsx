@@ -6,7 +6,13 @@ import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
 const inputClass =
   "w-full bg-black/50 border border-white/20 rounded-full h-12 px-6 text-base text-white placeholder-white/40 focus:outline-none focus:border-orangeleader transition-all cursor-text";
 
-export default function LeadForm({ servicioInteres }: { servicioInteres?: string }) {
+export default function LeadForm({
+  servicioInteres,
+  submitLabel = "Agendar llamada de estrategia (Google Meet)",
+}: {
+  servicioInteres?: string;
+  submitLabel?: string;
+}) {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
   const [correo, setCorreo] = useState("");
@@ -109,7 +115,7 @@ export default function LeadForm({ servicioInteres }: { servicioInteres?: string
         disabled={status === "submitting"}
         className="mt-4 bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full h-auto min-h-14 px-6 py-3 font-black text-sm md:text-base uppercase tracking-widest shadow-[0_10px_30px_rgba(235,63,27,0.4)] transition-all cursor-pointer disabled:opacity-60 whitespace-normal leading-tight"
       >
-        {status === "submitting" ? "Enviando…" : "Agendar llamada de estrategia (Google Meet)"}
+        {status === "submitting" ? "Enviando…" : submitLabel}
       </button>
     </form>
   );

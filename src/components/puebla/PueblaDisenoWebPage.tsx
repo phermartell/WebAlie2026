@@ -199,10 +199,10 @@ export default function PueblaDisenoWebPage() {
     {
       num: "01",
       title: "ESTRATEGIA & PLANIFICACIÓN",
-      desc: "Cartografiamos los objetivos de tu nave comercial. Trazamos el mapa de órbita y arquitectura para garantizar conversiones B2B de alto calibre.",
+      desc: "Antes de diseñar entendemos tu negocio, tus clientes y qué debe conseguir el sitio. Definimos estructura, contenidos y recorridos orientados a guiar a tus visitantes hacia una acción comercial.",
       services: [
-        { name: "Consultoría y Auditoría Digital", desc: "Escaneo de competidores locales y análisis de brechas de velocidad en tu web actual." },
-        { name: "Arquitectura de Información (UX)", desc: "Mapeo lógico de wireframes interactivos y flujo de conversión intuitivo para el usuario." }
+        { name: "Consultoría y Auditoría Digital", desc: "Analizamos tu sitio actual, competidores y oportunidades para definir qué debemos mejorar." },
+        { name: "Arquitectura de Información (UX)", desc: "Organizamos páginas, contenidos y llamadas a la acción para que tus visitantes encuentren rápidamente lo que necesitan." }
       ],
       glow: "rgba(235,63,27,0.08)",
       borderColor: "group-hover:border-orangeleader/30"
@@ -210,21 +210,21 @@ export default function PueblaDisenoWebPage() {
     {
       num: "02",
       title: "DISEÑO UI/UX PREMIUM",
-      desc: "Estética galáctica a la medida. Nada de plantillas baratas ni interfaces lentas. Creamos diseños fluidos, responsivos y altamente atractivos.",
+      desc: "Creamos una experiencia visual a la medida de tu marca, diseñada para transmitir confianza, facilitar la navegación y funcionar perfectamente en cualquier pantalla.",
       services: [
-        { name: "Diseño Mobile-First Personalizado", desc: "El 80% de tu tráfico viene de móviles. Diseñamos con precisión quirúrgica para pantallas pequeñas." },
-        { name: "Identidad Visual y Prototipos", desc: "Modelado interactivo en alta fidelidad y directrices visuales coherentes alineadas a tu marca." }
+        { name: "Diseño Mobile-First Personalizado", desc: "Diseñamos primero pensando en la experiencia móvil, donde hoy ocurre gran parte de la navegación y las decisiones de compra." },
+        { name: "Identidad Visual y Prototipos", desc: "Definimos la apariencia del sitio y construimos prototipos para validar la experiencia antes de comenzar el desarrollo." }
       ],
       glow: "rgba(34,211,238,0.08)",
       borderColor: "group-hover:border-cyan-400/30"
     },
     {
       num: "03",
-      title: "DESARROLLO HEADLESS & CMS",
-      desc: "Motores Next.js con velocidad de escape. Escribimos código ultrarrápido y seguro, integrado con administradores modulares como WordPress y Shopify.",
+      title: "DESARROLLO WEB & CMS",
+      desc: "Desarrollamos sitios rápidos, seguros y escalables utilizando la tecnología adecuada para cada proyecto, desde WordPress y Shopify hasta desarrollos personalizados con Next.js.",
       services: [
-        { name: "Desarrollo Headless (Next.js / React)", desc: "Sitios web estáticos e híbridos con tiempos de carga menores a un segundo." },
-        { name: "Gestores Autoadministrables", desc: "WordPress modular o Shopify robusto para que gestiones tu nave comercial sin depender de un programador." }
+        { name: "Desarrollo a la Medida", desc: "Construimos sitios optimizados para velocidad, estabilidad y crecimiento, sin cargar tu proyecto con tecnología que no necesitas." },
+        { name: "Sitios Autoadministrables", desc: "Cuando el proyecto lo requiere, implementamos WordPress, Shopify u otros CMS para que puedas actualizar contenidos sin depender de un programador." }
       ],
       glow: "rgba(168,85,247,0.08)",
       borderColor: "group-hover:border-purple-400/30"
@@ -232,10 +232,10 @@ export default function PueblaDisenoWebPage() {
     {
       num: "04",
       title: "SEO TÉCNICO & PERFORMANCE",
-      desc: "Blindaje técnico para que Google y la IA recomienden tu marca. Estructuras preparadas para posicionarse en los primeros puestos.",
+      desc: "Construimos el sitio sobre una base técnica preparada para cargar rápido, ser rastreada correctamente por Google y ofrecer una buena experiencia en cualquier dispositivo.",
       services: [
-        { name: "Optimización Core Web Vitals", desc: "Velocidad real de carga, estabilidad visual y tiempos de respuesta interactivos al 100%." },
-        { name: "Marcado de Datos Schema JSON-LD", desc: "Microdatos enriquecidos para una visibilidad destacada en motores de búsqueda e inteligencias artificiales." }
+        { name: "Optimización Core Web Vitals", desc: "Optimizamos velocidad, estabilidad visual y respuesta para ofrecer una mejor experiencia a tus visitantes." },
+        { name: "DATOS ESTRUCTURADOS & SEO TÉCNICO", desc: "Implementamos datos estructurados, metadatos y fundamentos técnicos que facilitan a buscadores y sistemas de IA comprender mejor el contenido de tu sitio." }
       ],
       glow: "rgba(34,197,94,0.08)",
       borderColor: "group-hover:border-green-400/30"
@@ -246,38 +246,38 @@ export default function PueblaDisenoWebPage() {
   const processSteps = [
     {
       num: "01",
-      phase: "Descubrimiento & Mapeo",
-      title: "Definición del Destino Interestelar",
-      desc: "Analizamos tu modelo de negocio B2B en Puebla. Identificamos tu propuesta de valor, tu perfil de cliente ideal y definimos las metas comerciales de tu nuevo sitio web.",
-      points: ["Auditoría técnica del sitio actual", "Keyword Research enfocado en Puebla y nacional", "Definición de requerimientos técnicos y APIs"]
+      phase: "Estrategia & Definición",
+      title: "Entendemos tu negocio antes de diseñar",
+      desc: "Conocemos tu empresa, clientes, oferta y objetivos para definir qué debe comunicar y conseguir tu nueva página web.",
+      points: ["Análisis del sitio actual y competidores", "Definición de objetivos y requerimientos", "Arquitectura inicial y oportunidades SEO"]
     },
     {
       num: "02",
       phase: "Diseño e Interfaz UI/UX",
-      title: "Construcción del Prototipo Visual",
-      desc: "Modelamos la interfaz visual desde cero. Diseñamos componentes elegantes con estética premium cuidando el contraste de color, tipografía y adaptabilidad móvil.",
-      points: ["Diseño de wireframes interactivos", "Maquetación visual en alta fidelidad", "Aprobación de la estética antes de programar"]
+      title: "Diseñamos la experiencia antes de programar",
+      desc: "Transformamos la estrategia en una propuesta visual alineada con tu marca, priorizando claridad, navegación y conversión en escritorio y móvil.",
+      points: ["Wireframes y estructura visual", "Diseño de interfaces y adaptación responsive", "Validación del diseño antes del desarrollo"]
     },
     {
       num: "03",
-      phase: "Ensamble & Programación",
-      title: "Codificación con Velocidad Estelar",
-      desc: "Nuestros desarrolladores escriben código limpio, semántico y modular. Programamos los componentes de la interfaz usando tecnologías modernas como Next.js y React.",
-      points: ["Desarrollo responsivo ultra optimizado", "Integración con CRM y APIs transaccionales", "Cumplimiento estricto de estándares W3C"]
+      phase: "Desarrollo & Programación",
+      title: "Convertimos el diseño en un sitio real",
+      desc: "Desarrollamos las páginas, funcionalidades e integraciones necesarias utilizando una arquitectura rápida, segura y preparada para crecer.",
+      points: ["Desarrollo responsive y funcionalidades", "Formularios e integraciones cuando se requieran", "CMS o autoadministración cuando aplique"]
     },
     {
       num: "04",
-      phase: "Optimización de Motores",
-      title: "Blindaje de SEO e Integración IA",
-      desc: "Preparamos la página para su indexación. Inyectamos microformatos Schema JSON-LD, integramos metaetiquetas dinámicas y configuramos la velocidad extrema del servidor.",
-      points: ["Inyección de metadatos SEO y Open Graph", "Integración de recaptcha v3 y honeypot anti-bots", "Optimización de assets y compresión de imágenes"]
+      phase: "SEO & Optimización",
+      title: "Preparamos tu sitio para Google y tus usuarios",
+      desc: "Revisamos rendimiento, estructura técnica, indexación y elementos SEO antes del lanzamiento para que el sitio salga preparado desde el primer día.",
+      points: ["SEO técnico, metadatos y datos estructurados", "Optimización de imágenes y recursos", "Revisión de velocidad y Core Web Vitals"]
     },
     {
       num: "05",
       phase: "Despegue & Monitoreo",
-      title: "Lanzamiento y Auditoría PageSpeed",
-      desc: "Sometemos el sitio web a una auditoría estricta de rendimiento. Una vez validada la velocidad óptima de carga en móviles y computadoras, lanzamos el sitio sin tiempo muerto.",
-      points: ["Auditoría final PageSpeed (Score de 90+)", "Cambio de DNS seguro libre de caídas", "Monitoreo post-lanzamiento e indexación en Google"]
+      title: "Lanzamos, validamos y monitoreamos",
+      desc: "Antes de publicar realizamos las pruebas finales de funcionamiento, rendimiento y experiencia. Después del lanzamiento verificamos que todo opere correctamente.",
+      points: ["Pruebas finales y auditoría PageSpeed", "Publicación y configuración de dominio", "Monitoreo post-lanzamiento e indexación"]
     }
   ];
 
@@ -333,7 +333,7 @@ export default function PueblaDisenoWebPage() {
             </h1>
 
             <p className="text-base md:text-lg text-starlight/85 max-w-2xl mx-auto leading-relaxed font-light mb-10">
-              Desarrollamos portales corporativos premium, e-commerce y aplicaciones web headless a la medida en Puebla y Cholula. Sitios ultrarrápidos, optimizados para SEO local e integrados a tu CRM.
+              Diseñamos páginas web para empresas que necesitan algo más que verse bien: sitios rápidos, profesionales y preparados para generar prospectos y ventas.
             </p>
           </div>
 
@@ -342,13 +342,13 @@ export default function PueblaDisenoWebPage() {
               href="#contacto"
               className="bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest shadow-[0_10px_30px_rgba(235,63,27,0.4)] transition-all flex items-center justify-center cursor-pointer"
             >
-              Iniciar Despegue Web
+              Cotizar mi página web
             </a>
             <a
               href="#capacidades"
               className="glass-l2 rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest text-white flex items-center justify-center cursor-pointer hover:bg-white/5 transition-all"
             >
-              Explorar Capacidades
+              Ver qué podemos hacer
             </a>
           </div>
         </div>
@@ -358,12 +358,12 @@ export default function PueblaDisenoWebPage() {
       <section className="relative z-10 px-4 md:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <Hud>Bitácora de Ingeniería // Portal Puebla</Hud>
+            <Hud>Diseño Web // Alié Puebla</Hud>
             <h2 className="mt-8 text-3xl md:text-5xl font-black uppercase text-white leading-[1.05] tracking-tight">
-              Construimos Sitios Chulos que Conectan con la Galaxia
+              Tu página web debe ayudarte a vender, no solo verse bien
             </h2>
             <p className="mt-8 text-base text-starlight/75 leading-relaxed font-light">
-              Desde nuestra central digital en Cholula, diseñamos páginas web que no solo se ven espectaculares sino que operan como verdaderas naves de captación de clientes. Nos enfocamos en eliminar toda fricción técnica: velocidad extrema con Next.js, seguridad inquebrantable, formularios conectados a tu CRM y diseño visual de alto nivel. Cero plantillas lentas, puro código de alto rendimiento.
+              Diseñamos sitios pensados alrededor de tus objetivos comerciales. Combinamos estrategia, experiencia de usuario, desarrollo, velocidad y SEO para convertir tu página en una herramienta capaz de atraer clientes y respaldar el crecimiento de tu empresa.
             </p>
           </div>
 
@@ -389,7 +389,7 @@ export default function PueblaDisenoWebPage() {
               Capacidades de Diseño Web en Puebla
             </h2>
             <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light">
-              Desplegamos soluciones de diseño de primer nivel para empresas que no se conforman con lo ordinario.
+              Estrategia, diseño, tecnología y posicionamiento trabajando juntos para construir un sitio que responda a los objetivos de tu negocio.
             </p>
           </div>
 
@@ -475,10 +475,10 @@ export default function PueblaDisenoWebPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <Hud>Hoja de Ruta // Proceso de Despegue</Hud>
             <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-              Nuestra Metodología de Desarrollo en Puebla
+              Así construimos tu nueva página web
             </h2>
             <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light">
-              Nuestra ingeniería de 5 fases estructuradas para garantizar un sitio rápido, seguro y libre de errores.
+              Un proceso de 5 etapas para pasar de tus objetivos de negocio a un sitio diseñado, desarrollado, optimizado y listo para crecer.
             </p>
           </div>
 
@@ -553,9 +553,9 @@ export default function PueblaDisenoWebPage() {
       {/* 🤝 CLIENTS SECTION */}
       <section className="relative z-10 py-16 md:py-24 border-t border-white/5 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 mb-16 text-center">
-          <Hud>Aliados Locales // Casos de Éxito</Hud>
+          <Hud>Clientes & Proyectos // Puebla</Hud>
           <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-            PROYECTOS LANZADOS EN PUEBLA
+            Empresas que han confiado en Alié
           </h2>
         </div>
 
@@ -575,19 +575,19 @@ export default function PueblaDisenoWebPage() {
       <section id="contacto" className="relative min-h-screen flex items-center justify-center px-4 pb-32 pt-20 z-10 border-t border-white/5">
         <div className="max-w-4xl w-full mx-auto">
           <div className="glass-liquid border border-white/10 rounded-[48px] p-8 md:p-16 text-center shadow-[0_0_80px_rgba(16,27,57,0.7)]">
-            <Hud>ESTACIÓN DE CONTROL ANGELÓPOLIS // CRM CONNECT</Hud>
+            <Hud>Hablemos de tu Proyecto // Alié Puebla</Hud>
             <h2 className="text-3xl md:text-5xl font-black uppercase text-white mt-6 mb-6">
-              Agendemos tu Estrategia de Diseño en Puebla
+              ¿Tienes un proyecto web en mente?
             </h2>
             <p className="text-sm md:text-base text-starlight/85 mb-12 leading-relaxed font-light max-w-2xl mx-auto">
-              Platiquemos sobre el diseño y velocidad de tu próximo sitio web. Llena el formulario para sincronizar con nuestro CRM y agendar una llamada.
+              Cuéntanos qué necesitas. Revisaremos tu proyecto y te contactaremos para conocer tus objetivos, resolver tus dudas y recomendarte la mejor solución.
             </p>
 
-            <LeadForm servicioInteres="Diseño de páginas web" />
+            <LeadForm servicioInteres="Diseño de páginas web" submitLabel="Quiero cotizar mi página web" />
 
             <div className="mt-14 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-6 text-left text-sm text-starlight/70 font-mono">
               <div>
-                <span className="text-xs text-white/30 block mb-1">CENTRAL</span>
+                <span className="text-xs text-white/30 block mb-1">UBICACIÓN</span>
                 <span className="text-white font-bold">Puebla, México</span>
               </div>
               <div>
@@ -597,7 +597,7 @@ export default function PueblaDisenoWebPage() {
                 </a>
               </div>
               <div>
-                <span className="text-xs text-white/30 block mb-1">CENTRAL DE CORREO</span>
+                <span className="text-xs text-white/30 block mb-1">CORREO</span>
                 <a href="mailto:puebla@aliedigital.com" className="text-white font-bold hover:underline">
                   puebla@aliedigital.com
                 </a>
