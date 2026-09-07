@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { ReactLenis, useLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import CalmSpaceBackground from "./CalmSpaceBackground";
+import AttributionTracker from "./AttributionTracker";
 
 const NebulaBackground = dynamic(() => import("./NebulaBackground"), { ssr: false });
 const SpaceScene = dynamic(() => import("./SpaceScene"), { ssr: false });
@@ -42,6 +43,9 @@ export default function SpaceLayoutWrapper({ children }: { children: React.React
 
   return (
     <ReactLenis root>
+      <Suspense fallback={null}>
+        <AttributionTracker />
+      </Suspense>
       <LenisPageTrigger />
       {/* Fondo: nebulosa WebGL solo en home y desktop; fondo calmo estático en el resto */}
       {isHome && isDesktop ? <NebulaBackground /> : <CalmSpaceBackground />}
