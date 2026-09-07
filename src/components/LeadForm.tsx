@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
+import { getAttribution, type AttributionPayload } from "@/lib/attribution";
 
 const inputClass =
   "w-full bg-black/50 border border-white/20 rounded-full h-12 px-6 text-base text-white placeholder-white/40 focus:outline-none focus:border-orangeleader transition-all cursor-text";
@@ -47,6 +48,15 @@ export default function LeadForm({
 
     try {
       const recaptchaToken = await getRecaptchaToken(siteKey, "submit_lead");
+
+      // C5.4: atribución first-party en el momento de conversión. Nunca bloquea el envío.
+      let attribution: AttributionPayload | null = null;
+      try {
+        attribution = getAttribution();
+      } catch {
+        attribution = null;
+      }
+
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -65,6 +75,7 @@ export default function LeadForm({
           website,
           pagina: typeof window !== "undefined" ? window.location.href : "",
           formulario: "Formulario de Landing (Estrategia)",
+          attribution,
         }),
       });
       const data = await res.json();

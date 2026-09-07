@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
+import { getAttribution, type AttributionPayload } from "@/lib/attribution";
 
 // Consola de selección de servicios (píldoras Bento Switches).
 const SERVICES = [
@@ -59,6 +60,15 @@ export default function ContactoForm() {
 
     try {
       const recaptchaToken = await getRecaptchaToken(siteKey, "submit_lead");
+
+      // C5.4: atribución first-party en el momento de conversión. Nunca bloquea el envío.
+      let attribution: AttributionPayload | null = null;
+      try {
+        attribution = getAttribution();
+      } catch {
+        attribution = null;
+      }
+
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -78,6 +88,7 @@ export default function ContactoForm() {
           website,
           pagina: typeof window !== "undefined" ? window.location.href : "",
           formulario: "Formulario de Cotización (Contacto)",
+          attribution,
         }),
       });
       const data = await res.json();

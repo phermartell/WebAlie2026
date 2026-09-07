@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
+import { getAttribution, type AttributionPayload } from "@/lib/attribution";
 
 type Variant = "facebook" | "instagram";
 
@@ -81,6 +82,14 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
     try {
       const recaptchaToken = await getRecaptchaToken(siteKey, "submit_lead");
 
+      // C5.4: atribución first-party en el momento de conversión. Nunca bloquea el envío.
+      let attribution: AttributionPayload | null = null;
+      try {
+        attribution = getAttribution();
+      } catch {
+        attribution = null;
+      }
+
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -94,6 +103,7 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
           website,
           pagina: typeof window !== "undefined" ? window.location.href : "",
           formulario: variant === "facebook" ? "Modal Messenger (FB)" : "Modal Instagram (IG)",
+          attribution,
         }),
       });
 
