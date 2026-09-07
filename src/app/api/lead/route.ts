@@ -1,36 +1,97 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+  sanitizeAttribution,
+  formatAttributionSummary,
+} from "@/lib/attribution-sanitize";
+
+const MAX_BODY_BYTES = 102400; // 100 KB
 
 interface LeadPayload {
-  nombre: string;
-  whatsapp: string;
-  servicio: string;
-  mensaje: string;
-  canal: "facebook" | "instagram" | "web" | "whatsapp";
-  recaptchaToken?: string;
-  website?: string;
-  pagina?: string;
-  formulario?: string;
+  nombre?: unknown;
+  whatsapp?: unknown;
+  servicio?: unknown;
+  mensaje?: unknown;
+  canal?: unknown;
+  recaptchaToken?: unknown;
+  website?: unknown;
+  pagina?: unknown;
+  formulario?: unknown;
+  attribution?: unknown;
+}
+
+// Convierte a string solo si ya es string; nunca coacciona otros tipos.
+function toStr(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
+// Lee el body de forma controlada y limita su tamaño real en bytes.
+async function readBodyText(req: NextRequest): Promise<string | null> {
+  const contentLength = req.headers.get("content-length");
+  if (contentLength) {
+    const n = Number(contentLength);
+    if (Number.isFinite(n) && n > MAX_BODY_BYTES) return null;
+  }
+  const reader = req.body?.getReader();
+  if (!reader) return "";
+  const chunks: Uint8Array[] = [];
+  let received = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (value && value.byteLength > 0) {
+        received += value.byteLength;
+        if (received > MAX_BODY_BYTES) return null;
+        chunks.push(value);
+      }
+    }
+  } catch {
+    return null;
+  }
+  const bytes = new Uint8Array(received);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(bytes);
 }
 
 export async function POST(req: NextRequest) {
+  const rawText = await readBodyText(req);
+  if (rawText === null) {
+    return NextResponse.json(
+      { success: false, error: "Payload demasiado grande" },
+      { status: 413 }
+    );
+  }
+
   let body: LeadPayload;
   try {
-    body = await req.json();
+    body = JSON.parse(rawText) as LeadPayload;
   } catch {
     return NextResponse.json({ success: false, error: "Payload inválido" }, { status: 400 });
   }
 
-  const nombre = (body.nombre || "").trim();
-  const whatsapp = (body.whatsapp || "").trim();
-  const servicio = (body.servicio || "").trim();
-  const mensaje = (body.mensaje || "").trim();
-  const canal =
-    body.canal === "instagram" || body.canal === "web" || body.canal === "whatsapp" ? body.canal : "facebook";
-  const pagina = (body.pagina || "").trim();
-  const formulario = (body.formulario || "").trim();
+  const nombre = toStr(body.nombre).trim();
+  const whatsapp = toStr(body.whatsapp).trim();
+  const servicio = toStr(body.servicio).trim();
+  const mensaje = toStr(body.mensaje).trim();
+  const rawCanal = toStr(body.canal);
+  const canal: "facebook" | "instagram" | "web" | "whatsapp" =
+    rawCanal === "instagram" || rawCanal === "web" || rawCanal === "whatsapp"
+      ? (rawCanal as "instagram" | "web" | "whatsapp")
+      : "facebook";
+  const pagina = toStr(body.pagina).trim();
+  const formulario = toStr(body.formulario).trim();
+  const website = toStr(body.website);
+  const recaptchaToken = toStr(body.recaptchaToken);
+
+  // Atribución: metadata opcional. Nunca invalida un lead por sí sola.
+  const attribution = sanitizeAttribution(body.attribution);
 
   // Honeypot anti-bots
-  if (body.website && body.website.length > 0) {
+  if (website.length > 0) {
     return NextResponse.json({ success: false, error: "Spam detectado" }, { status: 400 });
   }
 
@@ -41,7 +102,7 @@ export async function POST(req: NextRequest) {
   // 1. Verificar reCAPTCHA v3 (obligatorio para todo formulario)
   const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
   if (recaptchaSecret) {
-    if (!body.recaptchaToken) {
+    if (!recaptchaToken) {
       return NextResponse.json({ success: false, error: "Captcha requerido" }, { status: 400 });
     }
     try {
@@ -50,7 +111,7 @@ export async function POST(req: NextRequest) {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
           secret: recaptchaSecret,
-          response: body.recaptchaToken,
+          response: recaptchaToken,
         }).toString(),
       });
       const verify = await verifyRes.json();
@@ -97,6 +158,11 @@ export async function POST(req: NextRequest) {
   if (userAgent) wpMensaje += `\nAgente de usuario: ${userAgent}`;
   if (ip) wpMensaje += `\nIP remota: ${ip}`;
 
+  // Atribución sanitizada: solo se añade si existe (metadata opcional).
+  if (attribution) {
+    wpMensaje += formatAttributionSummary(attribution);
+  }
+
   // 2. Guardar en WordPress (CPT "lead" vía AlieCore)
   const wpUrl = process.env.NEXT_PUBLIC_WP_API_URL;
   if (wpUrl) {
@@ -131,7 +197,7 @@ export async function POST(req: NextRequest) {
           fuente: `Formulario Web Alié - ${sourceLabel}`,
           estadoLead: "Nuevo",
           origenCampana: canal,
-          resumen: `Servicio: ${servicio}. Mensaje: ${mensaje}${formulario ? ` | Formulario: ${formulario}` : ""}${pagina ? ` | Página: ${pagina}` : ""}${ip ? ` | IP: ${ip}` : ""}`,
+          resumen: `Servicio: ${servicio}. Mensaje: ${mensaje}${formulario ? ` | Formulario: ${formulario}` : ""}${pagina ? ` | Página: ${pagina}` : ""}${ip ? ` | IP: ${ip}` : ""}${attribution ? formatAttributionSummary(attribution) : ""}`,
           zonaHoraria: "America/Mexico_City",
         }),
       });
