@@ -72,6 +72,11 @@ export default function LeadForm({
         throw new Error(data.error || "No se pudo enviar tu solicitud.");
       }
       setStatus("success");
+      // Emitir evento de conversión únicamente tras confirmación del servidor.
+      // GTM escuchará "lead_success" para disparar la etiqueta GA4 CTAContacto.
+      const dataLayerWindow = window as Window & { dataLayer?: unknown[] };
+      dataLayerWindow.dataLayer = dataLayerWindow.dataLayer || [];
+      dataLayerWindow.dataLayer.push({ event: "lead_success", form_id: "CTAContacto" });
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Ocurrió un error, intenta de nuevo.");
