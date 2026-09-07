@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
 
 const inputClass =
@@ -17,11 +17,8 @@ export default function LeadForm({ servicioInteres }: { servicioInteres?: string
 
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
 
-  useEffect(() => {
-    if (siteKey) {
-      loadRecaptcha(siteKey);
-    }
-  }, [siteKey]);
+  // Carga lazy: el SDK de reCAPTCHA se carga solo al primer focus del formulario.
+  // getRecaptchaToken al submit sigue siendo el fallback absoluto: nunca se omite la validación.
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,7 +85,7 @@ export default function LeadForm({ servicioInteres }: { servicioInteres?: string
   }
 
   return (
-    <form id="CTAContacto" onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 max-w-xl mx-auto">
+    <form id="CTAContacto" onSubmit={handleSubmit} noValidate onFocusCapture={() => { if (siteKey) loadRecaptcha(siteKey); }} className="flex flex-col gap-4 max-w-xl mx-auto">
       {/* Honeypot (oculto para humanos) */}
       <input
         type="text"

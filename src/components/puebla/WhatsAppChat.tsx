@@ -26,11 +26,8 @@ export default function WhatsAppChat({ services, isOpen: externalIsOpen, setIsOp
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
   const whatsappNumber = "522213279555";
 
-  useEffect(() => {
-    if (siteKey) {
-      loadRecaptcha(siteKey);
-    }
-  }, [siteKey]);
+  // Carga lazy: el SDK de reCAPTCHA se carga solo al abrir el modal o al primer focus.
+  // getRecaptchaToken al submit sigue siendo el fallback absoluto: nunca se omite la validación.
 
   useEffect(() => {
     if (isOpen) {
@@ -118,7 +115,10 @@ export default function WhatsAppChat({ services, isOpen: externalIsOpen, setIsOp
     <>
       {/* Floating Button */}
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpen(true);
+          if (siteKey) loadRecaptcha(siteKey);
+        }}
         className="fixed bottom-6 right-6 z-[90] w-14 h-14 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:shadow-[0_15px_35px_rgba(37,211,102,0.6)] flex items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer active:scale-95 group"
         aria-label="Contactar por WhatsApp"
       >
@@ -181,7 +181,7 @@ export default function WhatsAppChat({ services, isOpen: externalIsOpen, setIsOp
 
               {/* Form Body */}
               <div className="px-6 py-6 max-h-[60vh] overflow-y-auto overscroll-contain text-left">
-                <form id="CTAWhatsapp" onSubmit={handleSubmit} noValidate className="flex flex-col gap-3.5">
+                <form id="CTAWhatsapp" onSubmit={handleSubmit} noValidate onFocusCapture={() => { if (siteKey) loadRecaptcha(siteKey); }} className="flex flex-col gap-3.5">
                   {/* Honeypot */}
                   <input
                     type="text"

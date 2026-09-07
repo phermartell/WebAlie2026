@@ -309,6 +309,18 @@ export default function PueblaDisenoWebPage() {
         .animate-marquee-right {
           animation: scroll-right 50s linear infinite;
         }
+
+        /* Hero rise — CSS-only para que el H1 sea visible sin depender de JavaScript */
+        .hero-rise {
+          animation: hero-rise 0.6s ease-out both;
+        }
+        @keyframes hero-rise {
+          from { opacity: 0; transform: translateY(24px); }
+          to   { opacity: 1; transform: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-rise { animation: none; }
+        }
       `}</style>
 
       {/* Spacecraft following scroll */}
@@ -320,12 +332,7 @@ export default function PueblaDisenoWebPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-orangeleader/15 via-transparent to-transparent pointer-events-none z-0" />
 
         <div className="max-w-5xl mx-auto text-center relative z-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col items-center"
-          >
+          <div className="flex flex-col items-center hero-rise">
             <span className="text-xs md:text-sm font-mono tracking-[0.4em] text-orangeleader uppercase block mb-6">
               DISEÑO & DESARROLLO DE PÁGINAS WEB // PUEBLA
             </span>
@@ -340,7 +347,7 @@ export default function PueblaDisenoWebPage() {
             <p className="text-base md:text-lg text-starlight/85 max-w-2xl mx-auto leading-relaxed font-light mb-10">
               Desarrollamos portales corporativos premium, e-commerce y aplicaciones web headless a la medida en Puebla y Cholula. Sitios ultrarrápidos, optimizados para SEO local e integrados a tu CRM.
             </p>
-          </motion.div>
+          </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-4">
             <a

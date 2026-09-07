@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
 
 // Consola de selección de servicios (píldoras Bento Switches).
@@ -35,11 +35,8 @@ export default function ContactoForm() {
 
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
 
-  useEffect(() => {
-    if (siteKey) {
-      loadRecaptcha(siteKey);
-    }
-  }, [siteKey]);
+  // Carga lazy: el SDK de reCAPTCHA se carga solo al primer focus del formulario.
+  // getRecaptchaToken al submit sigue siendo el fallback absoluto: nunca se omite la validación.
 
   const toggleServicio = (s: string) => {
     setServicios((prev) =>
@@ -110,7 +107,7 @@ export default function ContactoForm() {
   }
 
   return (
-    <form id="CTAContacto" onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+    <form id="CTAContacto" onSubmit={handleSubmit} noValidate onFocusCapture={() => { if (siteKey) loadRecaptcha(siteKey); }} className="flex flex-col gap-5">
       {/* Honeypot (oculto para humanos) */}
       <input
         type="text"
