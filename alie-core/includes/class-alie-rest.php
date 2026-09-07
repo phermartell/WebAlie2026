@@ -44,6 +44,10 @@ class AlieCore_REST {
 		$pagina     = sanitize_text_field( $request->get_param( 'pagina' ) );
 		$formulario = sanitize_text_field( $request->get_param( 'formulario' ) );
 
+		// C5.6A: attribution estructurada. Input NO confiable: whitelist estricta.
+		// Si es inválida se descarta (null) y el lead SIEMPRE se sigue creando.
+		$attribution = self::sanitize_attribution( $request->get_param( 'attribution' ) );
+
 		if ( ! empty( $website ) ) {
 			return new WP_Error( 'spam_detected', 'Spam detectado', array( 'status' => 400 ) );
 		}
@@ -74,6 +78,50 @@ class AlieCore_REST {
 		update_post_meta( $post_id, 'pagina', $pagina );
 		update_post_meta( $post_id, 'formulario', $formulario );
 
+		// C5.6A: persiste la attribution estructurada (snapshot versionado + meta promovidos).
+		// Fuente de verdad: alie_attribution. Los alie_* son copias consultables.
+		if ( null !== $attribution ) {
+			$snapshot = array(
+				'attribution_version' => 1,
+				'visitor_id'          => $attribution['visitor_id'],
+				'returning_visitor'   => $attribution['returning_visitor'],
+				'first_touch'         => $attribution['first_touch'],
+				'last_touch'          => $attribution['last_touch'],
+			);
+
+			$encoded = wp_json_encode( $snapshot, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+
+			if ( false !== $encoded ) {
+				update_post_meta( $post_id, 'alie_attribution', $encoded );
+
+				// Touchpoint más relevante para la conversión:
+				// last_touch si existe; si no, first_touch.
+				$touch = null !== $attribution['last_touch'] ? $attribution['last_touch'] : $attribution['first_touch'];
+
+				$promoted_fields = array(
+					'gclid'    => '',
+					'gbraid'   => '',
+					'wbraid'   => '',
+					'source'   => '',
+					'medium'   => '',
+					'campaign' => '',
+				);
+
+				if ( null !== $touch ) {
+					$promoted_fields['gclid']    = isset( $touch['gclid'] ) ? $touch['gclid'] : '';
+					$promoted_fields['gbraid']   = isset( $touch['gbraid'] ) ? $touch['gbraid'] : '';
+					$promoted_fields['wbraid']   = isset( $touch['wbraid'] ) ? $touch['wbraid'] : '';
+					$promoted_fields['source']   = isset( $touch['source'] ) ? $touch['source'] : '';
+					$promoted_fields['medium']   = isset( $touch['medium'] ) ? $touch['medium'] : '';
+					$promoted_fields['campaign'] = isset( $touch['campaign'] ) ? $touch['campaign'] : '';
+				}
+
+				foreach ( $promoted_fields as $field => $value ) {
+					update_post_meta( $post_id, 'alie_' . $field, $value );
+				}
+			}
+		}
+
 		// Notificación por correo (destinatario configurable en Ajustes → Alié Digital).
 		$to = AlieCore_Settings::get_notification_email();
 		if ( $to ) {
@@ -90,4 +138,121 @@ class AlieCore_REST {
 			)
 		);
 	}
+
+	/**
+	 * Sanitiza el snapshot de attribution recibido del cliente (C5.6A).
+	 *
+	 * Input NO confiable: se aplica whitelist estricta de claves y límites
+	 * alineados con src/lib/attribution-sanitize.ts. Nunca se copian arrays
+	 * externos ni se serializa input arbitrario.
+	 *
+	 * Devuelve un array limpio con visitor_id, returning_visitor,
+	 * first_touch y last_touch; o null si la atribución es inválida.
+	 *
+	 * @param mixed $input Parámetro 'attribution' del request.
+	 * @return array|null
+	 */
+	private static function sanitize_attribution( $input ) {
+		if ( ! is_array( $input ) ) {
+			return null;
+		}
+
+		$raw_visitor_id = isset( $input['visitor_id'] ) ? $input['visitor_id'] : '';
+		$visitor_id     = self::sanitize_attribution_string( $raw_visitor_id, 100 );
+
+		// visitor_id es obligatorio y debe tener formato válido. Si falla,
+		// toda la atribución se descarta; el lead NO se ve afectado.
+		if ( '' === $visitor_id || ! preg_match( '/^[A-Za-z0-9_-]{8,100}$/', $visitor_id ) ) {
+			return null;
+		}
+
+		return array(
+			'visitor_id'        => $visitor_id,
+			'returning_visitor' => ( true === ( isset( $input['returning_visitor'] ) ? $input['returning_visitor'] : false ) ),
+			'first_touch'       => self::sanitize_touchpoint( isset( $input['first_touch'] ) ? $input['first_touch'] : null ),
+			'last_touch'        => self::sanitize_touchpoint( isset( $input['last_touch'] ) ? $input['last_touch'] : null ),
+		);
+	}
+
+	/**
+	 * Sanitiza un touchpoint con whitelist estricta.
+	 *
+	 * @param mixed $input Touchpoint crudo.
+	 * @return array|null
+	 */
+	private static function sanitize_touchpoint( $input ) {
+		if ( ! is_array( $input ) ) {
+			return null;
+		}
+
+		// timestamp obligatorio, parseable y dentro de una ventana razonable.
+		$timestamp = self::sanitize_attribution_string( isset( $input['timestamp'] ) ? $input['timestamp'] : '', 40 );
+		$ts        = strtotime( $timestamp );
+		if ( false === $ts || $ts < strtotime( '2000-01-01T00:00:00+00:00' ) || $ts > time() + DAY_IN_SECONDS ) {
+			return null;
+		}
+
+		$touch = array();
+
+		// Campos string con límites alineados a attribution-sanitize.ts.
+		$string_fields = array(
+			'source'       => 100,
+			'medium'       => 50,
+			'campaign'     => 200,
+			'content'      => 200,
+			'term'         => 200,
+			'referrer'     => 253,
+			'landing_page' => 2000,
+		);
+		foreach ( $string_fields as $field => $max ) {
+			$raw           = isset( $input[ $field ] ) ? $input[ $field ] : '';
+			$touch[ $field ] = self::sanitize_attribution_string( $raw, $max );
+		}
+
+		// Click IDs con charset estricto.
+		$click_fields = array( 'gclid', 'gbraid', 'wbraid', 'fbclid', 'msclkid' );
+		foreach ( $click_fields as $field ) {
+			$raw           = isset( $input[ $field ] ) ? $input[ $field ] : '';
+			$touch[ $field ] = self::sanitize_click_id( $raw );
+		}
+
+		$touch['timestamp'] = $timestamp;
+
+		return $touch;
+	}
+
+	/**
+	 * Sanitiza un string de attribution: solo strings, sin control chars,
+	 * trim y truncado al límite indicado.
+	 *
+	 * @param mixed $value Valor crudo.
+	 * @param int   $max   Longitud máxima.
+	 * @return string
+	 */
+	private static function sanitize_attribution_string( $value, $max ) {
+		if ( ! is_string( $value ) ) {
+			return '';
+		}
+		$value = trim( $value );
+		$value = preg_replace( '/[\x00-\x1f\x7f]/', '', $value );
+		if ( null === $value ) {
+			$value = '';
+		}
+		return function_exists( 'mb_substr' ) ? mb_substr( $value, 0, $max ) : substr( $value, 0, $max );
+	}
+
+	/**
+	 * Sanitiza un click ID (gclid, gbraid, wbraid, fbclid, msclkid).
+	 *
+	 * @param mixed $value Valor crudo.
+	 * @return string
+	 */
+	private static function sanitize_click_id( $value ) {
+		$value = self::sanitize_attribution_string( $value, 500 );
+		if ( '' === $value ) {
+			return '';
+		}
+		return preg_match( '/^[A-Za-z0-9._-]+$/', $value ) ? $value : '';
+	}
+
 }

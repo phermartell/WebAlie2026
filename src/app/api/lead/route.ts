@@ -170,7 +170,18 @@ export async function POST(req: NextRequest) {
       const wpRes = await fetch(`${wpUrl.replace(/\/+$/, "")}/wp-json/alie/v1/lead`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, whatsapp, servicio, mensaje: wpMensaje, canal, pagina, formulario }),
+        body: JSON.stringify({
+          nombre,
+          whatsapp,
+          servicio,
+          mensaje: wpMensaje,
+          canal,
+          pagina,
+          formulario,
+          // C5.6A: atribución estructurada (objeto ya sanitizado por sanitizeAttribution).
+          // Solo se añade si existe; nunca bloquea el lead si es null.
+          ...(attribution ? { attribution } : {}),
+        }),
       });
       if (wpRes.ok) savedTo.push("wordpress");
       else errors.push(`wordpress:${wpRes.status}`);
