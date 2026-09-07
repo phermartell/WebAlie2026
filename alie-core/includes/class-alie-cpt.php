@@ -25,7 +25,7 @@ class AlieCore_CPT {
 				'public'          => false,
 				'show_ui'         => true,
 				'show_in_menu'    => true,
-				'show_in_rest'    => true,
+				'show_in_rest'    => false,
 				'menu_icon'       => 'dashicons-admin-users',
 				'menu_position'   => 26,
 				'supports'        => array( 'title' ),

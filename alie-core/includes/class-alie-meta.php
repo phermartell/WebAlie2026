@@ -32,7 +32,7 @@ class AlieCore_Meta {
 					'type'              => 'string',
 					'sanitize_callback' => $sanitize_callback,
 					'auth_callback'     => function () {
-						return true;
+						return current_user_can( 'edit_posts' );
 					},
 				)
 			);
