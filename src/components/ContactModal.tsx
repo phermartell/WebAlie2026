@@ -113,6 +113,13 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
       }
 
       setStatus("success");
+      // Emitir evento de conversión únicamente tras confirmación del servidor.
+      const dataLayerWindow = window as Window & { dataLayer?: unknown[] };
+      dataLayerWindow.dataLayer = dataLayerWindow.dataLayer || [];
+      dataLayerWindow.dataLayer.push({
+        event: "lead_success",
+        form_id: variant === "facebook" ? "CTAFacebook" : "CTAInstagram",
+      });
       window.open(chatUrl, "_blank", "noopener");
     } catch (err) {
       setStatus("error");

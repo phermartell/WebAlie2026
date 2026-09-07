@@ -94,6 +94,10 @@ export default function WhatsAppChat({ services, isOpen: externalIsOpen, setIsOp
       }
 
       setStatus("success");
+      // Emitir evento de conversión únicamente tras confirmación del servidor.
+      const dataLayerWindow = window as Window & { dataLayer?: unknown[] };
+      dataLayerWindow.dataLayer = dataLayerWindow.dataLayer || [];
+      dataLayerWindow.dataLayer.push({ event: "lead_success", form_id: "CTAWhatsapp" });
       window.open(chatUrl, "_blank", "noopener,noreferrer");
       setIsOpen(false);
       // Reset form
