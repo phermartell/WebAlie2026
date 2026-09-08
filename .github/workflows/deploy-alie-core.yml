@@ -1,0 +1,286 @@
+# Deploy AlieCore -> WordPress (Hostinger)
+#
+# Diseño C5.7E:
+#   - Trigger MANUAL (workflow_dispatch) con selección de tag alie-core-vX.Y.Z.
+#   - Los pushes a main (Next.js) NUNCA disparan este workflow.
+#   - El código se extrae desde Git/tag (git archive), NUNCA del working tree.
+#   - dry_run (default) valida y empaqueta SIN tocar producción.
+#   - Con dry_run=false requiere secrets SFTP_* definidos.
+#
+# Allowlist de release (7 archivos):
+#   alie-core/alie-core.php
+#   alie-core/README.md
+#   alie-core/CHANGELOG.md
+#   alie-core/includes/class-alie-cpt.php
+#   alie-core/includes/class-alie-meta.php
+#   alie-core/includes/class-alie-rest.php
+#   alie-core/includes/class-alie-settings.php
+#
+# Excluidos por diseño: class-alie-webhook.php, *.bak, .DS_Store,
+# extensionCRM/, node_modules/ y cualquier otro archivo del monorepo.
+
+name: Deploy AlieCore
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag AlieCore a desplegar (formato: alie-core-vX.Y.Z)'
+        required: true
+        type: string
+        default: 'alie-core-v1.1.0'
+      dry_run:
+        description: 'Solo validar y empaquetar (no toca produccion). default: true'
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aliecore-deploy
+  cancel-in-progress: false
+
+jobs:
+  validate-package:
+    name: 'Validate & package (${{ inputs.tag }})'
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.validate.outputs.version }}
+      checksum: ${{ steps.checksum.outputs.checksum }}
+    steps:
+      - name: Checkout del tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+          fetch-depth: 1
+
+      - name: Validar tag y coincidencia con Plugin header
+        id: validate
+        shell: bash
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$TAG" =~ ^alie-core-v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Formato de tag invalido: $TAG (esperado alie-core-vX.Y.Z)"
+            exit 1
+          fi
+          VER_TAG="${TAG#alie-core-v}"
+          VER_HEADER="$(grep -m1 '^\s*\*\s*Version:' alie-core/alie-core.php | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)"
+          echo "tag_version=$VER_TAG"
+          echo "header_version=$VER_HEADER"
+          if [[ -z "$VER_HEADER" || "$VER_TAG" != "$VER_HEADER" ]]; then
+            echo "::error::El tag ($VER_TAG) NO coincide con el Plugin header ($VER_HEADER). NO DEPLOY."
+            exit 1
+          fi
+          echo "version=$VER_TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Construir paquete limpio desde el tag (allowlist explicita)
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf build && mkdir -p build
+          git archive --format=tar "${{ inputs.tag }}" -- \
+            alie-core/alie-core.php \
+            alie-core/README.md \
+            alie-core/CHANGELOG.md \
+            alie-core/includes/class-alie-cpt.php \
+            alie-core/includes/class-alie-meta.php \
+            alie-core/includes/class-alie-rest.php \
+            alie-core/includes/class-alie-settings.php \
+            | tar -x -C build
+
+      - name: Validar allowlist (exactamente 7 archivos, sin extras)
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$(printf '%s\n' \
+            alie-core.php \
+            CHANGELOG.md \
+            README.md \
+            includes/class-alie-cpt.php \
+            includes/class-alie-meta.php \
+            includes/class-alie-rest.php \
+            includes/class-alie-settings.php | sort)"
+          actual="$(cd build/alie-core && find . -type f | sed 's|^\./||' | sort)"
+          echo "expected:"; printf '%s\n' "$expected"
+          echo "actual:"; printf '%s\n' "$actual"
+          if [[ "$actual" != "$expected" ]]; then
+            echo "::error::El paquete contiene archivos fuera de la allowlist."
+            exit 1
+          fi
+          test ! -f build/alie-core/includes/class-alie-webhook.php || { echo '::error::class-alie-webhook.php presente'; exit 1; }
+          [[ -z "$(find build/alie-core \( -name '*.bak' -o -name '.DS_Store' \) )" ]] || { echo '::error::backup/.DS_Store presente'; exit 1; }
+          echo 'OK: allowlist correcta'
+
+      - name: php -l de todos los archivos PHP
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v php >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq php-cli >/dev/null; }
+          for f in $(find build/alie-core -name '*.php' | sort); do php -l "$f"; done
+
+      - name: Deteccion basica de secrets en PHP
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -rniE '(password[[:space:]]*=|secret[[:space:]]*=|api[_-]?key[[:space:]]*=|bearer|PRIVATE KEY|smtp://|BEGIN .*PRIVATE)' build/alie-core --include='*.php'; then
+            echo '::error::Posible secreto detectado en el paquete.'
+            exit 1
+          fi
+          echo 'OK: sin secrets obvios en PHP'
+
+      - name: Checksum del paquete
+        id: checksum
+        shell: bash
+        run: |
+          set -euo pipefail
+          ( cd build/alie-core && find . -type f -print0 | sort -z | xargs -0 sha256sum ) > checksums.txt
+          cat checksums.txt
+          echo "checksum=$(sha256sum checksums.txt | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      - name: Subir artifact del paquete validado
+        uses: actions/upload-artifact@v4
+        with:
+          name: alie-core-${{ inputs.tag }}
+          path: |
+            build/alie-core
+            checksums.txt
+          if-no-files-found: error
+
+      - name: Resumen (dry-run o deploy)
+        shell: bash
+        run: |
+          echo "version=${{ steps.validate.outputs.version }}"
+          echo "checksum=${{ steps.checksum.outputs.checksum }}"
+          echo "remote_base_secret_configured=${{ secrets.SFTP_REMOTE_PATH != '' }}"
+          if [[ '${{ inputs.dry_run }}' == 'true' ]]; then
+            echo 'DRY-RUN: paquete validado y subido como artifact. NO se toca produccion.'
+          else
+            echo 'DEPLOY: dry_run=false -> se ejecuta el job de publicacion SFTP.'
+          fi
+
+  deploy:
+    name: 'Deploy SFTP (${{ inputs.tag }})'
+    needs: validate-package
+    runs-on: ubuntu-latest
+    if: ${{ inputs.dry_run == false }}
+    steps:
+      - name: Descargar paquete validado
+        uses: actions/download-artifact@v4
+        with:
+          name: alie-core-${{ inputs.tag }}
+          path: package
+
+      - name: Verificar secrets SFTP
+        shell: bash
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_REMOTE_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
+        run: |
+          : "${SFTP_HOST:?Falta secret SFTP_HOST}"
+          : "${SFTP_USER:?Falta secret SFTP_USER}"
+          : "${SFTP_REMOTE_PATH:?Falta secret SFTP_REMOTE_PATH}"
+          echo 'Secrets SFTP configurados.'
+
+      - name: Backup remoto (descargar allowlist actual fuera del plugin)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet paramiko
+          rm -rf backup && mkdir -p backup
+          python3 - <<'PY'
+          import os
+          import paramiko
+          host = os.environ['SFTP_HOST']
+          port = int(os.environ.get('SFTP_PORT', '22'))
+          user = os.environ['SFTP_USER']
+          remote = os.environ['SFTP_REMOTE_PATH'].rstrip('/')
+          pw = os.environ.get('SFTP_PASSWORD')
+          key = os.environ.get('SFTP_SSH_KEY')
+          files = [
+            'alie-core.php',
+            'includes/class-alie-cpt.php',
+            'includes/class-alie-meta.php',
+            'includes/class-alie-rest.php',
+            'includes/class-alie-settings.php',
+          ]
+          pkey = None
+          if key:
+              import base64, io
+              pkey = paramiko.RSAKey.from_private_key(io.StringIO(base64.b64decode(key).decode()))
+          t = paramiko.Transport((host, port))
+          t.connect(username=user, password=pw, pkey=pkey)
+          sftp = paramiko.SFTPClient.from_transport(t)
+          try:
+              for f in files:
+                  try:
+                      sftp.get(f'{remote}/{f}', os.path.join('backup', f.replace('/', '__')))
+                      print(f'backup OK {f}')
+                  except FileNotFoundError:
+                      print(f'backup skip (no existe remoto): {f}')
+          finally:
+              sftp.close(); t.close()
+          PY
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT || '22' }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+          SFTP_SSH_KEY: ${{ secrets.SFTP_SSH_KEY }}
+          SFTP_REMOTE_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
+
+
+      - name: Publicar allowlist via SFTP
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet paramiko
+          python3 - <<'PY'
+          import os
+          import paramiko
+          host = os.environ['SFTP_HOST']
+          port = int(os.environ.get('SFTP_PORT', '22'))
+          user = os.environ['SFTP_USER']
+          remote = os.environ['SFTP_REMOTE_PATH'].rstrip('/')
+          pw = os.environ.get('SFTP_PASSWORD')
+          key = os.environ.get('SFTP_SSH_KEY')
+          pkey = None
+          if key:
+              import base64, io
+              pkey = paramiko.RSAKey.from_private_key(io.StringIO(base64.b64decode(key).decode()))
+          t = paramiko.Transport((host, port))
+          t.connect(username=user, password=pw, pkey=pkey)
+          sftp = paramiko.SFTPClient.from_transport(t)
+          try:
+              sftp.stat(remote)
+          except FileNotFoundError:
+              print(f'::error::Ruta remota no existe: {remote}')
+              raise
+          try:
+              sftp.stat(f'{remote}/includes')
+          except FileNotFoundError:
+              sftp.mkdir(f'{remote}/includes')
+          files = [
+            ('alie-core/alie-core.php', 'alie-core.php'),
+            ('alie-core/includes/class-alie-cpt.php', 'includes/class-alie-cpt.php'),
+            ('alie-core/includes/class-alie-meta.php', 'includes/class-alie-meta.php'),
+            ('alie-core/includes/class-alie-rest.php', 'includes/class-alie-rest.php'),
+            ('alie-core/includes/class-alie-settings.php', 'includes/class-alie-settings.php'),
+          ]
+          for src, dst in files:
+              sftp.put(os.path.join('package', src), f'{remote}/{dst}')
+              print(f'upload OK {dst}')
+          print('Deploy completado.')
+          sftp.close(); t.close()
+          PY
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT || '22' }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+          SFTP_SSH_KEY: ${{ secrets.SFTP_SSH_KEY }}
+          SFTP_REMOTE_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
