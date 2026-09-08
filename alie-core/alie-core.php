@@ -3,7 +3,7 @@
  * Plugin Name:       AlieCore
  * Plugin URI:        https://aliedigital.com
  * Description:       Registra el CPT "lead" y el endpoint REST para captar leads desde la landing de Alié Digital.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            Alié Digital
  * Text Domain:       alie-core
  */
@@ -12,7 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ALIE_CORE_VERSION', '1.0.0' );
 define( 'ALIE_CORE_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once ALIE_CORE_PATH . 'includes/class-alie-cpt.php';
