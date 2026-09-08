@@ -351,6 +351,10 @@ export default function PueblaDisenoWebPage() {
               Ver qué podemos hacer
             </a>
           </div>
+
+          <div className="mt-5 text-center text-xs md:text-sm font-mono tracking-wide text-starlight/70">
+            Proyectos de sitios web desde $6,000 MXN
+          </div>
         </div>
       </section>
 
