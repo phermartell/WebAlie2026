@@ -34,6 +34,9 @@
   },
   "overrides": {
     "browserslist": "4.28.7",
-    "js-yaml": "4.3.2"
+    "js-yaml": "4.3.2",
+    "three-stdlib": {
+      "fflate": "0.6.11"
+    }
   }
 }
