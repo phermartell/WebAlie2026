@@ -7,10 +7,10 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: {
-    canonical: "https://aliedigital.com/puebla/diseno-de-paginas-web/",
+    canonical: "https://aliedigital.com/puebla/diseno-de-paginas-web",
   },
 };
 
 export default function Page() {
-  permanentRedirect("/puebla/diseno-de-paginas-web/");
+  permanentRedirect("/puebla/diseno-de-paginas-web");
 }
