@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Manejo de Redes Sociales B2B y Contenido | Alié Digital",
-  description: "Servicios de gestión de redes sociales B2B y marketing de contenidos. Diseños de alto impacto y embudos de conversión para captar más clientes orgánicos.",
+  title: "Gestión de redes sociales para negocios | Alié Digital",
+  description: "Planeamos, diseñamos y publicamos contenido para las redes sociales de tu negocio. Consulta opciones de contenido, publicación y gestión según tus necesidades.",
   alternates: {
     canonical: "https://aliedigital.com/redes-sociales/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Gestión de Redes Sociales B2B y Contenido | Alié Digital",
-    description: "Servicios profesionales de gestión de redes sociales B2B y marketing de contenidos. Diseños de alto impacto y embudos de conversión para clientes orgánicos.",
+    title: "Gestión de redes sociales para negocios | Alié Digital",
+    description: "Planeamos, diseñamos y publicamos contenido para las redes sociales de tu negocio. Consulta opciones de contenido, publicación y gestión según tus necesidades.",
     url: "https://aliedigital.com/redes-sociales/",
     images: [
       {
@@ -31,11 +31,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Gestión de Redes Sociales B2B y Contenido | Alié Digital",
-    description: "Servicios profesionales de gestión de redes sociales B2B y marketing de contenidos. Diseños de alto impacto y embudos de conversión para clientes orgánicos.",
+    title: "Gestión de redes sociales para negocios | Alié Digital",
+    description: "Planeamos, diseñamos y publicamos contenido para las redes sociales de tu negocio. Consulta opciones de contenido, publicación y gestión según tus necesidades.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   return (
@@ -43,8 +43,8 @@ export default function Page() {
       <JsonLd
         data={createServiceSchema(
           "/redes-sociales/",
-          "Redes Sociales B2B & SMM | Alié Digital",
-          "Estrategias de contenido orgánico y gestión de redes sociales (SMM) B2B. Diseños de alta gama y embudos de conversión orgánicos."
+          "Gestión de redes sociales para negocios | Alié Digital",
+          "Gestión de redes sociales con planeación de contenido, diseño, redacción, publicación y revisión de métricas según los canales y las actividades acordados."
         )}
       />
       <SocialMediaPageClient />

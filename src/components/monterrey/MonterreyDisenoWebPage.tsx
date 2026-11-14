@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform, useVelocity, useMotionValue, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import LeadForm from "@/components/LeadForm";
@@ -195,51 +196,40 @@ export default function MonterreyDisenoWebPage() {
   const [activeExpertise, setActiveExpertise] = useState(0);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
 
-  // SpinX style Capabilities Grid adapted to Web Design & Space Theme
+  // 3 Opciones de Diseño Web adaptadas a Monterrey B2B
   const coreExpertise = [
     {
       num: "01",
-      title: "ESTRATEGIA & PLANIFICACIÓN",
-      desc: "Cartografiamos los objetivos de tu nave comercial. Trazamos el mapa de órbita y arquitectura para garantizar conversiones B2B de alto calibre.",
+      title: "Sitio web nuevo",
+      desc: "Organizamos tus servicios, proyectos y datos de contacto en un sitio que ayude a tus prospectos a entender tu oferta y solicitar una cotización.",
       services: [
-        { name: "Consultoría y Auditoría Digital", desc: "Escaneo de competidores locales y análisis de brechas de velocidad en tu web actual." },
-        { name: "Arquitectura de Información (UX)", desc: "Mapeo lógico de wireframes interactivos y flujo de conversión intuitivo para el usuario." }
+        { name: "Estructura y contenidos", desc: "Organizamos las secciones de servicios, proyectos y contacto para presentar tu oferta de manera clara.", icon: 0 },
+        { name: "Diseño y desarrollo web", desc: "Diseñamos una interfaz adaptada a computadoras y dispositivos móviles, facilitando la consulta de información.", icon: 1 }
       ],
       glow: "rgba(235,63,27,0.08)",
       borderColor: "group-hover:border-orangeleader/30"
     },
     {
       num: "02",
-      title: "DISEÑO UI/UX PREMIUM",
-      desc: "Estética galáctica a la medida. Nada de plantillas baratas ni interfaces lentas. Creamos diseños fluidos, responsivos y altamente atractivos.",
+      title: "Rediseño de un sitio existente",
+      desc: "Revisamos qué páginas y contenidos conviene conservar. A partir de eso proponemos cambios en la estructura, el diseño y las rutas de contacto.",
       services: [
-        { name: "Diseño Mobile-First Personalizado", desc: "El 80% de tu tráfico viene de móviles. Diseñamos con precisión quirúrgica para pantallas pequeñas." },
-        { name: "Identidad Visual y Prototipos", desc: "Modelado interactivo en alta fidelidad y directrices visuales coherentes alineadas a tu marca." }
+        { name: "Revisión del sitio actual", desc: "Analizamos qué contenidos y secciones conviene mantener y cuáles necesitan actualización.", icon: 7 },
+        { name: "Actualización visual y navegación", desc: "Mejoramos la presentación de tus páginas y optimizamos las rutas hacia los puntos de contacto.", icon: 1 }
       ],
       glow: "rgba(34,211,238,0.08)",
       borderColor: "group-hover:border-cyan-400/30"
     },
     {
       num: "03",
-      title: "DESARROLLO HEADLESS & CMS",
-      desc: "Motores Next.js con velocidad de escape. Escribimos código ultrarrápido y seguro, integrado con administradores modulares como WordPress y Shopify.",
+      title: "Mejoras e integraciones",
+      desc: "Si el sitio ya cumple su función principal, podemos trabajar en una parte concreta, como el formulario, el acceso a WhatsApp, la conexión con tu CRM o la medición de solicitudes. Revisamos la compatibilidad antes de definir el alcance.",
       services: [
-        { name: "Desarrollo Headless (Next.js / React)", desc: "Sitios web estáticos e híbridos con tiempos de carga menores a un segundo." },
-        { name: "Gestores Autoadministrables", desc: "WordPress modular o Shopify robusto para que gestiones tu nave comercial sin depender de un programador." }
+        { name: "Formularios y WhatsApp", desc: "Optimizamos los puntos de contacto directo para facilitar que los prospectos envíen sus consultas.", icon: 6 },
+        { name: "Conexión a CRM y analítica", desc: "Configuramos el envío de datos a tu sistema comercial y la medición de acciones clave acordadas.", icon: 5 }
       ],
       glow: "rgba(168,85,247,0.08)",
       borderColor: "group-hover:border-purple-400/30"
-    },
-    {
-      num: "04",
-      title: "SEO TÉCNICO & PERFORMANCE",
-      desc: "Blindaje técnico para que Google y la IA recomienden tu marca. Estructuras preparadas para posicionarse en los primeros puestos.",
-      services: [
-        { name: "Optimización Core Web Vitals", desc: "Velocidad real de carga, estabilidad visual y tiempos de respuesta interactivos al 100%." },
-        { name: "Marcado de Datos Schema JSON-LD", desc: "Microdatos enriquecidos para una visibilidad destacada en motores de búsqueda e inteligencias artificiales." }
-      ],
-      glow: "rgba(34,197,94,0.08)",
-      borderColor: "group-hover:border-green-400/30"
     }
   ];
 
@@ -247,74 +237,43 @@ export default function MonterreyDisenoWebPage() {
   const processSteps = [
     {
       num: "01",
-      phase: "Descubrimiento & Mapeo",
-      title: "Definición del Destino Interestelar",
-      desc: "Analizamos tu modelo de negocio B2B en Monterrey. Identificamos tu propuesta de valor, tu perfil de cliente ideal y definimos las metas comerciales de tu nuevo sitio web.",
-      points: ["Auditoría técnica del sitio actual", "Keyword Research enfocado en Monterrey y nacional", "Definición de requerimientos técnicos y APIs"]
+      phase: "Alcance",
+      title: "Definimos el alcance",
+      desc: "Revisamos tu oferta, a quién va dirigido el sitio y qué acciones quieres facilitar. Si ya tienes un sitio, identificamos los contenidos y las funciones que conviene conservar.",
+      points: ["Objetivo del sitio", "Páginas y contenidos", "Integraciones necesarias"]
     },
     {
       num: "02",
-      phase: "Diseño e Interfaz UI/UX",
-      title: "Construcción del Prototipo Visual",
-      desc: "Modelamos la interfaz visual desde cero. Diseñamos componentes elegantes con estética premium cuidando el contraste de color, tipografía y adaptabilidad móvil.",
-      points: ["Diseño de wireframes interactivos", "Maquetación visual en alta fidelidad", "Aprobación de la estética antes de programar"]
+      phase: "Diseño",
+      title: "Preparamos la estructura y el diseño",
+      desc: "Ordenamos la navegación y preparamos el diseño de las páginas acordadas. Revisamos contigo cómo se presentan los servicios y dónde aparecen las opciones de contacto.",
+      points: ["Estructura de páginas", "Diseño visual", "Revisión con tu equipo"]
     },
     {
       num: "03",
-      phase: "Ensamble & Programación",
-      title: "Codificación con Velocidad Estelar",
-      desc: "Nuestros desarrolladores escriben código limpio, semántico y modular. Programamos los componentes de la interfaz usando tecnologías modernas como Next.js y React.",
-      points: ["Desarrollo responsivo ultra optimizado", "Integración con CRM y APIs transaccionales", "Cumplimiento estricto de estándares W3C"]
+      phase: "Desarrollo",
+      title: "Desarrollamos el sitio",
+      desc: "Implementamos las páginas y, según el alcance, configuramos el formulario, WhatsApp y las conexiones con tus herramientas comerciales.",
+      points: ["Desarrollo web", "Formularios y contacto", "Integraciones acordadas"]
     },
     {
       num: "04",
-      phase: "Optimización de Motores",
-      title: "Blindaje de SEO e Integración IA",
-      desc: "Preparamos la página para su indexación. Inyectamos microformatos Schema JSON-LD, integramos metaetiquetas dinámicas y configuramos la velocidad extrema del servidor.",
-      points: ["Inyección de metadatos SEO y Open Graph", "Integración de recaptcha v3 y honeypot anti-bots", "Optimización de assets y compresión de imágenes"]
+      phase: "Revisión",
+      title: "Revisamos antes de publicar",
+      desc: "Comprobamos la navegación en computadora y móvil. Según el alcance, revisamos los formularios, la medición, los metadatos y el rendimiento de las páginas principales.",
+      points: ["Navegación y dispositivos", "Pruebas de contacto", "Revisión SEO y de rendimiento"]
     },
     {
       num: "05",
-      phase: "Despegue & Monitoreo",
-      title: "Lanzamiento y Auditoría PageSpeed",
-      desc: "Sometemos el sitio web a una auditoría estricta de rendimiento. Una vez validada la velocidad óptima de carga en móviles y computadoras, lanzamos el sitio sin tiempo muerto.",
-      points: ["Auditoría final PageSpeed (Score de 90+)", "Cambio de DNS seguro libre de caídas", "Monitoreo post-lanzamiento e indexación en Google"]
+      phase: "Publicación",
+      title: "Coordinamos la publicación",
+      desc: "Acordamos cuándo publicar y qué accesos se necesitan. Después de publicar, revisamos las páginas principales y entregamos los recursos previstos en la propuesta.",
+      points: ["Publicación coordinada", "Revisión posterior", "Entrega acordada"]
     }
-  ];
-
-  const clientLogos = [
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-viveterapia.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-uniformex.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-trebal.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-sedesil.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-salud-digna.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-punto-activa.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-marlosa.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-forcelift.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-famisa.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-envfor.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/cliente-historiente.webp"
   ];
 
   return (
     <div className="relative text-white font-sans selection:bg-orangeleader/30 selection:text-white bg-transparent overflow-x-hidden w-full">
-      <style jsx global>{`
-        @keyframes scroll-left {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes scroll-right {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
-        .animate-marquee-left {
-          animation: scroll-left 50s linear infinite;
-        }
-        .animate-marquee-right {
-          animation: scroll-right 50s linear infinite;
-        }
-      `}</style>
-
       {/* Spacecraft following scroll */}
       <MonterreyOrbitalPath />
 
@@ -331,7 +290,7 @@ export default function MonterreyDisenoWebPage() {
             className="flex flex-col items-center"
           >
             <span className="text-xs md:text-sm font-mono tracking-[0.4em] text-orangeleader uppercase block mb-6">
-              DISEÑO & DESARROLLO DE PÁGINAS WEB // MONTERREY
+              DISEÑO WEB PARA EMPRESAS B2B
             </span>
 
             <h1 className="text-4xl md:text-7xl font-black uppercase leading-[1.02] tracking-tighter mb-8 max-w-4xl">
@@ -342,7 +301,7 @@ export default function MonterreyDisenoWebPage() {
             </h1>
 
             <p className="text-base md:text-lg text-starlight/85 max-w-2xl mx-auto leading-relaxed font-light mb-10">
-              Desarrollamos portales corporativos premium, e-commerce y aplicaciones web headless a la medida en Monterrey y San Pedro Garza García. Sitios ultrarrápidos, optimizados para SEO local e integrados a tu CRM.
+              Diseñamos sitios web para que las empresas de Monterrey presenten sus servicios, muestren sus proyectos y reciban solicitudes de cotización. Si ya tienes un sitio, revisamos contigo qué conviene conservar y qué necesita mejorar.
             </p>
           </motion.div>
 
@@ -351,13 +310,13 @@ export default function MonterreyDisenoWebPage() {
               href="#contacto"
               className="bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest shadow-[0_10px_30px_rgba(235,63,27,0.4)] transition-all flex items-center justify-center cursor-pointer"
             >
-              Iniciar Despegue Web
+              Solicitar cotización
             </a>
             <a
               href="#capacidades"
               className="glass-l2 rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest text-white flex items-center justify-center cursor-pointer hover:bg-white/5 transition-all"
             >
-              Explorar Capacidades
+              Ver opciones de diseño web
             </a>
           </div>
         </div>
@@ -367,12 +326,12 @@ export default function MonterreyDisenoWebPage() {
       <section className="relative z-10 px-4 md:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <Hud>Bitácora de Ingeniería // Portal Monterrey</Hud>
+            <Hud>DISEÑO WEB PARA TU EQUIPO COMERCIAL</Hud>
             <h2 className="mt-8 text-3xl md:text-5xl font-black uppercase text-white leading-[1.05] tracking-tight">
-              Construimos Sitios con Madre que Conectan con la Galaxia
+              Un sitio que facilite solicitar una cotización
             </h2>
             <p className="mt-8 text-base text-starlight/75 leading-relaxed font-light">
-              Desde nuestra central digital en Monterrey y San Pedro Garza García, diseñamos páginas web que no solo se ven espectaculares sino que operan como verdaderas naves de captación de clientes. Nos enfocamos en eliminar toda fricción técnica: velocidad extrema con Next.js, seguridad inquebrantable, formularios conectados a tu CRM y diseño visual de alto nivel. Cero plantillas lentas, puro código de alto rendimiento.
+              Organizamos la información que tus prospectos necesitan para evaluar tu oferta: qué servicios prestas, en qué proyectos has trabajado y cómo pueden contactarte. Si ya tienes un sitio, revisamos qué vale la pena conservar antes de definir los cambios.
             </p>
           </div>
 
@@ -393,16 +352,16 @@ export default function MonterreyDisenoWebPage() {
       <section id="capacidades" className="relative z-10 px-4 md:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <Hud>Especialidades Digitales // Core Capabilities</Hud>
+            <Hud>OPCIONES DE DISEÑO WEB</Hud>
             <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-              Capacidades de Diseño Web en Monterrey
+              Qué podemos trabajar en tu sitio web
             </h2>
             <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light">
-              Desplegamos soluciones de diseño de primer nivel para empresas que no se conforman con lo ordinario.
+              El alcance depende de lo que ya tienes y de lo que necesitas que el sitio haga por tu equipo comercial.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {coreExpertise.map((exp, idx) => {
               const isSelected = activeExpertise === idx;
               return (
@@ -423,7 +382,7 @@ export default function MonterreyDisenoWebPage() {
 
                   <div className="relative z-10">
                     <div className="flex justify-between items-center mb-6">
-                      <span className="font-mono text-xs text-orangeleader tracking-widest">{exp.num} // AREA</span>
+                      <span className="font-mono text-xs text-orangeleader tracking-widest">{`${exp.num} // OPCIÓN`}</span>
                       <span className={`w-2.5 h-2.5 rounded-full transition-all ${isSelected ? "bg-orangeleader scale-125" : "bg-white/20"}`} />
                     </div>
                     
@@ -460,7 +419,7 @@ export default function MonterreyDisenoWebPage() {
                 {coreExpertise[activeExpertise].services.map((s, idx) => (
                   <div key={idx} className="flex gap-5 group/item">
                     <span className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-orangeleader shrink-0 group-hover/item:bg-orangeleader/10 transition-colors">
-                      <ServiceIcon i={activeExpertise * 2 + idx} />
+                      <ServiceIcon i={s.icon ?? (activeExpertise * 2 + idx)} />
                     </span>
                     <div>
                       <h4 className="text-lg font-black uppercase text-white tracking-tight mb-2 group-hover/item:text-orangeleader transition-colors">
@@ -482,12 +441,12 @@ export default function MonterreyDisenoWebPage() {
       <section className="relative z-10 px-4 md:px-8 py-16 md:py-24 border-t border-white/5">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <Hud>Hoja de Ruta // Proceso de Despegue</Hud>
+            <Hud>PROCESO DE TRABAJO</Hud>
             <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-              Nuestra Metodología de Desarrollo en Monterrey
+              Cómo diseñamos y publicamos tu sitio
             </h2>
             <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light">
-              Nuestra ingeniería de 5 fases estructuradas para garantizar un sitio rápido, seguro y libre de errores.
+              Antes de cotizar, revisamos qué páginas necesita el sitio, qué materiales tiene tu equipo y qué integraciones deben formar parte del proyecto.
             </p>
           </div>
 
@@ -531,7 +490,7 @@ export default function MonterreyDisenoWebPage() {
                 >
                   <div>
                     <span className="font-mono text-[10px] tracking-[0.25em] text-orangeleader uppercase px-3 py-1 rounded-full border border-orangeleader/20 bg-orangeleader/5">
-                      Fase {processSteps[activeStep].num} // {processSteps[activeStep].phase}
+                      {`Fase ${processSteps[activeStep].num} // ${processSteps[activeStep].phase}`}
                     </span>
                     <h3 className="text-2xl md:text-3xl font-black uppercase text-white tracking-tight mt-6 mb-4">
                       {processSteps[activeStep].title}
@@ -559,23 +518,68 @@ export default function MonterreyDisenoWebPage() {
         </div>
       </section>
 
-      {/* 🤝 CLIENTS SECTION */}
-      <section className="relative z-10 py-16 md:py-24 border-t border-white/5 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 mb-16 text-center">
-          <Hud>Aliados Locales // Casos de Éxito</Hud>
-          <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-            PROYECTOS LANZADOS EN MONTERREY
-          </h2>
-        </div>
+      {/* PORTAFOLIO DE DISEÑO WEB */}
+      <section className="relative z-10 py-16 md:py-24 border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <Hud>PORTAFOLIO DE DISEÑO WEB</Hud>
+            <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
+              Ejemplos de sitios que hemos desarrollado
+            </h2>
+            <p className="mt-6 text-starlight/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed font-light">
+              Conoce proyectos de distintos sectores y cómo organizamos la información de cada empresa según lo que necesita presentar en su sitio.
+            </p>
+          </div>
 
-        {/* Logos Marquee */}
-        <div className="flex overflow-hidden w-full relative py-4">
-          <div className="flex gap-12 animate-marquee-left items-center min-w-full">
-            {[...clientLogos, ...clientLogos].map((src, idx) => (
-              <div key={idx} className="w-24 md:w-32 shrink-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                <Image src={src} width={128} height={64} unoptimized className="w-full h-auto object-contain filter brightness-0 invert" alt="Cliente Alié Digital Monterrey" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
+            <div className="glass-liquid rounded-[32px] border border-white/10 p-6 md:p-8 flex flex-col justify-between hover:border-orangeleader/30 transition-all duration-300">
+              <div>
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 bg-black/40 mb-6">
+                  <Image
+                    src="/casos/web/gruposedesil.webp"
+                    alt="Grupo Sedesil"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 500px"
+                  />
+                </div>
+                <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-tight mb-3">
+                  Grupo Sedesil
+                </h3>
+                <p className="text-starlight/75 text-sm font-light leading-relaxed">
+                  Sitio corporativo para presentar granos y botanas a granel, productos derivados de sus botanas y opciones de contacto comercial.
+                </p>
               </div>
-            ))}
+            </div>
+
+            <div className="glass-liquid rounded-[32px] border border-white/10 p-6 md:p-8 flex flex-col justify-between hover:border-orangeleader/30 transition-all duration-300">
+              <div>
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 bg-black/40 mb-6">
+                  <Image
+                    src="/casos/web/puntoactiva.webp"
+                    alt="Punto Activa"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 500px"
+                  />
+                </div>
+                <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-tight mb-3">
+                  Punto Activa
+                </h3>
+                <p className="text-starlight/75 text-sm font-light leading-relaxed">
+                  Desarrollo de un sitio corporativo de entrenamiento enfocado en inspirar acción y captar prospectos presenciales y online.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <Link
+              href="/diseno-de-paginas-web/#casos-orbita"
+              className="inline-flex items-center gap-2 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-colors"
+            >
+              Ver portafolio de diseño web →
+            </Link>
           </div>
         </div>
       </section>
@@ -584,21 +588,20 @@ export default function MonterreyDisenoWebPage() {
       <section id="contacto" className="relative min-h-screen flex items-center justify-center px-4 pb-32 pt-20 z-10 border-t border-white/5">
         <div className="max-w-4xl w-full mx-auto">
           <div className="glass-liquid border border-white/10 rounded-[48px] p-8 md:p-16 text-center shadow-[0_0_80px_rgba(16,27,57,0.7)]">
-            <Hud>ESTACIÓN DE CONTROL DE MONTERREY // CONEXIÓN ESTELAR</Hud>
+            <Hud>CONTACTO EN MONTERREY</Hud>
             <h2 className="text-3xl md:text-5xl font-black uppercase text-white mt-6 mb-6">
-              Agendemos tu Estrategia de Diseño en Monterrey
+              Solicita una cotización para tu sitio web
             </h2>
             <p className="text-sm md:text-base text-starlight/85 mb-12 leading-relaxed font-light max-w-2xl mx-auto">
-              Platiquemos sobre el diseño y velocidad de tu próximo sitio web. Llena el formulario para sincronizar con nuestro CRM y agendar una llamada.
+              Cuéntanos si necesitas un sitio nuevo, un rediseño o una mejora puntual. Si ya tienes un sitio, puedes compartirnos el enlace por WhatsApp. Con esa información podremos revisar qué necesita tu empresa y definir el alcance de la propuesta.
             </p>
 
-            <LeadForm servicioInteres="Diseño de páginas web" />
+            <LeadForm servicioInteres="Diseño de páginas web" submitLabel="Solicitar cotización" />
 
             <div className="mt-14 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-6 text-left text-sm text-starlight/70 font-mono">
               <div>
-                <span className="text-xs text-white/30 block mb-1">CENTRAL</span>
-                <span className="text-white font-bold">Monterrey, Nuevo León</span>
-                <span className="block text-xs mt-1 text-white/50">Base San Pedro Garza García</span>
+                <span className="text-xs text-white/30 block mb-1">COBERTURA</span>
+                <span className="text-white font-bold">Atención a empresas en Monterrey, Nuevo León</span>
               </div>
               <div>
                 <span className="text-xs text-white/30 block mb-1">WHATSAPP DIRECTO</span>

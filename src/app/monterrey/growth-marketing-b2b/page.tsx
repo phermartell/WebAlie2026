@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Agencia de Growth Marketing en Monterrey | Alié Digital",
-  description: "Agencia de growth marketing en Monterrey para empresas B2B. Estrategias de paid media, captación de prospectos y automatización de tu marketing digital.",
+  title: "Growth Marketing B2B en Monterrey | Alié Digital",
+  description: "Campañas, páginas de captación y medición para empresas B2B en Monterrey. Te ayudamos a registrar las consultas y organizar su seguimiento comercial.",
   alternates: {
     canonical: "https://aliedigital.com/monterrey/growth-marketing-b2b/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Agencia de Growth Marketing B2B en Monterrey | Alié Digital",
-    description: "Agencia especializada en growth marketing en Monterrey para empresas B2B. Estrategias efectivas de paid media, captación de prospectos y automatización de marketing.",
+    title: "Growth Marketing B2B en Monterrey | Alié Digital",
+    description: "Campañas, páginas de captación y medición para empresas B2B en Monterrey. Te ayudamos a registrar las consultas y organizar su seguimiento comercial.",
     url: "https://aliedigital.com/monterrey/growth-marketing-b2b/",
     images: [
       {
@@ -31,17 +31,17 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Agencia de Growth Marketing B2B en Monterrey | Alié Digital",
-    description: "Agencia especializada en growth marketing en Monterrey para empresas B2B. Estrategias efectivas de paid media, captación de prospectos y automatización de marketing.",
+    title: "Growth Marketing B2B en Monterrey | Alié Digital",
+    description: "Campañas, páginas de captación y medición para empresas B2B en Monterrey. Te ayudamos a registrar las consultas y organizar su seguimiento comercial.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   const serviceSchema = createServiceSchema(
     "/monterrey/growth-marketing-b2b/",
-    "Agencia de Growth Marketing en Monterrey | Alié Digital",
-    "Growth Marketing en Monterrey todo en uno: paid media, data, AI, automatización, lifecycle y desarrollo web a la medida alineado a tu presupuesto."
+    "Growth Marketing B2B en Monterrey | Alié Digital",
+    "Servicios de campañas digitales, páginas de captación, medición de consultas e integración con CRM para empresas B2B en Monterrey, según el alcance acordado."
   );
 
   const faqSchema = {
@@ -50,26 +50,42 @@ export default function Page() {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Por qué venden paquetes todo en uno y no servicios por separado?",
+        "name": "¿Qué puede incluir la propuesta?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Porque comprar solo una campaña de Ads sin una landing rápida o sin analítica es como querer volar al espacio en una combi a medio gas. Al empaquetarlo todo a la medida de tu presupuesto, eliminamos la fricción y aseguramos resultados reales."
+          "text": "Según lo que ya tenga tu empresa, la propuesta puede incluir campañas en Google Ads o Meta Ads, una página de captación, medición de consultas y conexiones con tu CRM. Acordamos qué se implementa y qué herramientas necesita aportar tu equipo."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Tienen oficina física en Monterrey o San Pedro?",
+        "name": "¿Cómo atienden a empresas en Monterrey?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Operamos como un equipo senior distribuido y remoto. No gastamos en rentas lujosas en San Pedro Garza García para no inflar tus costos."
+          "text": "Atendemos a empresas en Monterrey por videollamada y WhatsApp. En la primera conversación revisamos qué quieres mejorar y qué herramientas ya usas."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Cómo se conectan los formularios a mi CRM?",
+        "name": "¿Cómo se define el presupuesto?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Toda la telemetría del sitio (formularios y clics) se conecta de forma directa a tu CRM mediante integraciones limpias de API, con protección de reCAPTCHA v3 y honeypot."
+          "text": "Revisamos el alcance y la inversión disponible. La propuesta detalla los honorarios del servicio y, si incluye campañas, distingue el presupuesto destinado a anuncios."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuándo podremos evaluar los primeros datos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depende de la configuración inicial, el presupuesto y el volumen de consultas. Al definir el alcance acordamos cuándo revisar los datos disponibles y qué señales usaremos para decidir ajustes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Quién da seguimiento a las consultas?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Podemos ayudarte a registrar y asignar las consultas y a definir criterios para calificarlas. Tu equipo comercial contacta a los prospectos, actualiza el estado de cada oportunidad y lleva la negociación."
         }
       }
     ]

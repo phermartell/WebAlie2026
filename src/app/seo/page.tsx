@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Servicios de SEO Técnico y Optimización | Alié Digital",
-  description: "Agencia de SEO técnico y optimización web. Posicionamos tu negocio en los motores de búsqueda mediante datos estructurados y mejoras de velocidad web.",
+  title: "Posicionamiento SEO para empresas | Alié Digital",
+  description: "Mejoramos la estructura y los contenidos de tu sitio para aumentar su visibilidad en buscadores. Consulta el servicio de posicionamiento SEO de Alié Digital.",
   alternates: {
     canonical: "https://aliedigital.com/seo/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Servicios de SEO Técnico y Optimización Web | Alié Digital",
-    description: "Agencia experta en SEO técnico y optimización web. Posicionamos tu marca en motores de búsqueda mediante datos estructurados y optimización de velocidad de carga.",
+    title: "Posicionamiento SEO para empresas | Alié Digital",
+    description: "Mejoramos la estructura y los contenidos de tu sitio para aumentar su visibilidad en buscadores. Consulta el servicio de posicionamiento SEO de Alié Digital.",
     url: "https://aliedigital.com/seo/",
     images: [
       {
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Servicios de SEO Técnico y Optimización Web | Alié Digital",
-    description: "Agencia experta en SEO técnico y optimización web. Posicionamos tu marca en motores de búsqueda mediante datos estructurados y optimización de velocidad de carga.",
+    title: "Posicionamiento SEO para empresas | Alié Digital",
+    description: "Mejoramos la estructura y los contenidos de tu sitio para aumentar su visibilidad en buscadores. Consulta el servicio de posicionamiento SEO de Alié Digital.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
 };;
@@ -43,8 +43,8 @@ export default function Page() {
       <JsonLd
         data={createServiceSchema(
           "/seo/",
-          "SEO Técnico & AI SEO | Alié Digital",
-          "Dominamos los motores de búsqueda mediante optimización de código fuente, estructuración de datos para modelos de IA y arquitectura de contenidos."
+          "Posicionamiento SEO para empresas | Alié Digital",
+          "Servicio de posicionamiento SEO que incluye revisión técnica, optimización de páginas y estrategia de contenidos según las necesidades y el alcance acordado para cada proyecto."
         )}
       />
       <SeoPageClient />

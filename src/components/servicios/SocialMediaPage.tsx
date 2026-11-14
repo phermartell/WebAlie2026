@@ -9,23 +9,23 @@ import OrbitalPath from "@/components/agencia/OrbitalPath";
 import LeadForm from "@/components/LeadForm";
 
 const stats = [
-  { value: "B2B", label: "Enfoque Estratégico", tech: "SYS: AUDIENCE" },
-  { value: "Mayoreo", label: "Orientado a Ventas", tech: "RAD: CONVERSION" },
-  { value: "Alta Gama", label: "Línea Gráfica Premium", tech: "ORBIT: BRANDING" },
-  { value: "Activo", label: "Comunidad Moderada", tech: "TLM: ENGAGEMENT" }
+  { value: "Facebook", label: "Canal del proyecto", tech: "PLATAFORMA" },
+  { value: "Productos", label: "Contenido de catálogo", tech: "ENFOQUE" },
+  { value: "Reels", label: "Ejemplos en video", tech: "FORMATO" },
+  { value: "Métricas", label: "Revisión de desempeño", tech: "SEGUIMIENTO" }
 ];
 
 const smmWork = [
   {
     num: "01",
     tag: "ESTRATEGIA",
-    title: "Estructura de Embudos (Funnel Building)",
-    desc: "No publicamos por publicar. Diseñamos cada publicación según la etapa del embudo comercial: atracción (awareness), educación (engagement) y conversión. El contenido está estructurado para transformar seguidores en prospectos calificados B2B.",
+    title: "Planeación de contenido",
+    desc: "Conocemos tu negocio, tu oferta y las personas a las que quieres llegar. Definimos temas y formatos para organizar publicaciones que expliquen tus productos o servicios.",
     items: [
-      "Atracción de prospectos calificados en frío",
-      "Carruseles informativos y de autoridad industrial",
-      "Llamadas a la acción (CTA) de alta conversión",
-      "Embudos orgánicos hacia WhatsApp y Messenger"
+      "Objetivos y temas de comunicación",
+      "Organización del calendario editorial",
+      "Selección de formatos y canales",
+      "Llamados a la acción según cada publicación"
     ],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
@@ -33,12 +33,12 @@ const smmWork = [
   {
     num: "02",
     tag: "REDACCIÓN",
-    title: "Copywriting Persuasivo B2B",
-    desc: "Hablamos el idioma de tu sector. Redactamos copys orientados a tomadores de decisiones corporativas, directores de compras, recursos humanos y directivos, abordando sus pain points reales con profesionalismo.",
+    title: "Mensajes que expliquen tu oferta",
+    desc: "Redactamos textos para presentar tus productos, responder dudas frecuentes y comunicar sus características. Adaptamos el tono y los llamados a la acción a tu marca y a cada canal.",
     items: [
-      "Tono corporativo y especializado",
-      "Ganchos (hooks) iniciales magnéticos",
-      "Redacción orientada a resolver objeciones"
+      "Textos para publicaciones",
+      "Mensajes sobre productos y servicios",
+      "Revisión de información con tu equipo"
     ],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
@@ -46,12 +46,12 @@ const smmWork = [
   {
     num: "03",
     tag: "DISEÑO",
-    title: "Diseño Visual de Alta Gama",
-    desc: "Tu imagen corporativa lo es todo en canales digitales. Creamos piezas visuales personalizadas e infografías sofisticadas que transmiten la calidad y durabilidad de tus soluciones, alejándonos de plantillas baratas y genéricas.",
+    title: "Diseño para tus publicaciones",
+    desc: "Creamos piezas visuales alineadas con la identidad de tu negocio. Definimos los formatos y los materiales necesarios según el contenido y el alcance acordados.",
     items: [
-      "Identidad visual de marca consistente",
-      "Diseño de infografías y gráficos premium",
-      "Carruseles corporativos interactivos"
+      "Línea visual consistente",
+      "Diseño de imágenes y carruseles",
+      "Adaptación de materiales a cada formato"
     ],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
@@ -59,12 +59,12 @@ const smmWork = [
   {
     num: "04",
     tag: "INTERACCIÓN",
-    title: "Administración de Comunidades",
-    desc: "Mantenemos una comunicación activa con tu audiencia. Monitoreamos comentarios e interacciones entrantes para detectar y canalizar oportunidades comerciales y cotizaciones con rapidez.",
+    title: "Seguimiento de tu comunidad",
+    desc: "Cuando el servicio incluye gestión de comunidad, acordamos cómo revisar comentarios y mensajes, qué respuestas podemos atender y qué consultas deben pasar a tu equipo.",
     items: [
-      "Monitoreo constante de comentarios y mensajes",
-      "Fomento de interacciones de calidad",
-      "Detección de prospectos interesados (leads calificados)"
+      "Canales y horarios de atención acordados",
+      "Criterios para responder y canalizar consultas",
+      "Seguimiento según el alcance contratado"
     ],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
@@ -73,81 +73,75 @@ const smmWork = [
 
 const monthlyPlan = [
   {
-    week: "Semana 1",
-    title: "Planeación & Línea Editorial",
-    desc: "Definición del calendario de publicaciones mensual, temas clave y alineación con los objetivos comerciales de tu empresa.",
-    status: "PLANEACIÓN: APROBADA",
-    metric: "STRATEGY // OK"
+    week: "Etapa 01",
+    title: "Planeación de temas",
+    desc: "Definimos los temas y las publicaciones según tus objetivos, las novedades del negocio y la información disponible.",
+    status: "TEMAS Y CALENDARIO",
+    metric: "PLANEACIÓN"
   },
   {
-    week: "Semana 2",
-    title: "Diseño & Redacción Creativa",
-    desc: "Creación de las piezas visuales premium y redacción de copys persuasivos B2B listos para revisión y aprobación.",
-    status: "PRODUCCIÓN: LISTA",
-    metric: "CREATIVE // PROD"
+    week: "Etapa 02",
+    title: "Diseño y redacción",
+    desc: "Preparamos los textos y las piezas visuales contempladas en la propuesta. Compartimos el contenido para revisión antes de publicarlo.",
+    status: "CONTENIDO PARA REVISIÓN",
+    metric: "PRODUCCIÓN"
   },
   {
-    week: "Semana 3",
-    title: "Programación & Distribución",
-    desc: "Calendarización y distribución de los contenidos en las redes sociales acordadas utilizando herramientas de precisión.",
-    status: "DISTRIBUCIÓN: ACTIVA",
-    metric: "SCHEDULER // ON"
+    week: "Etapa 03",
+    title: "Aprobación y publicación",
+    desc: "Incorporamos los ajustes acordados y programamos el contenido aprobado en los canales definidos.",
+    status: "PUBLICACIÓN ACORDADA",
+    metric: "PUBLICACIÓN"
   },
   {
-    week: "Semana 4",
-    title: "Telemetría & Optimización de Órbita",
-    desc: "Evaluación de métricas de alcance e interacción, entrega del reporte mensual y planeación de la siguiente órbita comercial.",
-    status: "REPORTE: ENVIADO",
-    metric: "TELEMETRY // RPT"
+    week: "Etapa 04",
+    title: "Revisión de resultados",
+    desc: "Revisamos las métricas disponibles de las publicaciones y compartimos observaciones para orientar los siguientes contenidos.",
+    status: "MÉTRICAS Y RECOMENDACIONES",
+    metric: "SEGUIMIENTO"
   }
 ];
 
 const packages = [
   {
-    name: "Órbita 01 - Lanzamiento",
-    desc: "Para marcas B2B que necesitan establecer una presencia digital profesional y sólida.",
+    name: "Contenido para tus redes",
+    desc: "Para negocios que necesitan organizar los temas y preparar publicaciones para presentar sus productos o servicios.",
     items: [
-      "Calendario Editorial mensual",
-      "Diseño de Piezas Visuales de Alta Gama (12 posts/mes)",
-      "Copywriting B2B persuasivo",
-      "Publicación y programación en 2 redes sociales",
-      "Reporte mensual de rendimiento",
-      "Llamada de planeación mensual"
+      "Planeación de temas y calendario",
+      "Redacción de textos",
+      "Diseño de publicaciones",
+      "Revisión y aprobación del contenido",
+      "Formatos y cantidades acordados"
     ],
-    cta: "Iniciar Lanzamiento",
+    cta: "Consultar contenido",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   },
   {
-    name: "Órbita 02 - Expansión",
-    tag: "Más Recomendado",
-    desc: "Para empresas que buscan aumentar su engagement, educar a su mercado y captar prospectos calificados.",
+    name: "Contenido y publicación",
+    desc: "Para negocios que necesitan coordinar la preparación y la publicación de contenido en los canales acordados.",
     items: [
-      "Todo lo incluido en la Órbita 01",
-      "Diseño de Piezas Visuales extendido (16 posts/mes)",
-      "Creación y publicación de 4 Reels mensuales",
-      "Creación de carruseles interactivos e historias de engagement",
-      "Análisis continuo de tendencias de tu nicho",
-      "Moderación y administración de comunidades activa",
-      "Reporte detallado de rendimiento y métricas clave"
+      "Planeación de temas y formatos",
+      "Diseño y redacción de publicaciones",
+      "Programación del contenido aprobado",
+      "Revisión de métricas disponibles",
+      "Reportes según la propuesta"
     ],
-    cta: "Iniciar Expansión",
+    cta: "Consultar gestión",
     glow: "rgba(235,63,27,0.05)",
     border: "border-orangeleader/30"
   },
   {
-    name: "Órbita 03 - Dominación",
-    desc: "Para corporativos que buscan una estrategia multicanal agresiva para liderar su sector.",
+    name: "Gestión a medida",
+    desc: "Para negocios con necesidades particulares de contenido, coordinación de canales o atención de su comunidad.",
     items: [
-      "Todo lo incluido en la Órbita 02",
-      "Diseño de Piezas Visuales premium (24 posts/mes)",
-      "Creación y publicación de 8 Reels mensuales",
-      "Distribución y adaptación en múltiples canales (Instagram, LinkedIn, FB)",
-      "Estrategia de contenidos enfocada en conversiones B2B",
-      "Optimización de embudos orgánicos (Lead Gen)",
-      "Soporte estratégico prioritario y llamadas quincenales"
+      "Revisión de canales y necesidades",
+      "Definición de formatos y materiales",
+      "Coordinación con tu equipo",
+      "Atención de comunidad cuando se incluya",
+      "Actividades y horarios acordados"
     ],
-    cta: "Iniciar Dominación",
+    cta: "Consultar proyecto",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   }
@@ -159,40 +153,40 @@ export default function SocialMediaPageClient() {
 
   const screenshots = [
     {
-      title: "Crecimiento de Comunidad",
-      category: "MÉTRICAS DE EVOLUCIÓN",
+      title: "Resumen de la cuenta de Facebook",
+      category: "MÉTRICAS DE LA CUENTA",
       img: "/casos/uniformes-mexicanos/crecimiento-fb.webp",
-      desc: "Evolución constante de la cuenta de Facebook. Muestra el crecimiento sostenido de la comunidad orgánica y el alcance de las publicaciones dirigidas a tomadores de decisiones corporativos."
+      desc: "Captura del panel con indicadores de seguidores, visualizaciones, visitas a la página y contenido publicado. El gráfico muestra fechas de enero a julio; la imagen no distingue resultados orgánicos y pagados."
     },
     {
-      title: "Top 5 Posts con Mayor Tracción",
-      category: "MÉTRICAS DE EVOLUCIÓN",
+      title: "Cinco publicaciones ordenadas por visualizaciones",
+      category: "MÉTRICAS DE PUBLICACIONES",
       img: "/casos/uniformes-mexicanos/top-5-post.webp",
-      desc: "Análisis y métricas detalladas de las 5 publicaciones con mayor nivel de engagement, comentarios e interacciones de calidad en el sector de uniformes corporativos."
+      desc: "La tabla muestra cinco publicaciones ordenadas por visualizaciones, con valores entre 6,76 mil y 9,99 mil. También presenta alcance, reacciones y comentarios de cada publicación."
     },
     {
-      title: "Top 5 Reels de Mayor Alcance",
-      category: "MÉTRICAS DE EVOLUCIÓN",
+      title: "Cinco reels ordenados por visualizaciones",
+      category: "MÉTRICAS DE VIDEO",
       img: "/casos/uniformes-mexicanos/top-5-reels.webp",
-      desc: "Rendimiento y visualizaciones de los Reels líderes. El video corto estructurado con ganchos comerciales representó el canal de tracción más acelerado."
+      desc: "La tabla muestra cinco reels con entre 14,82 mil y 27,79 mil visualizaciones de video. Las publicaciones tienen fechas entre enero y junio de 2026."
     },
     {
-      title: "Optimización de Formato y Gancho",
-      category: "OPTIMIZACIÓN DE ALCANCE",
+      title: "Reel sobre calzado de seguridad",
+      category: "EJEMPLO DE CONTENIDO",
       img: "/casos/uniformes-mexicanos/post1.webp",
-      desc: "Ejemplo de publicación optimizada. Estructura visual de alta gama y copy persuasivo diseñados específicamente para resolver necesidades de departamentos de compras."
+      desc: "Ejemplo de contenido sobre calzado de seguridad. La captura registra 33,6 mil visualizaciones, 22,6 mil espectadores y 60 interacciones."
     },
     {
-      title: "Exhibición de Catálogo Corporativo",
-      category: "OPTIMIZACIÓN DE ALCANCE",
+      title: "Presentación de calzado del catálogo",
+      category: "EJEMPLO DE CONTENIDO",
       img: "/casos/uniformes-mexicanos/post2.webp",
-      desc: "Publicación enfocada en la presentación y calidad técnica de los materiales textiles. Incremento notable en el tiempo de retención y guardados."
+      desc: "Reel que presenta un modelo de calzado del catálogo. La captura registra 18,1 mil visualizaciones, 14 mil espectadores y 45 interacciones."
     },
     {
-      title: "Conversión Directa a Cotización",
-      category: "OPTIMIZACIÓN DE ALCANCE",
+      title: "Otro ejemplo de contenido de producto",
+      category: "EJEMPLO DE CONTENIDO",
       img: "/casos/uniformes-mexicanos/post3.webp",
-      desc: "Estrategia de llamado a la acción directa. Diseñado para guiar a los prospectos de Facebook hacia WhatsApp Business y Messenger para cotizaciones al mayoreo."
+      desc: "Reel de presentación de calzado. La captura registra 14,7 mil visualizaciones, 10,9 mil espectadores y 32 interacciones."
     }
   ];
 
@@ -227,32 +221,32 @@ export default function SocialMediaPageClient() {
               href="/servicios"
               className="inline-flex items-center gap-2 text-white/30 text-xs font-bold uppercase tracking-widest hover:text-orangeleader transition-colors"
             >
-              ← Módulos de Flota
+              ← Ver servicios
             </Link>
           </div>
 
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="text-orangeleader text-xs font-black tracking-[0.5em] uppercase">
-              SOCIAL MEDIA MARKETING
+              GESTIÓN DE REDES SOCIALES
             </span>
             <span className="px-3 py-1 rounded-full border border-orangeleader/30 bg-orangeleader/10 text-xs font-black text-orangeleader uppercase tracking-wider">
-              SMM
+              CONTENIDO PARA TU NEGOCIO
             </span>
           </div>
 
           <h1 className="text-5xl md:text-8xl font-black uppercase text-white leading-[0.95] tracking-tight mb-8">
-            TRANSMITE TU SEÑAL.<br />
-            <span className="text-transparent block mt-2" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.75)" }}>
-              CONECTA TU MARCA.
+            Redes sociales para<br />
+            <span className="text-white block mt-2">
+              presentar tu negocio
             </span>
           </h1>
 
           <p className="mt-8 text-base md:text-lg text-starlight/70 leading-relaxed font-light max-w-2xl mx-auto">
-            Estrategias de contenido orgánico y gestión de redes sociales (SMM) diseñadas para posicionar tu marca B2B en la órbita correcta, interactuar de manera profesional con tu comunidad y generar conversiones reales.
+            Planeamos, diseñamos y publicamos contenido para explicar qué ofrece tu negocio. Definimos los temas, los formatos y los canales según tus objetivos, y revisamos los resultados para orientar las siguientes publicaciones.
           </p>
 
           <div className="mt-12 flex justify-center flex-wrap gap-2.5">
-            {["Calendario B2B", "Diseño de Alta Gama", "Copywriting Persuasivo", "Comunidad Activa", "Reportes de Rendimiento"].map((badge, idx) => (
+            {["Planeación de contenido", "Diseño y redacción", "Publicación", "Gestión según alcance", "Reportes"].map((badge, idx) => (
               <span
                 key={idx}
                 className="px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-[#eb3f1b]/5 border border-[#eb3f1b]/20 text-orangeleader"
@@ -267,7 +261,7 @@ export default function SocialMediaPageClient() {
               href="/contacto"
               className="inline-block bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full px-8 py-4 font-black text-sm uppercase tracking-widest transition-all cursor-pointer shadow-[0_10px_30px_rgba(235,63,27,0.4)] hover:scale-105 active:scale-95"
             >
-              OBTÉN UN DIAGNÓSTICO SIN COSTO →
+              Consultar redes sociales →
             </Link>
           </div>
         </motion.div>
@@ -276,9 +270,9 @@ export default function SocialMediaPageClient() {
       {/* 🛰️ Desglose del Servicio - Bento Grid */}
       <section className="py-24 px-6 md:px-8 max-w-6xl mx-auto relative z-10 border-t border-white/[0.04]">
         <div className="mb-20 text-center">
-          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">SISTEMAS DEL MÓDULO SMM</span>
+          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">CONTENIDO Y GESTIÓN</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2">
-            Despliegue de Redes
+            Qué trabajamos en tus redes sociales
           </h2>
           <div className="h-0.5 w-16 bg-orangeleader/40 mx-auto mt-4 rounded-full" />
         </div>
@@ -335,12 +329,12 @@ export default function SocialMediaPageClient() {
       {/* 🗺️ Secuencia Mensual */}
       <section className="py-24 px-6 md:px-8 max-w-5xl mx-auto border-t border-white/[0.04] relative z-10">
         <div className="mb-20 text-center">
-          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">PLAN DE VUELO MENSUAL</span>
+          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">DE LA PLANEACIÓN A LA PUBLICACIÓN</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2">
-            La Secuencia de Publicación
+            Cómo organizamos tu contenido
           </h2>
           <p className="mt-4 text-starlight/60 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed">
-            La constancia y la calidad en redes sociales construyen una marca memorable. Cada mes ejecutamos un ciclo completo para asegurar que tu señal se mantenga activa y con el mejor alcance.
+            Acordamos un calendario de trabajo para preparar, revisar y publicar el contenido. Los tiempos dependen de los formatos, los materiales disponibles y las aprobaciones de tu equipo.
           </p>
         </div>
 
@@ -391,36 +385,36 @@ export default function SocialMediaPageClient() {
       {/* 📊 Featured Case Study Section - Uniformes Mexicanos */}
       <section className="py-24 px-6 md:px-8 max-w-5xl mx-auto relative z-10 border-t border-white/[0.04]">
         <div className="mb-16 text-center">
-          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">CASO DE ÉXITO RECIENTE</span>
+          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">EXPERIENCIA EN CONTENIDO</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2">
             Uniformes Mexicanos
           </h2>
           <p className="mt-4 text-starlight/60 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed">
-            Cómo estructuramos la presencia digital y el crecimiento de la comunidad para un líder en uniformes industriales y corporativos B2B, logrando un despegue en visualizaciones y alcance.
+            Una selección de contenido y métricas de Facebook para un negocio de uniformes y calzado de seguridad.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-6">
             <h3 className="text-2xl md:text-3xl font-black uppercase text-white tracking-tight">
-              Diseño Industrial y Comunicación B2B
+              Contenido para presentar sus productos
             </h3>
             <p className="text-starlight/75 text-sm md:text-base font-light leading-relaxed">
-              Uniformes Mexicanos destaca por la resistencia, calidad y personalización de sus prendas. Diseñamos una estrategia de contenido en Facebook enfocada en destacar la calidad de confección, bordados y tecnología textil, conectando directamente con tomadores de decisiones de compras y recursos humanos que buscan cotizaciones de uniformes al mayoreo.
+              Trabajamos la comunicación de sus productos mediante textos y piezas visuales para Facebook. Esta selección muestra publicaciones sobre calzado de seguridad y capturas del desempeño registrado en la cuenta.
             </p>
 
             <ul className="space-y-3 pt-2">
               <li className="flex items-start gap-2.5 text-xs md:text-sm text-starlight/65">
                 <span className="text-orangeleader mt-1">✦</span>
-                <span>Línea gráfica profesional que proyecta la durabilidad e identidad de marca de las empresas clientes.</span>
+                <span>Presentación de productos y sus características</span>
               </li>
               <li className="flex items-start gap-2.5 text-xs md:text-sm text-starlight/65">
                 <span className="text-orangeleader mt-1">✦</span>
-                <span>Evolución constante de la comunidad y del engagement mediante formatos dinámicos y educativos.</span>
+                <span>Diseño y redacción de publicaciones</span>
               </li>
               <li className="flex items-start gap-2.5 text-xs md:text-sm text-starlight/65">
                 <span className="text-orangeleader mt-1">✦</span>
-                <span>Implementación de un embudo de conversión orgánico directo a WhatsApp Business y Messenger para cotizaciones.</span>
+                <span>Revisión de visualizaciones e interacciones</span>
               </li>
             </ul>
 
@@ -463,7 +457,7 @@ export default function SocialMediaPageClient() {
                     {s.label}
                   </h4>
                   <span className="font-mono text-[10px] text-orangeleader/50 uppercase tracking-widest block mt-0.5">
-                    DIAGNOSTIC // ACTIVE
+                    DATOS DEL PROYECTO
                   </span>
                 </div>
               </motion.div>
@@ -589,12 +583,12 @@ export default function SocialMediaPageClient() {
       {/* 📦 Configuraciones de Misión - Paquetes SMM sin Precios */}
       <section className="py-24 px-6 md:px-8 max-w-6xl mx-auto border-t border-white/[0.04] relative z-10">
         <div className="mb-20 text-center">
-          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">PAQUETES ADAPTABLES</span>
+          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">OPCIONES DE GESTIÓN</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2">
-            Configuraciones de Misión
+            Contenido según las necesidades de tu negocio
           </h2>
           <p className="mt-4 text-starlight/60 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed">
-            Selecciona la órbita de cobertura que se adapte al nivel de actividad y canales que requiere tu marca corporativa.
+            Definimos los canales, los formatos y la cantidad de publicaciones según tus objetivos y los materiales disponibles. La propuesta detalla las actividades incluidas y la forma de trabajo.
           </p>
         </div>
 
@@ -614,11 +608,6 @@ export default function SocialMediaPageClient() {
                   <span className="text-[10px] font-mono tracking-widest text-starlight/40 uppercase">
                     CONFIGURACIÓN 0{idx + 1}
                   </span>
-                  {pack.tag && (
-                    <span className="px-2 py-0.5 rounded-full bg-orangeleader/15 border border-orangeleader/30 text-[10px] font-mono font-bold text-orangeleader uppercase tracking-widest">
-                      {pack.tag}
-                    </span>
-                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -660,15 +649,15 @@ export default function SocialMediaPageClient() {
         <div className="glass-liquid rounded-[40px] border border-white/10 p-8 md:p-16 space-y-8 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom,rgba(235,63,27,0.08),transparent_60%)] pointer-events-none" />
           
-          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">INICIA TU MISIÓN</span>
+          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">HABLEMOS DE TUS REDES</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight leading-none">
-            ¿Listo para despegar en redes sociales?
+            ¿Qué necesitas comunicar de tu negocio?
           </h2>
           <p className="text-starlight/75 text-sm md:text-base font-light max-w-2xl mx-auto leading-relaxed">
-            Diseñemos juntos la estrategia de redes sociales ideal para tu marca. Llena el formulario a continuación para agendar tu llamada de estrategia.
+            Cuéntanos qué productos o servicios ofreces, qué redes utilizas y qué apoyo necesitas con tu contenido. Te orientamos sobre los canales, los formatos y las actividades para preparar una propuesta.
           </p>
           <div className="pt-4 max-w-lg mx-auto">
-            <LeadForm servicioInteres="Social Media (SMM)" />
+            <LeadForm servicioInteres="Gestión de redes sociales" submitLabel="Solicitar información" />
           </div>
         </div>
       </section>

@@ -27,6 +27,17 @@ const nextConfig = {
         destination: "/sitemap.xml",
         permanent: true,
       },
+      // 0b. Redireccionar ruta anterior de diseño web en Puebla hacia la principal canónica
+      {
+        source: "/puebla/diseno-paginas-web",
+        destination: "/puebla/diseno-de-paginas-web",
+        permanent: true,
+      },
+      {
+        source: "/puebla/diseno-paginas-web/",
+        destination: "/puebla/diseno-de-paginas-web",
+        permanent: true,
+      },
       // 1. Redireccionar posts antiguos alojados bajo /puebla/ hacia la nueva estructura global /blog/
       {
         source: "/puebla/por-que-tu-negocio-en-puebla-necesita-una-pagina-web",

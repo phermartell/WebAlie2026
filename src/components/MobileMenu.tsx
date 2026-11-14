@@ -283,7 +283,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2L2 22l10-4 10 4L12 2z" />
               </svg>
-              Agendar llamada de estrategia
+              Solicitar información
             </Link>
             <p className="text-center font-mono text-xs uppercase tracking-[0.35em] text-white/30">Sueña grande · Llega lejos</p>
           </div>

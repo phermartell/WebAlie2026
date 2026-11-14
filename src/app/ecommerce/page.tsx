@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Diseño y Desarrollo de Tiendas en Línea | Alié Digital",
-  description: "Diseño y desarrollo de tiendas online optimizadas. Expertos en e-commerce con Shopify, WooCommerce y Next.js para acelerar tus ventas y transacciones.",
+  title: "Diseño y desarrollo de tiendas en línea | Alié Digital",
+  description: "Creamos tiendas en línea con catálogo, pagos y gestión de pedidos según tu negocio. Consulta opciones en WooCommerce, Shopify o desarrollo a medida.",
   alternates: {
     canonical: "https://aliedigital.com/ecommerce/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Diseño y Desarrollo de Tiendas de E-commerce | Alié Digital",
-    description: "Expertos en diseño y desarrollo de tiendas online optimizadas. Plataformas de e-commerce con Shopify, WooCommerce y Next.js para acelerar ventas y transacciones.",
+    title: "Diseño y desarrollo de tiendas en línea | Alié Digital",
+    description: "Creamos tiendas en línea con catálogo, pagos y gestión de pedidos según tu negocio. Consulta opciones en WooCommerce, Shopify o desarrollo a medida.",
     url: "https://aliedigital.com/ecommerce/",
     images: [
       {
@@ -31,11 +31,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Diseño y Desarrollo de Tiendas de E-commerce | Alié Digital",
-    description: "Expertos en diseño y desarrollo de tiendas online optimizadas. Plataformas de e-commerce con Shopify, WooCommerce y Next.js para acelerar ventas y transacciones.",
+    title: "Diseño y desarrollo de tiendas en línea | Alié Digital",
+    description: "Creamos tiendas en línea con catálogo, pagos y gestión de pedidos según tu negocio. Consulta opciones en WooCommerce, Shopify o desarrollo a medida.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   return (
@@ -43,8 +43,8 @@ export default function Page() {
       <JsonLd
         data={createServiceSchema(
           "/ecommerce/",
-          "Agencia de Diseño y Desarrollo E-commerce | Alié Digital",
-          "Diseñamos y desarrollamos tiendas en línea de alto rendimiento con Shopify, WooCommerce y Next.js. Sitios rápidos, optimizados para SEO y conversión."
+          "Diseño y desarrollo de tiendas en línea | Alié Digital",
+          "Diseño y desarrollo de tiendas en línea con catálogo, proceso de compra y herramientas de gestión, con plataforma e integraciones definidas según las necesidades de cada proyecto."
         )}
       />
       <EcommercePageClient />

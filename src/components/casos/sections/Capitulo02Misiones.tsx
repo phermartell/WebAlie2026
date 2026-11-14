@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { MISIONES } from "../data";
 import { Hud } from "@/components/agencia/hud";
-import { CountUp } from "@/components/agencia/ui";
 import Planeta from "../Planeta";
 
 const TINTES = ["#38bdf8", "#fbbf24", "#34d399", "#a78bfa", "#f472b6", "#fb923c", "#22d3ee"];
@@ -59,14 +58,29 @@ export default function Capitulo02Misiones() {
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <Radar />
-          <Hud>Bitácora de Misiones Cumplidas // Radar Táctico</Hud>
+          <Hud>PROYECTOS REALIZADOS</Hud>
           <h2 className="mt-6 text-3xl md:text-5xl font-black uppercase text-white leading-[1.05]">
-            Bitácora de Misiones Cumplidas
+            Explora los casos por proyecto
           </h2>
           <p className="mt-6 text-starlight/60 leading-relaxed">
-            Casos de estudio donde la tecnología web y la pauta estratégica se tradujeron en
-            crecimiento financiero.
+            Consulta qué necesitaba cada cliente, qué trabajo realizamos y qué resultados se documentaron.
           </p>
+
+          {/* Índice compacto con un enlace por ficha */}
+          <nav
+            aria-label="Índice de proyectos"
+            className="mt-8 flex flex-wrap justify-center gap-2.5 max-w-4xl mx-auto"
+          >
+            {MISIONES.map((m) => (
+              <a
+                key={m.id}
+                href={`#${m.id}`}
+                className="glass-l2 rounded-full px-4 py-2 text-xs font-mono font-semibold uppercase tracking-wider text-starlight/80 hover:text-white hover:border-orangeleader/40 hover:bg-white/5 transition-all"
+              >
+                {m.nombreIndice}
+              </a>
+            ))}
+          </nav>
         </div>
 
         <div className="flex flex-col gap-20 md:gap-40 mt-16">
@@ -98,7 +112,7 @@ export default function Capitulo02Misiones() {
                 >
                   <article
                     id={m.id}
-                    className="glass-liquid rounded-[28px] p-7 md:p-8 flex flex-col gap-5"
+                    className="glass-liquid rounded-[28px] p-7 md:p-8 flex flex-col gap-5 scroll-mt-28"
                   >
                     <div>
                       <p className="font-mono text-xs tracking-[0.2em] text-tangerine uppercase">
@@ -109,19 +123,7 @@ export default function Capitulo02Misiones() {
                       </h3>
                     </div>
 
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <CountUp
-                        to={m.metrica.count}
-                        prefix={m.metrica.prefix}
-                        suffix={m.metrica.suffix}
-                        className="text-3xl md:text-4xl font-black bg-gradient-to-r from-orangeleader to-tangerine bg-clip-text text-transparent"
-                      />
-                      <span className="text-xs uppercase tracking-wide text-starlight/50">
-                        {m.metrica.label}
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col gap-4 text-sm leading-relaxed text-starlight/75">
+                    <div className="flex flex-col gap-5 text-sm leading-relaxed text-starlight/75">
                       <div>
                         <span className="block text-xs font-mono uppercase tracking-[0.2em] text-white/40 mb-1">
                           Cliente
@@ -130,34 +132,45 @@ export default function Capitulo02Misiones() {
                           <strong className="text-white font-semibold">{m.cliente}</strong>
                         </p>
                       </div>
+
                       <div>
                         <span className="block text-xs font-mono uppercase tracking-[0.2em] text-white/40 mb-1">
-                          Reto
+                          Qué necesitaba el cliente
                         </span>
-                        <p>{m.reto}</p>
+                        <p>{m.necesidad}</p>
                       </div>
+
                       <div>
                         <span className="block text-xs font-mono uppercase tracking-[0.2em] text-white/40 mb-1">
-                          Resultados de Impacto
+                          Qué hicimos
                         </span>
-                        <ul className="flex flex-col gap-1.5">
-                          {m.resultados.map((r) => (
-                            <li key={r.destacado} className="flex gap-2">
-                              <span className="text-orangeleader mt-0.5 shrink-0">▸</span>
-                              <span>
-                                <strong className="text-white font-semibold">{r.destacado}</strong>
-                                {r.resto}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
+                        <p>{m.queHicimos}</p>
                       </div>
-                      <div>
-                        <span className="block text-xs font-mono uppercase tracking-[0.2em] text-white/40 mb-1">
-                          Despliegue Técnico
-                        </span>
-                        <p>{m.despliegue}</p>
-                      </div>
+
+                      {m.resultadosVerificados && m.resultadosVerificados.length > 0 && (
+                        <div>
+                          <span className="block text-xs font-mono uppercase tracking-[0.2em] text-white/40 mb-1">
+                            Resultados documentados
+                          </span>
+                          <ul className="flex flex-col gap-2">
+                            {m.resultadosVerificados.map((r) => (
+                              <li key={r.texto} className="flex gap-2">
+                                <span className="text-orangeleader mt-0.5 shrink-0">▸</span>
+                                <div className="flex flex-col gap-0.5">
+                                  <strong className="text-white font-semibold">{r.texto}</strong>
+                                  {(r.fuente || r.periodo) && (
+                                    <span className="text-starlight/60 text-xs font-mono">
+                                      {r.fuente && `Fuente: ${r.fuente}`}
+                                      {r.fuente && r.periodo && " · "}
+                                      {r.periodo && `Periodo: ${r.periodo}`}
+                                    </span>
+                                  )}
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   </article>
                 </motion.div>

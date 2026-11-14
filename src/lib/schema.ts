@@ -11,7 +11,7 @@ const ORGANIZATION_SCHEMA = {
   image: "https://aliedigital.com/og-home.webp",
   slogan: "SUEÑA GRANDE, LLEGA LEJOS",
   description:
-    "Agencia de marketing digital B2B potenciada por inteligencia artificial, especializada en diseño y desarrollo web, growth marketing, SEO, paid media y automatizaciones en Monterrey, Puebla y Latinoamérica.",
+    "Alié Digital ofrece diseño y desarrollo web, posicionamiento en buscadores y gestión de campañas digitales para empresas.",
   foundingDate: "2021",
   telephone: "+528115545351",
   address: {
@@ -25,6 +25,22 @@ const ORGANIZATION_SCHEMA = {
     { "@type": "City", name: "Puebla" },
     { "@type": "City", name: "Ciudad de México" },
     { "@type": "AdministrativeArea", name: "Latinoamérica" },
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+528115545351",
+      email: "monterrey@aliedigital.com",
+      contactType: "atención comercial",
+      areaServed: "Monterrey",
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: "+522213279555",
+      email: "puebla@aliedigital.com",
+      contactType: "atención comercial",
+      areaServed: "Puebla",
+    },
   ],
   knowsAbout: [
     "Diseño Web UI/UX",
@@ -73,9 +89,9 @@ export const AGENCIA_SCHEMA = {
       "@type": "AboutPage",
       "@id": "https://aliedigital.com/agencia/#webpage",
       url: "https://aliedigital.com/agencia/",
-      name: "Sobre Alié Digital | Agencia Digital Potenciada por Inteligencia Artificial",
+      name: "Agencia de marketing digital y desarrollo web | Alié Digital",
       description:
-        "Bitácora de trayectoria y filosofía de Alié Digital. Agencia de diseño web y marketing digital B2B impulsada por inteligencia artificial con más de 7 años digitalizando empresas.",
+        "Conoce cómo trabaja Alié Digital en proyectos de diseño web, posicionamiento en buscadores y campañas digitales. Explora nuestros servicios y proyectos realizados.",
       inLanguage: "es-MX",
       isPartOf: {
         "@type": "WebSite",
@@ -98,9 +114,9 @@ export const CASOS_SCHEMA = {
       "@type": "CollectionPage",
       "@id": "https://aliedigital.com/casos-de-exito/#webpage",
       url: "https://aliedigital.com/casos-de-exito/",
-      name: "Casos de éxito | Alié Digital",
+      name: "Casos de éxito en marketing digital y desarrollo web | Alié Digital",
       description:
-        "Casos de estudio de Alié Digital: campañas reales, resultados medibles y ROI sin excusas en sectores de alta competencia, nichos restringidos y mercados B2B complejos.",
+        "Explora proyectos de campañas, sitios web y tiendas en línea de Alié Digital. Conoce qué necesitaba cada cliente y qué trabajo realizamos.",
       inLanguage: "es-MX",
       isPartOf: {
         "@type": "WebSite",
@@ -121,9 +137,10 @@ export const CASOS_SCHEMA = {
             item: {
               "@type": "CreativeWork",
               name: "Equipamiento Industrial B2B & Sector Hogar",
-              about: "Comercializadora de Bombas Sumergibles",
+              about: "MORECSA",
+              url: "https://aliedigital.com/casos-de-exito/#mision-01-bombas-sumergibles",
               description:
-                "57 prospectos calificados al mes, +2,190 contactos B2B en 38 meses y posicionamiento SEO Top 1 en Google.",
+                "Catálogo web técnico, optimización SEO local y campañas en Google Ads y Meta Ads. Resultado documentado: más de 2,190 contactos B2B incorporados a su base de datos en 38 meses (reportado en la ficha original).",
             },
           },
           {
@@ -133,8 +150,9 @@ export const CASOS_SCHEMA = {
               "@type": "CreativeWork",
               name: "Insumos y Manufactura B2B",
               about: "Fabricante y Distribuidor de Vasos Desechables de Cartón",
+              url: "https://aliedigital.com/casos-de-exito/#mision-02-vasos-desechables",
               description:
-                "105 prospectos mayoristas al mes y +1,900 empresas en base de datos activa en 18 meses.",
+                "Rediseño de identidad gráfica, sitio web de cotización mayorista y campañas en Google Ads. Resultado documentado: más de 1,900 empresas acumuladas en la base de datos activa en 18 meses (reportado en la ficha original).",
             },
           },
           {
@@ -144,8 +162,9 @@ export const CASOS_SCHEMA = {
               "@type": "CreativeWork",
               name: "Sector Salud & Medicina de Alta Especialidad",
               about: "Cirujano Maxilofacial",
+              url: "https://aliedigital.com/casos-de-exito/#mision-03-cirujano-maxilofacial",
               description:
-                "48 pacientes calificados al mes y +1,155 expedientes y contactos generados en 24 meses.",
+                "Sitio web médico profesional con lineamientos UI/UX para autoridad clínica y campañas en Google Ads para consultas de cirugía maxilofacial.",
             },
           },
           {
@@ -154,9 +173,10 @@ export const CASOS_SCHEMA = {
             item: {
               "@type": "CreativeWork",
               name: "Infraestructura y Alumbrado Público",
-              about: "Venta de Postes Metálicos y de Concreto",
+              about: "Postes Puebla",
+              url: "https://aliedigital.com/casos-de-exito/#mision-04-postes-infraestructura",
               description:
-                "46 cotizaciones B2B de gran escala al mes y +1,124 constructoras y contratistas registrados en 24 meses.",
+                "Plataforma web con catálogo técnico y fichas descargables de postes, junto con campañas en Google Ads. Resultado documentado: más de 1,124 constructoras y contratistas registrados en la base de datos en 24 meses (reportado en la ficha original).",
             },
           },
           {
@@ -165,9 +185,10 @@ export const CASOS_SCHEMA = {
             item: {
               "@type": "CreativeWork",
               name: "Dominio Orgánico y SEO Técnico Multisectorial",
-              about: "Multi-Industria (7 Marcas)",
+              about: "Empresas en Maquinaria, Software, Contenedores y Salud",
+              url: "https://aliedigital.com/casos-de-exito/#mision-05-seo-multisectorial",
               description:
-                "Top 5 en Google en palabras clave comerciales para 7 industrias y +500 errores técnicos corregidos.",
+                "Auditorías técnicas on-page y off-page, optimización de Core Web Vitals, datos estructurados y reestructuración de contenidos técnicos para relevancia en buscadores.",
             },
           },
           {
@@ -176,9 +197,10 @@ export const CASOS_SCHEMA = {
             item: {
               "@type": "CreativeWork",
               name: "Escalamiento E-commerce & Retail Motopartes",
-              about: "Tienda en Línea de Motopartes",
+              about: "Argüello Motopartes",
+              url: "https://aliedigital.com/casos-de-exito/#mision-06-motopartes-ecommerce",
               description:
-                "+$366,000 MXN en ventas en 2026 y +115% de crecimiento interanual acelerado.",
+                "Plataforma de comercio electrónico con buscador interno optimizado para refacciones, pasarelas de pago automatizadas y migración técnica en servidores de alta disponibilidad.",
             },
           },
           {
@@ -187,9 +209,10 @@ export const CASOS_SCHEMA = {
             item: {
               "@type": "CreativeWork",
               name: "B2B SaaS & Gestión Corporativa",
-              about: "Empresa de Control de Asistencias",
+              about: "Empresa de Software de Control de Asistencias",
+              url: "https://aliedigital.com/casos-de-exito/#mision-07-control-asistencias-saas",
               description:
-                "+450 prospectos B2B corporativos calificados en menos de 12 meses y optimización continua del CPA.",
+                "Landing pages orientadas a directivos de recursos humanos y campañas de publicidad en Google Ads y LinkedIn Ads para demostraciones de software corporativo.",
             },
           },
         ],
@@ -208,7 +231,7 @@ export const CONTACTO_SCHEMA = {
       url: "https://aliedigital.com/contacto/",
       name: "Contacto | Alié Digital",
       description:
-        "Inicia tu misión digital con Alié Digital. Cuéntanos sobre tu proyecto y agenda una llamada de estrategia. Tu dominio siempre será tuyo gracias a nuestra Garantía Anti-Secuestro.",
+        "Cuéntanos sobre tu proyecto mediante el formulario o escríbenos por WhatsApp o correo a nuestros equipos de atención en Monterrey y Puebla.",
       inLanguage: "es-MX",
       isPartOf: {
         "@type": "WebSite",

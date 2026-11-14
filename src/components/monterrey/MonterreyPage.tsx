@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform, useVelocity, useMotionValue, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import LeadForm from "@/components/LeadForm";
 import { SERVICIOS } from "@/components/agencia/data";
@@ -193,7 +194,6 @@ const InteractiveStarsInner = () => {
 };
 
 export default function MonterreyPage() {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
   const [activeExpertise, setActiveExpertise] = useState(0);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
@@ -218,112 +218,49 @@ export default function MonterreyPage() {
     };
   }, []);
 
-  const slides = [
-    {
-      title: "Agencia de Marketing Digital en Monterrey",
-      subtitle: "Ponemos a jalar tus campañas al hiperespacio. Trabajamos desde el norte y jalamos con la misma garra que cualquier regio para hacer crecer tu negocio.",
-      tag: "ESTACIÓN ESPACIAL MONTERREY // SUEÑA GRANDE, LLEGA LEJOS",
-      bgGradient: "from-orangeleader/15 to-transparent",
-    },
-    {
-      title: "Servicios de Marketing Digital en Monterrey",
-      subtitle: "Campañas de Google Ads y Meta Ads diseñadas a la medida de tus metas, con la potencia y solidez de un Cerro de la Silla Cósmico. Cero rodeos, puro jale de alta ingeniería.",
-      tag: "PROPULSIÓN EN NUEVO LEÓN // PUBLICIDAD DIGITAL ESTRATÉGICA",
-      bgGradient: "from-cyan-500/15 to-transparent",
-    },
-    {
-      title: "Empresas de Marketing Digital en Monterrey",
-      subtitle: "Desarrollamos sitios web robustos y más rápidos que una carne asada bien armada. Sitios con blindaje estelar listos para captar leads.",
-      tag: "INGENIERÍA WEB Y SEO IA // MARKETING DIGITAL EN MONTERREY",
-      bgGradient: "from-purple-500/15 to-transparent",
-    },
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
-  const clientLogos = [
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-viveterapia.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-uniformex.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-trebal.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-sedesil.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-salud-digna.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-punto-activa.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-marlosa.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-forcelift.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-famisa.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/logo-envfor.webp",
-    "https://aliedigital.com/wp-content/uploads/2024/09/cliente-historiente.webp"
-  ];
-
-  // Monterrey Testimonials in Puebla Style
-  const testimonialsRow1 = [
-    { quote: "El rediseño de nuestro sitio web B2B quedó con madre. Los leads se duplicaron en menos de tres meses.", author: "Sra. Laura Garza", company: "Vive Terapia" },
-    { quote: "Un equipo muy profesional que sabe cómo jalar en el mercado B2B corporativo de Monterrey.", author: "Socio Principal", company: "Trebal Abogados" },
-    { quote: "Nuestra landing de uniformes industriales está jalando de lo lindo con Google Ads.", author: "Gerente de Planta", company: "Uniformex" },
-    { quote: "Cero rodeos. El SEO técnico con IA nos posicionó por encima de competidores nacionales.", author: "Director Comercial", company: "Sedesil" }
-  ];
-
-  const testimonialsRow2 = [
-    { quote: "Excelente comunicación y entregas ultra rápidas. Su infraestructura de IA nos ahorró semanas.", author: "Coordinador Tecnológico", company: "Salud Digna" },
-    { quote: "La automatización del CRM y los formularios de captación nos aligeraron el jale diario.", author: "Gerente General", company: "Punto Activa" },
-    { quote: "Campañas de Paid Media optimizadas que atraen prospectos calificados recurrentemente.", author: "Director de TI", company: "Grupo Marlosa" },
-    { quote: "Nuestra plataforma de e-commerce de montacargas ahora procesa cotizaciones automáticamente.", author: "CEO", company: "Forcelift" }
-  ];
-
-  const testimonialsRow3 = [
-    { quote: "Diseño web de primer nivel. Entienden perfectamente el dinamismo de la industria en Monterrey.", author: "Adquisiciones", company: "Famisa" },
-    { quote: "Un aliado estratégico de primer nivel. Su soporte y empuje regio marcan la diferencia.", author: "Director de Proyectos", company: "Envfor" },
-    { quote: "La landing page es rápida, chula y convierte visitas en clientes constantemente.", author: "Fundador", company: "Historiente" },
-    { quote: "El jale que hicieron con el posicionamiento orgánico superó todas nuestras metas anuales.", author: "Director Comercial", company: "Trebal Monterrey" }
-  ];
 
   // 4 Core Expertises inspired by SpinX Digital without prices
   const coreExpertise = [
     {
       num: "01",
-      title: "DISEÑO WEB & BRANDING",
-      desc: "Creamos portales web a medida y marcas de alto impacto visual sin usar plantillas genéricas. Nos enfocamos en la estética premium y la usabilidad.",
+      title: "Diseño web e identidad visual",
+      desc: "Diseñamos sitios para presentar servicios, mostrar proyectos y facilitar las solicitudes de información.",
       services: [
-        { name: "Diseño Web UI/UX Custom", desc: "Interfaces limpias, rápidas y orientadas a captar leads en Monterrey." },
-        { name: "Identidad Gráfica & Branding", desc: "Logotipos, guías de estilo, tono de voz and directrices visuales corporativas." }
+        { name: "Diseño de páginas web", desc: "Organizamos la información de tu empresa y preparamos páginas que ayudan al visitante a entender tu oferta y contactarte." },
+        { name: "Manuales de marca", desc: "Documentamos cómo usar el logotipo, los colores y las tipografías de tu identidad visual." }
       ],
       glow: "rgba(235,63,27,0.08)",
       borderColor: "group-hover:border-orangeleader/30"
     },
     {
       num: "02",
-      title: "PAID MEDIA & SOCIAL",
-      desc: "Publicidad inteligente y gestión de contenido diseñada para generar leads y ventas recurrentes en tu portal comercial.",
+      title: "Publicidad digital y redes sociales",
+      desc: "Planeamos campañas y contenidos según tu oferta, los canales que utiliza tu público y los objetivos de tu empresa.",
       services: [
-        { name: "Publicidad en Meta & Google Ads", desc: "Campañas segmentadas orientadas a un retorno de inversión real." },
-        { name: "Gestión de Redes Sociales", desc: "Estrategia de contenido, diseño gráfico y redacción persuasiva." }
+        { name: "Google Ads y Meta Ads", desc: "Definimos audiencias, anuncios y acciones de seguimiento según el objetivo de cada campaña." },
+        { name: "Gestión de redes sociales", desc: "Planeamos, redactamos y diseñamos contenidos para los canales acordados." }
       ],
       glow: "rgba(34,211,238,0.08)",
       borderColor: "group-hover:border-cyan-400/30"
     },
     {
       num: "03",
-      title: "SEO & GROWTH B2B",
-      desc: "Posicionamos tu empresa en las primeras páginas de Google y en los motores de búsqueda de Inteligencia Artificial de nueva generación.",
+      title: "SEO y seguimiento comercial B2B",
+      desc: "Revisamos cómo encuentran tu empresa y cómo puedes dar seguimiento a las consultas que recibe tu equipo.",
       services: [
-        { name: "Posicionamiento SEO IA", desc: "Optimización técnica para motores tradicionales y modelos LLM." },
-        { name: "Email Marketing & Nutrición", desc: "Automatizaciones para reactivar y nutrir clientes sin esfuerzo manual." }
+        { name: "Posicionamiento SEO", desc: "Revisamos la estructura, el contenido y los aspectos técnicos del sitio para facilitar que tus servicios se encuentren en buscadores." },
+        { name: "Email marketing", desc: "Preparamos campañas y secuencias de correo según tus contactos, tus objetivos y las herramientas disponibles." }
       ],
       glow: "rgba(168,85,247,0.08)",
       borderColor: "group-hover:border-purple-400/30"
     },
     {
       num: "04",
-      title: "IA & AUTOMATIZACIONES",
-      desc: "Sistemas autónomos y tiendas transaccionales complejas que automatizan la cotización y la atención de prospectos.",
+      title: "Ecommerce e IA aplicada",
+      desc: "Diseñamos tiendas en línea y flujos que ayudan a coordinar la atención al cliente, los pedidos y los envíos.",
       services: [
-        { name: "Asistentes de IA 24/7", desc: "Agentes entrenados para calificar y atender prospectos de forma autónoma." },
-        { name: "Ecommerce (Tiendas en Línea)", desc: "Tiendas estables preparadas para procesar miles de transacciones." }
+        { name: "Tiendas en línea", desc: "Organizamos el catálogo, la compra y las opciones de pago y entrega según las necesidades de tu tienda." },
+        { name: "IA aplicada al ecommerce", desc: "Diseñamos asistentes para atender consultas y automatizaciones para gestionar pedidos y coordinar la producción, la preparación y el envío." }
       ],
       glow: "rgba(34,197,94,0.08)",
       borderColor: "group-hover:border-green-400/30"
@@ -334,142 +271,86 @@ export default function MonterreyPage() {
   const processSteps = [
     {
       num: "01",
-      phase: "Descubrimiento & Telemetría",
-      title: "Entendimiento Profundo de la Misión",
-      desc: "Antes de programar una sola línea de código, nos sumergimos en tu modelo de negocio B2B. Analizamos tu competencia en Monterrey y definimos los objetivos clave de ventas y posicionamiento digital.",
-      points: ["Auditoría de activos digitales actuales", "Análisis de competidores clave en Monterrey", "Definición de KPIs comerciales"]
+      phase: "Revisamos tu situación actual",
+      title: "Revisamos tu situación actual",
+      desc: "Conversamos con tu equipo para entender qué vendes, a quién y cómo llegan hoy las consultas. Si ya tienes sitio o campañas, revisamos los recursos y datos disponibles.",
+      points: ["Oferta y público", "Canales actuales", "Objetivo comercial"]
     },
     {
       num: "02",
-      phase: "Planificación & Estructura",
-      title: "Mapa de Órbita e Ingeniería de Conversión",
-      desc: "Diseñamos la arquitectura de la información y definimos el embudo de ventas. Mapeamos las palabras clave (SEO) y estructuramos las pasarelas de pago y las integraciones con tu CRM.",
-      points: ["Keyword Research de alto valor transaccional en Monterrey", "Esquemas de flujos de conversión (Wireframes)", "Definición de stack tecnológico idóneo"]
+      phase: "Acordamos el alcance y las prioridades",
+      title: "Acordamos el alcance y las prioridades",
+      desc: "Definimos qué conviene trabajar primero, qué necesita aportar tu equipo y cómo revisaremos los avances. La propuesta detalla las actividades y los entregables acordados.",
+      points: ["Prioridades", "Entregables", "Responsabilidades"]
     },
     {
       num: "03",
-      phase: "Diseño Web UI/UX",
-      title: "Estética Premium sin Plantillas",
-      desc: "Creamos la interfaz visual de tu proyecto desde cero. Cuidamos cada detalle tipográfico, de color y de espaciado para reflejar solidez corporativa y garantizar una navegación intuitiva.",
-      points: ["Prototipos interactivos de alta fidelidad", "Diseño responsivo móvil quirúrgico", "Aprobación visual antes de desarrollo"]
+      phase: "Preparamos contenidos y diseños",
+      title: "Preparamos contenidos y diseños",
+      desc: "Según el proyecto, preparamos la estructura y el diseño del sitio o los mensajes y anuncios de campaña. Revisamos contigo los materiales antes de implementarlos.",
+      points: ["Estructura y mensajes", "Diseño o anuncios", "Revisión con tu equipo"]
     },
     {
       num: "04",
-      phase: "Desarrollo e Integraciones",
-      title: "Ensamble Tecnológico Limpio",
-      desc: "Nuestros ingenieros escriben código rápido, limpio y optimizado. Integramos los formularios de captación, los asistentes de IA autónomos y los sistemas de seguimiento analítico.",
-      points: ["Programación con Next.js o WordPress modular", "Integración con CRM y WhatsApp automatizado", "Conexión de pixeles de seguimiento y reCAPTCHA v3"]
+      phase: "Implementamos y hacemos pruebas",
+      title: "Implementamos y hacemos pruebas",
+      desc: "Desarrollamos el sitio o configuramos las campañas según el alcance. Probamos los formularios, las integraciones y el registro de las acciones acordadas cuando formen parte del proyecto.",
+      points: ["Implementación", "Pruebas", "Medición acordada"]
     },
     {
       num: "05",
-      phase: "Lanzamiento y Auditoría",
-      title: "Puesta en Órbita y Optimización de Velocidad",
-      desc: "Sometemos el sitio a pruebas rigurosas de rendimiento en Google PageSpeed Insights. Garantizamos que el sitio cargue en menos de un segundo y sea completamente estable antes de abrirlo al público.",
-      points: ["Prueba de velocidad (PageSpeed 90+ obligatorio)", "Configuración de SEO técnico (Schema JSON-LD)", "Lanzamiento final libre de fricciones"]
+      phase: "Publicamos y revisamos los primeros datos",
+      title: "Publicamos y revisamos los primeros datos",
+      desc: "Publicamos el sitio o activamos las campañas después de la revisión acordada. Según el alcance, revisamos los primeros datos disponibles y señalamos qué conviene ajustar.",
+      points: ["Publicación o activación", "Revisión inicial", "Ajustes prioritarios"]
     }
   ];
 
   return (
     <div className="relative text-white font-sans selection:bg-orangeleader/30 selection:text-white bg-transparent">
-      
-      {/* Styles for continuous infinite marquee loops */}
-      <style jsx global>{`
-        @keyframes scroll-left {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes scroll-right {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
-        .animate-marquee-left {
-          animation: scroll-left 55s linear infinite;
-        }
-        .animate-marquee-right {
-          animation: scroll-right 55s linear infinite;
-        }
-        .animate-marquee-left-fast {
-          animation: scroll-left 45s linear infinite;
-        }
-      `}</style>
-
       {/* Trajectory spaceship on the left side */}
       <MonterreyOrbitalPath />
 
-      {/* SECCIÓN 1: HERO SLIDER CON ESTRELLAS INTERACTIVAS */}
+      {/* SECCIÓN 1: HERO CON ESTRELLAS INTERACTIVAS */}
       <section className="relative min-h-[90vh] flex flex-col justify-center items-center px-4 overflow-hidden z-10 pt-28">
         <InteractiveStars />
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.02 }}
-            transition={{ duration: 0.8 }}
-            className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].bgGradient} to-transparent pointer-events-none z-0`}
-          />
-        </AnimatePresence>
+        <div className="absolute inset-0 bg-gradient-to-br from-orangeleader/15 to-transparent pointer-events-none z-0" />
 
         <div className="max-w-5xl mx-auto text-center relative z-20">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col items-center"
-            >
-              <span className="text-xs md:text-sm font-mono tracking-[0.4em] text-orangeleader uppercase block mb-6">
-                {slides[currentSlide].tag}
-              </span>
-              
-              {currentSlide === 0 ? (
-                <h1 className="text-4xl md:text-7xl font-black uppercase leading-[1.02] tracking-tighter mb-8 max-w-4xl">
-                  {slides[currentSlide].title}
-                </h1>
-              ) : (
-                <h2 className="text-4xl md:text-7xl font-black uppercase leading-[1.02] tracking-tighter mb-8 max-w-4xl">
-                  {slides[currentSlide].title}
-                </h2>
-              )}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center"
+          >
+            <span className="text-xs md:text-sm font-mono tracking-[0.4em] text-orangeleader uppercase block mb-6">
+              PARA EMPRESAS B2B EN MONTERREY
+            </span>
 
-              <p className="text-base md:text-lg text-starlight/85 max-w-2xl mx-auto leading-relaxed font-light mb-10">
-                {slides[currentSlide].subtitle}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+            <h1 className="text-4xl md:text-7xl font-black uppercase leading-[1.02] tracking-tighter mb-8 max-w-4xl">
+              Marketing digital para empresas B2B en Monterrey
+            </h1>
+
+            <p className="text-base md:text-lg text-starlight/85 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+              Diseñamos sitios web y gestionamos campañas de Google Ads y Meta Ads para que las empresas de Monterrey presenten sus servicios y reciban consultas comerciales. Si ya tienes sitio o campañas, revisamos contigo qué conviene mejorar primero.
+            </p>
+          </motion.div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-4">
-            <button
-              onClick={() => setIsWhatsAppOpen(true)}
+            <a
+              href="#contacto"
               className="bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest shadow-[0_10px_30px_rgba(235,63,27,0.4)] transition-all flex items-center justify-center cursor-pointer"
             >
-              Iniciar Conversación
-            </button>
+              Solicitar información
+            </a>
             <a
               href="#servicios"
               className="glass-l2 rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest text-white flex items-center justify-center cursor-pointer hover:bg-white/5 transition-all"
             >
-              Explorar Soluciones
+              Ver servicios
             </a>
           </div>
-        </div>
-
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-3 z-30">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentSlide(i)}
-              className={`rounded-full transition-all duration-300 cursor-pointer ${
-                i === currentSlide
-                  ? "w-8 h-2.5 bg-orangeleader shadow-[0_0_10px_rgba(235,63,27,0.6)]"
-                  : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"
-              }`}
-              aria-label={`Slide ${i + 1}`}
-            />
-          ))}
         </div>
       </section>
 
@@ -477,16 +358,12 @@ export default function MonterreyPage() {
       <section className="relative z-10 px-4 md:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <div className="mb-4">
-              <span className="text-xs text-orangeleader tracking-widest uppercase font-mono block mb-1">Jalamos con garra en el norte</span>
-              <div className="w-12 h-0.5 bg-orangeleader"></div>
-            </div>
-            <Hud>Bitácora de Vuelo // Base de Lanzamiento Monterrey</Hud>
+            <Hud>PARA EMPRESAS QUE VENDEN A OTRAS EMPRESAS</Hud>
             <h2 className="mt-8 text-3xl md:text-5xl font-black uppercase text-white leading-[1.05] tracking-tight">
-              Habitamos en el norte con el Cerro de la Silla en nuestro horizonte
+              Ayuda para presentar tus servicios y recibir consultas
             </h2>
             <p className="mt-8 text-base text-starlight/75 leading-relaxed font-light">
-              Trabajamos en el norte con el Cerro de la Silla en nuestro horizonte. Aquí no venimos a tirar barra ni a hacerte perder el tiempo; sabemos que en Monterrey el jale es serio. Las empresas regias no necesitan sitios web estáticos ni agencias burocráticas; necesitan una <strong className="text-white font-semibold">agencia digital potenciada por inteligencia artificial</strong> que sea transparente y un aliado estratégico orientado a entender sus metas financieras y potenciar sus ventas. Como <strong className="text-white font-semibold">agencia de diseño web impulsada por inteligencia artificial</strong> y <strong className="text-white font-semibold">agencia de marketing digital potenciada por inteligencia artificial</strong> con más de 7 años de trayectoria en el sector, acompañamos a empresas en Monterrey, San Pedro Garza García y toda la región a construir activos comerciales impulsados por ingeniería tecnológica e Inteligencia Artificial que generan resultados reales y medibles.
+              Si tu equipo comercial depende de recomendaciones o de contactos directos, tu sitio web y tus campañas pueden ayudar a que más empresas conozcan tu oferta. Trabajamos contigo para definir qué información necesitan tus prospectos y cómo facilitarles el contacto.
             </p>
           </div>
 
@@ -507,9 +384,9 @@ export default function MonterreyPage() {
       <section className="relative z-10 px-4 md:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <Hud>Doctrina de Misión // ADN Regio & Espacial</Hud>
+            <Hud>POR QUÉ TRABAJAR CON ALIÉ DIGITAL</Hud>
             <h2 className="mt-6 text-3xl md:text-5xl font-black uppercase text-white leading-[1.05]">
-              Nuestra filosofía: éxito compartido y pasión por crecer en Monterrey
+              Claridad sobre el alcance y cómo revisar los resultados
             </h2>
           </div>
 
@@ -517,16 +394,13 @@ export default function MonterreyPage() {
             <div className="glass-liquid rounded-[32px] p-8 md:p-10 h-full flex flex-col justify-between border border-white/5 hover:border-orangeleader/20 transition-all">
               <div>
                 <span className="font-mono text-xs tracking-[0.3em] text-orangeleader uppercase">
-                  Módulo de Crecimiento A
+                  Módulo A
                 </span>
                 <h3 className="mt-4 text-2xl md:text-3xl font-black uppercase text-white">
-                  Éxito Compartido
+                  Una propuesta con entregables claros
                 </h3>
                 <p className="mt-5 text-starlight/70 leading-relaxed text-sm md:text-base font-light">
-                  Creemos firmemente que si a nuestros clientes les va bien, a nosotros nos va bien.
-                  No buscamos transacciones de una sola vez ni contratos inflados. Aquí nos gusta hacer tiro de verdad. Construimos
-                  relaciones comerciales a largo plazo donde nuestro indicador clave de rendimiento es
-                  el impacto real en las oportunidades de negocio y ventas de tu empresa con estrategias sólidas de <strong className="text-white font-medium">marketing digital en Monterrey</strong>. Conectamos tu marca con la solidez del Cerro de la Silla Galáctico, sin rodeos ni tiradera de barra.
+                  Antes de empezar, acordamos qué entregaremos, qué necesita aportar tu equipo y cuándo revisaremos los avances. Si tienes varias necesidades, te ayudamos a definir cuál atender primero.
                 </p>
               </div>
             </div>
@@ -545,16 +419,13 @@ export default function MonterreyPage() {
             <div className="glass-liquid rounded-[32px] p-8 md:p-10 h-full flex flex-col justify-between border border-white/5 hover:border-tangerine/20 transition-all">
               <div>
                 <span className="font-mono text-xs tracking-[0.3em] text-tangerine uppercase">
-                  Módulo de Crecimiento B
+                  Módulo B
                 </span>
                 <h3 className="mt-4 text-2xl md:text-3xl font-black uppercase text-white">
-                  Creemos en los Sueños
+                  Medición útil para tu equipo comercial
                 </h3>
                 <p className="mt-5 text-starlight/70 leading-relaxed text-sm md:text-base font-light">
-                  Creemos en los sueños y amamos ayudar a las marcas a soñar en grande; ¡qué chulada es Monterrey y qué con ganas es ver despegar tu negocio!
-                  Acompañamos a pequeñas y medianas empresas a proyectar una imagen sólida, dándoles
-                  acceso a la misma infraestructura de alta gama que utilizan los grandes corporativos
-                  para competir y dominar su mercado con servicios de <strong className="text-white font-medium">marketing digital monterrey</strong> y la fuerza templada del acero de Fundidora Estelar.
+                  Cuando la medición forma parte del proyecto, acordamos qué acciones registrar, como solicitudes por formulario o clics a WhatsApp. Con los datos disponibles y la retroalimentación de tu equipo, revisamos qué canales generan consultas y qué conviene ajustar.
                 </p>
               </div>
             </div>
@@ -566,12 +437,12 @@ export default function MonterreyPage() {
       <section id="servicios" className="relative z-10 px-4 md:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <Hud>Nuestras Capacidades // Core Expertise</Hud>
+            <Hud>SERVICIOS DE MARKETING DIGITAL</Hud>
             <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-              QUÉ HACEMOS MEJOR EN MONTERREY
+              Diseño web, campañas y seguimiento comercial
             </h2>
-            <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light">
-              Desplegamos infraestructura de alta gama para acelerar tus ventas B2B. Selecciona un área para ver nuestros servicios detallados.
+            <p className="mt-6 text-starlight/70 max-w-2xl mx-auto text-sm leading-relaxed font-light">
+              Revisamos cómo presentas tus servicios, cómo llegan las consultas y qué hace tu equipo después de recibirlas. A partir de eso definimos qué conviene trabajar primero.
             </p>
           </div>
 
@@ -648,6 +519,22 @@ export default function MonterreyPage() {
               </motion.div>
             </AnimatePresence>
           </div>
+
+          {/* Enlaces directos a servicios en Monterrey */}
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/monterrey/diseno-de-paginas-web"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full glass-l2 border border-white/10 hover:border-orangeleader/50 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-all duration-300"
+            >
+              Diseño de páginas web en Monterrey →
+            </Link>
+            <Link
+              href="/monterrey/growth-marketing-b2b"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full glass-l2 border border-white/10 hover:border-orangeleader/50 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-all duration-300"
+            >
+              Growth marketing B2B en Monterrey →
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -655,12 +542,12 @@ export default function MonterreyPage() {
       <section className="relative z-10 px-4 md:px-8 py-16 md:py-24">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <Hud>Hoja de Ruta // Proceso de Ingeniería</Hud>
+            <Hud>PROCESO DE TRABAJO</Hud>
             <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-              Cómo Hacemos Sinergia con tu Proyecto en Monterrey
+              Cómo trabajamos tu proyecto
             </h2>
-            <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light">
-              Nuestra metodología estructurada de 5 fases, diseñada para entregar velocidad y resultados sin perder calidad.
+            <p className="mt-6 text-starlight/70 max-w-2xl mx-auto text-sm leading-relaxed font-light">
+              Empezamos por entender cómo llegan hoy tus oportunidades comerciales. Con esa información definimos el alcance y acordamos qué revisar contigo antes de publicar el sitio o activar las campañas.
             </p>
           </div>
 
@@ -704,7 +591,7 @@ export default function MonterreyPage() {
                 >
                   <div>
                     <span className="font-mono text-[10px] tracking-[0.25em] text-orangeleader uppercase px-3 py-1 rounded-full border border-orangeleader/20 bg-orangeleader/5">
-                      Fase {processSteps[activeStep].num} // {processSteps[activeStep].phase}
+                      Fase {processSteps[activeStep].num}
                     </span>
                     <h3 className="text-2xl md:text-3xl font-black uppercase text-white tracking-tight mt-6 mb-4">
                       {processSteps[activeStep].title}
@@ -732,113 +619,48 @@ export default function MonterreyPage() {
         </div>
       </section>
 
-      {/* SECCIÓN 5: TESTIMONIALES (MARQUESINAS ESTILO PUEBLA) */}
-      <section className="relative z-10 py-16 md:py-24 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 mb-16 text-center">
-          <div className="flex justify-center mb-4">
-            <span className="w-2.5 h-2.5 rounded-full bg-orangeleader animate-pulse" />
+      {/* SECCIÓN 5: PROYECTOS REALIZADOS */}
+      <section className="relative z-10 px-4 md:px-8 py-16 md:py-24">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <Hud>PROYECTOS REALIZADOS</Hud>
+            <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
+              Identidad visual para una firma en Monterrey
+            </h2>
           </div>
-          <Hud>Comunicaciones Confirmadas // Testimonios en Órbita</Hud>
-          <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-            ¡Qué chulada de jale en el norte!
-          </h2>
-        </div>
 
-        {/* Row 1 - Scroll Left */}
-        <div className="flex overflow-hidden w-full mb-8 relative py-4">
-          <div className="flex gap-6 animate-marquee-left whitespace-nowrap min-w-full">
-            {[...testimonialsRow1, ...testimonialsRow1].map((t, idx) => (
-              <div
-                key={idx}
-                className="glass-liquid rounded-[24px] p-6 border border-white/5 w-[350px] shrink-0 flex flex-col justify-between whitespace-normal hover:-translate-y-2 hover:border-orangeleader/40 hover:shadow-[0_10px_25px_rgba(235,63,27,0.15)] transition-all duration-300 cursor-pointer"
-              >
-                <p className="text-xs text-starlight/80 italic font-light">&quot;{t.quote}&quot;</p>
-                <div className="mt-4 flex items-center gap-3 border-t border-white/5 pt-3">
-                  <div className="w-8 h-8 rounded-full bg-orangeleader flex items-center justify-center font-mono font-bold text-[10px] text-white">MTY</div>
+          <div className="max-w-4xl mx-auto">
+            <div className="glass-liquid rounded-[32px] border border-white/10 p-6 md:p-8 overflow-hidden hover:border-orangeleader/30 transition-all duration-300">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div className="md:col-span-5 relative aspect-[16/10] md:aspect-square rounded-2xl overflow-hidden border border-white/10 bg-black/40">
+                  <Image
+                    src="/branding/trebal.webp"
+                    alt="Trebal"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 400px"
+                  />
+                </div>
+                <div className="md:col-span-7 flex flex-col justify-between space-y-4">
                   <div>
-                    <h4 className="text-xs font-bold uppercase text-white leading-none">{t.company}</h4>
-                    <span className="text-[10px] text-starlight/40 block mt-1 leading-none">{t.author}</span>
+                    <h3 className="text-2xl md:text-3xl font-black uppercase text-white tracking-tight">
+                      Trebal
+                    </h3>
+                    <p className="mt-4 text-starlight/75 text-sm md:text-base font-light leading-relaxed">
+                      Diseñamos la identidad visual y sus lineamientos de uso para Trebal, una firma de abogados en Monterrey.
+                    </p>
+                  </div>
+                  <div className="pt-2">
+                    <Link
+                      href="/identidad-grafica/#showcase"
+                      className="inline-flex items-center gap-2 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-colors"
+                    >
+                      Ver el portafolio de identidad visual →
+                    </Link>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Row 2 - Scroll Right */}
-        <div className="flex overflow-hidden w-full mb-8 relative py-4">
-          <div className="flex gap-6 animate-marquee-right whitespace-nowrap min-w-full">
-            {[...testimonialsRow2, ...testimonialsRow2].map((t, idx) => (
-              <div
-                key={idx}
-                className="glass-liquid rounded-[24px] p-6 border border-white/5 w-[350px] shrink-0 flex flex-col justify-between whitespace-normal hover:-translate-y-2 hover:border-cyan-400/40 hover:shadow-[0_10px_25px_rgba(34,211,238,0.15)] transition-all duration-300 cursor-pointer"
-              >
-                <p className="text-xs text-starlight/80 italic font-light">&quot;{t.quote}&quot;</p>
-                <div className="mt-4 flex items-center gap-3 border-t border-white/5 pt-3">
-                  <div className="w-8 h-8 rounded-full bg-cyan-400 flex items-center justify-center font-mono font-bold text-[10px] text-black">B2B</div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase text-white leading-none">{t.company}</h4>
-                    <span className="text-[10px] text-starlight/40 block mt-1 leading-none">{t.author}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Row 3 - Scroll Left Fast */}
-        <div className="flex overflow-hidden w-full relative py-4">
-          <div className="flex gap-6 animate-marquee-left-fast whitespace-nowrap min-w-full">
-            {[...testimonialsRow3, ...testimonialsRow3].map((t, idx) => (
-              <div
-                key={idx}
-                className="glass-liquid rounded-[24px] p-6 border border-white/5 w-[350px] shrink-0 flex flex-col justify-between whitespace-normal hover:-translate-y-2 hover:border-purple-400/40 hover:shadow-[0_10px_25px_rgba(168,85,247,0.15)] transition-all duration-300 cursor-pointer"
-              >
-                <p className="text-xs text-starlight/80 italic font-light">&quot;{t.quote}&quot;</p>
-                <div className="mt-4 flex items-center gap-3 border-t border-white/5 pt-3">
-                  <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center font-mono font-bold text-[10px] text-white">IA</div>
-                  <div>
-                    <h4 className="text-xs font-bold uppercase text-white leading-none">{t.company}</h4>
-                    <span className="text-[10px] text-starlight/40 block mt-1 leading-none">{t.author}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECCIÓN 6: CLIENTES LOCALES DE MONTERREY */}
-      <section className="relative z-10 py-16 md:py-24 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 mb-16 text-center">
-          <Hud>Aliados en Órbita // Trayectoria Comprobada</Hud>
-          <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-            Nuestras Marcas de Monterrey en el Espacio Comercial
-          </h2>
-          <p className="mt-4 text-sm text-starlight/55 max-w-md mx-auto">
-            Más de 20 empresas en Monterrey ya confían en nuestro jale.
-          </p>
-        </div>
-
-        {/* Logos Marquee Row 1 - Left */}
-        <div className="flex overflow-hidden w-full mb-8 relative py-4">
-          <div className="flex gap-12 animate-marquee-left items-center min-w-full">
-            {[...clientLogos, ...clientLogos].map((src, idx) => (
-              <div key={idx} className="w-24 md:w-32 shrink-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                <Image src={src} width={128} height={64} unoptimized className="w-full h-auto object-contain filter brightness-0 invert" alt="Cliente Alié Monterrey" />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Logos Marquee Row 2 - Right */}
-        <div className="flex overflow-hidden w-full relative py-4">
-          <div className="flex gap-12 animate-marquee-right items-center min-w-full">
-            {[...clientLogos, ...clientLogos].reverse().map((src, idx) => (
-              <div key={idx} className="w-24 md:w-32 shrink-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                <Image src={src} width={128} height={64} unoptimized className="w-full h-auto object-contain filter brightness-0 invert" alt="Cliente Alié Monterrey" />
-              </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -847,21 +669,20 @@ export default function MonterreyPage() {
       <section id="contacto" className="relative min-h-screen flex items-center justify-center px-4 pb-32 pt-20 z-10">
         <div className="max-w-4xl w-full mx-auto">
           <div className="glass-liquid border border-white/10 rounded-[48px] p-8 md:p-16 text-center shadow-[0_0_80px_rgba(16,27,57,0.7)]">
-            <Hud>ESTACIÓN DE CONTROL DE MONTERREY // CONEXIÓN ESTELAR</Hud>
+            <Hud>CONTACTO EN MONTERREY</Hud>
             <h2 className="text-3xl md:text-5xl font-black uppercase text-white mt-6 mb-6">
-              Hagamos despegar tu proyecto en Monterrey
+              Cuéntanos qué necesita tu empresa
             </h2>
             <p className="text-sm md:text-base text-starlight/85 mb-12 leading-relaxed font-light max-w-2xl mx-auto">
-              Operamos en Monterrey mediante videollamada y WhatsApp directo para agilizar procesos y maximizar la efectividad de tus campañas de <strong className="text-white font-medium">marketing digital en Monterrey</strong>.
+              Si necesitas un sitio web, quieres mejorar tus campañas o buscas organizar el seguimiento de tus prospectos, déjanos tus datos o escríbenos por WhatsApp para conversar sobre tu proyecto.
             </p>
 
-            <LeadForm servicioInteres="Estrategia Monterrey" />
+            <LeadForm servicioInteres="Estrategia Monterrey" submitLabel="Solicitar información" />
 
             <div className="mt-14 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-6 text-left text-sm text-starlight/70 font-mono">
               <div>
-                <span className="text-xs text-white/30 block mb-1">UBICACIÓN</span>
-                <span className="text-white font-bold">Monterrey, Nuevo León</span>
-                <span className="block text-xs mt-1 text-white/50">Base San Pedro Garza García</span>
+                <span className="text-xs text-white/30 block mb-1">COBERTURA</span>
+                <span className="text-white font-bold">Atención a empresas en Monterrey, Nuevo León</span>
               </div>
               <div>
                 <span className="text-xs text-white/30 block mb-1">WHATSAPP DIRECTO</span>

@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Diseño de Páginas Web y Sitios Headless | Alié Digital",
-  description: "Agencia de diseño de páginas web rápidas y seguras. Creamos sitios premium con tecnologías modernas como Next.js y WordPress enfocadas en la conversión.",
+  title: "Diseño de páginas web para empresas | Alié Digital",
+  description: "Diseñamos páginas web para presentar tu negocio y facilitar el contacto con clientes. Sitios empresariales, tiendas en línea y desarrollo a medida. Cotiza tu proyecto.",
   alternates: {
     canonical: "https://aliedigital.com/diseno-paginas-web/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Diseño de Páginas Web y Sitios Headless B2B | Alié Digital",
-    description: "Agencia de diseño de páginas web rápidas y seguras. Creamos sitios premium con tecnologías modernas como Next.js y WordPress enfocados en la conversión comercial.",
+    title: "Diseño de páginas web para empresas | Alié Digital",
+    description: "Diseñamos páginas web para presentar tu negocio y facilitar el contacto con clientes. Sitios empresariales, tiendas en línea y desarrollo a medida. Cotiza tu proyecto.",
     url: "https://aliedigital.com/diseno-paginas-web/",
     images: [
       {
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Diseño de Páginas Web y Sitios Headless B2B | Alié Digital",
-    description: "Agencia de diseño de páginas web rápidas y seguras. Creamos sitios premium con tecnologías modernas como Next.js y WordPress enfocados en la conversión comercial.",
+    title: "Diseño de páginas web para empresas | Alié Digital",
+    description: "Diseñamos páginas web para presentar tu negocio y facilitar el contacto con clientes. Sitios empresariales, tiendas en línea y desarrollo a medida. Cotiza tu proyecto.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
 };;
@@ -43,8 +43,8 @@ export default function Page() {
       <JsonLd
         data={createServiceSchema(
           "/diseno-paginas-web/",
-          "Diseño de Páginas Web & Desarrollo Headless | Alié Digital",
-          "Diseño y desarrollo de páginas web a la medida con Next.js, WordPress y Shopify. Sitios web ultrarrápidos y optimizados para SEO y conversión."
+          "Diseño de páginas web para empresas | Alié Digital",
+          "Diseño y desarrollo de sitios empresariales, tiendas en línea y funciones a medida, con estructura, diseño y tecnología definidos según las necesidades de cada proyecto."
         )}
       />
       <WebDevPageClient />

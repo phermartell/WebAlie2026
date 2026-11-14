@@ -5,173 +5,202 @@ import Link from "next/link";
 import { SpotlightCard } from "@/components/agencia/ui";
 import OrbitalPath from "@/components/agencia/OrbitalPath";
 
-const modules = [
+interface ServiceModule {
+  num: string;
+  title: string;
+  desc: string;
+  items: string[];
+  price: string;
+  tag: string;
+  href: string;
+  primaryCta?: string;
+  secondaryCta?: string;
+}
+
+const modules: ServiceModule[] = [
   {
     num: "01",
-    title: "SEO Técnico & AI SEO - GOOGLE, CHATGPT",
-    desc: "Rankea en las órbitas donde la gente busca: Google, ChatGPT y más. Combinamos el SEO tradicional con el SEO optimizado con IA. Dominamos los motores de búsqueda mediante optimización de código fuente, estructuración de datos para modelos de IA y arquitectura de contenidos estratégica.",
+    title: "Posicionamiento SEO",
+    desc: "Ayuda a tus clientes a encontrar tu empresa cuando buscan tus productos o servicios. Mejoramos la estructura y los contenidos de tu sitio para aumentar su visibilidad en búsquedas relevantes para tu negocio.",
     items: [
-      "Optimización On-Page y Core Web Vitals",
-      "Estrategia de Contenidos para Búsqueda e IA (llms.txt & entity SEO)",
-      "Auditoría de Arquitectura Técnica SEO y reparación SEO técnica",
-      "Búsqueda de palabras clave y generación de contenido estratégico",
-      "Optimización de Schema",
-      "LinkBuilding"
+      "Revisión técnica del sitio y prioridades de mejora",
+      "Investigación de palabras clave relacionadas con tu oferta",
+      "Optimización de títulos, contenidos y enlaces internos",
+      "Mejoras de rastreo, indexación y rendimiento",
+      "Datos estructurados para describir tu contenido",
+      "Estrategia de contenidos y referencias externas"
     ],
     price: "Desde $6,000/mes.",
-    tag: "AI SEO",
-    href: "/seo"
+    tag: "SEO",
+    href: "/seo",
+    primaryCta: "Consultar SEO →",
+    secondaryCta: "Conocer el servicio →"
   },
   {
     num: "02",
-    title: "Diseño de Páginas Web & Desarrollo Web Headless - NEXT.JS, WORDPRESS",
-    desc: "Tu Nave Madre. Sitios web construidos con Next.js, WordPress o código cien por ciento personalizado. Optimizados para SEO y dispositivos móviles, diseñados como máquinas de conversión. Desarrollamos sitios ultrarrápidos (One Page, Corporativos, Catálogos y E-commerce) hechos a la medida, liberándote de las plantillas pesadas y lentas del pasado.",
+    title: "Diseño de páginas web",
+    desc: "Presenta tu negocio con un sitio que explique tu oferta, transmita confianza y facilite el contacto. Diseñamos páginas empresariales, catálogos y sitios personalizados según los objetivos y necesidades de tu proyecto.",
     items: [
-      "Diseño personalizado UI/UX (Liquid Glass)",
-      "Construcción híbrida con Headless WordPress",
-      "Diseño mobile first",
-      "Desarrollo Next.js/React de carga ultrarrápida",
-      "Arquitectura optimizada para SEO",
+      "Diseño alineado con la identidad de tu negocio",
+      "Estructura y navegación para encontrar información",
+      "Adaptación a dispositivos móviles",
+      "Desarrollo con la tecnología adecuada para tu proyecto",
+      "Preparación técnica básica para buscadores",
       "Configuración de analítica",
-      "Interfaces orientadas a conversión"
+      "Recorridos que faciliten consultas y solicitudes"
     ],
     price: "Desde $7,000 MXN.",
-    tag: "HEADLESS",
-    href: "/diseno-paginas-web"
+    tag: "DISEÑO WEB",
+    href: "/diseno-paginas-web",
+    primaryCta: "Cotizar página web →",
+    secondaryCta: "Conocer el servicio →"
   },
   {
     num: "03",
-    title: "Ecommerce & Tiendas en Línea - SHOPIFY, WOOCOMMERCE, HEADLESS",
-    desc: "Desarrollamos tiendas en línea y plataformas transaccionales de alta velocidad preparadas para vender de forma más eficiente. Creamos flujos de compra optimizados para conversiones (CRO), pasarelas de pago integradas y control autoadministrable de stock.",
+    title: "Desarrollo de tiendas en línea",
+    desc: "Vende tus productos por internet con una tienda adaptada a tu catálogo y a la operación de tu negocio. Organizamos la presentación de productos, el proceso de compra y la gestión de pedidos según el alcance de tu proyecto.",
     items: [
-      "Diseño personalizado UI/UX optimizado para conversión",
-      "Programación limpia en WooCommerce, Shopify o Next.js",
-      "Integración de pasarelas de pago (Stripe, PayPal, MercadoPago)",
-      "Configuración de operadores logísticos y alertas de envío",
-      "Sincronización con CRM y control de stock automatizado"
+      "Diseño de catálogo y fichas de producto",
+      "Desarrollo en la plataforma adecuada para tu negocio",
+      "Configuración de métodos de pago",
+      "Configuración de opciones y notificaciones de envío",
+      "Integraciones de inventario y CRM según el proyecto"
     ],
     price: "Desde $8,000 MXN.",
     tag: "ECOMMERCE",
-    href: "/ecommerce"
+    href: "/ecommerce",
+    primaryCta: "Cotizar tienda →",
+    secondaryCta: "Conocer el servicio →"
   },
   {
     num: "04",
-    title: "Meta & Google Ads - PAID ADS",
-    desc: "Combustible de alta combustión. Captamos clientes con intención directa de compra inmediata a través de campañas pautadas con seguimiento avanzado de conversiones y eventos.",
+    title: "Gestión de Google Ads y Meta Ads",
+    desc: "Acerca tu oferta a personas interesadas mediante campañas publicitarias. Definimos objetivos, audiencias y mensajes, damos seguimiento al presupuesto y revisamos las consultas registradas para mejorar el desempeño de tus anuncios.",
     items: [
-      "Configuración de campañas estratégicas",
-      "Búsqueda y segmentación de audiencias",
-      "Rastreo de conversiones",
-      "Producción creativa de anuncios",
-      "A/B Testing Continuo de Anuncios y Copys",
-      "Reporteo Transparente de Retorno de Inversión (ROI)",
-      "Campañas de Búsqueda y Display en Google",
-      "Configuración de Píxeles y Eventos de Conversión"
+      "Planeación y configuración de campañas",
+      "Investigación de búsquedas y audiencias",
+      "Redacción y diseño de anuncios",
+      "Configuración de medición de conversiones",
+      "Pruebas de mensajes y creatividades",
+      "Seguimiento y ajustes de presupuesto",
+      "Reportes de resultados y recomendaciones"
     ],
     price: "Desde $2,500/mes + saldo publicitario.",
-    tag: "PAID ADS",
-    href: "/paid-media"
+    tag: "PUBLICIDAD DIGITAL",
+    href: "/paid-media",
+    primaryCta: "Consultar campañas →",
+    secondaryCta: "Conocer el servicio →"
   },
   {
     num: "05",
-    title: "Social Media Marketing - SMM",
-    desc: "Transmite tu señal a través del cosmos. Desde la creación de contenido orgánico, generamos ecosistemas para TikTok, Instagram, LinkedIn y YouTube con estrategias basadas en datos para crecer tu marca y generar conversiones.",
+    title: "Gestión de redes sociales",
+    desc: "Mantén una presencia consistente y comunica con claridad lo que ofrece tu negocio. Planeamos contenido, diseñamos publicaciones y damos seguimiento a la actividad de tus redes según los canales y el alcance acordados.",
     items: [
-      "Calendario Editorial & Copywriting B2B",
-      "Diseño de Piezas Visuales de Alta Gama",
-      "Análisis de tendencias",
-      "Administración de comunidades",
-      "Reportes de rendimiento"
+      "Planeación del calendario de contenidos",
+      "Redacción de textos para publicaciones",
+      "Diseño de piezas alineadas con tu marca",
+      "Revisión de temas y tendencias relevantes",
+      "Gestión de comunidad según el alcance contratado",
+      "Reportes de actividad y recomendaciones"
     ],
     price: "Desde $4,000/mes + saldo publicitario.",
-    tag: "SMM",
-    href: "/redes-sociales"
+    tag: "REDES SOCIALES",
+    href: "/redes-sociales",
+    primaryCta: "Consultar redes →",
+    secondaryCta: "Conocer el servicio →"
   },
   {
     num: "06",
-    title: "Email Marketing & Automatización de Flujos - NEWSLETTERS, CRM",
-    desc: "Diseñamos campañas y automatizaciones de email marketing de alto impacto para nutrir contactos y activar ventas continuas. Establecemos canales profesionales de comunicación para educar, retener y convertir prospectos en piloto automático.",
+    title: "Email marketing y automatización",
+    desc: "Mantén el contacto con tus prospectos y clientes mediante correos relevantes. Creamos campañas y secuencias automatizadas para comunicar novedades, acompañar decisiones de compra y dar seguimiento según las necesidades de tu negocio.",
     items: [
-      "Diseño de plantillas branded premium y personalizadas",
-      "Redacción y copywriting persuasivo B2B / B2C",
-      "Configuración de flujos automatizados de nutrición y venta",
-      "Segmentación avanzada de contactos por comportamiento e interés",
-      "Seguimiento, pruebas A/B de asuntos/CTAs y reportes mensuales"
+      "Diseño de plantillas alineadas con tu marca",
+      "Redacción de mensajes y llamados a la acción",
+      "Segmentación de tu base de contactos",
+      "Configuración de secuencias automatizadas",
+      "Pruebas de asuntos y mensajes",
+      "Reportes de resultados y recomendaciones"
     ],
     price: "Desde $3,000/mes.",
-    tag: "EMAIL",
-    href: "/email-marketing"
+    tag: "EMAIL MARKETING",
+    href: "/email-marketing",
+    primaryCta: "Consultar email →",
+    secondaryCta: "Conocer el servicio →"
   },
   {
     num: "07",
-    title: "Asistentes IA & Automatizaciones - CLAUDE, OPENAI, CHATBOTS",
-    desc: "Tus copilotos autónomos. Implementamos flujos automatizados de captación y atención con Inteligencia Artificial para acelerar la respuesta a prospectos sin aumentar la nómina. Asistentes de IA personalizados desarrollados con Claude o OpenAI, entrenados para tu negocio, activos en el radar 24/7. Nosotros manejamos toda la estrategia, construcción y optimización en vivo.",
+    title: "IA y automatización para tu negocio",
+    desc: "Reduce tareas repetitivas y agiliza la atención con soluciones adaptadas a tu operación. Revisamos tus procesos y herramientas para definir qué puede automatizarse y dónde necesita intervenir tu equipo.",
     items: [
-      "Análisis de las necesidades de tu negocio",
-      "Desarrollo con Claude/OpenAI/Gemini",
-      "Diseño personalizado de asistentes de IA",
-      "Integración de WhatsApp Web API & CRMs",
-      "Agentes de IA y Chatbots de Calificación",
-      "Automatización de Calificación de Leads B2B",
-      "Seguimiento Omnicanal Automatizado"
+      "Análisis del proceso que necesitas mejorar",
+      "Definición del alcance y las herramientas",
+      "Diseño de asistentes y flujos automatizados",
+      "Integraciones según viabilidad y alcance del proyecto",
+      "Configuración de respuestas y criterios de seguimiento",
+      "Pruebas y ajustes de la solución"
     ],
     price: "Precio personalizado.",
-    tag: "CHATBOTS",
-    href: "/ia"
+    tag: "IA Y AUTOMATIZACIÓN",
+    href: "/ia",
+    primaryCta: "Consultar IA →",
+    secondaryCta: "Conocer el servicio →"
   },
   {
     num: "08",
-    title: "Identidad Gráfica & Branding Corporativo",
-    desc: "La insignia de tu flota. Desde el posicionamiento de marca y el tono de voz, hasta la identidad visual y las directrices maestras. Construimos marcas que destacan en la oscuridad y atraen a los aliados adecuados.",
+    title: "Diseño de identidad gráfica",
+    desc: "Presenta una imagen coherente en los distintos puntos de contacto de tu negocio. Definimos elementos visuales y criterios de uso para ayudarte a crear una identidad o mejorar la que ya tienes.",
     items: [
-      "Estrategias de posicionamiento de marca",
-      "Voz de marca y copywriting",
-      "Manual de Identidad & Tipografía Corporativa",
-      "Paleta Cromática e Iconografía Institucional",
-      "Aplicaciones de Marca y Papelería Digital"
+      "Definición del enfoque visual de la marca",
+      "Diseño de logotipo según el alcance del proyecto",
+      "Selección de colores y tipografías",
+      "Lineamientos de uso y aplicaciones",
+      "Archivos y recursos gráficos acordados",
+      "Guía de identidad según la opción contratada"
     ],
     price: "Desde $4,000 MXN.",
-    tag: "BRANDING",
-    href: "/identidad-grafica"
+    tag: "IDENTIDAD GRÁFICA",
+    href: "/identidad-grafica",
+    primaryCta: "Cotizar identidad →",
+    secondaryCta: "Conocer el servicio →"
   }
 ];
 
 const steps = [
   {
     num: "01",
-    phase: "PASO 01 - SEMANA 1 • AUDITORÍA",
-    title: "Descubrimiento",
-    desc: "Análisis exhaustivo de tu negocio, metas y competidores. Auditoría sin costo incluida.",
+    phase: "CONTEXTO",
+    title: "Conocemos tu necesidad",
+    desc: "Conversamos sobre tu negocio, tus objetivos y las herramientas que utilizas para identificar qué necesitas resolver.",
     sphereBg: "radial-gradient(circle at 35% 35%, #eb3f1b, #4a0f05, #000)"
   },
   {
     num: "02",
-    phase: "PASO 02 - SEMANA 2 • ESTRATEGIA",
-    title: "Hoja de Ruta",
-    desc: "Plan de crecimiento personalizado priorizando las oportunidades de mayor valor comercial.",
+    phase: "ALCANCE",
+    title: "Definimos la propuesta",
+    desc: "Precisamos los entregables, la inversión, los tiempos y las responsabilidades de cada parte antes de iniciar.",
     sphereBg: "radial-gradient(circle at 35% 35%, #eb3f1b, #4a0f05, #000)"
   },
   {
     num: "03",
-    phase: "PASO 03 - SEMANAS 3-4 • CONSTRUCCIÓN",
-    title: "Ejecución",
-    desc: "Flujos de trabajo acelerados por Inteligencia Artificial para resultados más rápidos y rentables.",
+    phase: "EJECUCIÓN",
+    title: "Desarrollamos el trabajo",
+    desc: "Ejecutamos las actividades acordadas y coordinamos contigo la información y las revisiones necesarias.",
     sphereBg: "radial-gradient(circle at 35% 35%, #eb3f1b, #4a0f05, #000)"
   },
   {
     num: "04",
-    phase: "PASO 04 - CONSTANTE • OPTIMIZACIÓN",
-    title: "Resultados",
-    desc: "Monitoreo continuo, reportes de rendimiento y optimización para potenciar conversiones.",
+    phase: "SEGUIMIENTO",
+    title: "Revisamos los avances",
+    desc: "Compartimos los entregables y revisamos los resultados disponibles según el servicio contratado.",
     sphereBg: "radial-gradient(circle at 35% 35%, #eb3f1b, #4a0f05, #000)"
   }
 ];
 
 const stats = [
-  { value: "6 sem", label: "TIEMPO ESTIMADO" },
-  { value: "24/7", label: "MONITOREO IA" },
-  { value: "14 días", label: "VENTANA DE AJUSTES" },
-  { value: "∞", label: "ITERACIONES" }
+  { value: "Alcance", label: "Entregables acordados" },
+  { value: "Tiempos", label: "Calendario por proyecto" },
+  { value: "Revisión", label: "Ajustes según propuesta" },
+  { value: "Atención", label: "Canales y horarios acordados" }
 ];
 
 export default function ServiciosPage() {
@@ -199,18 +228,15 @@ export default function ServiciosPage() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orangeleader/30 bg-orangeleader/10 text-orangeleader text-xs font-mono uppercase tracking-widest mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-orangeleader animate-ping" />
-            NUESTROS MÓDULOS DE ESCALAMIENTO
+            Servicios de Alié Digital
           </div>
 
           <h1 className="text-5xl md:text-8xl font-black uppercase text-white leading-[1.0] tracking-tight mb-8">
-            FULL-STACK<br />
-            <span className="text-transparent block mt-2" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.75)" }}>
-              MARKETING.
-            </span>
+            Marketing digital y desarrollo web para tu empresa
           </h1>
 
           <p className="mt-8 text-base md:text-xl text-starlight/70 leading-relaxed font-light max-w-2xl mx-auto">
-            Construimos la infraestructura digital que escala las ventas de tu empresa. Un ecosistema impulsado por Inteligencia Artificial y código Headless.
+            Encuentra apoyo para crear tu sitio, promocionar tus productos o servicios y mejorar el seguimiento de tus prospectos. Cuéntanos qué necesita tu negocio y te orientamos sobre las opciones para tu proyecto.
           </p>
 
           <div className="mt-12">
@@ -218,7 +244,7 @@ export default function ServiciosPage() {
               href="/contacto"
               className="inline-block bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full px-8 py-4 font-black text-sm uppercase tracking-widest transition-all cursor-pointer shadow-[0_10px_30px_rgba(235,63,27,0.4)] hover:scale-105 active:scale-95"
             >
-              OBTÉN UNA AUDITORÍA SIN COSTO →
+              Solicitar información →
             </Link>
           </div>
         </motion.div>
@@ -229,7 +255,7 @@ export default function ServiciosPage() {
         <div className="mb-20 text-center">
           <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">HANGAR DE INGENIERÍA</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2">
-            Sistemas de Propulsión de Flota
+            Encuentra el servicio que necesita tu negocio
           </h2>
           <div className="h-0.5 w-16 bg-orangeleader/40 mx-auto mt-4 rounded-full" />
         </div>
@@ -283,13 +309,13 @@ export default function ServiciosPage() {
                       href="/contacto"
                       className="flex-1 bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full py-3 px-6 font-black text-[11px] uppercase tracking-widest text-center shadow-[0_4px_12px_rgba(235,63,27,0.2)] transition-all"
                     >
-                      EMPEZAR PROYECTO →
+                      {m.primaryCta || "EMPEZAR PROYECTO →"}
                     </Link>
                     <Link
                       href={m.href}
                       className="flex-1 bg-white/5 hover:bg-white/10 text-white rounded-full py-3 px-6 font-black text-[11px] uppercase tracking-widest border border-white/10 transition-all text-center hover:border-white/20"
                     >
-                      VER PORTAFOLIO →
+                      {m.secondaryCta || "VER PORTAFOLIO →"}
                     </Link>
                   </div>
                 </div>
@@ -313,13 +339,10 @@ export default function ServiciosPage() {
             CÓMO TRABAJAMOS • 4 PASOS
           </div>
           <h2 className="text-4xl md:text-7xl font-black uppercase text-white tracking-tight">
-            EL{" "}
-            <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.7)" }}>
-              Proceso.
-            </span>
+            Cómo trabajamos contigo
           </h2>
           <p className="mt-6 text-starlight/60 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed">
-            Del descubrimiento a los resultados de escalamiento: un marco de trabajo de 4 pasos para lanzar tu infraestructura digital.
+            Primero entendemos lo que necesita tu negocio. Después definimos el alcance, las actividades y la forma de dar seguimiento a tu proyecto.
           </p>
         </div>
 
@@ -361,7 +384,7 @@ export default function ServiciosPage() {
         {/* Row of stats */}
         <div className="mt-24 text-center relative z-10">
           <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-wider">
-            Tiempos Promedio y Garantías de Misión
+            Un alcance claro desde el inicio
           </h3>
           <div className="h-0.5 w-12 bg-orangeleader/30 mx-auto mt-3 rounded-full" />
         </div>

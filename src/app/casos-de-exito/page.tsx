@@ -4,8 +4,9 @@ import JsonLd from "@/components/JsonLd";
 import { CASOS_SCHEMA } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Casos de Éxito en Marketing Digital B2B | Alié Digital",
-  description: "Casos de estudio reales de Alié Digital. Analiza resultados medibles de nuestras campañas de SEO, Google Ads, Meta Ads y growth marketing para empresas.",
+  title: "Casos de éxito en marketing digital y desarrollo web | Alié Digital",
+  description:
+    "Explora proyectos de campañas, sitios web y tiendas en línea de Alié Digital. Conoce qué necesitaba cada cliente y qué trabajo realizamos.",
   alternates: {
     canonical: "https://aliedigital.com/casos-de-exito/",
     languages: {
@@ -16,8 +17,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Casos de Éxito en Marketing Digital y SEO B2B | Alié Digital",
-    description: "Explora los casos de estudio reales de Alié Digital. Analiza resultados medibles de nuestras campañas de SEO técnico, Google Ads, Meta Ads y growth marketing B2B.",
+    title: "Casos de éxito en marketing digital y desarrollo web | Alié Digital",
+    description:
+      "Explora proyectos de campañas, sitios web y tiendas en línea de Alié Digital. Conoce qué necesitaba cada cliente y qué trabajo realizamos.",
     url: "https://aliedigital.com/casos-de-exito/",
     images: [
       {
@@ -31,11 +33,12 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Casos de Éxito en Marketing Digital y SEO B2B | Alié Digital",
-    description: "Explora los casos de estudio reales de Alié Digital. Analiza resultados medibles de nuestras campañas de SEO técnico, Google Ads, Meta Ads y growth marketing B2B.",
+    title: "Casos de éxito en marketing digital y desarrollo web | Alié Digital",
+    description:
+      "Explora proyectos de campañas, sitios web y tiendas en línea de Alié Digital. Conoce qué necesitaba cada cliente y qué trabajo realizamos.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   return (

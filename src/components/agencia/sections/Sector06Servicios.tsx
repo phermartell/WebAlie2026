@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { SERVICIOS } from "../data";
 import { Hud, ServiceIcon } from "../hud";
@@ -24,21 +25,44 @@ export default function Sector06Servicios() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+              className="h-full"
             >
-              <SpotlightCard className="glass-liquid rounded-[28px] p-7 flex flex-col gap-4 h-full">
-                <div className="flex items-center justify-between">
-                  <span className="w-14 h-14 rounded-2xl border border-white/15 bg-white/5 flex items-center justify-center text-orangeleader">
-                    <ServiceIcon i={i} />
-                  </span>
-                  <span className="font-mono text-xs text-white/30 tracking-[0.2em]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+              <SpotlightCard className="glass-liquid rounded-[28px] p-7 flex flex-col justify-between gap-6 h-full">
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center justify-between">
+                    <span className="w-14 h-14 rounded-2xl border border-white/15 bg-white/5 flex items-center justify-center text-orangeleader">
+                      <ServiceIcon i={i} />
+                    </span>
+                    <span className="font-mono text-xs text-white/30 tracking-[0.2em]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="text-base font-black uppercase text-white leading-snug">{s.titulo}</h3>
+                  <p className="text-sm text-starlight/60 leading-relaxed font-light">{s.desc}</p>
                 </div>
-                <h3 className="text-base font-black uppercase text-white leading-snug">{s.titulo}</h3>
-                <p className="text-sm text-starlight/60 leading-relaxed">{s.desc}</p>
+                <div className="pt-4 border-t border-white/10">
+                  <Link
+                    href={s.href}
+                    aria-label={`Ver servicio de ${s.titulo}`}
+                    className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-orangeleader hover:text-tangerine transition-colors group/link cursor-pointer"
+                  >
+                    <span>Ver servicio</span>
+                    <span aria-hidden="true" className="transition-transform duration-300 group-hover/link:translate-x-1">→</span>
+                  </Link>
+                </div>
               </SpotlightCard>
             </motion.div>
           ))}
+        </div>
+
+        {/* Enlace al pie */}
+        <div className="mt-14 flex justify-center">
+          <Link
+            href="/servicios/"
+            className="w-full sm:w-auto glass-l2 rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest text-white flex items-center justify-center cursor-pointer hover:bg-white/5 transition-all"
+          >
+            Ver todos los servicios
+          </Link>
         </div>
       </div>
     </section>

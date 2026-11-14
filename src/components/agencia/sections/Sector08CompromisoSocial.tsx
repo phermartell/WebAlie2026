@@ -32,8 +32,7 @@ export default function Sector08CompromisoSocial() {
             <div className="mt-8 space-y-6 text-starlight/70 leading-relaxed">
               <p>
                 Tenemos compromiso social, es por ello que ayudamos a fundaciones sin ánimo de
-                lucro. Desde el 2023 nos dimos a la tarea de construir para Taller IMAGINA una
-                tienda en línea y ayudarlos a comercializar sus productos.
+                lucro.
               </p>
               <p>
                 Taller IMAGINA es un Programa para la Vida y el Trabajo (PROVYT) en donde trabajan
@@ -46,8 +45,8 @@ export default function Sector08CompromisoSocial() {
                 atención integral a personas con Parálisis Cerebral.
               </p>
               <p>
-                Cuentan con tres áreas principales: serigrafía, arte y maquila. En nuestro taller
-                creemos que:
+                Cuentan con tres áreas principales: serigrafía, arte y maquila. En el taller
+                consideran que:
               </p>
             </div>
 
@@ -57,8 +56,8 @@ export default function Sector08CompromisoSocial() {
             </blockquote>
 
             <p className="mt-8 text-starlight/70 leading-relaxed">
-              Es por eso que ejecutamos con amor este catálogo que tienes en tus manos, para
-              demostrarte que nada es imposible cuando tienes la pasión para seguir tus sueños.
+              Colaboramos con Taller IMAGINA e Instituto Nuevo Amanecer A.B.P. en el desarrollo de
+              una tienda en línea para presentar los productos del taller y facilitar su compra.
             </p>
           </div>
         </motion.div>

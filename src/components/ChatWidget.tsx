@@ -151,7 +151,7 @@ export default function ChatWidget({ onOpenSocial }: ChatWidgetProps) {
                   </p>
                   <p className="mt-2 text-sm text-starlight/70 leading-relaxed font-light">
                     Pongamos a girar la maquinaria digital de tu negocio.
-                    Mándanos un mensaje — tiempo de respuesta récord (&lt; 1 min).
+                    Elige Messenger o Instagram para escribirnos.
                   </p>
 
                   <div className="mt-5 flex flex-col gap-2.5">

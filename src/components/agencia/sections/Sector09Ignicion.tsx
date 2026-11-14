@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import LeadForm from "@/components/LeadForm";
 import { Hud } from "../hud";
@@ -36,25 +37,28 @@ export default function Sector09Ignicion() {
 
           <div className="relative">
             <motion.div variants={item}>
-              <Hud>Despegue Comercial // Inicia la Ignición</Hud>
+              <Hud>HABLEMOS DE TU PROYECTO</Hud>
             </motion.div>
             <motion.h2
               variants={item}
               className="mt-6 text-3xl md:text-5xl font-black uppercase text-white leading-[1.05]"
             >
-              Listo para crecer: construyamos algo increíble
+              Cuéntanos qué necesita tu empresa
             </motion.h2>
             <motion.p variants={item} className="mt-6 text-base text-starlight/75 leading-relaxed font-light">
-              Como tu{" "}
-              <strong className="text-white font-semibold">
-                agencia de marketing digital potenciada por inteligencia artificial
-              </strong>{" "}
-              y desarrollo tecnológico, estamos listos para analizar tu presencia digital actual,
-              identificar fugas en tu proceso comercial y diseñar la hoja de ruta para tu siguiente
-              nivel de crecimiento.
+              Déjanos tus datos y te contactaremos para conocer qué quieres mejorar, qué herramientas ya usas y por dónde conviene empezar.
             </motion.p>
             <motion.div variants={item} className="mt-10">
-              <LeadForm />
+              <LeadForm submitLabel="Solicitar información" />
+            </motion.div>
+            <motion.div variants={item} className="mt-6 flex justify-center">
+              <Link
+                href="/contacto/"
+                className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-orangeleader hover:text-tangerine transition-colors group/link cursor-pointer"
+              >
+                <span>Ver canales de contacto</span>
+                <span aria-hidden="true" className="transition-transform duration-300 group-hover/link:translate-x-1">→</span>
+              </Link>
             </motion.div>
             <motion.div
               variants={item}

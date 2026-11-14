@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Paid Media y Publicidad Digital en Redes | Alié Digital",
-  description: "Campañas de Google Ads, Meta Ads y LinkedIn Ads B2B. Maximizamos el retorno de tu inversión publicitaria y la captación de leads comerciales de valor.",
+  title: "Gestión de Google Ads y Meta Ads | Alié Digital",
+  description: "Gestionamos campañas en Google Ads y Meta Ads para atraer consultas sobre tu negocio. Planeación, anuncios, medición y seguimiento de presupuesto. Solicita información.",
   alternates: {
     canonical: "https://aliedigital.com/paid-media/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Paid Media y Publicidad Digital B2B en Redes | Alié Digital",
-    description: "Creamos campañas de Google Ads, Meta Ads y LinkedIn Ads B2B. Maximizamos el retorno de tu inversión publicitaria y la captación de leads comerciales de valor.",
+    title: "Gestión de Google Ads y Meta Ads | Alié Digital",
+    description: "Gestionamos campañas en Google Ads y Meta Ads para atraer consultas sobre tu negocio. Planeación, anuncios, medición y seguimiento de presupuesto. Solicita información.",
     url: "https://aliedigital.com/paid-media/",
     images: [
       {
@@ -31,15 +31,15 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Paid Media y Publicidad Digital B2B en Redes | Alié Digital",
-    description: "Creamos campañas de Google Ads, Meta Ads y LinkedIn Ads B2B. Maximizamos el retorno de tu inversión publicitaria y la captación de leads comerciales de valor.",
+    title: "Gestión de Google Ads y Meta Ads | Alié Digital",
+    description: "Gestionamos campañas en Google Ads y Meta Ads para atraer consultas sobre tu negocio. Planeación, anuncios, medición y seguimiento de presupuesto. Solicita información.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
 };;
 
 export default function Page() {
   return <>
-      <JsonLd data={createServiceSchema("/paid-media/", "Publicidad Digital & Paid Ads | Alié Digital", "Campañas de Meta Ads, Google Ads y LinkedIn Ads con enfoque B2B y temática de alto impacto.")} />
+      <JsonLd data={createServiceSchema("/paid-media/", "Gestión de Google Ads y Meta Ads | Alié Digital", "Gestión de campañas en Google Ads y Meta Ads con planeación, preparación de anuncios, medición de acciones y seguimiento del presupuesto según el alcance acordado.")} />
       <PaidMediaPageClient />
     </>;
 }

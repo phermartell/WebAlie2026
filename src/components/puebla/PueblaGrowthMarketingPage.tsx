@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useSpring, useTransform, useVelocity, useMotionValue, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import LeadForm from "@/components/LeadForm";
 import { Hud, ShipMark } from "@/components/agencia/hud";
@@ -195,58 +196,46 @@ export default function PueblaGrowthMarketingPage() {
 
   const packages = [
     {
-      id: "capsula",
-      name: "Cápsula de Despegue",
-      eyebrow: "ÓRBITA INICIAL · STARTUP & LOCAL",
-      desc: "Perfecta para validar canales y traccionar rápido sin camotearse con agencias lentas.",
-      price: "Scoping personalizado",
+      id: "captar-consultas",
+      tag: "Opción 01",
+      title: "Empezar a captar consultas",
+      desc: "Para empresas que necesitan poner en marcha un canal de captación y saber qué anuncios o páginas generan solicitudes.",
       features: [
-        "Campañas básicas en Meta Ads (Facebook & Instagram)",
-        "1 Landing Page premium de alta velocidad (Next.js)",
-        "Configuración básica de analítica de conversión",
-        "CRM Sync para registrar leads al instante",
-        "Soporte técnico por chat y reportes mensuales",
+        "Campañas en Google Ads o Meta Ads según el proyecto",
+        "Página de captación y opciones de contacto",
+        "Medición de las acciones acordadas",
       ],
-      cta: "Iniciar Despegue",
+      cta: "Consultar esta opción",
       gradient: "from-yellow-500/5 via-transparent to-transparent",
       borderColor: "border-white/10 hover:border-yellow-500/50 hover:shadow-[0_0_30px_rgba(234,179,8,0.1)]",
       pillBg: "bg-yellow-500/10 text-yellow-400 border-yellow-400/30",
     },
     {
-      id: "transbordador",
-      name: "Transbordador de Velocidad de Escape",
-      eyebrow: "MISIONES DE CRECIMIENTO · RECOMENDADO",
-      desc: "Para empresas medianas listas para subir como erupción de Don Goyo y dominar su sector.",
-      price: "Scoping por metas",
+      id: "mejorar-campanas",
+      tag: "Opción 02",
+      title: "Mejorar campañas activas",
+      desc: "Para empresas que ya invierten en publicidad y quieren entender dónde se pierden consultas o qué ajustes conviene probar.",
       features: [
-        "Paid Media multi-canal (Meta Ads + Google Ads)",
-        "Embudo de conversión multi-paso (Lead Nurturing)",
-        "Email Marketing automatizado y flujos de retención",
-        "Optimización SEO local (Puebla, Cholula y Nacional)",
-        "Dashboard interactivo en tiempo real con Looker Studio",
-        "Integración de reCAPTCHA v3 & honeypot anti-bots",
+        "Revisión de campañas y páginas de destino",
+        "Validación de la medición disponible",
+        "Prioridades de optimización según los datos",
       ],
-      cta: "Activar Velocidad de Escape",
+      cta: "Consultar esta opción",
       gradient: "from-orangeleader/10 via-transparent to-transparent",
       borderColor: "border-[#eb3f1b]/40 hover:border-orangeleader hover:shadow-[0_0_40px_rgba(235,63,27,0.2)]",
       pillBg: "bg-[#eb3f1b]/20 text-orangeleader border-[#eb3f1b]/40",
-      featured: true,
     },
     {
-      id: "crucero",
-      name: "Crucero de Conquista Interestelar",
-      eyebrow: "SISTEMA INTEGRAL 360° · PREMIUM",
-      desc: "El motor de growth más robusto, chulo y seguro. La joya de la corona tecnológica.",
-      price: "Scoping por presupuesto",
+      id: "seguimiento-comercial",
+      tag: "Opción 03",
+      title: "Organizar el seguimiento comercial",
+      desc: "Para empresas que ya reciben consultas y necesitan registrarlas, asignarlas y saber en qué etapa está cada oportunidad.",
       features: [
-        "Estrategia de Growth 360° y Paid Media ilimitado",
-        "Desarrollo Headless Web a la medida con Next.js",
-        "Asistente de IA conversacional 24/7 para atención local",
-        "Data Engine para atribuir y reconciliar ingresos al centavo",
-        "Optimización de Búsquedas por IA (AEO / GEO / SEO)",
-        "Soporte prioritario 24/7 y consultoría estratégica",
+        "Criterios de calificación acordados con ventas",
+        "Registro y asignación en el CRM según compatibilidad",
+        "Seguimiento por correo o WhatsApp según el alcance",
       ],
-      cta: "Conquistar la Galaxia",
+      cta: "Consultar esta opción",
       gradient: "from-cyan-500/5 via-transparent to-transparent",
       borderColor: "border-white/10 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]",
       pillBg: "bg-cyan-500/10 text-cyan-400 border-cyan-400/30",
@@ -256,76 +245,47 @@ export default function PueblaGrowthMarketingPage() {
   const coreCapabilities = [
     {
       num: "01",
-      title: "Paid Media Inteligente",
-      desc: "Anuncios en Google y Meta Ads operados bajo una sola estrategia de adquisición orientada a tus metas de ingresos.",
+      title: "Campañas",
+      desc: "Configuramos o revisamos anuncios en Google Ads y Meta Ads según el público, el objetivo y el presupuesto acordados.",
     },
     {
       num: "02",
-      title: "Data & Analítica",
-      desc: "Ingeniería de medición para que sepas qué campaña atrae clientes de verdad y no te quedes como el perro de las dos tortas.",
+      title: "Página de captación",
+      desc: "Preparamos o revisamos la página de destino para que el prospecto pueda consultar tu oferta y solicitar una cotización.",
     },
     {
       num: "03",
-      title: "Asistentes de IA",
-      desc: "Agentes autónomos configurados para calificar leads y agendar citas comerciales por ti mientras Don Goyo descansa.",
+      title: "Medición",
+      desc: "Acordamos qué acciones registrar, como envíos de formulario o clics a WhatsApp. Revisamos de dónde vienen cuando los datos disponibles permiten identificarlo.",
     },
     {
       num: "04",
-      title: "Optimización AI Search",
-      desc: "Preparamos tu sitio para aparecer en respuestas directas de ChatGPT, Gemini y Perplexity, no solo en la lista azul de Google.",
-    },
-    {
-      num: "05",
-      title: "Headless Web Dev",
-      desc: "Sitios de Next.js ultrarrápidos con velocidad de escape. Cero plantillas pesadas, puro diseño premium personalizado.",
-    },
-    {
-      num: "06",
-      title: "Email & Lifecycle",
-      desc: "Nutrición automática de prospectos vía Email y WhatsApp para cerrar contratos sin gastar de más en publicidad.",
+      title: "CRM y seguimiento",
+      desc: "Si la integración forma parte del proyecto, configuramos el registro y la asignación de solicitudes. Tu equipo comercial las atiende y actualiza el estado de cada oportunidad.",
     },
   ];
 
   const faqs = [
     {
-      q: "¿Por qué venden paquetes todo en uno y no servicios por separado?",
-      a: "Porque comprar solo una campaña de Ads sin una landing rápida o sin analítica es como querer volar al espacio en una combi a medio gas. Un sistema de growth de verdad funciona cuando todas las piezas están unidas: los anuncios atraen demanda, el diseño web convierte, y los datos nos dicen qué optimizar. Al empaquetarlo todo a la medida de tu presupuesto, eliminamos la fricción y aseguramos resultados reales.",
+      q: "¿Qué puede incluir la propuesta?",
+      a: "Según lo que ya tenga tu empresa, la propuesta puede incluir campañas en Google Ads o Meta Ads, una página de captación, medición de consultas y conexiones con tu CRM. Acordamos qué se implementa y qué herramientas necesita aportar tu equipo.",
     },
     {
-      q: "¿Tienen oficina física en Puebla o Cholula?",
-      a: "Operamos como un equipo senior distribuido y remoto entre Puebla y Cholula. No gastamos en rentas lujosas frente a Angelópolis para no inflar tus costos; preferimos invertir todo tu presupuesto en ingeniería de datos, optimización de pauta y desarrollo. Nos reunimos por Google Meet para mantener la nave alineada y viajamos a tu corporativo si la misión lo amerita.",
+      q: "¿Cómo atienden a empresas en Puebla?",
+      a: "Atendemos a empresas en Puebla y San Andrés Cholula por videollamada y WhatsApp. En la primera conversación revisamos qué quieres mejorar y qué herramientas ya usas.",
     },
     {
-      q: "¿Cómo se conectan los formularios a mi CRM?",
-      a: "Toda la telemetría del sitio (formularios y clics) se conecta de forma directa a tu CRM mediante integraciones limpias de API. Además, cada formulario pasa por una validación de reCAPTCHA v3 y posee un honeypot oculto anti-bots, asegurando que solo te lleguen prospectos reales y calificados.",
+      q: "¿Cómo se define el presupuesto?",
+      a: "Revisamos el alcance y la inversión disponible. La propuesta detalla los honorarios del servicio y, si incluye campañas, distingue el presupuesto destinado a anuncios.",
     },
     {
-      q: "¿Cómo calculan el costo de los paquetes?",
-      a: "En lugar de cobrarte un porcentaje fijo del gasto en pauta (como hacen las agencias del siglo pasado), estructuramos el alcance según las metas de tu negocio y la fase en la que se encuentra tu marca. Diseñamos un alcance que se ajuste al presupuesto disponible para que cada peso genere retorno verificable.",
+      q: "¿Cuándo podremos evaluar los primeros datos?",
+      a: "Depende de la configuración inicial, el presupuesto y el volumen de consultas. Al definir el alcance acordamos cuándo revisar los datos disponibles y qué señales usaremos para decidir ajustes.",
     },
     {
-      q: "¿Qué pasa si mi presupuesto es pequeño? ¿Me quedo sin despegue?",
-      a: "Para nada. Si vas arrancando, iniciamos con la Cápsula de Despegue. Nos enfocamos en validar tus canales principales con pautas eficientes y una landing ultra rápida. Conforme se vayan captando leads y cierres ventas en Puebla o nivel nacional, escalamos tu presupuesto y tus sistemas al siguiente nivel sin camotearnos.",
+      q: "¿Quién da seguimiento a las consultas?",
+      a: "Podemos ayudarte a registrar y asignar las consultas y a definir criterios para calificarlas. Tu equipo comercial contacta a los prospectos, califica las oportunidades, actualiza su estado y lleva la negociación.",
     },
-    {
-      q: "¿En cuánto tiempo veré los resultados de mi sistema de growth?",
-      a: "Las campañas de pauta en Google y Meta Ads comienzan a generar prospectos en las primeras 2 a 3 semanas. La automatización del CRM y los asistentes de IA quedan listos en el primer mes. Las estrategias de SEO técnico local e indexación en IAs conversacionales toman entre 3 y 6 meses, constituyendo la base para un crecimiento sostenible sin depender eternamente de pauta pagada.",
-    },
-    {
-      q: "¿Tengo control y propiedad absoluta de mis activos digitales?",
-      a: "Por supuesto. Nosotros programamos, integramos y optimizamos tu nave comercial, pero tú eres el comandante absoluto. Todo el código Next.js, las cuentas publicitarias de Google/Meta, Google Analytics y las integraciones del CRM son de tu propiedad. Si la misión termina en algún momento, te llevas todo contigo sin penalizaciones ni letras chiquitas.",
-    }
-  ];
-
-  const clientLogos = [
-    "/logos/logo-acares.webp",
-    "/logos/logo-alianza.webp",
-    "/logos/logo-arguello.webp",
-    "/logos/logo-penalares.webp",
-    "/logos/logo-morecsa.webp",
-    "/logos/logo-prisma.webp",
-    "/logos/logo-confirma.webp",
-    "/logos/logo-conkretar.webp"
   ];
 
   return (
@@ -334,13 +294,6 @@ export default function PueblaGrowthMarketingPage() {
         @keyframes orbit-flow {
           0% { background-position: 0 0; }
           100% { background-position: 0 1000px; }
-        }
-        @keyframes marquee-left {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee-left {
-          animation: marquee-left 40s linear infinite;
         }
       `}</style>
 
@@ -360,18 +313,18 @@ export default function PueblaGrowthMarketingPage() {
             className="flex flex-col items-center"
           >
             <span className="text-xs md:text-sm font-mono tracking-[0.4em] text-orangeleader uppercase block mb-6 px-4">
-              SISTEMAS DE CRECIMIENTO TODO EN UNO // PUEBLA & CHOLULA
+              CAPTACIÓN Y SEGUIMIENTO COMERCIAL
             </span>
 
             <h1 className="text-4xl md:text-7xl font-black uppercase leading-[1.02] tracking-tighter mb-8 max-w-4xl px-2">
               Growth Marketing <br className="hidden md:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orangeleader to-tangerine">
-                Todo En Uno en Puebla
+                B2B en Puebla
               </span>
             </h1>
 
             <p className="text-base md:text-lg text-starlight/85 max-w-2xl mx-auto leading-relaxed font-light mb-10 px-4">
-              Dejemos de camotearnos con servicios sueltos. Construimos motores de crecimiento personalizados según tu presupuesto y metas de ventas: pauta digital, analítica robusta, automatización e IA operando bajo un solo sistema inteligente.
+              Ayudamos a empresas de Puebla a conectar sus campañas con páginas de captación y a medir de dónde llegan las solicitudes de cotización. Si ya recibes consultas, revisamos con tu equipo cómo registrarlas y darles seguimiento.
             </p>
           </motion.div>
 
@@ -380,31 +333,28 @@ export default function PueblaGrowthMarketingPage() {
               href="#contacto"
               className="w-full sm:w-auto bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest shadow-[0_10px_30px_rgba(235,63,27,0.4)] transition-all flex items-center justify-center cursor-pointer"
             >
-              Agendar Conversación
+              Solicitar información
             </a>
             <a
               href="#paquetes"
               className="w-full sm:w-auto glass-l2 rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest text-white flex items-center justify-center cursor-pointer hover:bg-white/5 transition-all"
             >
-              Ver Paquetes
+              Ver opciones de trabajo
             </a>
           </div>
         </div>
       </section>
 
-      {/* 🚀 THE APPROACH SECTION (UN SOLO EQUIPO & CHOLULA VISUAL REFERENCE - RESPONSIVE TALLER HEIGHT MATCH) */}
+      {/* 🚀 INTRODUCCIÓN */}
       <section className="relative z-10 px-4 md:px-8 py-20 bg-transparent">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           <div className="flex flex-col justify-center">
-            <Hud>Bitácora del Capitán // Puebla Digital</Hud>
+            <Hud>DE LA CAMPAÑA A LA COTIZACIÓN</Hud>
             <h2 className="mt-8 text-3xl md:text-5xl font-black uppercase text-white leading-[1.05] tracking-tight">
-              Un solo motor de growth en Puebla, no cinco agencias separadas
+              Qué pasa después de que alguien pide información
             </h2>
             <p className="mt-8 text-base text-starlight/75 leading-relaxed font-light font-sans">
-              Muchas empresas contratan a una agencia para diseño web, a otra para Google Ads, a un freelance para redes sociales y a un consultor de SEO. ¿El resultado? Una nave desarticulada que gasta gasolina y se queda como el perro de las dos tortas sin saber de dónde vienen las ventas.
-            </p>
-            <p className="mt-4 text-base text-starlight/75 leading-relaxed font-light font-sans">
-              En Alié Digital unimos todas las especialidades en un solo sistema de adquisición. Tu presupuesto se canaliza a lo que de verdad impulsa tu rentabilidad, monitoreando el embudo desde el primer clic en Google hasta el cierre en tu CRM.
+              Una solicitud de cotización puede llegar desde un anuncio, tu sitio o WhatsApp. Revisamos con tu equipo dónde queda registrada, quién la atiende y qué datos necesita para decidir el siguiente paso.
             </p>
           </div>
 
@@ -416,39 +366,6 @@ export default function PueblaGrowthMarketingPage() {
               sizes="(max-width: 768px) 100vw, 50vw"
               className="absolute inset-0 w-full h-full object-cover opacity-80"
             />
-            {/* Visual reference representation of Cholula Pyramid with church */}
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/40 to-transparent p-6 text-center z-10">
-              <h3 className="text-xl font-bold uppercase tracking-widest text-orangeleader">Órbita Cholula</h3>
-              <p className="text-xs text-starlight/80 max-w-xs mx-auto mt-1 font-sans">
-                Elevamos tu marca como el Santuario de los Remedios sobre la Gran Pirámide, con cimientos tecnológicos inquebrantables.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 🚀 DON GOGO / POPOCATÉPETL SECTION (VISUAL REFERENCE - RESPONSIVE TALLER HEIGHT MATCH) */}
-      <section className="relative z-10 px-4 md:px-8 py-20 bg-transparent">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
-          <div className="relative rounded-[40px] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(235,63,27,0.15)] w-full min-h-[300px] md:min-h-[450px] lg:min-h-full flex items-center justify-center bg-black lg:order-1 order-2">
-            <Image
-              src="/puebla-popo.webp"
-              alt="Volcán Popocatépetl cósmico flotando en el espacio"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="absolute inset-0 w-full h-full object-cover opacity-80"
-            />
-            <div className="absolute inset-0 bg-[#02040a]/20 pointer-events-none" />
-          </div>
-
-          <div className="flex flex-col justify-center lg:order-2 order-1">
-            <Hud>Propulsión Don Goyo // Erupción de Prospectos</Hud>
-            <h2 className="mt-8 text-3xl md:text-5xl font-black uppercase text-white leading-[1.05] tracking-tight">
-              Estrategias con la fuerza activa del Popocatépetl
-            </h2>
-            <p className="mt-8 text-base text-starlight/75 leading-relaxed font-light font-sans">
-              Nuestras campañas no van a medio gas. Inyectamos la energía del volcán activo en cada canal de adquisición digital. Configuramos flujos inteligentes automatizados que reaccionan al comportamiento del prospecto al instante, detonando una erupción constante de leads calificados directos a tu fuerza de ventas.
-            </p>
           </div>
         </div>
       </section>
@@ -457,12 +374,12 @@ export default function PueblaGrowthMarketingPage() {
       <section id="paquetes" className="relative z-10 px-4 md:px-8 py-20 bg-transparent">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <Hud>Paquetes Estratégicos // Scoping Todo en Uno</Hud>
+            <Hud>OPCIONES DE TRABAJO</Hud>
             <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-              Paquetes de Growth a tu Medida en Puebla
+              Por dónde empezar según lo que ya tienes
             </h2>
-            <p className="mt-6 text-starlight/70 max-w-lg mx-auto text-sm leading-relaxed font-light font-sans">
-              Selecciona el paquete que mejor se alinee con el presupuesto y fase de vuelo de tu empresa. Cero letras chiquitas.
+            <p className="mt-6 text-starlight/70 max-w-2xl mx-auto text-sm leading-relaxed font-light font-sans">
+              La propuesta detalla qué vamos a implementar y qué necesita aportar tu equipo. Podemos ayudarte a registrar las consultas y definir criterios para calificarlas. Tu equipo comercial atiende a los prospectos, califica las oportunidades y lleva la negociación hasta el cierre.
             </p>
           </div>
 
@@ -470,9 +387,7 @@ export default function PueblaGrowthMarketingPage() {
             {packages.map((pkg, idx) => (
               <div
                 key={idx}
-                className={`relative rounded-[32px] border ${pkg.borderColor} bg-white/[0.03] backdrop-blur-md p-8 flex flex-col justify-between overflow-hidden transition-all duration-500 ${
-                  pkg.featured ? "scale-100 lg:scale-[1.03] z-10" : ""
-                }`}
+                className={`relative rounded-[32px] border ${pkg.borderColor} bg-white/[0.03] backdrop-blur-md p-8 flex flex-col justify-between overflow-hidden transition-all duration-500`}
               >
                 {/* Background Gradient glow */}
                 <div className={`absolute inset-0 bg-gradient-to-b ${pkg.gradient} pointer-events-none z-0`} />
@@ -480,28 +395,18 @@ export default function PueblaGrowthMarketingPage() {
                 <div className="relative z-10">
                   <div className="flex justify-between items-center mb-6">
                     <span className={`text-[10px] font-mono tracking-widest border rounded-full px-3 py-1 uppercase ${pkg.pillBg}`}>
-                      {pkg.eyebrow}
+                      {pkg.tag}
                     </span>
-                    {pkg.featured && (
-                      <span className="text-[10px] font-mono tracking-widest bg-[#eb3f1b] text-white rounded-full px-3 py-1 uppercase font-bold">
-                        Popular
-                      </span>
-                    )}
                   </div>
 
                   <h3 className="text-2xl font-black uppercase tracking-tight text-white mb-3 font-sans">
-                    {pkg.name}
+                    {pkg.title}
                   </h3>
                   <p className="text-sm text-starlight/70 leading-relaxed mb-6 font-light font-sans">
                     {pkg.desc}
                   </p>
 
-                  <div className="border-t border-b border-white/10 py-4 mb-6">
-                    <div className="text-xs font-mono text-starlight/45 uppercase tracking-widest">Inversión Estimada</div>
-                    <div className="text-2xl font-black text-white mt-1 font-sans">{pkg.price}</div>
-                  </div>
-
-                  <ul className="flex flex-col gap-3.5 mb-8">
+                  <ul className="flex flex-col gap-3.5 mb-8 pt-4 border-t border-white/10">
                     {pkg.features.map((feat, fidx) => (
                       <li key={fidx} className="flex items-start gap-2.5 text-sm text-starlight/85 font-light font-sans">
                         <span className="text-orangeleader mt-0.5">✦</span>
@@ -514,11 +419,7 @@ export default function PueblaGrowthMarketingPage() {
                 <div className="relative z-10">
                   <a
                     href="#contacto"
-                    className={`w-full h-12 rounded-full font-black text-xs uppercase tracking-widest flex items-center justify-center transition-all cursor-pointer ${
-                      pkg.featured
-                        ? "bg-[#eb3f1b] hover:bg-[#ff8643] text-white shadow-[0_5px_15px_rgba(235,63,27,0.3)]"
-                        : "glass-l2 text-white hover:bg-white/5"
-                    }`}
+                    className="w-full h-12 rounded-full font-black text-xs uppercase tracking-widest flex items-center justify-center transition-all cursor-pointer glass-l2 text-white hover:bg-white/10 hover:border-orangeleader/40"
                   >
                     {pkg.cta}
                   </a>
@@ -533,16 +434,19 @@ export default function PueblaGrowthMarketingPage() {
       <section className="relative z-10 px-4 md:px-8 py-16 bg-transparent">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <Hud>Componentes del Sistema // The Engine</Hud>
+            <Hud>HERRAMIENTAS DE CAPTACIÓN Y SEGUIMIENTO</Hud>
             <h2 className="mt-6 text-3xl md:text-5xl font-black uppercase text-white leading-tight tracking-tight">
-              ¿Qué incluye el Sistema de Growth en Puebla?
+              Qué podemos conectar con tus campañas
             </h2>
+            <p className="mt-6 text-starlight/70 max-w-2xl mx-auto text-sm leading-relaxed font-light font-sans">
+              Partimos de las herramientas que ya usas y acordamos qué hace falta configurar o conectar según el proyecto.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {coreCapabilities.map((cap, cidx) => (
               <div key={cidx} className="glass-liquid rounded-3xl p-8 border border-white/5 hover:border-orangeleader/30 hover:shadow-[0_0_25px_rgba(235,63,27,0.05)] transition-all duration-500">
-                <span className="font-mono text-xs text-orangeleader block mb-3">{cap.num} // SISTEMA</span>
+                <span className="font-mono text-xs text-orangeleader block mb-3">{cap.num}</span>
                 <h3 className="text-lg font-black uppercase tracking-tight text-white mb-2 font-sans">{cap.title}</h3>
                 <p className="text-sm text-starlight/70 leading-relaxed font-light font-sans">{cap.desc}</p>
               </div>
@@ -551,29 +455,77 @@ export default function PueblaGrowthMarketingPage() {
         </div>
       </section>
 
-      {/* 🚀 CLIENTS SECTION (MATCHING PueblaDisenoWebPage.tsx SIZING EXACTLY) */}
-      <section className="relative z-10 py-16 md:py-24 border-t border-white/5 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 mb-16 text-center">
-          <Hud>Aliados Locales // Casos de Éxito</Hud>
-          <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
-            PROYECTOS LANZADOS EN PUEBLA
-          </h2>
-        </div>
+      {/* 🚀 PROYECTOS REALIZADOS */}
+      <section className="relative z-10 py-16 md:py-24 border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <Hud>PROYECTOS REALIZADOS</Hud>
+            <h2 className="mt-6 text-3xl md:text-6xl font-black uppercase text-white leading-none tracking-tighter">
+              Campañas y catálogos para captar consultas
+            </h2>
+            <p className="mt-6 text-starlight/70 max-w-2xl mx-auto text-sm md:text-base leading-relaxed font-light font-sans">
+              Conoce cómo trabajamos la captación en dos proyectos de equipos de bombeo e infraestructura.
+            </p>
+          </div>
 
-        {/* Logos Marquee */}
-        <div className="flex overflow-hidden w-full relative py-4">
-          <div className="flex gap-12 animate-marquee-left items-center min-w-full">
-            {[...clientLogos, ...clientLogos].map((src, idx) => (
-              <div key={idx} className="w-24 md:w-32 shrink-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                <Image
-                  src={src}
-                  width={128}
-                  height={64}
-                  className="w-full h-auto object-contain filter brightness-0 invert"
-                  alt="Cliente Alié Digital Puebla"
-                />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Proyecto 1: MORECSA */}
+            <div className="glass-liquid rounded-[32px] border border-white/10 p-6 md:p-8 flex flex-col justify-between hover:border-orangeleader/30 transition-all duration-300">
+              <div>
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 bg-black/40 mb-6">
+                  <Image
+                    src="/branding/morecsa.webp"
+                    alt="MORECSA"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 500px"
+                  />
+                </div>
+                <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-tight mb-3 font-sans">
+                  MORECSA
+                </h3>
+                <p className="text-starlight/75 text-sm font-light leading-relaxed font-sans">
+                  Trabajamos campañas en Google Ads y Meta Ads, un catálogo web y SEO local para apoyar la captación de consultas sobre equipos de bombeo en Puebla.
+                </p>
               </div>
-            ))}
+              <div className="pt-6">
+                <Link
+                  href="/casos-de-exito/#mision-01-bombas-sumergibles"
+                  className="inline-flex items-center gap-2 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-colors"
+                >
+                  Ver ficha del proyecto →
+                </Link>
+              </div>
+            </div>
+
+            {/* Proyecto 2: Postes Puebla */}
+            <div className="glass-liquid rounded-[32px] border border-white/10 p-6 md:p-8 flex flex-col justify-between hover:border-orangeleader/30 transition-all duration-300">
+              <div>
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 bg-black/40 mb-6">
+                  <Image
+                    src="/casos/web/postespuebla.webp"
+                    alt="Postes Puebla"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 500px"
+                  />
+                </div>
+                <h3 className="text-xl md:text-2xl font-black uppercase text-white tracking-tight mb-3 font-sans">
+                  Postes Puebla
+                </h3>
+                <p className="text-starlight/75 text-sm font-light leading-relaxed font-sans">
+                  Desarrollamos un catálogo técnico de postes y trabajamos campañas de Google Ads dirigidas a responsables de obra que buscaban información para cotizar.
+                </p>
+              </div>
+              <div className="pt-6">
+                <Link
+                  href="/casos-de-exito/#mision-04-postes-infraestructura"
+                  className="inline-flex items-center gap-2 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-colors"
+                >
+                  Ver ficha del proyecto →
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -582,32 +534,32 @@ export default function PueblaGrowthMarketingPage() {
       <section className="relative z-10 px-4 md:px-8 py-20 bg-transparent">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <Hud>Fases de Vuelo // Ruta de Colisión</Hud>
+            <Hud>PROCESO DE TRABAJO</Hud>
             <h2 className="mt-6 text-3xl md:text-5xl font-black uppercase text-white leading-tight tracking-tight">
-              Fases de Despegue desde Puebla
+              Cómo ponemos en marcha y ajustamos el servicio
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.01] backdrop-blur-[2px] text-left hover:border-orangeleader/45 hover:bg-white/[0.03] hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(235,63,27,0.12)] transition-all duration-500 cursor-default">
               <span className="font-mono text-2xl text-orangeleader font-bold">01</span>
-              <h3 className="text-xl font-black uppercase text-white mt-4 mb-2 font-sans">Auditoría & Telemetría</h3>
+              <h3 className="text-xl font-black uppercase text-white mt-4 mb-2 font-sans">Revisamos cómo llegan tus consultas</h3>
               <p className="text-sm text-starlight/75 leading-relaxed font-light font-sans">
-                Escaneamos tu funnel actual, analizamos a los competidores poblanos y modelamos la economía unitaria de tus prospectos antes de invertir el primer peso.
+                Revisamos las campañas, páginas y herramientas que ya usa tu empresa. Acordamos qué conviene trabajar primero y con qué datos evaluaremos los avances.
               </p>
             </div>
             <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.01] backdrop-blur-[2px] text-left hover:border-cyan-400/45 hover:bg-white/[0.03] hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(34,211,238,0.12)] transition-all duration-500 cursor-default">
               <span className="font-mono text-2xl text-cyan-400 font-bold">02</span>
-              <h3 className="text-xl font-black uppercase text-white mt-4 mb-2 font-sans">Ingeniería del Stack</h3>
+              <h3 className="text-xl font-black uppercase text-white mt-4 mb-2 font-sans">Implementamos y verificamos lo acordado</h3>
               <p className="text-sm text-starlight/75 leading-relaxed font-light font-sans">
-                Instalamos la analítica, creamos las landing pages headless ultra veloces e integramos los canales de pauta y CRM para que no se escape ningún lead.
+                Configuramos las campañas, páginas o integraciones previstas en la propuesta. Según el alcance, comprobamos que se registren las acciones acordadas y que las consultas lleguen al canal correspondiente.
               </p>
             </div>
             <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.01] backdrop-blur-[2px] text-left hover:border-green-400/45 hover:bg-white/[0.03] hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(34,197,94,0.12)] transition-all duration-500 cursor-default">
               <span className="font-mono text-2xl text-green-400 font-bold">03</span>
-              <h3 className="text-xl font-black uppercase text-white mt-4 mb-2 font-sans">Escalamiento Constante</h3>
+              <h3 className="text-xl font-black uppercase text-white mt-4 mb-2 font-sans">Revisamos los datos con tu equipo</h3>
               <p className="text-sm text-starlight/75 leading-relaxed font-light font-sans">
-                Optimizamos audiencias con IA, escalamos los anuncios ganadores, y te reportamos retornos claros que hasta el área de finanzas aplaudirá.
+                Contrastamos las consultas registradas con lo que reporta ventas sobre su pertinencia comercial. A partir de esa revisión priorizamos ajustes de anuncios, páginas o seguimiento.
               </p>
             </div>
           </div>
@@ -617,16 +569,51 @@ export default function PueblaGrowthMarketingPage() {
       {/* 🚀 CONTACT / CRM FORM SECTION */}
       <section id="contacto" className="relative z-10 px-4 md:px-8 py-20 bg-transparent">
         <div className="max-w-4xl mx-auto text-center">
-          <Hud>Mesa de Control // Lanzar Misión</Hud>
+          <Hud>CONTACTO EN PUEBLA</Hud>
           <h2 className="mt-6 text-3xl md:text-5xl font-black uppercase text-white tracking-tight mb-4">
-            ¿Listo para Despegar en Puebla?
+            Cuéntanos cómo llegan hoy tus prospectos
           </h2>
-          <p className="text-sm text-starlight/70 max-w-lg mx-auto mb-12 font-light font-sans">
-            Escríbenos y nuestro equipo analizará tu caso para sugerirte el paquete idóneo para tus objetivos y presupuesto.
+          <p className="text-sm md:text-base text-starlight/85 max-w-2xl mx-auto mb-12 font-light leading-relaxed font-sans">
+            Si quieres empezar a captar consultas, mejorar campañas activas u organizar el seguimiento comercial, déjanos tus datos o escríbenos por WhatsApp. Revisaremos contigo qué herramientas ya usas y por dónde conviene empezar.
           </p>
 
           <div className="glass-liquid rounded-[40px] border border-white/10 p-6 md:p-12 relative overflow-hidden shadow-[0_20px_50px_rgba(235,63,27,0.1)] backdrop-blur-md">
-            <LeadForm servicioInteres="Growth Marketing Puebla Paquetes" />
+            <LeadForm servicioInteres="Growth Marketing Puebla Paquetes" submitLabel="Solicitar información" />
+
+            <div className="mt-14 pt-8 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-6 text-left text-sm text-starlight/70 font-mono">
+              <div>
+                <span className="text-xs text-white/30 block mb-1">COBERTURA</span>
+                <span className="text-white font-bold">Atención a empresas en Puebla y San Andrés Cholula</span>
+              </div>
+              <div>
+                <span className="text-xs text-white/30 block mb-1">WHATSAPP DIRECTO</span>
+                <a href="https://wa.me/522213279555" target="_blank" rel="noopener noreferrer" className="text-orangeleader font-bold hover:underline">
+                  221 327 9555
+                </a>
+              </div>
+              <div>
+                <span className="text-xs text-white/30 block mb-1">CORREO</span>
+                <a href="mailto:puebla@aliedigital.com" className="text-white font-bold hover:underline">
+                  puebla@aliedigital.com
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-xs font-mono uppercase tracking-wider text-starlight/70">
+            <Link
+              href="/puebla/diseno-de-paginas-web/"
+              className="text-white/80 hover:text-orangeleader transition-colors inline-flex items-center gap-2"
+            >
+              Diseño de páginas web en Puebla →
+            </Link>
+            <span className="hidden sm:inline text-white/20">·</span>
+            <Link
+              href="/puebla/"
+              className="text-white/80 hover:text-orangeleader transition-colors inline-flex items-center gap-2"
+            >
+              Ver servicios de marketing digital en Puebla →
+            </Link>
           </div>
         </div>
       </section>
@@ -635,9 +622,9 @@ export default function PueblaGrowthMarketingPage() {
       <section className="relative z-10 px-4 md:px-8 py-20 bg-transparent">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
-            <Hud>Bitácora de Soporte // Preguntas Frecuentes sobre Growth en Puebla</Hud>
+            <Hud>PREGUNTAS FRECUENTES</Hud>
             <h2 className="mt-4 text-3xl md:text-5xl font-black uppercase text-white tracking-tight">
-              Preguntas Frecuentes sobre Growth en Puebla
+              Qué saber antes de iniciar
             </h2>
           </div>
 

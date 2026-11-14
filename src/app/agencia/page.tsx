@@ -4,8 +4,9 @@ import JsonLd from "@/components/JsonLd";
 import { AGENCIA_SCHEMA } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "La Agencia de Marketing Digital B2B | Alié Digital",
-  description: "Conoce Alié Digital, la agencia de marketing digital B2B experta en diseño web, SEO y growth marketing enfocada en la conversión y retorno de inversión.",
+  title: "Agencia de marketing digital y desarrollo web | Alié Digital",
+  description:
+    "Conoce cómo trabaja Alié Digital en proyectos de diseño web, posicionamiento en buscadores y campañas digitales. Explora nuestros servicios y proyectos realizados.",
   alternates: {
     canonical: "https://aliedigital.com/agencia/",
     languages: {
@@ -16,8 +17,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Conoce la Agencia de Marketing Digital B2B | Alié Digital",
-    description: "Conoce Alié Digital, agencia de marketing digital B2B líder en diseño web headless, SEO técnico y growth marketing enfocados en la conversión y retorno de inversión.",
+    title: "Agencia de marketing digital y desarrollo web | Alié Digital",
+    description:
+      "Conoce cómo trabaja Alié Digital en proyectos de diseño web, posicionamiento en buscadores y campañas digitales. Explora nuestros servicios y proyectos realizados.",
     url: "https://aliedigital.com/agencia/",
     images: [
       {
@@ -31,11 +33,12 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Conoce la Agencia de Marketing Digital B2B | Alié Digital",
-    description: "Conoce Alié Digital, agencia de marketing digital B2B líder en diseño web headless, SEO técnico y growth marketing enfocados en la conversión y retorno de inversión.",
+    title: "Agencia de marketing digital y desarrollo web | Alié Digital",
+    description:
+      "Conoce cómo trabaja Alié Digital en proyectos de diseño web, posicionamiento en buscadores y campañas digitales. Explora nuestros servicios y proyectos realizados.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   return (

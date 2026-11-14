@@ -8,58 +8,56 @@ import OrbitalPath from "@/components/agencia/OrbitalPath";
 import LeadForm from "@/components/LeadForm";
 
 const stats = [
-  { value: "+50", label: "Misiones Exitosas en Órbita", tech: "SYS: LAUNCHED" },
-  { value: "<800ms", label: "Velocidad de Carga Promedio", tech: "RAD: LCP_SPEED" },
-  { value: "Next & WP", label: "Tecnología de Propulsión", tech: "ORBIT: STACK" },
-  { value: "100%", label: "Optimizado para Conversión", tech: "TLM: ROI" }
+  { value: "Diseño", label: "Alineado con tu marca", tech: "IDENTIDAD" },
+  { value: "Móvil", label: "Adaptación a distintos dispositivos", tech: "NAVEGACIÓN" },
+  { value: "Contenido", label: "Tu oferta organizada", tech: "CLARIDAD" },
+  { value: "Contacto", label: "Canales para recibir consultas", tech: "COMUNICACIÓN" }
 ];
 
 
 const packages = [
   {
-    name: "Órbita 01 - Nave Informativa / CMS",
-    tag: "Fácil Administración",
-    desc: "Despega con una presencia digital sólida, profesional y fácil de administrar. Ideal para corporativos, marcas personales o empresas de servicios.",
+    name: "Sitio empresarial",
+    tag: "PRESENTACIÓN Y CONTACTO",
+    desc: "Para empresas y profesionales que necesitan explicar sus servicios, mostrar su trabajo y facilitar que las personas interesadas los contacten.",
     items: [
-      "Diseño personalizado UI/UX (Mobile First)",
-      "Desarrollo autoadministrable (WordPress)",
-      "Hasta 5 secciones principales",
-      "Optimización de SEO On-Page básico",
-      "Formularios integrados y enlace de WhatsApp",
-      "Manual básico de uso y autogestión"
+      "Diseño alineado con tu identidad",
+      "Organización de secciones y contenidos",
+      "Adaptación a dispositivos móviles",
+      "Formularios y canales de contacto",
+      "Administración de contenidos según la plataforma"
     ],
-    cta: "Iniciar Despegue",
+    cta: "Cotizar sitio empresarial",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   },
   {
-    name: "Órbita 02 - Estación E-Commerce",
-    tag: "Ventas e Inventario",
-    desc: "Establece un puerto comercial interplanetario completo, seguro y optimizado para transacciones rápidas y conversiones fluidas.",
+    name: "Tienda en línea",
+    tag: "CATÁLOGO Y VENTAS",
+    desc: "Para negocios que necesitan presentar productos y recibir pedidos por internet. Definimos la plataforma y las funciones según tu catálogo y tu operación.",
     items: [
-      "Diseño UI/UX enfocado en catálogo e intención de compra",
-      "Plataforma e-commerce robusta (Shopify o WooCommerce)",
-      "Configuración avanzada de pasarelas de pago (Stripe, PayPal, etc.)",
-      "Buscador interno y filtros avanzados de producto",
-      "Automatización de notificaciones de envío",
-      "Sincronización con CRM e inventario"
+      "Catálogo y fichas de producto",
+      "Proceso de compra y métodos de pago",
+      "Opciones de envío según tu operación",
+      "Herramientas de gestión de pedidos",
+      "Integraciones según viabilidad y alcance"
     ],
-    cta: "Construir Puerto Comercial",
+    cta: "Cotizar tienda",
     glow: "rgba(235,63,27,0.05)",
     border: "border-orangeleader/30"
   },
   {
-    name: "Órbita 03 - Crucero Personalizado (Headless)",
-    tag: "Velocidad Interestelar",
-    desc: "La cúspide del rendimiento digital. Código 100% a medida para marcas de alta competencia, startups tecnológicas o aplicaciones complejas.",
+    name: "Desarrollo a medida",
+    tag: "FUNCIONES ESPECÍFICAS",
+    desc: "Para proyectos que requieren una estructura o funciones particulares. Revisamos tus necesidades para definir la solución técnica y las integraciones necesarias.",
     items: [
-      "Desarrollo Headless ultrarrápido con Next.js y React",
-      "Diseño y animaciones a la medida sin plantillas preestablecidas",
-      "Arquitectura desacoplada (Headless CMS o APIs dedicadas)",
-      "Asistentes inteligentes de IA y automatizaciones integradas",
-      "SEO técnico avanzado y Core Web Vitals al 100%"
+      "Definición de requisitos del proyecto",
+      "Diseño de interfaces y recorridos",
+      "Desarrollo de funciones acordadas",
+      "Conexión con herramientas y sistemas",
+      "Pruebas y documentación según el alcance"
     ],
-    cta: "Lanzar Nave Custom",
+    cta: "Consultar desarrollo",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   }
@@ -68,52 +66,52 @@ const packages = [
 const processSteps = [
   {
     num: "01",
-    tag: "CARTOGRAFÍA",
-    title: "Cartografía Digital (Diseño UI/UX)",
-    desc: "Mapeamos tus objetivos comerciales y diseñamos una interfaz a medida. Creamos wireframes interactivos para visualizar la experiencia del usuario antes de tirar la primera línea de código.",
+    tag: "PLANEACIÓN",
+    title: "Definimos la estructura y el diseño",
+    desc: "Conocemos tu negocio, tus objetivos y la información que necesita tu cliente. Organizamos las secciones y definimos la propuesta visual antes de desarrollar.",
     items: [
-      "Análisis de competidores y mercado",
-      "Definición de estructura y flujos comerciales",
-      "Diseño visual de alta fidelidad alineado a tu marca"
+      "Objetivos y alcance del sitio",
+      "Organización de contenidos y navegación",
+      "Diseño alineado con tu identidad"
     ],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   },
   {
     num: "02",
-    tag: "ENSAMBLE",
-    title: "Ensamble de Motores (Desarrollo)",
-    desc: "Nuestros ingenieros dan vida al diseño utilizando el stack idóneo. Escribimos código limpio, rápido y semántico para asegurar que tu nave sea ligera y veloz en la inmensidad de internet.",
+    tag: "DESARROLLO",
+    title: "Construimos las páginas y funciones",
+    desc: "Desarrollamos el sitio con la plataforma acordada y adaptamos su presentación a distintos dispositivos. Integramos las funciones contempladas en la propuesta.",
     items: [
-      "Codificación robusta e interactiva",
-      "Integraciones de CRM, pagos y analíticas",
-      "Estructuras 100% responsivas para móviles"
+      "Desarrollo de páginas y componentes",
+      "Adaptación a móviles, tabletas y escritorio",
+      "Integraciones según el alcance acordado"
     ],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "03",
-    tag: "BLINDAJE",
-    title: "Blindaje de Órbita (SEO Técnico)",
-    desc: "Preparamos la nave para los motores de búsqueda. Configuramos el marcado Schema JSON-LD, integramos metadatos avanzados y optimizamos los tiempos de respuesta del servidor para asegurar que escales posiciones desde el lanzamiento.",
+    tag: "PREPARACIÓN",
+    title: "Preparamos el sitio para su publicación",
+    desc: "Configuramos los elementos técnicos básicos para buscadores y revisamos los recursos del sitio. Este trabajo prepara las páginas para su rastreo, sin garantizar posiciones en los resultados.",
     items: [
-      "Configuración de etiquetas y meta description",
-      "Generación de Sitemap XML y Robots.txt",
-      "Optimización y compresión de assets"
+      "Títulos y descripciones de las páginas",
+      "Configuración de rastreo según la plataforma",
+      "Optimización de imágenes y otros recursos"
     ],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "04",
-    tag: "IGNICIÓN",
-    title: "Ignición e Ir en Vivo (QA & Launch)",
-    desc: "Hacemos un escaneo completo de 360 grados en múltiples navegadores y dispositivos para corregir cualquier anomalía de diseño o velocidad. Desplegamos la web en producción con DNS seguras y sin tiempo de inactividad.",
+    tag: "PUBLICACIÓN",
+    title: "Revisamos y publicamos",
+    desc: "Revisamos la navegación, los formularios y la presentación del sitio antes de publicarlo. Coordinamos contigo los accesos, la aprobación y los pasos necesarios para la entrega.",
     items: [
-      "Pruebas cruzadas (Mobile, Tablet, Desktop)",
-      "Auditoría PageSpeed final",
-      "Migración de dominio libre de fallos"
+      "Revisión en distintos dispositivos y navegadores",
+      "Comprobación de funciones acordadas",
+      "Publicación y entrega según la propuesta"
     ],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
@@ -141,7 +139,7 @@ const successCases = [
     name: "Arguello Motopartes",
     sector: "Sector: E-commerce / Automotriz",
     url: "https://arguellomotopartes.com/",
-    img: "/casos/web/arguellomotopartes.webp",
+    img: "/casos/web/arguellomotopartes-catalogo.webp",
     stack: ["WooCommerce", "Buscador de Autopartes", "Pasarela de Pagos"],
     desc: "Construimos un e-commerce robusto de refacciones para motos con un buscador avanzado interno para facilitar la compra de piezas exactas."
   },
@@ -203,11 +201,11 @@ const successCases = [
   },
   {
     name: "Grupo Sedesil",
-    sector: "Sector: Servicios de Limpieza Industrial",
+    sector: "Sector: Comercialización de granos y botanas",
     url: "https://gruposedesil.com/",
     img: "/casos/web/gruposedesil.webp",
-    stack: ["WordPress", "Servicios B2B", "Conversión"],
-    desc: "Sitio web para cotizaciones de limpieza profesional y mantenimiento de corporativos y plantas industriales."
+    stack: ["WordPress", "Granos y botanas", "Sitio corporativo"],
+    desc: "Sitio corporativo para presentar granos y botanas a granel, productos derivados de sus botanas y opciones de contacto comercial."
   },
   {
     name: "Colegio San Ángel",
@@ -242,7 +240,7 @@ export default function WebDevPageClient() {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orangeleader/30 bg-orangeleader/10 text-tangerine text-[13px] font-black tracking-widest uppercase mb-6"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-orangeleader animate-ping" />
-              SISTEMAS DE DESPEGUE DIGITAL
+              DISEÑO Y DESARROLLO WEB
             </motion.div>
 
             {/* Headline */}
@@ -252,9 +250,9 @@ export default function WebDevPageClient() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.05] uppercase tracking-tight"
             >
-              TU NAVE MADRE EN LA <br className="hidden md:inline" />
+              Páginas web para presentar tu negocio <br className="hidden md:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orangeleader to-tangerine">
-                GALAXIA DIGITAL
+                y recibir consultas
               </span>
             </motion.h1>
 
@@ -265,7 +263,7 @@ export default function WebDevPageClient() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mt-6 text-starlight/75 text-[15px] sm:text-[17px] md:text-[19px] leading-relaxed max-w-2xl"
             >
-              Sitios web y plataformas construidas a la medida con **Next.js**, **WordPress** o **Shopify**, optimizadas para velocidad interestelar y diseñadas estratégicamente para captar leads y clientes calificados.
+              Creamos sitios que explican tus productos o servicios, muestran tu trabajo y facilitan que las personas interesadas te contacten. Definimos la estructura, el diseño y la tecnología según las necesidades de tu proyecto.
             </motion.p>
 
             {/* CTAs */}
@@ -279,13 +277,13 @@ export default function WebDevPageClient() {
                 href="#contacto-mision"
                 className="w-full sm:w-auto bg-orangeleader hover:bg-tangerine text-white rounded-full px-8 py-4 font-black text-xs uppercase tracking-widest transition-all cursor-pointer shadow-[0_10px_30px_rgba(235,63,27,0.3)] text-center"
               >
-                Iniciar Misión Web
+                Cotizar página web
               </a>
               <a
                 href="#casos-orbita"
                 className="w-full sm:w-auto border border-white/20 hover:border-white text-white rounded-full px-8 py-4 font-black text-xs uppercase tracking-widest transition-all cursor-pointer text-center"
               >
-                Misiones en Órbita
+                Ver proyectos
               </a>
             </motion.div>
           </div>
@@ -316,13 +314,13 @@ export default function WebDevPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              CONFIGURACIONES DISPONIBLES
+              OPCIONES DE SITIO WEB
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              EL VIAJE DE LA FLOTA
+              Un sitio acorde con lo que necesita tu negocio
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Adaptamos el fuselaje y los sistemas de tu sitio web de acuerdo al tipo de viaje que desees emprender.
+              Desde presentar tus servicios hasta vender productos o integrar funciones específicas. Te orientamos para definir el tipo de sitio y el alcance de tu proyecto.
             </p>
           </div>
 
@@ -376,10 +374,10 @@ export default function WebDevPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <p className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              HOJA DE RUTA INTERESTELAR
+              DEL OBJETIVO A LA PUBLICACIÓN
             </p>
             <h2 className="text-3xl md:text-5xl font-black text-white uppercase">
-              EL PROCESO DE LANZAMIENTO
+              Cómo desarrollamos tu sitio
             </h2>
           </div>
 
@@ -432,13 +430,13 @@ export default function WebDevPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              MISIONES COMPLETADAS
+              PROYECTOS REALIZADOS
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              12 CASOS DE ÉXITO EN ÓRBITA
+              Conoce nuestro trabajo
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Explora las naves y sistemas comerciales activos que hemos diseñado y desarrollado para conectar marcas terrestres con clientes de toda la galaxia.
+              Explora una selección de sitios empresariales, tiendas en línea y portales institucionales que hemos desarrollado para distintas necesidades de negocio.
             </p>
           </div>
 
@@ -514,18 +512,18 @@ export default function WebDevPageClient() {
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <div className="mb-12">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              ¿LISTO PARA TU VIAJE?
+              HABLEMOS DE TU PROYECTO
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase mb-4">
-              ENVIAR SOLICITUD DE DESPEGUE
+              Cuéntanos cómo necesitas tu página web
             </h3>
             <p className="text-starlight/60 text-sm max-w-xl mx-auto">
-              Agenda tu llamada de estrategia de 15 minutos en Google Meet para modelar tu nueva Nave Madre Web.
+              ¿Vas a crear un sitio o renovar el que tienes? Comparte qué ofrece tu negocio y qué necesitas resolver. Te orientamos sobre el tipo de página, las funciones y el alcance para preparar una propuesta.
             </p>
           </div>
 
           <div className="max-w-xl mx-auto glass-liquid rounded-3xl p-8 shadow-2xl">
-            <LeadForm servicioInteres="Diseño de páginas web" />
+            <LeadForm servicioInteres="Diseño de páginas web" submitLabel="Solicitar cotización" />
           </div>
         </div>
       </section>

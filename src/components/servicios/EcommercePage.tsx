@@ -8,65 +8,65 @@ import OrbitalPath from "@/components/agencia/OrbitalPath";
 import LeadForm from "@/components/LeadForm";
 
 const stats = [
-  { value: "+$4.5M", label: "Ventas Procesadas", tech: "SYS: REVENUE_TRACK" },
-  { value: "<950ms", label: "Carga de Ficha de Producto", tech: "RAD: FCP_CATALOG" },
-  { value: "99.99%", label: "Uptime de Puerto Comercial", tech: "ORBIT: RUNTIME" },
-  { value: "Shopify & Woo", label: "Sistemas de Propulsión", tech: "TLM: ENGINE" }
+  { value: "Catálogo", label: "Productos organizados", tech: "PRESENTACIÓN" },
+  { value: "Compra", label: "Carrito y proceso de pago", tech: "PEDIDOS" },
+  { value: "Gestión", label: "Administración de la tienda", tech: "OPERACIÓN" },
+  { value: "Conexión", label: "Integraciones según tu proyecto", tech: "HERRAMIENTAS" }
 ];
 
 const processSteps = [
   {
     num: "01",
-    tag: "CARTOGRAFÍA",
-    title: "Estrategia y Arquitectura Comercial",
-    desc: "Mapeamos tus objetivos comerciales y diseñamos un flujo de compra intuitivo. Analizamos la experiencia de usuario (UX) ideal para tu cliente objetivo, estructuramos categorías lógicas y definimos el mapa de integraciones clave (pagos, envíos y CRM).",
+    tag: "PLANEACIÓN",
+    title: "Definimos cómo venderás",
+    desc: "Revisamos tus productos, tus clientes y la forma en que gestionas las ventas. Definimos la estructura del catálogo y los requisitos de compra, pago y envío.",
     items: [
-      "Diseño UI/UX de embudos de compra",
-      "Estructura de arquitectura de catálogo de productos",
-      "Definición de pasarelas de pago y operadores de logística",
-      "Mapeo de integraciones de CRM y ERP"
+      "Organización de categorías y productos",
+      "Requisitos de pago y entrega",
+      "Selección de plataforma",
+      "Alcance de funciones e integraciones"
     ],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   },
   {
     num: "02",
-    tag: "ENSAMBLE",
-    title: "Desarrollo y Optimización de Conversión (CRO)",
-    desc: "Nuestros ingenieros construyen tu tienda en línea sobre el stack tecnológico idóneo. Optimizamos cada paso del proceso: desde un buscador interno inteligente y filtros dinámicos hasta un checkout en un solo paso diseñado para reducir carritos abandonados.",
+    tag: "DESARROLLO",
+    title: "Construimos el catálogo y la compra",
+    desc: "Diseñamos las páginas de la tienda y configuramos las funciones acordadas para que tus clientes puedan consultar productos, agregarlos al carrito y realizar pedidos.",
     items: [
-      "Programación limpia y modular (WooCommerce / Shopify / Next.js)",
-      "Buscador predictivo y filtros avanzados de producto",
-      "Checkout optimizado para reducir la fricción de pago",
-      "Diseño responsivo quirúrgico para compras en móviles"
+      "Diseño de catálogo y fichas de producto",
+      "Carrito y proceso de compra",
+      "Búsqueda y filtros según el proyecto",
+      "Adaptación a dispositivos móviles"
     ],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "03",
-    tag: "IGNICIÓN",
-    title: "Sincronización y Automatización Integral",
-    desc: "Conectamos tu tienda con el resto de tus sistemas operativos. Automatizamos las notificaciones de compra y envío para tus clientes, sincronizamos inventarios en tiempo real para evitar roturas de stock y enlazamos los formularios directamente a tu CRM.",
+    tag: "CONFIGURACIÓN",
+    title: "Preparamos la operación",
+    desc: "Configuramos los métodos de pago, las opciones de envío y las notificaciones contempladas en la propuesta. Revisamos las conexiones con otras herramientas cuando el proyecto las requiere.",
     items: [
-      "Conexión segura de pasarelas de pago (Stripe, PayPal, MercadoPago)",
-      "Integración de etiquetas de conversión (Meta, Google, Pinterest)",
-      "Automatización de correos de confirmación y carritos abandonados",
-      "Sincronización con CRM para seguimiento de clientes"
+      "Configuración de métodos de pago",
+      "Opciones de envío y notificaciones",
+      "Herramientas de gestión de pedidos",
+      "Integraciones según viabilidad y alcance"
     ],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "04",
-    tag: "TELEMETRÍA",
-    title: "Lanzamiento y Optimización de Velocidad",
-    desc: "Realizamos una auditoría exhaustiva antes de abrir tu puerto comercial al público. Optimizamos tiempos de carga, compresión de imágenes y almacenamiento en caché para asegurar que tu tienda sea ultrarrápida, mejorando el posicionamiento SEO y la tasa de conversión.",
+    tag: "PUBLICACIÓN",
+    title: "Probamos y publicamos",
+    desc: "Revisamos el recorrido de compra y realizamos pruebas de las funciones acordadas. Coordinamos contigo la información, los accesos y la aprobación necesarios para publicar la tienda.",
     items: [
-      "Auditoría final de velocidad en PageSpeed Insights",
-      "Implementación de redes de distribución de contenido (CDN) y caché avanzada",
-      "Configuración de Schema JSON-LD de producto para motores de búsqueda",
-      "Lanzamiento de producción libre de fricciones"
+      "Pruebas del proceso de pedido",
+      "Revisión en distintos dispositivos",
+      "Revisión de imágenes y rendimiento",
+      "Publicación y entrega según la propuesta"
     ],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
@@ -78,7 +78,7 @@ const successCases = [
     name: "Arguello Motopartes",
     sector: "Sector: E-commerce / Refacciones",
     url: "https://arguellomotopartes.com/",
-    img: "/casos/web/arguellomotopartes.webp",
+    img: "/casos/web/arguellomotopartes-catalogo.webp",
     stack: ["WooCommerce", "Buscador de Autopartes", "Pasarela de Pagos"],
     desc: "Construimos un e-commerce robusto de refacciones para motos con un buscador avanzado interno para facilitar la compra de piezas exactas."
   },
@@ -110,50 +110,47 @@ const successCases = [
 
 const packages = [
   {
-    name: "Órbita 01 - Puerto WooCommerce",
-    tag: "Flexible y Sin Cuotas",
-    desc: "Construye tu tienda sobre WordPress con total propiedad y libertad de cuotas de plataforma recurrentes. Perfecto para marcas en crecimiento.",
+    name: "Tienda con WooCommerce",
+    tag: "WORDPRESS Y COMERCIO ELECTRÓNICO",
+    desc: "Una opción para gestionar tu tienda desde WordPress y adaptar sus funciones mediante extensiones y desarrollo según el proyecto.",
     items: [
-      "Diseño personalizado UI/UX optimizado para conversión (CRO)",
-      "Integración de pasarelas de pago (Stripe, PayPal, MercadoPago)",
-      "Buscador inteligente de productos y filtros avanzados",
-      "Optimización de velocidad (caché avanzada y compresión de assets)",
-      "Panel autoadministrable para control de stock y pedidos",
-      "Garantía de propiedad total del código"
+      "Diseño de catálogo y fichas de producto",
+      "Configuración de carrito y pagos",
+      "Gestión de productos y pedidos",
+      "Opciones de envío según tu operación",
+      "Extensiones e integraciones según el alcance"
     ],
-    cta: "Iniciar WooCommerce",
+    cta: "Consultar WooCommerce",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   },
   {
-    name: "Órbita 02 - Estación Shopify",
-    tag: "Lanzamiento y Estabilidad",
-    desc: "Lanza tu e-commerce sobre la infraestructura en la nube más confiable del mundo. Ideal para catálogos dinámicos con alta transaccionalidad.",
+    name: "Tienda con Shopify",
+    tag: "PLATAFORMA ADMINISTRADA",
+    desc: "Una opción para administrar productos y pedidos en Shopify. Definimos el diseño, la configuración y las aplicaciones necesarias para tu operación.",
     items: [
-      "Maquetación y configuración premium de la tienda Shopify",
-      "Diseño de fichas de producto persuasivas y veloces",
-      "Integración con transportistas y alertas de envío en tiempo real",
-      "Configuración de etiquetas y píxeles de pauta publicitaria",
-      "Sincronización con CRM e inventario externo",
-      "Capacitación de uso del administrador de Shopify"
+      "Configuración y diseño de la tienda",
+      "Organización del catálogo",
+      "Configuración de pagos y envíos",
+      "Selección de aplicaciones según necesidades",
+      "Orientación para administrar la tienda"
     ],
-    cta: "Construir Puerto Comercial",
+    cta: "Consultar Shopify",
     glow: "rgba(235,63,27,0.05)",
     border: "border-orangeleader/30"
   },
   {
-    name: "Órbita 03 - Crucero Headless (Next.js)",
-    tag: "Velocidad Interestelar",
-    desc: "La cúspide del rendimiento digital. Una experiencia web desacoplada ultrarrápida donde el frontend vuela y se conecta por API al motor e-commerce.",
+    name: "Desarrollo a medida",
+    tag: "FUNCIONES E INTEGRACIONES",
+    desc: "Para proyectos con requisitos particulares de diseño, navegación o conexión con otros sistemas. Evaluamos la viabilidad técnica antes de definir la solución.",
     items: [
-      "Frontend a la medida programado con Next.js y React",
-      "Carga instantánea de fichas de producto (Core Web Vitals al 100%)",
-      "Máxima seguridad y blindaje ante ataques (arquitectura desacoplada)",
-      "Personalización absoluta del checkout y carrito de compras",
-      "Optimización SEO avanzada a nivel servidor (SSR/ISR)",
-      "Soporte estratégico prioritario y telemetría en vivo"
+      "Definición de requisitos técnicos",
+      "Diseño de interfaces y recorridos de compra",
+      "Desarrollo de funciones acordadas",
+      "Integraciones mediante APIs cuando correspondan",
+      "Pruebas y documentación según el alcance"
     ],
-    cta: "Lanzar Nave Custom",
+    cta: "Consultar desarrollo",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   }
@@ -182,7 +179,7 @@ export default function EcommercePageClient() {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orangeleader/30 bg-orangeleader/10 text-tangerine text-[13px] font-black tracking-widest uppercase mb-6"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-orangeleader animate-ping" />
-              PUERTOS COMERCIALES INTERESTELARES
+              DISEÑO Y DESARROLLO ECOMMERCE
             </motion.div>
 
             {/* Headline */}
@@ -192,9 +189,9 @@ export default function EcommercePageClient() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.05] uppercase tracking-tight"
             >
-              TIENDAS EN LÍNEA DE <br className="hidden md:inline" />
+              Tiendas en línea <br className="hidden md:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orangeleader to-tangerine">
-                ALTO RENDIMIENTO
+                para vender tus productos
               </span>
             </motion.h1>
 
@@ -205,7 +202,7 @@ export default function EcommercePageClient() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mt-6 text-starlight/75 text-[15px] sm:text-[17px] md:text-[19px] leading-relaxed max-w-2xl"
             >
-              Desarrollamos ecosistemas e-commerce a la medida con **Shopify**, **WooCommerce** y **Next.js**. Sitios web ultrarrápidos, optimizados para buscadores y estructurados para guiar al usuario directo a la conversión.
+              Creamos tu tienda en línea con un catálogo organizado, un proceso de compra claro y herramientas para gestionar pedidos. Definimos la plataforma, los pagos y los envíos según las necesidades de tu negocio.
             </motion.p>
 
             {/* CTAs */}
@@ -219,13 +216,13 @@ export default function EcommercePageClient() {
                 href="#contacto-mision"
                 className="w-full sm:w-auto bg-orangeleader hover:bg-tangerine text-white rounded-full px-8 py-4 font-black text-xs uppercase tracking-widest transition-all cursor-pointer shadow-[0_10px_30px_rgba(235,63,27,0.3)] text-center"
               >
-                Lanzar Mi Tienda →
+                Cotizar tienda →
               </a>
               <a
                 href="#casos-orbita"
                 className="w-full sm:w-auto border border-white/20 hover:border-white text-white rounded-full px-8 py-4 font-black text-xs uppercase tracking-widest transition-all cursor-pointer text-center"
               >
-                Ver Tiendas Activas
+                Ver proyectos
               </a>
             </motion.div>
           </div>
@@ -256,10 +253,10 @@ export default function EcommercePageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <p className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              HOJA DE RUTA AL LANZAMIENTO
+              DE TU CATÁLOGO A LA TIENDA
             </p>
             <h2 className="text-3xl md:text-5xl font-black text-white uppercase">
-              EL VIAJE HACIA LAS VENTAS EN LÍNEA
+              Cómo desarrollamos tu tienda en línea
             </h2>
           </div>
 
@@ -312,13 +309,13 @@ export default function EcommercePageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              PUERTOS COMERCIALES OPERATIVOS
+              PROYECTOS REALIZADOS
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              MISIONES E-COMMERCE COMPLETADAS
+              Conoce nuestras tiendas en línea
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Explora las tiendas y sistemas transaccionales que hemos diseñado y desarrollado para impulsar las ventas de marcas líderes en sus respectivos sectores.
+              Explora una selección de tiendas que hemos desarrollado para presentar productos y facilitar su compra por internet.
             </p>
           </div>
 
@@ -391,13 +388,13 @@ export default function EcommercePageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              CONFIGURACIONES DE NAVE COMERCIAL
+              PLATAFORMA PARA TU OPERACIÓN
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              MODELOS DE OPERACIÓN
+              Elegimos la tecnología según tu negocio
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Calibramos los motores de tu negocio en línea según la escala y necesidades de transaccionalidad de tu marca.
+              Revisamos tu catálogo, las funciones que necesitas y la forma en que administrarás la tienda para recomendar una plataforma y definir sus costos de operación.
             </p>
           </div>
 
@@ -452,18 +449,18 @@ export default function EcommercePageClient() {
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <div className="mb-12">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              ¿LISTO PARA DESPEGAR EN LAS VENTAS DIGITALES?
+              HABLEMOS DE TU TIENDA
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase mb-4">
-              DESARROLLEMOS TU PUERTO DE VENTAS
+              Cuéntanos qué quieres vender por internet
             </h3>
             <p className="text-starlight/60 text-sm max-w-xl mx-auto">
-              Agenda tu llamada de estrategia de 15 minutos en Google Meet para modelar tu nueva tienda en línea de alto rendimiento.
+              ¿Vas a crear una tienda o mejorar la que tienes? Cuéntanos qué productos vendes y cómo gestionas tus pedidos. Te orientamos sobre la plataforma, las funciones y el alcance para preparar una propuesta.
             </p>
           </div>
 
           <div className="max-w-xl mx-auto glass-liquid rounded-3xl p-8 shadow-2xl">
-            <LeadForm servicioInteres="E-commerce" />
+            <LeadForm servicioInteres="Desarrollo de tienda en línea" submitLabel="Solicitar cotización" />
           </div>
         </div>
       </section>

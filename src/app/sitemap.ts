@@ -26,7 +26,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/paid-media",
     "/puebla",
     "/puebla/diseno-de-paginas-web",
-    "/puebla/diseno-paginas-web",
     "/puebla/growth-marketing-b2b",
     "/redes-sociales",
     "/seo",

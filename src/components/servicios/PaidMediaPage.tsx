@@ -16,53 +16,53 @@ const stats = [
 const processSteps = [
   {
     num: "01",
-    tag: "CARTOGRAFÍA",
-    title: "Escaneo y Cartografía de Órbita",
-    desc: "Antes de encender los motores, realizamos una auditoría profunda de tus competidores, identificamos las palabras clave con mayor intención de compra y cartografiamos la trayectoria óptima del embudo de conversión.",
+    tag: "PLANEACIÓN",
+    title: "Definimos objetivos y presupuesto",
+    desc: "Conocemos tu oferta, las zonas que atiendes y el tipo de consultas que buscas recibir. Revisamos tus campañas existentes, si las tienes, para definir prioridades y una propuesta de trabajo.",
     items: [
-      "Auditoría técnica de cuentas de anuncios existentes",
-      "Análisis de palabras clave y volumen de búsqueda",
-      "Mapeo de la competencia en Google y Meta",
-      "Definición de audiencias y avatares de cliente (buyer personas)"
+      "Objetivos y acciones que se medirán",
+      "Revisión de cuentas existentes cuando corresponda",
+      "Investigación de búsquedas y audiencias",
+      "Definición de presupuesto y canales"
     ],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   },
   {
     num: "02",
-    tag: "PROPULSORES",
-    title: "Diseño de los Propulsores Creativos",
-    desc: "Creamos anuncios nativos diseñados para detener el scroll y capturar el interés del tomador de decisiones. Desarrollamos copys persuasivos B2B/B2C enfocados en el dolor real de tu cliente y diseñamos piezas de alta gama.",
+    tag: "ANUNCIOS",
+    title: "Preparamos mensajes y piezas",
+    desc: "Desarrollamos anuncios que expliquen tu oferta y den a las personas interesadas un siguiente paso claro. Coordinamos los textos y materiales según los formatos y el alcance acordados.",
     items: [
-      "Copywriting corporativo y ganchos persuasivos",
-      "Estructuras de anuncios orientadas a resolver objeciones",
-      "Diseño visual de banners, carruseles e infografías premium"
+      "Redacción de mensajes y llamados a la acción",
+      "Diseño de piezas según el alcance",
+      "Alineación entre anuncios y página de destino"
     ],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "03",
-    tag: "IGNICIÓN",
-    title: "Despegue e Ignición de Campaña",
-    desc: "Activamos las campañas aplicando configuraciones de precisión. Segmentamos de manera quirúrgica para evitar quemar presupuesto con audiencias incorrectas, y lanzamos múltiples variaciones de anuncios desde el día uno.",
+    tag: "CONFIGURACIÓN",
+    title: "Configuramos y activamos",
+    desc: "Preparamos las campañas, su segmentación y la medición de las acciones acordadas. Revisamos los anuncios y destinos antes de enviarlos a aprobación en cada plataforma.",
     items: [
-      "Configuración milimétrica de píxeles y conversiones API",
-      "Lanzamiento multivariante para testeo A/B inmediato",
-      "Segmentación geográfica e intenciones comerciales activas"
+      "Configuración de campañas y audiencias",
+      "Configuración y revisión de conversiones",
+      "Activación sujeta a aprobación de la plataforma"
     ],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "04",
-    tag: "TELEMETRÍA",
-    title: "Telemetría & Optimización de Órbita",
-    desc: "Monitoreamos la pauta en tiempo real. Apagamos de inmediato los anuncios de bajo rendimiento y redirigimos la inversión hacia las variaciones más rentables, escalando de manera predecible para maximizar el ROAS.",
+    tag: "SEGUIMIENTO",
+    title: "Revisamos resultados y ajustamos",
+    desc: "Damos seguimiento al gasto, las consultas registradas y el desempeño de los anuncios. Con los datos disponibles proponemos ajustes y revisamos contigo la calidad de los contactos recibidos.",
     items: [
-      "Monitoreo semanal del Costo por Adquisición (CPA)",
-      "Optimización de pujas mediante IA y control de presupuestos",
-      "Reporte de telemetría y planeación de siguiente ciclo"
+      "Seguimiento de presupuesto y costo por resultado",
+      "Pruebas de mensajes y segmentación",
+      "Reportes y recomendaciones de siguientes acciones"
     ],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
@@ -73,12 +73,12 @@ const caseStudies = [
   {
     name: "MORECSA",
     sector: "Sector: Comercialización e Industria (Bombas Sumergibles)",
-    metrics: "57 leads/mes · +2,190 contactos B2B",
-    description: "Construimos un ecosistema de pauta híbrida activando campañas en Meta Ads y Google Ads para captar prospectos corporativos e incursionar en el mercado doméstico de la región central.",
+    metrics: "Promedio de 57 prospectos al mes",
+    description: "Campañas en Google Ads y Meta Ads orientadas a recibir consultas sobre productos de su catálogo.",
     results: [
-      "Generación promedio de 57 prospectos de alta intención cada mes.",
-      "Base de datos de más de 2,190 contactos B2B acumulados.",
-      "Campaña enfocada en cotización inmediata de equipos industriales."
+      "Promedio mensual reportado: 57 prospectos",
+      "Base acumulada de más de 2,190 contactos",
+      "Consultas relacionadas con equipos y productos del negocio"
     ],
     glow: "rgba(235,63,27,0.05)",
     border: "border-orangeleader/20"
@@ -86,12 +86,12 @@ const caseStudies = [
   {
     name: "Vasos para Café",
     sector: "Sector: Insumos y Distribución Mayorista",
-    metrics: "105 leads/mes · +1,900 empresas integradas",
-    description: "Para este distribuidor mayorista de vasos desechables de cartón, desplegamos campañas hiper-segmentadas en Google Ads para dominar las búsquedas comerciales de cadenas y negocios corporativos.",
+    metrics: "Más de 1,900 leads en 18 meses",
+    description: "Campañas en Google Ads orientadas a generar consultas sobre vasos e insumos para cafeterías y otros negocios.",
     results: [
-      "Captación mensual promedio de 105 prospectos mayoristas.",
-      "Conversión del tráfico de búsqueda a solicitudes formales de cotización.",
-      "Crecimiento acelerado en base de datos de empresas compradoras."
+      "Promedio mensual reportado: 105 prospectos",
+      "Más de 1,900 leads generados en 18 meses",
+      "Campañas enfocadas en consultas sobre su oferta mayorista"
     ],
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
@@ -99,12 +99,12 @@ const caseStudies = [
   {
     name: "Dr. Peña Lares",
     sector: "Sector: Healthcare / Cirugía Maxilofacial",
-    metrics: "48 pacientes/mes · +1,155 expedientes",
-    description: "Establecimos un sistema predecible de adquisición de pacientes calificados para procedimientos de alto valor en el sector salud, interceptando búsquedas médicas urgentes en Google Ads.",
+    metrics: "Promedio de 48 prospectos al mes",
+    description: "Campañas en Google Ads orientadas a recibir consultas de personas interesadas en sus servicios de cirugía maxilofacial.",
     results: [
-      "48 nuevos prospectos y pacientes calificados en promedio mensual.",
-      "Generación de más de 1,155 expedientes médicos digitales en 24 meses.",
-      "Alta tasa de agendamiento gracias a la alineación del anuncio y landing page."
+      "Promedio mensual reportado: 48 prospectos",
+      "Más de 1,155 contactos acumulados",
+      "Anuncios y página de destino enfocados en sus servicios"
     ],
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
@@ -112,12 +112,12 @@ const caseStudies = [
   {
     name: "Postes Puebla",
     sector: "Sector: Construcción e Ingeniería Civil",
-    metrics: "46 cotizaciones B2B/mes · +1,124 constructoras",
-    description: "Calibramos Google Ads de gran formato para conectar directamente con directores de obra, constructoras y contratistas interesados en la compra masiva de postes metálicos y de concreto.",
+    metrics: "Promedio de 46 prospectos al mes",
+    description: "Campañas en Google Ads orientadas a recibir consultas sobre postes y productos para proyectos de construcción.",
     results: [
-      "46 cotizaciones a gran escala de obras públicas e ingeniería civil al mes.",
-      "+1,124 constructoras registradas como prospectos calificados recurrentes.",
-      "Retorno de inversión directo ligado al volumen de licitaciones obtenidas."
+      "Promedio mensual reportado: 46 prospectos",
+      "Más de 1,124 contactos acumulados",
+      "Campañas relacionadas con búsquedas de sus productos"
     ],
     glow: "rgba(235,63,27,0.05)",
     border: "border-orangeleader/20"
@@ -126,45 +126,44 @@ const caseStudies = [
 
 const packages = [
   {
-    name: "Órbita 01 - Tracción",
-    desc: "Para marcas que necesitan establecer captación de leads calificados activando pauta en un solo canal prioritario.",
+    name: "Campañas en un canal",
+    desc: "Para negocios que buscan concentrar su publicidad en Google Ads o Meta Ads según su oferta y sus objetivos.",
     items: [
-      "Gestión de pauta en 1 red (Google Ads o Meta Ads)",
-      "Creación de piezas visuales publicitarias de alta gama",
-      "Redacción de copys comerciales enfocados en ganchos",
-      "Configuración de conversiones básicas y etiquetas",
-      "Reporte de telemetría mensual"
+      "Definición de objetivos y audiencias",
+      "Configuración de campañas en el canal acordado",
+      "Mensajes y piezas según el alcance",
+      "Medición de acciones y seguimiento de presupuesto",
+      "Reportes y recomendaciones"
     ],
-    cta: "Iniciar Tracción",
+    cta: "Consultar un canal",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   },
   {
-    name: "Órbita 02 - Expansión",
-    tag: "Más Recomendado",
-    desc: "Estrategia de conversión omnicanal para interceptar demanda activa y generar volumen estable de leads.",
+    name: "Google Ads y Meta Ads",
+    desc: "Para negocios que necesitan coordinar campañas de búsqueda y redes sociales con mensajes y objetivos relacionados.",
     items: [
-      "Pauta multicanal activa (Google Ads + Meta Ads)",
-      "Hasta 10 anuncios diseñados al mes (carruseles, gráficos, banners)",
-      "Estrategia de retargeting para recuperar usuarios perdidos",
-      "Optimización de conversiones avanzada y píxeles",
-      "Reporte de telemetría y llamadas de optimización quincenales"
+      "Planeación de campañas en ambos canales",
+      "Coordinación de mensajes y anuncios",
+      "Distribución y seguimiento del presupuesto",
+      "Medición de acciones por canal",
+      "Revisión de resultados y ajustes"
     ],
-    cta: "Iniciar Expansión",
+    cta: "Consultar gestión",
     glow: "rgba(235,63,27,0.05)",
     border: "border-orangeleader/30"
   },
   {
-    name: "Órbita 03 - Dominación",
-    desc: "Para empresas que buscan liderar el mercado, estructurar embudos sofisticados de conversión con IA y presupuesto agresivo.",
+    name: "Gestión a medida",
+    desc: "Para empresas con campañas existentes o necesidades particulares de medición, anuncios y páginas de destino.",
     items: [
-      "Pauta omnicanal robusta (Google, Meta & LinkedIn/TikTok Ads)",
-      "Pruebas dinámicas multivariantes constantes",
-      "Creación continua de ganchos publicitarios avanzados",
-      "Embudos de conversión personalizados y landing pages de alta velocidad",
-      "Soporte estratégico prioritario y telemetría en tiempo real"
+      "Revisión de cuentas y necesidades",
+      "Definición de prioridades de trabajo",
+      "Propuesta de campañas y medición",
+      "Coordinación de materiales e integraciones",
+      "Alcance y calendario acordados"
     ],
-    cta: "Iniciar Dominación",
+    cta: "Consultar proyecto",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   }
@@ -202,32 +201,32 @@ export default function PaidMediaPageClient() {
               href="/servicios"
               className="inline-flex items-center gap-2 text-white/30 text-xs font-bold uppercase tracking-widest hover:text-orangeleader transition-colors"
             >
-              ← Módulos de Flota
+              ← Ver servicios
             </Link>
           </div>
 
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="text-orangeleader text-xs font-black tracking-[0.5em] uppercase">
-              PAID ADS AGENCY
+              PUBLICIDAD DIGITAL
             </span>
             <span className="px-3 py-1 rounded-full border border-orangeleader/30 bg-orangeleader/10 text-xs font-black text-orangeleader uppercase tracking-wider">
-              PAUTA
+              GOOGLE ADS Y META ADS
             </span>
           </div>
 
           <h1 className="text-5xl md:text-8xl font-black uppercase text-white leading-[0.95] tracking-tight mb-8">
-            ANUNCIOS DE ALTO IMPACTO.<br />
-            <span className="text-transparent block mt-2" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.75)" }}>
-              CONVERSIÓN DIRECTA.
+            Campañas para atraer<br />
+            <span className="text-white block mt-2">
+              consultas sobre tu negocio
             </span>
           </h1>
 
           <p className="mt-8 text-base md:text-lg text-starlight/70 leading-relaxed font-light max-w-2xl mx-auto">
-            Meta, Google, y LinkedIn campaigns calibradas bajo una estrategia omnicanal y ganchos publicitarios de alta retención. Llevamos compradores calificados directo a tu embudo corporativo.
+            Gestionamos campañas en Google Ads y Meta Ads para acercar tus productos o servicios a personas interesadas. Definimos objetivos, anuncios y presupuesto, y medimos las acciones registradas para orientar los ajustes.
           </p>
 
           <div className="mt-12 flex justify-center flex-wrap gap-2.5">
-            {["Campañas B2B/B2C", "Copywriting de Conversión", "Optimización del ROAS", "Pauta Predictiva", "Monitoreo Semanal"].map((badge, idx) => (
+            {["Planeación de campañas", "Mensajes y anuncios", "Audiencias", "Medición de consultas", "Seguimiento de presupuesto"].map((badge, idx) => (
               <span
                 key={idx}
                 className="px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-[#eb3f1b]/5 border border-[#eb3f1b]/20 text-orangeleader"
@@ -242,7 +241,7 @@ export default function PaidMediaPageClient() {
               href="/contacto"
               className="inline-block bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full px-8 py-4 font-black text-sm uppercase tracking-widest transition-all cursor-pointer shadow-[0_10px_30px_rgba(235,63,27,0.4)] hover:scale-105 active:scale-95"
             >
-              INICIA TU CAMPAÑA DE CONVERSIÓN →
+              Consultar campañas →
             </Link>
           </div>
         </motion.div>
@@ -251,9 +250,9 @@ export default function PaidMediaPageClient() {
       {/* 🛰️ Desglose del Servicio - Bento Grid */}
       <section className="py-24 px-6 md:px-8 max-w-6xl mx-auto relative z-10 border-t border-white/[0.04]">
         <div className="mb-20 text-center">
-          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">SISTEMAS DEL MÓDULO DE TRÁFICO</span>
+          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">GESTIÓN DE PUBLICIDAD DIGITAL</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2">
-            El Plan de Vuelo
+            Cómo trabajamos tus campañas
           </h2>
           <div className="h-0.5 w-16 bg-orangeleader/40 mx-auto mt-4 rounded-full" />
         </div>
@@ -310,12 +309,12 @@ export default function PaidMediaPageClient() {
       {/* 🌌 Bitácora de Éxito / Caso de Éxito Section */}
       <section className="py-24 px-6 md:px-8 max-w-6xl mx-auto relative z-10 border-t border-white/[0.04]">
         <div className="mb-16 text-center">
-          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">BITÁCORA DE EXPEDICIÓN</span>
+          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">EXPERIENCIA EN CAMPAÑAS</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2">
-            Misiones de Pauta Cumplidas
+            Proyectos de publicidad digital
           </h2>
           <p className="mt-4 text-starlight/60 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed">
-            Explora las métricas y alcances de nuestros propulsores publicitarios activos para marcas líderes en distintos nichos comerciales.
+            Estos proyectos muestran nuestro trabajo de captación de consultas en distintos sectores. Las cifras corresponden a cada caso y no representan una garantía para nuevas campañas.
           </p>
         </div>
 
@@ -375,12 +374,12 @@ export default function PaidMediaPageClient() {
       {/* 📦 Configuraciones de Misión - Paquetes sin Precios */}
       <section className="py-24 px-6 md:px-8 max-w-6xl mx-auto border-t border-white/[0.04] relative z-10">
         <div className="mb-20 text-center">
-          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">PAQUETES ADAPTABLES</span>
+          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">OPCIONES DE GESTIÓN</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight mt-2">
-            Configuraciones de Misión
+            Un alcance acorde con tus campañas
           </h2>
           <p className="mt-4 text-starlight/60 text-sm md:text-base font-light max-w-xl mx-auto leading-relaxed">
-            Alinea tus recursos publicitarios con los objetivos y la escala de adquisición requerida.
+            Definimos los canales, las actividades y los materiales según tus objetivos. La propuesta distingue los honorarios de gestión del presupuesto destinado a anuncios.
           </p>
         </div>
 
@@ -400,11 +399,6 @@ export default function PaidMediaPageClient() {
                   <span className="text-[10px] font-mono tracking-widest text-starlight/40 uppercase">
                     CONFIGURACIÓN 0{idx + 1}
                   </span>
-                  {pack.tag && (
-                    <span className="px-2 py-0.5 rounded-full bg-orangeleader/15 border border-orangeleader/30 text-[10px] font-mono font-bold text-orangeleader uppercase tracking-widest">
-                      {pack.tag}
-                    </span>
-                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -446,15 +440,15 @@ export default function PaidMediaPageClient() {
         <div className="glass-liquid rounded-[40px] border border-white/10 p-8 md:p-16 space-y-8 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom,rgba(235,63,27,0.08),transparent_60%)] pointer-events-none" />
           
-          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">INICIA TU MISIÓN</span>
+          <span className="text-xs font-mono tracking-[0.2em] text-orangeleader uppercase">HABLEMOS DE TUS CAMPAÑAS</span>
           <h2 className="text-3xl md:text-5xl font-black uppercase text-white tracking-tight leading-none">
-            ¿Listo para despegar en Paid Ads?
+            ¿Quieres anunciar tus productos o servicios?
           </h2>
           <p className="text-starlight/75 text-sm md:text-base font-light max-w-2xl mx-auto leading-relaxed">
-            Diseñemos juntos la estrategia de pauta publicitaria ideal para tu marca. Llena el formulario a continuación para agendar tu llamada de estrategia.
+            Cuéntanos qué ofrece tu negocio, a quién quieres llegar y si ya tienes campañas activas. Te orientamos sobre los canales, la medición y el alcance de gestión para preparar una propuesta.
           </p>
           <div className="pt-4 max-w-lg mx-auto">
-            <LeadForm servicioInteres="Paid Ads" />
+            <LeadForm servicioInteres="Google Ads y Meta Ads" submitLabel="Solicitar información" />
           </div>
         </div>
       </section>

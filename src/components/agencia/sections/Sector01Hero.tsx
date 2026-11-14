@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Hud } from "../hud";
 
@@ -23,30 +24,27 @@ export default function Sector01Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2 }}
           >
-            <Hud>Bitácora de Agencia // Operando como Alié desde 2021</Hud>
+            <Hud>CONOCE ALIÉ DIGITAL</Hud>
             <h1 className="mt-8 text-3xl md:text-6xl font-black uppercase text-white leading-[1.02] tracking-tight">
-              Creemos en las marcas que sueñan grande y trabajamos para hacerlas llegar lejos
+              Agencia de marketing digital y desarrollo web
             </h1>
             <p className="mt-8 text-base md:text-lg text-starlight/75 leading-relaxed font-light max-w-3xl mx-auto">
-              Nacimos con una convicción clara: las empresas no necesitan sitios web estáticos ni
-              agencias burocráticas; necesitan una{" "}
-              <strong className="text-white font-semibold">
-                agencia digital potenciada por inteligencia artificial
-              </strong>{" "}
-              que sea transparente y un aliado estratégico orientado a entender sus metas
-              financieras y potenciar sus ventas. Como{" "}
-              <strong className="text-white font-semibold">
-                agencia de diseño web impulsada por inteligencia artificial
-              </strong>{" "}
-              y{" "}
-              <strong className="text-white font-semibold">
-                agencia de marketing digital potenciada por inteligencia artificial
-              </strong>{" "}
-              con más de 7 años de trayectoria en el sector y operando bajo el sello Alié desde
-              2021, acompañamos a empresas en Monterrey, Puebla, Ciudad de México y Latinoamérica a
-              construir activos comerciales impulsados por ingeniería tecnológica e Inteligencia
-              Artificial que generan resultados reales y medibles.
+              Ayudamos a empresas a presentar su oferta, captar consultas y darles seguimiento. Diseñamos sitios web, trabajamos su posicionamiento en buscadores y gestionamos campañas digitales según las necesidades de cada proyecto.
             </p>
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+              <a
+                href="#CTAContacto"
+                className="w-full sm:w-auto bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest shadow-[0_10px_30px_rgba(235,63,27,0.4)] transition-all flex items-center justify-center cursor-pointer"
+              >
+                Solicitar información
+              </a>
+              <Link
+                href="/servicios"
+                className="w-full sm:w-auto glass-l2 rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest text-white flex items-center justify-center cursor-pointer hover:bg-white/5 transition-all"
+              >
+                Ver servicios
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
       </div>

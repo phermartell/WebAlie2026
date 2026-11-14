@@ -23,28 +23,29 @@ export default function Capitulo01Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
         >
-          <Hud>Telemetría de Rendimiento</Hud>
+          <Hud>PORTAFOLIO DE ALIÉ DIGITAL</Hud>
 
           <h1 className="mt-8 text-3xl md:text-6xl font-black uppercase text-white leading-[1.02] tracking-tight">
-            Campañas Reales. Resultados Medibles. ROI Sin Excusas.
+            Casos de éxito en marketing digital y desarrollo web
           </h1>
 
-          <h2 className="mt-8 text-lg md:text-2xl font-semibold text-tangerine leading-snug max-w-3xl mx-auto">
-            Pauta publicitaria de alto rendimiento en sectores de alta competencia, nichos
-            restringidos y mercados B2B complejos.
-          </h2>
+          <p className="mt-8 text-base md:text-lg text-starlight/75 leading-relaxed font-light max-w-3xl mx-auto">
+            Conoce cómo trabajamos campañas, sitios web y tiendas en línea para empresas de distintos sectores. En cada proyecto puedes consultar qué necesitaba el cliente y qué implementamos.
+          </p>
 
-          <div className="mt-8 space-y-6 text-base md:text-lg text-starlight/75 leading-relaxed font-light max-w-3xl mx-auto">
-            <p>
-              En Alié Digital no reportamos clics superficiales ni impresiones vanidosas. Cada peso
-              invertido en pauta publicitaria a través de{" "}
-              <strong className="text-white font-semibold">Google Ads</strong>,{" "}
-              <strong className="text-white font-semibold">Meta Ads</strong>,{" "}
-              <strong className="text-white font-semibold">TikTok</strong> y{" "}
-              <strong className="text-white font-semibold">LinkedIn</strong> está conectado
-              directamente a sistemas de atribución de ventas, reducción del Costo por Adquisición
-              (CPA) y generación constante de clientes potenciales calificados.
-            </p>
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+            <a
+              href="#misiones-casos-exito"
+              className="w-full sm:w-auto bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest shadow-[0_10px_30px_rgba(235,63,27,0.4)] transition-all flex items-center justify-center cursor-pointer"
+            >
+              Ver proyectos
+            </a>
+            <a
+              href="#cierre-conversion"
+              className="w-full sm:w-auto glass-l2 rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest text-white flex items-center justify-center cursor-pointer hover:bg-white/5 transition-all"
+            >
+              Solicitar información
+            </a>
           </div>
         </motion.div>
       </motion.div>

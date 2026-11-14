@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import LeadForm from "@/components/LeadForm";
-import { ShipMark } from "@/components/agencia/hud";
+import { Hud, ShipMark } from "@/components/agencia/hud";
 
 const container = {
   hidden: {},
@@ -71,21 +71,23 @@ export default function Capitulo03Cierre() {
               </motion.div>
             </div>
 
+            <motion.div variants={item} className="mb-6">
+              <Hud>HABLEMOS DE TU PROYECTO</Hud>
+            </motion.div>
+
             <motion.h2
               variants={item}
               className="text-3xl md:text-5xl font-black uppercase text-white leading-[1.05]"
             >
-              ¿Quieres resultados predecibles como estos en tu empresa?
+              Cuéntanos qué necesita tu empresa
             </motion.h2>
 
             <motion.p variants={item} className="mt-6 text-base text-starlight/75 leading-relaxed font-light">
-              No construimos sitios web{" "}
-              <strong className="text-white font-semibold">&quot;bonitos&quot;</strong> que nadie
-              visita. Diseñamos activos digitales que multiplican la facturación de tu negocio.
+              Si alguno de estos proyectos se parece a lo que necesitas, cuéntanos qué quieres mejorar y qué herramientas ya usas. Revisaremos contigo si conviene empezar por tu sitio, tus campañas o el seguimiento de las consultas.
             </motion.p>
 
             <motion.div variants={item} className="mt-10">
-              <LeadForm />
+              <LeadForm submitLabel="Solicitar información" />
             </motion.div>
 
             <motion.div variants={item} className="mt-10 flex flex-col items-center gap-4">
