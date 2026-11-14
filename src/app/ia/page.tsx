@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Inteligencia Artificial y Automatización | Alié Digital",
-  description: "Integramos Inteligencia Artificial y automatizaciones en tu negocio. Optimiza el procesamiento de datos, flujos de trabajo e integraciones ERP con IA.",
+  title: "IA aplicada al ecommerce | Alié Digital",
+  description: "Asistentes para atender a clientes y prospectos, y automatizaciones para gestionar pedidos y coordinar la producción, la preparación y los envíos de tu tienda.",
   alternates: {
     canonical: "https://aliedigital.com/ia/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Inteligencia Artificial y Automatización B2B | Alié Digital",
-    description: "Desarrollamos e integramos Inteligencia Artificial y automatización en tu negocio. Optimiza procesamiento de datos, flujos de trabajo e integraciones ERP con IA.",
+    title: "IA aplicada al ecommerce | Alié Digital",
+    description: "Asistentes para atender a clientes y prospectos, y automatizaciones para gestionar pedidos y coordinar la producción, la preparación y los envíos de tu tienda.",
     url: "https://aliedigital.com/ia/",
     images: [
       {
@@ -31,11 +31,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Inteligencia Artificial y Automatización B2B | Alié Digital",
-    description: "Desarrollamos e integramos Inteligencia Artificial y automatización en tu negocio. Optimiza procesamiento de datos, flujos de trabajo e integraciones ERP con IA.",
+    title: "IA aplicada al ecommerce | Alié Digital",
+    description: "Asistentes para atender a clientes y prospectos, y automatizaciones para gestionar pedidos y coordinar la producción, la preparación y los envíos de tu tienda.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   return (
@@ -43,8 +43,8 @@ export default function Page() {
       <JsonLd
         data={createServiceSchema(
           "/ia/",
-          "IA & Automatización de Pedidos y Procesos | Alié Digital",
-          "Automatización autónoma de captura, validación e integración de órdenes de compra y facturas en sistemas ERP utilizando Inteligencia Artificial."
+          "IA aplicada al ecommerce | Alié Digital",
+          "Diseño de asistentes y automatizaciones para tiendas en línea. El servicio puede incluir atención a clientes y prospectos, gestión de pedidos y coordinación de producción, preparación y envíos según las herramientas y el alcance acordados."
         )}
       />
       <IaPageClient />

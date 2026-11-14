@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { SpotlightCard } from "@/components/agencia/ui";
@@ -36,6 +37,7 @@ function InstagramIcon({ className }: { className?: string }) {
 
 export default function Sector01Construyamos() {
   const openSocial = useChatModal();
+  const [showChannels, setShowChannels] = useState(false);
 
   return (
     <section className="relative z-10 px-4 md:px-8 pt-36 pb-24">
@@ -92,50 +94,65 @@ export default function Sector01Construyamos() {
 
               <div className="flex-1">
                 <h3 className="text-lg md:text-xl font-black uppercase text-white leading-snug">
-                  Chatea con Alice
+                  Escríbenos por Messenger o Instagram
                 </h3>
                 <p className="text-xs text-orangeleader font-semibold tracking-tight mt-1">
-                  Oficial de Inteligencia en Órbita
+                  Alice — Oficial de Inteligencia
                 </p>
                 <p className="mt-3 text-base text-starlight/70 leading-relaxed font-light">
-                  ¿Necesitas respuestas rápidas antes de iniciar la secuencia de despegue? Alice
-                  es nuestra Inteligencia Artificial en guardia permanente. Escríbele para obtener
-                  información inmediata sobre{" "}
-                  <strong className="text-white font-semibold">
-                    precios aproximados, servicios y tiempos de entrega
-                  </strong>
-                  .
+                  Elige Messenger o Instagram para iniciar una conversación con Alié Digital. Antes de abrir el canal, te pediremos tus datos de contacto.
                 </p>
               </div>
             </div>
 
-            <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            <div className="mt-6 flex flex-col gap-3">
               <button
                 type="button"
-                onClick={() => openSocial("facebook")}
-                className="flex flex-1 items-center justify-between gap-3 rounded-full bg-[#1877F2] hover:bg-[#0e5fd0] px-5 py-3 text-white transition-all cursor-pointer"
+                onClick={() => setShowChannels((prev) => !prev)}
+                aria-expanded={showChannels}
+                className="w-full sm:w-auto self-start flex items-center justify-between gap-3 rounded-full bg-gradient-to-r from-orangeleader to-tangerine hover:opacity-90 px-6 py-3.5 text-white font-black text-sm uppercase tracking-wider transition-all cursor-pointer shadow-[0_8px_24px_rgba(235,63,27,0.35)]"
               >
-                <span className="flex items-center gap-3">
-                  <MessengerIcon className="w-5 h-5 shrink-0" />
-                  <span className="text-sm font-black uppercase tracking-wide leading-tight text-left">
-                    Messenger
-                  </span>
+                <span>Elegir canal de chat</span>
+                <span
+                  aria-hidden="true"
+                  className={`text-base leading-none shrink-0 transition-transform duration-200 ${
+                    showChannels ? "rotate-90" : ""
+                  }`}
+                >
+                  →
                 </span>
-                <span aria-hidden className="text-lg leading-none shrink-0">→</span>
               </button>
-              <button
-                type="button"
-                onClick={() => openSocial("instagram")}
-                className="flex flex-1 items-center justify-between gap-3 rounded-full bg-gradient-to-r from-[#833AB4] via-[#E1306C] to-[#F58529] hover:opacity-90 px-5 py-3 text-white transition-all cursor-pointer"
-              >
-                <span className="flex items-center gap-3">
-                  <InstagramIcon className="w-5 h-5 shrink-0" />
-                  <span className="text-sm font-black uppercase tracking-wide leading-tight text-left">
-                    Instagram
-                  </span>
-                </span>
-                <span aria-hidden className="text-lg leading-none shrink-0">→</span>
-              </button>
+
+              {showChannels && (
+                <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => openSocial("facebook")}
+                    className="flex flex-1 items-center justify-between gap-3 rounded-full bg-[#1877F2] hover:bg-[#0e5fd0] px-5 py-3 text-white transition-all cursor-pointer"
+                  >
+                    <span className="flex items-center gap-3">
+                      <MessengerIcon className="w-5 h-5 shrink-0" />
+                      <span className="text-sm font-black uppercase tracking-wide leading-tight text-left">
+                        Messenger
+                      </span>
+                    </span>
+                    <span aria-hidden="true" className="text-lg leading-none shrink-0">→</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => openSocial("instagram")}
+                    className="flex flex-1 items-center justify-between gap-3 rounded-full bg-gradient-to-r from-[#833AB4] via-[#E1306C] to-[#F58529] hover:opacity-90 px-5 py-3 text-white transition-all cursor-pointer"
+                  >
+                    <span className="flex items-center gap-3">
+                      <InstagramIcon className="w-5 h-5 shrink-0" />
+                      <span className="text-sm font-black uppercase tracking-wide leading-tight text-left">
+                        Instagram
+                      </span>
+                    </span>
+                    <span aria-hidden="true" className="text-lg leading-none shrink-0">→</span>
+                  </button>
+                </div>
+              )}
             </div>
           </SpotlightCard>
         </motion.div>

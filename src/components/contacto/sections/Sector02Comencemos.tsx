@@ -60,6 +60,83 @@ export default function Sector02Comencemos() {
               <motion.div variants={item} className="mt-8">
                 <ContactoForm />
               </motion.div>
+
+              {/* Canales directos: WhatsApp o correo */}
+              <motion.div variants={item} className="mt-12 pt-8 border-t border-white/10">
+                <h3 className="text-xl md:text-2xl font-black uppercase text-white leading-snug">
+                  Escríbenos por WhatsApp o correo
+                </h3>
+
+                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 text-left">
+                  {/* Atención en Monterrey */}
+                  <div className="glass-liquid rounded-[24px] p-5 sm:p-6 border border-white/10 bg-black/20 hover:border-white/20 transition-all flex flex-col justify-between gap-4">
+                    <h4 className="text-sm sm:text-base font-bold uppercase tracking-wider text-white flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-orangeleader" aria-hidden="true" />
+                      Atención en Monterrey
+                    </h4>
+                    <div className="flex flex-col gap-3 text-xs sm:text-sm font-mono">
+                      <div>
+                        <span className="text-xs text-starlight/60 uppercase tracking-widest block mb-1">
+                          WhatsApp
+                        </span>
+                        <a
+                          href="https://wa.me/528115545351"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-orangeleader font-bold hover:text-tangerine hover:underline transition-colors"
+                        >
+                          811 554 5351
+                        </a>
+                      </div>
+                      <div>
+                        <span className="text-xs text-starlight/60 uppercase tracking-widest block mb-1">
+                          Correo
+                        </span>
+                        <a
+                          href="mailto:monterrey@aliedigital.com"
+                          className="text-white font-medium hover:text-orangeleader hover:underline transition-colors break-all sm:break-normal"
+                        >
+                          monterrey@aliedigital.com
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Atención en Puebla */}
+                  <div className="glass-liquid rounded-[24px] p-5 sm:p-6 border border-white/10 bg-black/20 hover:border-white/20 transition-all flex flex-col justify-between gap-4">
+                    <h4 className="text-sm sm:text-base font-bold uppercase tracking-wider text-white flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-orangeleader" aria-hidden="true" />
+                      Atención en Puebla
+                    </h4>
+                    <div className="flex flex-col gap-3 text-xs sm:text-sm font-mono">
+                      <div>
+                        <span className="text-xs text-starlight/60 uppercase tracking-widest block mb-1">
+                          WhatsApp
+                        </span>
+                        <a
+                          href="https://wa.me/522213279555"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-orangeleader font-bold hover:text-tangerine hover:underline transition-colors"
+                        >
+                          221 327 9555
+                        </a>
+                      </div>
+                      <div>
+                        <span className="text-xs text-starlight/60 uppercase tracking-widest block mb-1">
+                          Correo
+                        </span>
+                        <a
+                          href="mailto:puebla@aliedigital.com"
+                          className="text-white font-medium hover:text-orangeleader hover:underline transition-colors break-all sm:break-normal"
+                        >
+                          puebla@aliedigital.com
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>

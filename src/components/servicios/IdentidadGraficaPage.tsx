@@ -9,42 +9,42 @@ import LeadForm from "@/components/LeadForm";
 import Image from "next/image";
 
 const stats = [
-  { value: "100%", label: "Consistencia Estelar", tech: "SYS: BRAND_ALIGN" },
-  { value: "+30", label: "Flotas de Marca Diseñadas", tech: "RAD: LOGOS_LAUNCHED" },
-  { value: "Hex/RGB", label: "Coordenadas de Color Precisas", tech: "ORBIT: SPECTRUM" },
-  { value: "Vector", label: "Archivos Escalables HD", tech: "TLM: FORMATS" }
+  { tech: "IDENTIDAD", value: "Logotipo", label: "Versiones y reglas de uso" },
+  { tech: "PALETA", value: "Color", label: "Referencias para tus materiales" },
+  { tech: "TIPOGRAFÍA", value: "Fuentes", label: "Jerarquías de texto" },
+  { tech: "APLICACIONES", value: "Ejemplos", label: "Piezas según el alcance" }
 ];
 
 const brandReason = [
   {
     num: "01",
-    tag: "IDENTIDAD",
-    title: "Construir Reconocimiento y Confianza",
-    desc: "Una marca coherente es memorable. Cuando tu audiencia ve los mismos colores, tipografías y el mismo tono de comunicación en cada canal, se construye una reputación de solidez y profesionalismo.",
+    tag: "LOGOTIPO",
+    title: "Elige la versión adecuada del logotipo",
+    desc: "Consulta qué versión usar sobre fondos claros u oscuros, cuánto espacio dejar alrededor y qué tamaño conviene según la pieza.",
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   },
   {
     num: "02",
-    tag: "ALINEACIÓN",
-    title: "Alineación de la Tripulación",
-    desc: "Obtén a todos tus colaboradores y socios externos (diseñadores, imprentas, agencias) hablando el mismo lenguaje gráfico. Evita desvíos visuales.",
+    tag: "COLOR Y TIPOGRAFÍA",
+    title: "Usa referencias comunes para cada pieza",
+    desc: "Reúne los colores de marca y las pautas de tipografía para que quienes preparan presentaciones, publicaciones o impresos trabajen con los mismos criterios.",
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "03",
-    tag: "EFICIENCIA",
-    title: "Ahorro de Tiempo y Recursos",
-    desc: "Las reglas claras eliminan la incertidumbre. Dile adiós a las idas y venidas de diseño y acelera las aprobaciones internas con pautas ya definidas y listas para aplicar.",
+    tag: "EQUIPO Y PROVEEDORES",
+    title: "Comparte una guía con quienes producen tus materiales",
+    desc: "Dale a tu equipo, diseñadores e imprentas una referencia para resolver dudas habituales al preparar una pieza.",
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "04",
-    tag: "PROTECCIÓN",
-    title: "Proteger la Integridad de la Marca",
-    desc: "Evita la dilución y malas interpretaciones de tu imagen. Tu marca mantendrá su distinción y fuerza visual sin importar quién la ejecute ni en qué medio se imprima o publique.",
+    tag: "APLICACIONES",
+    title: "Revisa cómo se aplica tu identidad",
+    desc: "Según el alcance, el manual puede incluir ejemplos en materiales como presentaciones, papelería o publicaciones digitales. Estos ejemplos sirven como referencia para preparar nuevas piezas.",
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   }
@@ -52,48 +52,42 @@ const brandReason = [
 
 const packages = [
   {
-    name: "Hoja de Ruta Estelar (Style Sheet)",
-    desc: "Ideal para startups y tripulaciones que necesitan una referencia visual de marca ágil y consistente.",
+    name: "Guía básica de marca",
+    desc: "Para equipos que necesitan una referencia breve para usar su identidad visual en los materiales del día a día.",
     items: [
-      "Manual básico de uso de logotipo (overview)",
-      "Coordenadas de color oficiales (RGB, HEX, CMYK)",
-      "Tipografía de transmisión (fuentes primarias y secundarias)",
-      "Pautas de escala y área de seguridad del escudo de marca",
-      "Formato de entrega: PDF Interactivo listo para compartir"
+      "Versiones del logotipo y fondos de uso",
+      "Tamaño mínimo y espacio alrededor del logotipo",
+      "Paleta de colores y tipografías de marca",
+      "Guía en PDF para compartir"
     ],
-    cta: "Trazar Hoja de Ruta",
+    cta: "Consultar guía básica",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   },
   {
-    name: "Manual de Navegación Core (Core Guidelines)",
-    desc: "Perfecto para marcas en expansión que buscan orden estructural sin la carga de un sistema masivo.",
+    name: "Manual de identidad visual",
+    desc: "Para empresas que necesitan documentar más usos de su marca y dar una referencia común a su equipo y a sus proveedores.",
     items: [
-      "Pautas completas de logotipo (variaciones de fondo, área de seguridad)",
-      "Códigos de color extendidos (pantone, digital, editorial)",
-      "Guía tipográfica detallada con jerarquía (h1, h2, cuerpo de texto)",
-      "Reglas de aplicación en formatos digitales comunes",
-      "Ejemplos visuales de usos correctos e incorrectos (Do's & Don'ts)",
-      "Formato de entrega: PDF corporativo editable y recursos vectoriales"
+      "Variantes del logotipo y criterios de aplicación",
+      "Referencias de color para medios digitales e impresos",
+      "Jerarquías tipográficas para títulos y textos",
+      "Ejemplos de usos correctos e incorrectos",
+      "Manual y recursos en los formatos acordados"
     ],
-    cta: "Obtener Manual Core",
+    cta: "Consultar manual",
     glow: "rgba(235,63,27,0.05)",
-    border: "border-orangeleader/30",
-    tag: "Más Recomendado"
+    border: "border-orangeleader/30"
   },
   {
-    name: "Protocolo Interestelar Completo (Comprehensive)",
-    desc: "La suite definitiva para flotas y corporativos que demandan una consistencia visual total en toda la galaxia.",
+    name: "Manual ampliado con aplicaciones",
+    desc: "Para empresas que necesitan orientar el uso de su identidad en varios tipos de materiales, como papelería, presentaciones, empaques o uniformes.",
     items: [
-      "Manual extendido de branding (arquitectura de marca e isotipos)",
-      "Guías de fotografía y dirección de arte (estilo de imágenes)",
-      "Retículas de composición y maquetación de layouts",
-      "Framework de iconos corporativos personalizados (con set inicial)",
-      "Ejemplos de aplicación real (papelería, empaques, uniformes, naves)",
-      "Guías de movimiento/animación de marca básica",
-      "Formato de entrega: Manual interactivo, recursos en la nube y kit de assets"
+      "Lineamientos visuales según los materiales acordados",
+      "Reglas de composición para las piezas prioritarias",
+      "Ejemplos de aplicación en los soportes seleccionados",
+      "Manual y recursos acordados para el equipo y sus proveedores"
     ],
-    cta: "Desplegar Protocolo Interestelar",
+    cta: "Consultar manual ampliado",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   }
@@ -102,70 +96,70 @@ const packages = [
 const brandManualsShowcase = [
   {
     title: "Mercado de Mar",
-    category: "CORTES MARINOS A DOMICILIO",
+    category: "CORTES DE PESCADO A DOMICILIO",
     img: "/branding/mercado_mar.webp",
-    desc: "Diseño de identidad visual para Mercado de Mar. Desarrollamos una marca para amantes de la variedad y los cortes de pescado premium, comunicando un modelo de negocio exclusivo de entrega a domicilio bajo pedido por anticipado."
+    desc: "Diseñamos la identidad visual de Mercado de Mar, un negocio de cortes de pescado que vende por encargo y entrega a domicilio."
   },
   {
     title: "MORECSA",
-    category: "BOMBAS SUMERGIBLES Y EQUIPOS",
+    category: "EQUIPOS DE BOMBEO Y REFACCIONES",
     img: "/branding/morecsa.webp",
-    desc: "Manual de marca para MORECSA, distribuidor especializado de refacciones, equipos de bombeo sumergible y jardinería. Estructuramos su identidad visual para respaldar la distribución oficial de grandes marcas nacionales como BONASA y EVANS."
+    desc: "Elaboramos un manual de marca para MORECSA, distribuidor de equipos de bombeo sumergible, refacciones y productos de jardinería."
   },
   {
     title: "Trebal",
-    category: "FIRMA LEGAL INTERNACIONAL",
+    category: "FIRMA DE ABOGADOS",
     img: "/branding/trebal.webp",
-    desc: "Branding y lineamientos visuales para TREBAL, firma de abogados en Monterrey. Diseñamos una identidad sólida y de alta confianza orientada a clientes americanos para la formalización y cumplimiento de sus operaciones comerciales en México."
+    desc: "Diseñamos la identidad visual y sus lineamientos de uso para Trebal, una firma de abogados en Monterrey."
   },
   {
     title: "Nirue",
     category: "JOYERÍA DE ACERO INOXIDABLE",
     img: "/branding/nirue.webp",
-    desc: "Manual de branding para NIRUE, un negocio boutique de joyería de acero inoxidable en la Ciudad de México. Línea gráfica moderna, elegante y brillante orientada a resaltar la durabilidad y estética de sus accesorios."
+    desc: "Elaboramos un manual de marca para Nirue, una tienda de joyería de acero inoxidable en la Ciudad de México."
   },
   {
     title: "SAX",
-    category: "EQUIPO MÉDICO CREATIVO",
+    category: "EQUIPO MÉDICO",
     img: "/branding/sax.webp",
-    desc: "Rediseño de identidad visual para SAX, comercializadora de equipo médico en la ciudad de Puebla. Desarrollamos un manual de marca sumamente creativo y profesional para refrescar su presencia institucional en el sector salud."
+    desc: "Rediseñamos la identidad visual de SAX, comercializadora de equipo médico en Puebla, y documentamos su uso en un manual de marca."
   }
 ];
 
 const processSteps = [
   {
     num: "01",
-    tag: "DESCUBRIMIENTO",
-    title: "Exploración de Órbita",
-    desc: "Estudiamos tu sector, tus competidores y tus metas espaciales. Definimos los cimientos conceptuales que harán que tu marca resalte en el vacío digital.",
-    items: ["Estudio de mercado", "Talleres de ADN de marca", "Análisis de competidores"],
+    tag: "REVISIÓN",
+    title: "Revisamos tu identidad actual",
+    desc: "Revisamos tu logotipo, los archivos disponibles y las piezas que ya utiliza tu empresa. Identificamos qué dudas debe resolver el manual y acordamos su alcance.",
+    items: ["Archivos disponibles", "Usos actuales", "Alcance del manual"],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   },
   {
     num: "02",
-    tag: "DISEÑO",
-    title: "Ensamble Visual",
-    desc: "Nuestros creativos diseñan los escudos estelares (logotipos) y definen las coordenadas cromáticas. Damos vida a la identidad a través de mockups realistas.",
-    items: ["Diseño de logotipo e isotipo", "Definición de paleta de colores", "Tipografías oficiales"],
+    tag: "LINEAMIENTOS",
+    title: "Definimos los criterios visuales",
+    desc: "Organizamos las versiones del logotipo, los colores y las tipografías. Si algún elemento necesita ajustarse, definimos contigo si ese trabajo formará parte del proyecto.",
+    items: ["Versiones del logotipo", "Paleta de color", "Tipografías"],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "03",
     tag: "DOCUMENTACIÓN",
-    title: "Codificación del Manual",
-    desc: "Estructuramos las directrices visuales en un manual de identidad detallado. Definimos las reglas de juego para asegurar el buen uso de tu marca en cualquier plataforma.",
-    items: ["Do's & Don'ts de marca", "Jerarquía de tamaños y espacios", "Reglas de composición"],
+    title: "Preparamos el manual",
+    desc: "Reunimos las reglas de uso y los ejemplos acordados. Revisamos contigo que la guía responda a las dudas que surgen al preparar materiales para tu empresa.",
+    items: ["Reglas de uso", "Ejemplos acordados", "Revisión del manual"],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "04",
-    tag: "LANZAMIENTO",
-    title: "Despegue Visual",
-    desc: "Entregamos todos los archivos fuente finales en formatos vectoriales editables y PDF interactivo de alta definición, listos para propulsar la presencia de tu marca.",
-    items: ["Archivos vectoriales (AI, SVG, PDF)", "Formatos listos para web (PNG, WebP)", "Inducción al equipo de trabajo"],
+    tag: "ENTREGA",
+    title: "Entregamos la guía y sus recursos",
+    desc: "Entregamos el manual y los recursos acordados para que tu equipo pueda consultarlos y compartirlos con sus proveedores.",
+    items: ["Manual de marca", "Recursos acordados", "Formatos de entrega"],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   }
@@ -206,28 +200,22 @@ export default function IdentidadGraficaPageClient() {
               href="/servicios"
               className="inline-flex items-center gap-2 text-white/30 text-xs font-bold uppercase tracking-widest hover:text-orangeleader transition-colors"
             >
-              ← Módulos de Flota
+              ← Ver servicios
             </Link>
           </div>
 
           <div className="flex items-center justify-center gap-3 mb-6">
             <span className="text-orangeleader text-xs font-black tracking-[0.5em] uppercase">
-              IDENTIDAD GRÁFICA & BRANDING
-            </span>
-            <span className="px-3 py-1 rounded-full border border-orangeleader/30 bg-orangeleader/10 text-xs font-black text-orangeleader uppercase tracking-wider">
-              CORE
+              IDENTIDAD GRÁFICA
             </span>
           </div>
 
           <h1 className="text-5xl md:text-8xl font-black uppercase text-white leading-[0.95] tracking-tight mb-8">
-            MANUALES DE MARCA.<br />
-            <span className="text-transparent block mt-2" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.75)" }}>
-              CONSISTENCIA ESTELAR.
-            </span>
+            Manuales de marca para tu empresa
           </h1>
 
           <p className="mt-8 text-base md:text-lg text-starlight/70 leading-relaxed font-light max-w-2xl mx-auto">
-            Equipa a tu equipo con lineamientos visuales y verbales claros para representar tu marca con precisión y elegancia en toda la galaxia. Diseñamos manuales de identidad personalizados que protegen y consolidan tu reputación.
+            Documentamos cómo usar el logotipo, los colores y las tipografías de tu marca. Así, tu equipo y tus proveedores tienen una referencia común al preparar publicaciones, presentaciones o materiales impresos.
           </p>
 
           <div className="mt-12 flex flex-wrap justify-center gap-4">
@@ -235,13 +223,13 @@ export default function IdentidadGraficaPageClient() {
               href="#paquetes"
               className="bg-orangeleader hover:bg-orangeleader/80 text-white text-xs font-black uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 shadow-[0_10px_20px_rgba(235,63,27,0.3)] hover:shadow-[0_12px_24px_rgba(235,63,27,0.5)] cursor-pointer"
             >
-              Ver Órbitas de Servicio
+              Ver opciones de manual
             </a>
             <a
               href="#showcase"
               className="border border-white/10 hover:border-white/20 bg-white/[0.02] hover:bg-white/[0.04] text-white text-xs font-black uppercase tracking-widest px-8 py-4 rounded-full transition-all duration-300 cursor-pointer"
             >
-              Ver Manuales de la Flota
+              Ver ejemplos
             </a>
           </div>
         </motion.div>
@@ -273,13 +261,13 @@ export default function IdentidadGraficaPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              SEGURIDAD Y RECONOCIMIENTO
+              USO DIARIO DE TU MARCA
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              PROTEGE LA FIRMA VISUAL DE TU NAVE NODRIZA
+              ¿Para qué sirve un manual de marca?
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Piensa en tu marca como una nave espacial: cada transmisión, módulo y detalle debe estar perfectamente alineado bajo un mismo manual de ingeniería para garantizar el éxito de la misión.
+              Un manual reúne las reglas y ejemplos que tu equipo y tus proveedores necesitan para aplicar tu identidad visual en distintos materiales.
             </p>
           </div>
 
@@ -322,13 +310,13 @@ export default function IdentidadGraficaPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              EXPEDICIONES GRÁFICAS
+              PORTAFOLIO
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              SISTEMAS DE IDENTIDAD EN ÓRBITA
+              Ejemplos de identidad visual y manuales de marca
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Navega a través de los manuales de identidad visual que hemos diseñado para tripulaciones aliadas en distintos sectores de la galaxia.
+              Explora una selección de trabajos de diseño, rediseño y documentación de identidad visual para empresas de distintos sectores.
             </p>
           </div>
 
@@ -449,13 +437,13 @@ export default function IdentidadGraficaPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              NUESTRA INGENIERÍA
+              PROCESO DE TRABAJO
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              EL PROCESO DE CARTOGRAFÍA DE MARCA
+              Cómo preparamos tu manual de marca
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Desde la conceptualización del logotipo hasta la codificación final del manual, guiamos tu marca en un viaje seguro de diseño y consistencia corporativa.
+              Revisamos los recursos que ya tiene tu marca, acordamos qué usos debe cubrir el manual y documentamos las reglas que tu equipo necesita para preparar sus materiales.
             </p>
           </div>
 
@@ -508,13 +496,13 @@ export default function IdentidadGraficaPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              CONFIGURACIONES DISPONIBLES
+              OPCIONES DE MANUAL DE MARCA
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              ÓRBITAS DE DISEÑO DE IDENTIDAD
+              Una guía según cómo usas tu marca
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Selecciona el nivel de estructuración y profundidad que necesita tu tripulación para operar de manera consistente.
+              Partimos de tu identidad visual actual. Acordamos qué reglas, ejemplos y archivos necesita tu equipo. Si tu logotipo u otros elementos requieren ajustes, los definimos por separado en la propuesta.
             </p>
           </div>
 
@@ -534,11 +522,6 @@ export default function IdentidadGraficaPageClient() {
                     <span className="text-[10px] font-mono tracking-widest text-starlight/40 uppercase">
                       CONFIGURACIÓN 0{idx + 1}
                     </span>
-                    {pack.tag && (
-                      <span className="px-2 py-0.5 rounded-full bg-orangeleader/15 border border-orangeleader/30 text-[10px] font-mono font-bold text-orangeleader uppercase tracking-widest">
-                        {pack.tag}
-                      </span>
-                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -583,18 +566,18 @@ export default function IdentidadGraficaPageClient() {
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <div className="mb-12">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              ¿LISTO PARA TU VIAJE?
+              HABLEMOS DE TU MARCA
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase mb-4">
-              ENVIAR SOLICITUD DE DESPEGUE DE MARCA
+              ¿Qué necesitas documentar de tu marca?
             </h3>
             <p className="text-starlight/60 text-sm max-w-xl mx-auto">
-              Comienza a modelar tu manual de identidad gráfica y branding. Agenda tu llamada de estrategia de 15 minutos en Google Meet con nuestros expertos.
+              Cuéntanos qué archivos tienes y en qué materiales usas tu marca. Revisamos contigo qué reglas, ejemplos y recursos necesita tu equipo para preparar una propuesta.
             </p>
           </div>
 
           <div className="max-w-xl mx-auto glass-liquid rounded-3xl p-8 shadow-2xl">
-            <LeadForm servicioInteres="Identidad Gráfica y Branding" />
+            <LeadForm servicioInteres="Manuales de marca" submitLabel="Solicitar información" />
           </div>
         </div>
       </section>

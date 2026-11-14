@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Diseño de Identidad Gráfica y Branding | Alié Digital",
-  description: "Servicios de diseño de identidad gráfica y branding corporativo. Creamos logotipos, manuales de identidad y recursos visuales coherentes con tu marca.",
+  title: "Manuales de marca e identidad visual | Alié Digital",
+  description: "Creamos manuales de marca para documentar el uso de tu logotipo, colores y tipografías, con ejemplos de aplicación según los materiales que utiliza tu empresa.",
   alternates: {
     canonical: "https://aliedigital.com/identidad-grafica/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Diseño de Identidad Gráfica y Branding B2B | Alié Digital",
-    description: "Servicios profesionales de diseño de identidad gráfica y branding corporativo. Diseñamos logotipos, manuales de identidad y recursos visuales coherentes de marca.",
+    title: "Manuales de marca e identidad visual | Alié Digital",
+    description: "Creamos manuales de marca para documentar el uso de tu logotipo, colores y tipografías, con ejemplos de aplicación según los materiales que utiliza tu empresa.",
     url: "https://aliedigital.com/identidad-grafica/",
     images: [
       {
@@ -31,11 +31,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Diseño de Identidad Gráfica y Branding B2B | Alié Digital",
-    description: "Servicios profesionales de diseño de identidad gráfica y branding corporativo. Diseñamos logotipos, manuales de identidad y recursos visuales coherentes de marca.",
+    title: "Manuales de marca e identidad visual | Alié Digital",
+    description: "Creamos manuales de marca para documentar el uso de tu logotipo, colores y tipografías, con ejemplos de aplicación según los materiales que utiliza tu empresa.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   return (
@@ -43,8 +43,8 @@ export default function Page() {
       <JsonLd
         data={createServiceSchema(
           "/identidad-grafica/",
-          "Identidad Gráfica & Branding Corporativo | Alié Digital",
-          "Manuales de identidad corporativa y guías de marca profesionales con temática espacial."
+          "Manuales de marca e identidad visual | Alié Digital",
+          "Elaboración de guías y manuales a partir de la identidad visual de tu empresa, con reglas de uso del logotipo, referencias de color, pautas tipográficas y ejemplos según el alcance acordado."
         )}
       />
       <IdentidadGraficaPageClient />

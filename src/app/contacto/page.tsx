@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { CONTACTO_SCHEMA } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Contacto: Agenda tu Asesoría de Growth | Alié Digital",
-  description: "Inicia tu proyecto digital con Alié Digital. Agenda una llamada de estrategia y conoce nuestra garantía anti-secuestro para proteger tu sitio web hoy.",
+  title: "Contacto | Alié Digital",
+  description: "Cuéntanos sobre tu proyecto mediante el formulario o escríbenos por WhatsApp o correo a nuestros equipos de atención en Monterrey y Puebla.",
   alternates: {
     canonical: "https://aliedigital.com/contacto/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Contacto: Agenda tu Asesoría de Growth B2B | Alié Digital",
-    description: "Inicia tu proyecto hoy con Alié Digital. Agenda una llamada de estrategia de marketing B2B y conoce la garantía anti-secuestro para proteger tu sitio web corporativo.",
+    title: "Contacto | Alié Digital",
+    description: "Cuéntanos sobre tu proyecto mediante el formulario o escríbenos por WhatsApp o correo a nuestros equipos de atención en Monterrey y Puebla.",
     url: "https://aliedigital.com/contacto/",
     images: [
       {
@@ -31,11 +31,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Contacto: Agenda tu Asesoría de Growth B2B | Alié Digital",
-    description: "Inicia tu proyecto hoy con Alié Digital. Agenda una llamada de estrategia de marketing B2B y conoce la garantía anti-secuestro para proteger tu sitio web corporativo.",
+    title: "Contacto | Alié Digital",
+    description: "Cuéntanos sobre tu proyecto mediante el formulario o escríbenos por WhatsApp o correo a nuestros equipos de atención en Monterrey y Puebla.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   return (

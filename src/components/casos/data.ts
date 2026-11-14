@@ -1,15 +1,7 @@
-export interface Resultado {
-  /** Parte resaltada en negrita al inicio de la frase */
-  destacado: string;
-  /** Resto de la frase (sin negrita) */
-  resto?: string;
-}
-
-export interface Metrica {
-  count: number;
-  prefix?: string;
-  suffix?: string;
-  label: string;
+export interface ResultadoVerificado {
+  texto: string;
+  fuente?: string;
+  periodo?: string;
 }
 
 export interface Mision {
@@ -18,11 +10,10 @@ export interface Mision {
   titulo: string;
   categoria: string;
   cliente: string;
-  reto: string;
-  resultados: Resultado[];
-  despliegue: string;
-  /** Métrica principal animada con contador */
-  metrica: Metrica;
+  nombreIndice: string;
+  necesidad: string;
+  queHicimos: string;
+  resultadosVerificados?: ResultadoVerificado[];
 }
 
 export const MISIONES: Mision[] = [
@@ -31,19 +22,19 @@ export const MISIONES: Mision[] = [
     tag: "Misión 01",
     titulo: "Equipamiento Industrial B2B & Sector Hogar",
     categoria: "Sector: Comercialización e Industria",
-    cliente: "Comercializadora de Bombas Sumergibles",
-    reto:
-      "Construir una infraestructura digital sólida desde cero para captar prospectos corporativos e ingresar al mercado de consumo masivo en Puebla y la región central.",
-    resultados: [
-      { destacado: "57 prospectos calificados", resto: " en promedio cada mes." },
-      { destacado: "+2,190 contactos B2B", resto: " integrados a base de datos propia en 38 meses." },
-      { destacado: "Posicionamiento SEO Top 1 en Google:", resto: " \"bomba sumergible en puebla\"." },
-      { destacado: "Posicionamiento SEO Top 6 en Google:", resto: " \"podadora de pasto\"." },
-      { destacado: "Creación y escalamiento de marca hermana", resto: " dedicada al sector Hogar." },
+    cliente: "MORECSA",
+    nombreIndice: "MORECSA",
+    necesidad:
+      "Construir una presencia digital sólida para presentar su catálogo de equipos de bombeo industrial y refacciones, captar consultas comerciales en Puebla y la región central, y abrir mercado para productos del sector hogar.",
+    queHicimos:
+      "Estructuramos la identidad visual de la marca y desarrollamos una arquitectura web con catálogo de productos organizada para la consulta técnica. Implementamos optimización SEO local y contenidos para búsquedas de su oferta en buscadores, y gestionamos campañas en Google Ads y Meta Ads orientadas a personas y empresas interesadas en equipos de bombeo y jardinería. También apoyamos la creación y presencia digital de una marca hermana enfocada en el sector hogar.",
+    resultadosVerificados: [
+      {
+        texto: "Más de 2,190 contactos B2B incorporados a su base de datos en 38 meses.",
+        fuente: "Reportado en la ficha original",
+        periodo: "38 meses",
+      },
     ],
-    despliegue:
-      "Para este proyecto, no construimos solo una página web; desplegamos un ecosistema digital completo diseñado para la conversión. Comenzamos definiendo una Identidad Gráfica sólida que se integró en una arquitectura web (multipágina con catálogo de productos). Para asegurar la tracción inmediata y a largo plazo, blindamos su presencia orgánica con SEO Técnico Local y una estrategia de blogs de autoridad. Finalmente, abrimos las llaves del tráfico comercial activando nuestro ecosistema Conquista Social en Meta Ads, respaldado por campañas en Google Ads, capturando directamente las intenciones de búsqueda B2C de su mercado.",
-    metrica: { count: 57, suffix: " prospectos/mes", label: "Prospectos calificados en promedio" },
   },
   {
     id: "mision-02-vasos-desechables",
@@ -51,16 +42,18 @@ export const MISIONES: Mision[] = [
     titulo: "Insumos y Manufactura B2B",
     categoria: "Sector: Empaque y Distribución Mayorista",
     cliente: "Fabricante y Distribuidor de Vasos Desechables de Cartón",
-    reto:
-      "Posicionar la marca ante compradores mayoristas y cadenas comerciales dentro de un mercado altamente monopolizado.",
-    resultados: [
-      { destacado: "105 prospectos mayoristas", resto: " en promedio cada mes." },
-      { destacado: "+1,900 empresas en base de datos", resto: " activa acumuladas en 18 meses." },
-      { destacado: "Posicionamiento SEO Top 20 en Google:", resto: " \"vasos para café personalizados\"." },
+    nombreIndice: "Vasos desechables de cartón",
+    necesidad:
+      "Dar a conocer su catálogo de vasos desechables de cartón e insumos térmicos ante compradores mayoristas, cafeterías y cadenas comerciales en un mercado dominado por marcas consolidadas.",
+    queHicimos:
+      "Rediseñamos la identidad gráfica corporativa para proyectar un estándar profesional de fabricante. Desarrollamos un sitio web de carga rápida con catálogo enfocado en solicitudes de cotización mayorista, y gestionamos campañas de búsqueda en Google Ads segmentadas para consultas comerciales de insumos y empaques de cartón.",
+    resultadosVerificados: [
+      {
+        texto: "Más de 1,900 empresas acumuladas en la base de datos activa en 18 meses.",
+        fuente: "Reportado en la ficha original",
+        periodo: "18 meses",
+      },
     ],
-    despliegue:
-      "Rediseñamos la Identidad Gráfica del cliente para alinear su imagen con un estándar corporativo de alto nivel. Sobre esta nueva base visual, construimos una plataforma web optimizada para velocidad extrema y conversión, convirtiendo el sitio en un embudo continuo de solicitudes de cotización. Para activar el flujo de clientes calificados de forma inmediata, integramos Google Ads, desplegando campañas de pauta hiper-segmentadas para dominar las búsquedas comerciales clave de su sector.",
-    metrica: { count: 105, suffix: " prospectos/mes", label: "Prospectos mayoristas en promedio" },
   },
   {
     id: "mision-03-cirujano-maxilofacial",
@@ -68,81 +61,69 @@ export const MISIONES: Mision[] = [
     titulo: "Sector Salud & Medicina de Alta Especialidad",
     categoria: "Sector: Healthcare / Cirugía Especializada",
     cliente: "Cirujano Maxilofacial",
-    reto:
-      "Establecer autoridad médica digital y generar un flujo constante de pacientes para procedimientos quirúrgicos de alto valor.",
-    resultados: [
-      { destacado: "48 prospectos/pacientes calificados", resto: " en promedio cada mes." },
-      { destacado: "+1,155 expedientes y contactos", resto: " generados en 24 meses." },
-    ],
-    despliegue:
-      "Para este cliente médico, la confianza desde el primer clic era innegociable. Desplegamos una arquitectura web corporativa profesional orientada a los servicios que ofrece el doctor. Su interfaz fue diseñada bajo estrictos lineamientos de UI/UX para proyectar autoridad clínica, empatía y profesionalismo de forma inmediata. Una vez establecida esta base de conversión activamos campañas de búsqueda en Google Ads milimétricamente segmentadas para interceptar a usuarios con intenciones reales de agendar una consulta, transformando la plataforma web en una máquina predecible de adquisición de pacientes calificados.",
-    metrica: { count: 48, suffix: " pacientes/mes", label: "Pacientes calificados en promedio" },
+    nombreIndice: "Cirujano maxilofacial",
+    necesidad:
+      "Proyectar autoridad clínica y experiencia médica en internet para orientar a pacientes que buscan información sobre procedimientos quirúrgicos maxilofaciales de alta especialidad y desean programar una consulta.",
+    queHicimos:
+      "Diseñamos y desarrollamos un sitio web profesional enfocado en la explicación detallada de los procedimientos quirúrgicos, con lineamientos de diseño UI/UX que transmiten rigor y confianza. Gestionamos campañas de búsqueda en Google Ads orientadas a consultas médicas específicas para facilitar el contacto directo y la solicitud de citas.",
+    resultadosVerificados: [],
   },
   {
     id: "mision-04-postes-infraestructura",
     tag: "Misión 04",
     titulo: "Infraestructura y Alumbrado Público",
     categoria: "Sector: Construcción e Ingeniería Civil",
-    cliente: "Venta de Postes Metálicos y de Concreto",
-    reto:
-      "Captar licitaciones, constructoras y proyectos de ingeniería civil a nivel regional y nacional.",
-    resultados: [
-      { destacado: "46 cotizaciones B2B de gran escala", resto: " en promedio cada mes." },
-      { destacado: "+1,124 constructoras y contratistas", resto: " registrados en base de datos en 24 meses." },
+    cliente: "Postes Puebla",
+    nombreIndice: "Postes Puebla",
+    necesidad:
+      "Digitalizar su catálogo técnico de postes metálicos y de concreto para que ingenieros, constructoras y contratistas de obra pública y privada pudieran consultar especificaciones técnicas y solicitar cotizaciones a gran escala.",
+    queHicimos:
+      "Desarrollamos una plataforma web optimizada con fichas técnicas descargables y catálogo de postes diseñado para la experiencia de compra de ingenieros y responsables de compras. Gestionamos campañas de búsqueda en Google Ads dirigidas a búsquedas técnicas y comerciales de materiales para electrificación y alumbrado.",
+    resultadosVerificados: [
+      {
+        texto: "Más de 1,124 constructoras y contratistas registrados en la base de datos en 24 meses.",
+        fuente: "Reportado en la ficha original",
+        periodo: "24 meses",
+      },
     ],
-    despliegue:
-      "Para este líder del sector industrial, tener una página web básica no era suficiente; necesitaban digitalizar su proceso de venta técnico. Construimos una plataforma web robusta y ultra-rápida equipada con un catálogo de productos detallado, pensado en la experiencia de usuario (UI/UX) de compradores e ingenieros. Una vez cimentada la infraestructura, encendimos nuestro ecosistema en Google Ads. En lugar de generar tráfico genérico, calibramos campañas hiper-segmentadas para interceptar exclusivamente a tomadores de decisiones activos en obras de construcción, transformando la plataforma en un activo digital que genera un retorno de inversión (ROI) medible y constante.",
-    metrica: { count: 46, suffix: " cotizaciones/mes", label: "Cotizaciones B2B en promedio" },
   },
   {
     id: "mision-05-seo-multisectorial",
     tag: "Misión 05",
     titulo: "Dominio Orgánico y SEO Técnico Multisectorial",
     categoria: "Sector: Multi-Industria (7 Marcas)",
-    cliente:
-      "Empresas en Maquinaria Pesada/Ligera, Suplementos, Software Contable, Cursos Clínicos, Contenedores Industriales y Dermocosmética.",
-    reto:
-      "Superar a competidores consolidados en motores de búsqueda, solucionar problemas graves de arquitectura web y restaurar la reputación digital.",
-    resultados: [
-      { destacado: "Top 5 en Google", resto: " en palabras clave comerciales clave para 7 industrias de alta rentabilidad." },
-      { destacado: "+500 errores técnicos corregidos", resto: " en rendimiento, indexabilidad, Core Web Vitals y arquitectura de datos." },
-      { destacado: "Reparación y blindaje de reputación digital", resto: " para marcas afectadas por contenido adverso o SEO negativo." },
-    ],
-    despliegue:
-      "Auditoría On-Page y Off-Page profunda, optimización de código fuente, estrategia de Linkbuilding de alta autoridad e ingesta de contenido SEO estratégico.",
-    metrica: { count: 500, prefix: "+", suffix: " errores", label: "Errores técnicos corregidos" },
+    cliente: "Empresas en Maquinaria, Software, Contenedores y Salud",
+    nombreIndice: "SEO multisectorial",
+    necesidad:
+      "Resolver errores graves de indexabilidad, velocidad y arquitectura web en sitios corporativos de diversos giros que perdían visibilidad ante competidores y requerían mejorar su presencia en Google.",
+    queHicimos:
+      "Ejecutamos auditorías técnicas on-page y off-page, corregimos errores en Core Web Vitals y datos estructurados, y reestructuramos contenidos técnicos y enlaces internos para optimizar la relevancia de cada sitio en búsquedas comerciales de sus sectores.",
+    resultadosVerificados: [],
   },
   {
     id: "mision-06-motopartes-ecommerce",
     tag: "Misión 06",
     titulo: "Escalamiento E-commerce & Retail Motopartes",
     categoria: "Sector: Comercio Electrónico / Automotive",
-    cliente: "Tienda en Línea de Motopartes",
-    reto:
-      "Migrar, estabilizar técnicamente y escalar el volumen de ventas de un catálogo masivo de refacciones sin perder historial transaccional ni posicionamiento.",
-    resultados: [
-      { destacado: "+$366,000 MXN en ventas", resto: " generados únicamente en el periodo transcurrido de 2026." },
-      { destacado: "+115% de crecimiento interanual acelerado", resto: " al comparar el periodo 2025 contra 2026." },
-      { destacado: "100% de integridad de datos retenida", resto: ", sin pérdida de historial de clientes o transacciones durante la migración tecnológica." },
-    ],
-    despliegue:
-      "Para este proyecto, un e-commerce tradicional no iba a soportar el volumen de transacciones del cliente. Construimos una infraestructura de comercio electrónico totalmente optimizada. Rediseñamos la experiencia de usuario (UX) enfocándonos en un buscador interno hiper-optimizado, permitiendo a los compradores encontrar y pagar productos en segundos mediante pasarelas de pago 100% automatizadas. Para blindar el negocio, alojamos todo el ecosistema web en una arquitectura de servidores de alta disponibilidad, diseñada expresamente para absorber picos masivos de tráfico sin caídas de rendimiento, garantizando que el motor de ventas nunca se detenga.",
-    metrica: { count: 366000, prefix: "$", suffix: " MXN", label: "Ventas generadas en 2026" },
+    cliente: "Argüello Motopartes",
+    nombreIndice: "Argüello Motopartes",
+    necesidad:
+      "Migrar y modernizar una tienda en línea con un catálogo masivo de refacciones para motocicletas, asegurando que los compradores encontraran piezas con rapidez y sin perder transacciones ni historial previo.",
+    queHicimos:
+      "Construimos una plataforma de comercio electrónico con un buscador interno optimizado para modelos y números de parte, integrando pasarelas de pago automatizadas. Ejecutamos la migración tecnológica sobre servidores de alta disponibilidad preservando el historial de cuentas y pedidos existentes.",
+    resultadosVerificados: [],
   },
   {
     id: "mision-07-control-asistencias-saas",
     tag: "Misión 07",
     titulo: "B2B SaaS & Gestión Corporativa",
     categoria: "Sector: Software Corporativo / Recursos Humanos",
-    cliente: "Empresa de Control de Asistencias",
-    reto:
-      "Captar cuentas corporativas optimizando de manera agresiva el Costo por Adquisición (CPA).",
-    resultados: [
-      { destacado: "+450 prospectos B2B corporativos", resto: " calificados en menos de 12 meses." },
-      { destacado: "Optimización continua del CPA", resto: " mediante la diversificación estratégica de canales de adquisición." },
-    ],
-    despliegue:
-      "Para dominar el mercado en múltiples frentes, sabíamos que lanzar anuncios aislados no sería suficiente; necesitábamos un motor de adquisición de clientes blindado. Comenzamos construyendo la base de conversión: Landing pages de alta velocidad diseñadas bajo estrictos principios de persuasión B2B/B2C para exprimir cada clic. Para alimentar este motor con tráfico de ultra-alta calidad, activamos un ecosistema publicitario omnicanal. Desplegamos campañas en Google Ads y LinkedIn Ads para interceptar la demanda comercial e interactuar con perfiles directivos. En paralelo, encendimos nuestra maquinaria de Conquista Social, utilizando el poder visual de Meta y TikTok Ads para capturar la atención masiva. El resultado: un sistema de captación escalable, medible y enfocado 100% en la rentabilidad.",
-    metrica: { count: 450, prefix: "+", suffix: " prospectos", label: "Prospectos B2B corporativos" },
+    cliente: "Empresa de Software de Control de Asistencias",
+    nombreIndice: "Control de asistencias SaaS",
+    necesidad:
+      "Captar prospectos corporativos calificados (directores y gerentes de recursos humanos) para demostraciones de software de control de asistencia empresarial.",
+    queHicimos:
+      "Diseñamos landing pages orientadas a tomadores de decisiones corporativos con mensajes claros sobre funcionalidades y ahorro de tiempo. Gestionamos campañas en Google Ads y LinkedIn Ads dirigidas a perfiles de gestión humana, acompañadas de anuncios en redes sociales para reforzar la consideración de marca.",
+    resultadosVerificados: [],
   },
 ];

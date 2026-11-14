@@ -9,7 +9,7 @@ const inputClass =
 
 export default function LeadForm({
   servicioInteres,
-  submitLabel = "Agendar llamada de estrategia (Google Meet)",
+  submitLabel = "Solicitar información",
 }: {
   servicioInteres?: string;
   submitLabel?: string;
@@ -100,7 +100,7 @@ export default function LeadForm({
         <div className="text-4xl mb-3">🚀</div>
         <h3 className="text-lg font-black uppercase text-white mb-2">¡Solicitud recibida!</h3>
         <p className="text-starlight/60 text-sm leading-relaxed">
-          Te contactaremos pronto para agendar tu llamada de estrategia por Google Meet.
+          Gracias por contactarnos. Revisaremos los datos que compartiste y nos pondremos en contacto contigo para conocer mejor tu proyecto.
         </p>
       </div>
     );

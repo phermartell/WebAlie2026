@@ -16,73 +16,73 @@ const stats = [
 const processSteps = [
   {
     num: "01",
-    tag: "CARTOGRAFÍA",
-    title: "Mapeo de Trayectoria y Objetivos",
-    desc: "Analizamos tus metas comerciales, tu oferta y el perfil de tus tripulantes (audiencia). Diseñamos el plan de vuelo inicial definiendo qué mensajes transmitir, a quiénes y en qué momentos clave.",
-    items: ["Estudio de buyer persona", "Definición de ofertas ganadoras", "Planificación de frecuencia de envío"],
+    tag: "OBJETIVOS",
+    title: "Definimos qué necesitas comunicar",
+    desc: "Revisamos tu oferta, tus contactos y el objetivo de los correos para acordar qué mensajes preparar y a quiénes dirigirlos.",
+    items: ["Objetivo de la comunicación", "Perfil de los destinatarios", "Frecuencia de envío acordada"],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   },
   {
     num: "02",
-    tag: "DEPURACIÓN",
-    title: "Limpieza y Configuración de Señal",
-    desc: "Eliminamos contactos inactivos o rebotes para proteger tu reputación de envío. Configuramos dominio, firmas DKIM/SPF y la arquitectura inicial para evitar caer en el agujero negro del spam.",
-    items: ["Depuración de rebotes y spam", "Configuración técnica DNS", "Arquitectura de base de datos"],
+    tag: "PREPARACIÓN",
+    title: "Revisamos contactos y plataforma",
+    desc: "Revisamos el origen y el estado de los contactos, las bajas y los requisitos de la herramienta de envío. Comprobamos la configuración del remitente según los accesos y el alcance acordados.",
+    items: ["Revisión de listas y suscripciones", "Gestión de bajas y rebotes", "Configuración del remitente"],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "03",
-    tag: "PLAN DE VUELO",
-    title: "Estrategia de Campañas y Flujos",
-    desc: "Diseñamos un calendario de transmisión mensual y definimos los flujos automatizados de respuesta rápida que guiarán a los usuarios en cada etapa de su viaje comercial.",
-    items: ["Estrategias de nutrición", "Estructuración de flujos", "Calendario editorial interestelar"],
+    tag: "PLANEACIÓN",
+    title: "Organizamos campañas y secuencias",
+    desc: "Definimos los temas, el calendario y las condiciones de las secuencias automatizadas cuando formen parte del proyecto.",
+    items: ["Temas y calendario", "Recorridos de seguimiento", "Condiciones de automatización"],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "04",
     tag: "REDACCIÓN",
-    title: "Copywriting de Alta Frecuencia",
-    desc: "Escribimos líneas de asunto magnéticas y textos persuasivos estructurados para captar la atención de tomadores de decisiones. Tono amigable, humano y libre de redundancias robóticas.",
-    items: ["Redacción de líneas de asunto", "Llamadas a la acción (CTA) de alto impacto", "Storytelling adaptado"],
+    title: "Preparamos asuntos y mensajes",
+    desc: "Redactamos el contenido del correo para explicar tu oferta y proponer un siguiente paso claro. Revisamos contigo la información antes del envío.",
+    items: ["Asuntos y textos de vista previa", "Contenido del mensaje", "Llamados a la acción"],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   },
   {
     num: "05",
-    tag: "MAQUETACIÓN",
-    title: "Diseño de Cápsulas de Contenido (Plantillas)",
-    desc: "Construimos maquetas responsivas impecables bajo tu línea gráfica premium. Optimizadas para dispositivos móviles y de escritorio, garantizando que el diseño mantenga su consistencia visual en cualquier puerto de lectura.",
-    items: ["Maquetación en HTML responsivo", "Diseño de marca consistente", "Optimización de pesos de imágenes"],
+    tag: "DISEÑO",
+    title: "Diseñamos la plantilla",
+    desc: "Adaptamos el contenido a una plantilla alineada con tu marca. Revisamos su presentación en los dispositivos y clientes de correo contemplados en la propuesta.",
+    items: ["Estructura y jerarquía visual", "Adaptación a dispositivos móviles", "Preparación de imágenes"],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   },
   {
     num: "06",
-    tag: "IGNICIÓN",
-    title: "Automatización y Segmentación en Órbita",
-    desc: "Activamos los motores de automatización y dividimos tu lista de contactos en grupos basados en su comportamiento (aperturas, clics, compras previas). Tu mensaje correcto llegará a la persona adecuada.",
-    items: ["Segmentación avanzada", "Flujos automáticos de bienvenida", "E-commerce flows automáticos"],
+    tag: "CONFIGURACIÓN",
+    title: "Configuramos destinatarios y envíos",
+    desc: "Preparamos los segmentos y las condiciones de envío con la información disponible. Configuramos las automatizaciones incluidas en el alcance.",
+    items: ["Criterios de selección de contactos", "Programación de campañas", "Configuración de flujos acordados"],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "07",
-    tag: "CALIBRACIÓN",
-    title: "Pruebas A/B y Optimización",
-    desc: "Testeo constante de variantes de asuntos, diseños y enlaces. Analizamos qué combinación genera mayor tracción para ajustar la potencia de envío y maximizar los resultados de tu canal.",
-    items: ["A/B Testing en asuntos", "Pruebas de diseño interactivo", "Optimización de entregabilidad"],
+    tag: "PRUEBAS",
+    title: "Revisamos antes de activar",
+    desc: "Comprobamos textos, enlaces y funcionamiento de los correos. Coordinamos la aprobación y realizamos pruebas de las secuencias cuando correspondan.",
+    items: ["Revisión de contenido y enlaces", "Envíos de prueba", "Pruebas de condiciones y recorridos"],
     bgGlow: "rgba(255,255,255,0.02)",
     colSpan: "lg:col-span-4"
   },
   {
     num: "08",
-    tag: "TELEMETRÍA",
-    title: "Reportes de Misión y Crecimiento",
-    desc: "Monitoreamos la tasa de apertura, clics y conversiones de ingresos. Te compartimos reportes claros y accionables con las optimizaciones realizadas y los próximos pasos para seguir conquistando terreno comercial.",
-    items: ["Métricas de clics y conversiones", "Recomendaciones de estrategia", "Reportes sencillos y transparentes"],
+    tag: "SEGUIMIENTO",
+    title: "Revisamos resultados y ajustes",
+    desc: "Revisamos los indicadores disponibles en la plataforma y compartimos observaciones para los siguientes envíos. La medición de acciones en el sitio depende de la configuración acordada.",
+    items: ["Aperturas, clics y rebotes registrados", "Acciones medidas cuando corresponda", "Recomendaciones para próximos envíos"],
     bgGlow: "rgba(235,63,27,0.06)",
     colSpan: "lg:col-span-8"
   }
@@ -90,52 +90,47 @@ const processSteps = [
 
 const packages = [
   {
-    name: "Órbita 01 - Sonda de Contacto",
-    tag: "Transmisión Esencial",
-    desc: "Establece una línea de comunicación profesional y periódica con tu tripulación (base de datos) para mantener activa tu presencia de marca.",
+    name: "Campañas de correo",
+    tag: "COMUNICACIÓN CON TUS CONTACTOS",
+    desc: "Para negocios que necesitan preparar y enviar correos con novedades, productos o información de interés para su base de contactos.",
     items: [
-      "Diseño de Plantilla branded premium",
-      "Redacción y Copywriting persuasivo B2B",
-      "Envío de 4 Campañas al mes",
-      "Segmentación básica de contactos",
-      "Configuración y reporte mensual de telemetría",
-      "Limpieza de bases de datos inicial"
+      "Planeación de temas y envíos",
+      "Redacción de asuntos y mensajes",
+      "Diseño de plantilla según tu marca",
+      "Selección de destinatarios según criterios acordados",
+      "Revisión de resultados del envío"
     ],
-    cta: "Iniciar Sonda",
+    cta: "Consultar campañas",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   },
   {
-    name: "Órbita 02 - Sistema de Acoplamiento",
-    tag: "Automatización & Tracción",
-    desc: "Automatiza las respuestas a los comportamientos de tus leads. Ideal para convertir prospectos fríos en oportunidades comerciales en piloto automático.",
+    name: "Automatizaciones de correo",
+    tag: "SEGUIMIENTO PROGRAMADO",
+    desc: "Para negocios que necesitan organizar mensajes de bienvenida o seguimiento a partir de acciones y condiciones definidas.",
     items: [
-      "Todo lo incluido en la Sonda de Contacto",
-      "Envío de 8 Campañas al mes",
-      "Diseño avanzado e interactivo de correos",
-      "Configuración de 2 Flujos de Automatización (e.g. Bienvenida + Recuperación)",
-      "Segmentación de contactos avanzada por interés",
-      "Pruebas A/B constantes en asuntos y CTAs",
-      "Reporte mensual de rendimiento detallado"
+      "Definición del recorrido y sus condiciones",
+      "Preparación de mensajes de la secuencia",
+      "Configuración según la plataforma disponible",
+      "Pruebas antes de activar el flujo",
+      "Revisión y ajustes según el alcance"
     ],
-    cta: "Acoplar Automatizaciones",
+    cta: "Consultar automatización",
     glow: "rgba(235,63,27,0.05)",
     border: "border-orangeleader/30"
   },
   {
-    name: "Órbita 03 - Estación de Control",
-    tag: "Dominación Interestelar",
-    desc: "Estrategia multicanal completa con automatizaciones personalizadas VIP y sincronización total con tu CRM para marcas B2B de alto impacto.",
+    name: "Integración con tus herramientas",
+    tag: "CONEXIONES SEGÚN EL PROYECTO",
+    desc: "Para negocios que necesitan conectar sus formularios, contactos o CRM con una plataforma de correo. Revisamos la viabilidad antes de definir la solución.",
     items: [
-      "Todo lo incluido en el Sistema de Acoplamiento",
-      "Envío de 12 Campañas al mes",
-      "Configuración de 4 Flujos de Automatización VIP avanzados",
-      "Sincronización total con CRM y Embudos de Conversión",
-      "Optimización SEO de entregabilidad avanzada en servidores de envío",
-      "Seguimiento y telemetría avanzada de conversiones web",
-      "Sesión mensual prioritaria de estrategia comercial"
+      "Revisión de herramientas y accesos",
+      "Definición de datos y eventos necesarios",
+      "Integraciones según compatibilidad",
+      "Pruebas de funcionamiento",
+      "Documentación y entrega según la propuesta"
     ],
-    cta: "Lanzar Estación de Control",
+    cta: "Consultar integración",
     glow: "rgba(255,255,255,0.01)",
     border: "border-white/5"
   }
@@ -143,28 +138,28 @@ const packages = [
 
 const includedFeatures = [
   {
-    title: "Estrategia y Calendario Orbital",
-    desc: "Mapeamos tus envíos en un calendario mensual estructurado. Sin improvisaciones; cada correo cumple un objetivo dentro de tu embudo comercial."
+    title: "Planeación de campañas",
+    desc: "Organizamos los temas, los destinatarios y el calendario de envíos para que cada correo tenga un objetivo definido."
   },
   {
-    title: "Copywriting Humano y Persuasivo",
-    desc: "Redacción directa, amena e inteligente orientada a tomadores de decisiones. Aumenta tus aperturas y genera respuestas comerciales reales."
+    title: "Redacción de mensajes",
+    desc: "Preparamos asuntos, textos de vista previa y contenido para explicar tu oferta y proponer un siguiente paso claro."
   },
   {
-    title: "Plantillas Branded Responsivas",
-    desc: "Diseños limpios y profesionales alineados a tu identidad gráfica. Visualización perfecta en smartphones, tablets y clientes de escritorio."
+    title: "Diseño de plantillas",
+    desc: "Diseñamos correos alineados con tu marca y revisamos su presentación en los dispositivos y clientes de correo acordados."
   },
   {
-    title: "Segmentación y Depuración",
-    desc: "Dividimos tu lista según el nivel de interacción y sector. Protegemos tu reputación enviando solo a señales activas y reduciendo el rebote."
+    title: "Organización de contactos",
+    desc: "Revisamos listas, suscripciones y criterios de segmentación para preparar los destinatarios de cada campaña."
   },
   {
-    title: "Automatizaciones que Venden",
-    desc: "Respuestas automáticas instantáneas al registrarse, descargar un recurso o abandonar un proceso de compra. Tu negocio atiende 24/7."
+    title: "Secuencias automatizadas",
+    desc: "Configuramos mensajes que se activan mediante acciones o condiciones definidas, según las funciones de la plataforma y el alcance del proyecto."
   },
   {
-    title: "Integración con CRM y Embudos",
-    desc: "Sincronizamos tus plataformas de Email con tu CRM principal (GHL, HubSpot, etc.). Registro y actualización automática de información."
+    title: "Conexión con otras herramientas",
+    desc: "Evaluamos la conexión de formularios, CRM y plataformas de correo para compartir los datos necesarios según su compatibilidad."
   }
 ];
 
@@ -191,7 +186,7 @@ export default function EmailMarketingPageClient() {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orangeleader/30 bg-orangeleader/10 text-tangerine text-[13px] font-black tracking-widest uppercase mb-6"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-orangeleader animate-ping" />
-              SISTEMAS DE TRANSMISIÓN INTERESTELAR
+              EMAIL MARKETING Y AUTOMATIZACIÓN
             </motion.div>
 
             {/* Headline */}
@@ -201,9 +196,9 @@ export default function EmailMarketingPageClient() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.05] uppercase tracking-tight"
             >
-              CONECTA CON TU AUDIENCIA <br className="hidden md:inline" />
+              Correos para mantener <br className="hidden md:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orangeleader to-tangerine">
-                EN CUALQUIER GALAXIA
+                el contacto con tus clientes
               </span>
             </motion.h1>
 
@@ -214,7 +209,7 @@ export default function EmailMarketingPageClient() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mt-6 text-starlight/75 text-[15px] sm:text-[17px] md:text-[19px] leading-relaxed max-w-2xl font-medium"
             >
-              Diseñamos e implementamos campañas de **Email Marketing** y **Automatizaciones de CRM** que convierten prospectos fríos en clientes habituales. Mensajes persuasivos, plantillas branded impecables e integración directa con tu CRM operativo.
+              Planeamos y preparamos campañas de correo para compartir novedades, presentar productos y dar seguimiento a tus contactos. Definimos los mensajes, los envíos y las automatizaciones según las necesidades de tu negocio.
             </motion.p>
 
             {/* CTAs */}
@@ -228,13 +223,13 @@ export default function EmailMarketingPageClient() {
                 href="#contacto-mision"
                 className="w-full sm:w-auto bg-orangeleader hover:bg-tangerine text-white rounded-full px-8 py-4 font-black text-xs uppercase tracking-widest transition-all cursor-pointer shadow-[0_10px_30px_rgba(235,63,27,0.3)] text-center"
               >
-                Iniciar Mi Transmisión →
+                Consultar email marketing →
               </a>
               <a
                 href="#que-incluye"
                 className="w-full sm:w-auto border border-white/20 hover:border-white text-white rounded-full px-8 py-4 font-black text-xs uppercase tracking-widest transition-all cursor-pointer text-center"
               >
-                Explorar Componentes
+                Conocer el servicio
               </a>
             </motion.div>
           </div>
@@ -246,13 +241,13 @@ export default function EmailMarketingPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              DEMOSTRACIÓN DE SISTEMAS DE COMUNICACIÓN
+              EJEMPLOS DE EMAIL MARKETING
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              TABLERO DE TELEMETRÍA EN VIVO
+              Explora mensajes y métricas
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Explora cómo viajan nuestras transmisiones y cómo estructuramos los correos para garantizar aperturas masivas y clics precisos.
+              Estos ejemplos ilustran cómo puede presentarse un correo y qué indicadores pueden revisarse después de un envío. Son demostraciones y no corresponden a campañas ni resultados de clientes.
             </p>
           </div>
 
@@ -267,9 +262,9 @@ export default function EmailMarketingPageClient() {
                     : "bg-white/[0.02] border-white/5 hover:border-white/20"
                 }`}
               >
-                <span className="text-[10px] font-mono text-orangeleader uppercase tracking-wider mb-1">01 // AUTOMATION FLOW</span>
-                <span className="text-sm font-black text-white uppercase">Secuencia de Bienvenida</span>
-                <span className="text-xs text-starlight/50 mt-1">Activación inmediata tras el primer acoplamiento del prospecto.</span>
+                <span className="text-[10px] font-mono text-orangeleader uppercase tracking-wider mb-1">01 // EJEMPLO</span>
+                <span className="text-sm font-black text-white uppercase">Correo de bienvenida</span>
+                <span className="text-xs text-starlight/50 mt-1">Un primer mensaje para presentar tu negocio y orientar al contacto.</span>
               </button>
 
               <button
@@ -280,9 +275,9 @@ export default function EmailMarketingPageClient() {
                     : "bg-white/[0.02] border-white/5 hover:border-white/20"
                 }`}
               >
-                <span className="text-[10px] font-mono text-orangeleader uppercase tracking-wider mb-1">02 // SALES SEQUENCE</span>
-                <span className="text-sm font-black text-white uppercase">Campaña Persuasiva B2B</span>
-                <span className="text-xs text-starlight/50 mt-1">Diseñada para guiar con suavidad hacia la conversión comercial.</span>
+                <span className="text-[10px] font-mono text-orangeleader uppercase tracking-wider mb-1">02 // EJEMPLO</span>
+                <span className="text-sm font-black text-white uppercase">Correo de seguimiento</span>
+                <span className="text-xs text-starlight/50 mt-1">Un mensaje para compartir información y ofrecer un siguiente paso.</span>
               </button>
 
               <button
@@ -293,9 +288,9 @@ export default function EmailMarketingPageClient() {
                     : "bg-white/[0.02] border-white/5 hover:border-white/20"
                 }`}
               >
-                <span className="text-[10px] font-mono text-orangeleader uppercase tracking-wider mb-1">03 // REAL-TIME METRICS</span>
-                <span className="text-sm font-black text-white uppercase">Métricas de Transmisión</span>
-                <span className="text-xs text-starlight/50 mt-1">Panel de control de entregabilidad y tasas de click en vivo.</span>
+                <span className="text-[10px] font-mono text-orangeleader uppercase tracking-wider mb-1">03 // INDICADORES</span>
+                <span className="text-sm font-black text-white uppercase">Indicadores de envío</span>
+                <span className="text-xs text-starlight/50 mt-1">Conoce qué información revisar después de una campaña.</span>
               </button>
             </div>
 
@@ -309,7 +304,7 @@ export default function EmailMarketingPageClient() {
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
                 <div className="text-[11px] font-mono text-starlight/45 uppercase tracking-widest">
-                  ALIE_SYS_TRANSMISSION_v3.2
+                  VISTA PREVIA DE EJEMPLO
                 </div>
                 <div className="w-4" />
               </div>
@@ -327,32 +322,32 @@ export default function EmailMarketingPageClient() {
                       className="flex-1 flex flex-col"
                     >
                       <div className="border border-white/5 bg-white/[0.01] rounded-2xl p-5 mb-4 text-xs font-mono text-starlight/70 flex flex-col gap-2">
-                        <div><span className="text-orangeleader">De:</span> Alié Digital &lt;transmisiones@aliedigital.com&gt;</div>
-                        <div><span className="text-orangeleader">Para:</span> comandante@sectorcomercial.com</div>
-                        <div className="border-t border-white/5 pt-2 mt-1"><span className="text-orangeleader">Asunto:</span> 🚀 Bienvenido a la Órbita de Alié Digital - Fase 01 de tu Despegue</div>
+                        <div><span className="text-orangeleader">De:</span> Alié Digital &lt;hola@example.com&gt;</div>
+                        <div><span className="text-orangeleader">Para:</span> contacto@example.com</div>
+                        <div className="border-t border-white/5 pt-2 mt-1"><span className="text-orangeleader">Asunto:</span> Gracias por tu interés en nuestros servicios</div>
                       </div>
                       
                       {/* Simulated email body */}
                       <div className="bg-black border border-white/5 rounded-2xl p-6 text-xs text-starlight/85 leading-relaxed flex-1">
                         <div className="w-full flex justify-between items-center mb-6 border-b border-white/5 pb-4">
                           <span className="font-black text-white tracking-widest uppercase">ALIÉ DIGITAL</span>
-                          <span className="text-[9px] text-orangeleader font-mono">CONEXIÓN_SEGURA_ESTABLECIDA</span>
+                          <span className="text-[9px] text-orangeleader font-mono">EJEMPLO DE BIENVENIDA</span>
                         </div>
-                        <p className="font-bold text-white text-sm mb-3">Hola, Tripulante.</p>
+                        <h4 className="font-bold text-white text-sm mb-3">Gracias por ponerte en contacto</h4>
                         <p className="mb-4">
-                          Tu señal ha sido recibida con éxito en nuestra estación base. A partir de hoy, tienes acceso a telemetría de primera mano para optimizar el rendimiento comercial de tus campañas y sitios web.
+                          Recibimos tu solicitud de información. Para orientarte, nos gustaría conocer qué ofrece tu negocio y qué necesitas resolver.
                         </p>
-                        <div className="my-5 p-4 rounded-xl bg-orangeleader/5 border border-orangeleader/15 text-center">
-                          <span className="block font-black text-white uppercase mb-1">Tu primer regalo de bienvenida</span>
-                          <span className="text-[11px] text-starlight/70">Hemos desbloqueado tu plantilla de auditoría SEO de alto rendimiento. Descárgala a continuación:</span>
-                          <span className="inline-block mt-3 bg-orangeleader text-white rounded-full px-4 py-2 font-black text-[10px] uppercase tracking-wider cursor-pointer">
-                            Descargar Bitácora de Vuelo →
-                          </span>
+                        <p className="mb-6">
+                          Puedes consultar nuestros servicios y compartirnos cuáles te interesan. Con esa información podremos revisar el alcance de una propuesta.
+                        </p>
+                        <div className="text-center my-4">
+                          <a
+                            href="/servicios"
+                            className="inline-block bg-orangeleader hover:bg-tangerine text-white rounded-full px-5 py-2.5 font-black text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
+                          >
+                            Conocer los servicios →
+                          </a>
                         </div>
-                        <p className="text-starlight/60">
-                          Nos vemos en el espacio exterior,<br />
-                          El equipo de Alié Digital.
-                        </p>
                       </div>
                     </motion.div>
                   )}
@@ -367,28 +362,31 @@ export default function EmailMarketingPageClient() {
                       className="flex-1 flex flex-col"
                     >
                       <div className="border border-white/5 bg-white/[0.01] rounded-2xl p-5 mb-4 text-xs font-mono text-starlight/70 flex flex-col gap-2">
-                        <div><span className="text-orangeleader">De:</span> Alié Digital &lt;estrategias@aliedigital.com&gt;</div>
-                        <div><span className="text-orangeleader">Para:</span> director@empresab2b.com</div>
-                        <div className="border-t border-white/5 pt-2 mt-1"><span className="text-orangeleader">Asunto:</span> ¿Por qué tus leads se están perdiendo en el vacío digital? 🛸</div>
+                        <div><span className="text-orangeleader">De:</span> Alié Digital &lt;hola@example.com&gt;</div>
+                        <div><span className="text-orangeleader">Para:</span> contacto@example.com</div>
+                        <div className="border-t border-white/5 pt-2 mt-1"><span className="text-orangeleader">Asunto:</span> ¿Retomamos lo que necesitas para tu negocio?</div>
                       </div>
                       
                       {/* Simulated email body */}
                       <div className="bg-black border border-white/5 rounded-2xl p-6 text-xs text-starlight/85 leading-relaxed flex-1">
                         <div className="w-full flex justify-between items-center mb-6 border-b border-white/5 pb-4">
                           <span className="font-black text-white tracking-widest uppercase">ALIÉ DIGITAL</span>
-                          <span className="text-[9px] text-[#ff8643] font-mono">SEÑAL: CAMPAÑA_VALOR</span>
+                          <span className="text-[9px] text-[#ff8643] font-mono">EJEMPLO DE SEGUIMIENTO</span>
                         </div>
-                        <p className="mb-3 font-bold text-white text-sm">¿Señal interrumpida?</p>
+                        <h4 className="font-bold text-white text-sm mb-3">Sigamos con tu proyecto</h4>
                         <p className="mb-4">
-                          El 97% de los usuarios que aterrizan en tu puerto web no están listos para comprar en ese mismo instante. Si no mantienes una frecuencia de comunicación con ellos, se desvanecerán en la galaxia digital de tu competencia.
+                          Si todavía estás revisando cómo mejorar la presencia digital de tu negocio, podemos ayudarte a ordenar las prioridades y definir qué necesitas.
                         </p>
-                        <p className="mb-4">
-                          Nuestro sistema de acoplamiento automático de emails mantiene tus señales activas sin requerir tu tiempo de forma constante. Logramos que tu marca sea recordada cuando el usuario esté listo para cerrar el contrato.
+                        <p className="mb-6">
+                          Cuéntanos qué productos o servicios ofreces y cuál es tu objetivo. Con esa información podremos orientarte sobre las opciones de trabajo.
                         </p>
                         <div className="text-center my-4">
-                          <span className="inline-block bg-[#ff8643] text-white rounded-full px-5 py-2.5 font-black text-[10px] uppercase tracking-wider cursor-pointer">
-                            Agendar Análisis de Transmisión →
-                          </span>
+                          <a
+                            href="#contacto-mision"
+                            className="inline-block bg-[#ff8643] hover:bg-orangeleader text-white rounded-full px-5 py-2.5 font-black text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
+                          >
+                            Consultar mi proyecto →
+                          </a>
                         </div>
                       </div>
                     </motion.div>
@@ -406,38 +404,32 @@ export default function EmailMarketingPageClient() {
                       <div className="grid grid-cols-3 gap-4 mb-6">
                         <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-4 text-center">
                           <span className="text-[9px] font-mono text-starlight/45 uppercase tracking-wider block mb-1">APERTURAS</span>
-                          <span className="text-2xl font-black text-green-400">42.4%</span>
-                          <span className="text-[8px] font-mono text-green-400/80 block mt-1">▲ +8.2% vs. promedio</span>
+                          <span className="text-xl sm:text-2xl font-black text-white block">Lectura</span>
+                          <span className="text-[10px] sm:text-xs text-starlight/60 block mt-1 leading-snug">Aperturas registradas por la plataforma</span>
                         </div>
                         <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-4 text-center">
                           <span className="text-[9px] font-mono text-starlight/45 uppercase tracking-wider block mb-1">CLICS</span>
-                          <span className="text-2xl font-black text-white">6.8%</span>
-                          <span className="text-[8px] font-mono text-orangeleader block mt-1">▲ +2.1% en flujos</span>
+                          <span className="text-xl sm:text-2xl font-black text-white block">Interés</span>
+                          <span className="text-[10px] sm:text-xs text-starlight/60 block mt-1 leading-snug">Clics registrados en los enlaces</span>
                         </div>
                         <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-4 text-center">
                           <span className="text-[9px] font-mono text-starlight/45 uppercase tracking-wider block mb-1">REBOTES</span>
-                          <span className="text-2xl font-black text-starlight/75">0.18%</span>
-                          <span className="text-[8px] font-mono text-starlight/40 block mt-1">SANO // EXCELENTE</span>
+                          <span className="text-xl sm:text-2xl font-black text-white block">Entrega</span>
+                          <span className="text-[10px] sm:text-xs text-starlight/60 block mt-1 leading-snug">Mensajes que no pudieron entregarse</span>
                         </div>
                       </div>
 
-                      {/* Fake graph container using divs */}
-                      <div className="bg-black border border-white/5 rounded-2xl p-4 flex flex-col gap-2 flex-1 justify-end min-h-[160px]">
-                        <span className="text-[9px] font-mono text-starlight/40 uppercase tracking-widest mb-2">PROGRESIÓN DE ENTREGABILIDAD (MÓDULOS ACTIVOS)</span>
-                        <div className="flex items-end justify-between gap-2 h-28 px-4 border-b border-l border-white/10 pt-2">
-                          <div className="bg-orangeleader/20 border-t-2 border-orangeleader w-8 h-[40%]" />
-                          <div className="bg-orangeleader/30 border-t-2 border-orangeleader w-8 h-[55%]" />
-                          <div className="bg-orangeleader/40 border-t-2 border-orangeleader w-8 h-[70%]" />
-                          <div className="bg-orangeleader/60 border-t-2 border-orangeleader w-8 h-[85%]" />
-                          <div className="bg-orangeleader border-t-2 border-tangerine w-8 h-[98%] shadow-[0_0_15px_rgba(235,63,27,0.3)] animate-pulse" />
-                        </div>
-                        <div className="flex justify-between text-[8px] font-mono text-starlight/40 mt-1">
-                          <span>S1: DEPURACIÓN</span>
-                          <span>S2: TEMPLATES</span>
-                          <span>S3: LANZAMIENTO</span>
-                          <span>S4: AUTOMACIÓN</span>
-                          <span>ACTUAL</span>
-                        </div>
+                      {/* Text block container */}
+                      <div className="bg-black border border-white/5 rounded-2xl p-5 flex flex-col justify-center flex-1 min-h-[160px]">
+                        <h4 className="text-sm font-black text-white uppercase tracking-wider mb-2">
+                          Cómo revisamos un envío
+                        </h4>
+                        <p className="text-xs text-starlight/75 leading-relaxed mb-3">
+                          Revisamos los indicadores disponibles en la plataforma y los relacionamos con el objetivo del correo. Las aperturas, los clics y los rebotes ayudan a detectar aspectos que conviene revisar.
+                        </p>
+                        <p className="text-[11px] text-starlight/50 leading-relaxed">
+                          Las aperturas registradas no equivalen necesariamente a lecturas reales.
+                        </p>
                       </div>
                     </motion.div>
                   )}
@@ -453,13 +445,13 @@ export default function EmailMarketingPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              CONFIGURACIONES DE TRANSMISIÓN ORBITAL
+              OPCIONES DE SERVICIO
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              MODELOS DE ENLACE DIGITAL
+              Campañas y automatizaciones según tu negocio
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Calibramos los motores de tu email marketing y de tu CRM de acuerdo con las dimensiones y necesidades de adquisición de tu marca.
+              Revisamos tus contactos, los mensajes que necesitas enviar y las herramientas disponibles. La propuesta detalla las actividades, la frecuencia de trabajo y los costos de plataforma por separado de los honorarios del servicio.
             </p>
           </div>
 
@@ -512,10 +504,10 @@ export default function EmailMarketingPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
             <p className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              HOJA DE RUTA HACIA EL ÉXITO
+              DE LA PLANEACIÓN AL SEGUIMIENTO
             </p>
             <h2 className="text-3xl md:text-5xl font-black text-white uppercase">
-              EL VIAJE DE TU MENSAJE INTERESTELAR
+              Cómo preparamos tus campañas de correo
             </h2>
           </div>
 
@@ -568,13 +560,13 @@ export default function EmailMarketingPageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              ¿QUÉ INCLUYEN NUESTROS COMPONENTES DE TRANSMISIÓN?
+              ACTIVIDADES DEL SERVICIO
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase">
-              ELEMENTOS DE OPERACIÓN
+              Qué podemos trabajar en tus correos
             </h3>
             <p className="text-starlight/60 text-sm mt-4">
-              Cada elemento está calibrado para asegurar que tus mensajes lleguen al destino planeado sin interferencias.
+              Acordamos las actividades necesarias para preparar tus campañas y automatizaciones según tus objetivos, tus contactos y las herramientas disponibles.
             </p>
           </div>
 
@@ -603,18 +595,18 @@ export default function EmailMarketingPageClient() {
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <div className="mb-12">
             <h2 className="text-xs font-black tracking-[0.5em] text-orangeleader uppercase mb-3">
-              ¿LISTO PARA DESPEGAR EN TU ESTRATEGIA DE EMAIL?
+              HABLEMOS DE TUS CAMPAÑAS
             </h2>
             <h3 className="text-3xl md:text-5xl font-black text-white uppercase mb-4">
-              CONECTEMOS TU EMISORA DE SEÑAL
+              ¿Qué necesitas comunicar por correo?
             </h3>
             <p className="text-starlight/60 text-sm max-w-xl mx-auto">
-              Agenda tu llamada de estrategia de 15 minutos en Google Meet para diseñar tu nueva infraestructura de automatizaciones de correo.
+              Cuéntanos qué mensajes quieres enviar, a quiénes y qué herramientas usas. Podemos ayudarte a definir si necesitas campañas, mensajes automáticos o una integración con las herramientas que ya utilizas.
             </p>
           </div>
 
           <div className="max-w-xl mx-auto glass-liquid rounded-3xl p-8 shadow-2xl">
-            <LeadForm servicioInteres="Email Marketing" />
+            <LeadForm servicioInteres="Email Marketing" submitLabel="Solicitar información" />
           </div>
         </div>
       </section>

@@ -111,11 +111,10 @@ export default function ContactoForm() {
       <div className="text-center py-10">
         <div className="text-5xl mb-4">🚀</div>
         <h3 className="text-xl font-black uppercase text-white mb-3">
-          ¡Secuencia de despegue iniciada!
+          Recibimos tu solicitud
         </h3>
         <p className="text-starlight/60 text-base leading-relaxed">
-          Tu señal fue recibida en el Centro de Control de Misiones. Nuestro equipo
-          revisará tu bitácora de vuelo y te contactará muy pronto para calibrar tu cotización.
+          Gracias por contactarnos. Revisaremos los datos que compartiste y nos pondremos en contacto contigo para conocer mejor tu proyecto.
         </p>
       </div>
     );
@@ -226,7 +225,7 @@ export default function ContactoForm() {
       {/* Nota informativa */}
       <div className="flex items-center gap-3 p-4 bg-orangeleader/10 border border-orangeleader/20 rounded-2xl text-starlight/80 text-sm">
         <span className="text-orangeleader text-lg leading-none shrink-0">ℹ</span>
-        <p>Al enviar, un arquitecto digital revisará tu caso en menos de 24h hábiles.</p>
+        <p>Revisaremos tu solicitud y te contactaremos para conocer mejor tu proyecto.</p>
       </div>
 
       {error && <p className="text-red-400 text-sm -mt-1">{error}</p>}
@@ -237,7 +236,7 @@ export default function ContactoForm() {
         disabled={status === "submitting"}
         className="mt-2 rounded-full bg-orangeleader hover:bg-tangerine text-white min-h-14 px-6 py-3 font-black text-sm md:text-base uppercase tracking-widest shadow-[0_10px_30px_rgba(235,63,27,0.5)] hover:shadow-[0_15px_40px_rgba(235,63,27,0.7)] hover:-translate-y-0.5 transition-all cursor-pointer disabled:opacity-60 inline-flex items-center justify-center gap-2 whitespace-normal leading-tight text-center"
       >
-        {status === "submitting" ? "Calibrando trayectoria…" : "Iniciar secuencia de despegue"} 🚀
+        {status === "submitting" ? "Enviando…" : "Enviar solicitud"}
       </button>
     </form>
   );

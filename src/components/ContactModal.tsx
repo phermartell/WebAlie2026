@@ -165,7 +165,7 @@ export default function ContactModal({ variant, services, onClose }: ContactModa
             <Image src={cfg.icon} alt={cfg.label} width={48} height={48} className="w-12 h-12 object-contain drop-shadow-[0_0_16px_rgba(255,255,255,0.4)]" />
             <div className="flex-1">
               <h3 className="text-xl font-black uppercase text-white leading-tight">Escríbenos por {cfg.label}</h3>
-              <p className="text-white/70 text-sm font-light">Te respondemos en minutos.</p>
+              <p className="text-white/70 text-sm font-light">Completa tus datos para continuar al canal que elegiste.</p>
             </div>
             <button onClick={onClose} aria-label="Cerrar" className="text-white/70 hover:text-white text-2xl leading-none cursor-pointer">×</button>
           </div>

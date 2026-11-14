@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Agencia de Marketing Digital en Puebla | Alié Digital",
-  description: "Agencia de marketing digital en Puebla. Servicios de diseño web, posicionamiento SEO local, campañas de paid media y automatizaciones avanzadas con IA.",
+  title: "Marketing digital B2B en Puebla | Alié Digital",
+  description: "Diseño web, SEO y campañas de Google Ads y Meta Ads para empresas B2B en Puebla. Solicita información para revisar por dónde empezar.",
   alternates: {
     canonical: "https://aliedigital.com/puebla/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Agencia de Marketing Digital B2B en Puebla | Alié Digital",
-    description: "Agencia de marketing digital en Puebla para empresas B2B. Servicios de diseño web, posicionamiento SEO local, campañas de paid media y automatizaciones de IA.",
+    title: "Marketing digital B2B en Puebla | Alié Digital",
+    description: "Diseño web, SEO y campañas de Google Ads y Meta Ads para empresas B2B en Puebla. Solicita información para revisar por dónde empezar.",
     url: "https://aliedigital.com/puebla/",
     images: [
       {
@@ -31,17 +31,17 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Agencia de Marketing Digital B2B en Puebla | Alié Digital",
-    description: "Agencia de marketing digital en Puebla para empresas B2B. Servicios de diseño web, posicionamiento SEO local, campañas de paid media y automatizaciones de IA.",
+    title: "Marketing digital B2B en Puebla | Alié Digital",
+    description: "Diseño web, SEO y campañas de Google Ads y Meta Ads para empresas B2B en Puebla. Solicita información para revisar por dónde empezar.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   const pageSchema = createServiceSchema(
     "/puebla/",
-    "Agencia de marketing digital en Puebla | Alié Digital",
-    "Alié Digital Puebla: Expertos en diseño web, SEO, Paid Media y automatizaciones de Inteligencia Artificial para empresas B2B en Puebla."
+    "Marketing digital B2B en Puebla | Alié Digital",
+    "Servicios de diseño web, SEO y publicidad digital para empresas B2B en Puebla, con medición y seguimiento de consultas según el alcance del proyecto."
   );
 
   return (

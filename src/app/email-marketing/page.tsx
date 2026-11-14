@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Email Marketing y Automatización de CRM | Alié Digital",
-  description: "Estrategias de email marketing B2B e integración de CRM a la medida. Crea campañas automatizadas de nutrición y conversión de leads con un alto impacto.",
+  title: "Email marketing y automatización de correos | Alié Digital",
+  description: "Planeamos, redactamos y diseñamos campañas de correo para tu negocio. Consulta opciones de envíos, automatización y conexión con tus herramientas.",
   alternates: {
     canonical: "https://aliedigital.com/email-marketing/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Email Marketing y Automatización de CRM B2B | Alié Digital",
-    description: "Servicios de email marketing B2B e integración de CRM a la medida de tu empresa. Crea campañas automatizadas de nutrición y conversión de leads de alto impacto.",
+    title: "Email marketing y automatización de correos | Alié Digital",
+    description: "Planeamos, redactamos y diseñamos campañas de correo para tu negocio. Consulta opciones de envíos, automatización y conexión con tus herramientas.",
     url: "https://aliedigital.com/email-marketing/",
     images: [
       {
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Email Marketing y Automatización de CRM B2B | Alié Digital",
-    description: "Servicios de email marketing B2B e integración de CRM a la medida de tu empresa. Crea campañas automatizadas de nutrición y conversión de leads de alto impacto.",
+    title: "Email marketing y automatización de correos | Alié Digital",
+    description: "Planeamos, redactamos y diseñamos campañas de correo para tu negocio. Consulta opciones de envíos, automatización y conexión con tus herramientas.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
 };;
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <JsonLd data={createServiceSchema("/email-marketing/", "Email Marketing & CRM B2B | Alié Digital", "Campañas de email marketing B2B e integraciones de CRM que convierten.")} />
+      <JsonLd data={createServiceSchema("/email-marketing/", "Email marketing y automatización de correos | Alié Digital", "Planeación, redacción y diseño de campañas de correo, con configuración de envíos, automatizaciones e integraciones según el alcance acordado.")} />
       <EmailMarketingPageClient />
     </>
   );

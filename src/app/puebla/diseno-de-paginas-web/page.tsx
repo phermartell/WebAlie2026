@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Diseño de Páginas Web en Puebla B2B | Alié Digital",
-  description: "Desarrollo y diseño de páginas web en Puebla. Sitios web premium, rápidos y adaptados a dispositivos móviles optimizados para la conversión y SEO local.",
+  title: "Diseño de páginas web en Puebla | Alié Digital",
+  description: "Diseño web para empresas en Puebla. Solicita una cotización para un sitio nuevo, un rediseño o mejoras en formularios, WhatsApp e integraciones.",
   alternates: {
     canonical: "https://aliedigital.com/puebla/diseno-de-paginas-web/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Diseño de Páginas Web en Puebla B2B y Cholula | Alié Digital",
-    description: "Agencia de desarrollo y diseño de páginas web en Puebla. Sitios web premium, rápidos y adaptados a dispositivos móviles optimizados para conversión y SEO local.",
+    title: "Diseño de páginas web en Puebla | Alié Digital",
+    description: "Diseño web para empresas en Puebla. Solicita una cotización para un sitio nuevo, un rediseño o mejoras en formularios, WhatsApp e integraciones.",
     url: "https://aliedigital.com/puebla/diseno-de-paginas-web/",
     images: [
       {
@@ -31,15 +31,15 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Diseño de Páginas Web en Puebla B2B y Cholula | Alié Digital",
-    description: "Agencia de desarrollo y diseño de páginas web en Puebla. Sitios web premium, rápidos y adaptados a dispositivos móviles optimizados para conversión y SEO local.",
+    title: "Diseño de páginas web en Puebla | Alié Digital",
+    description: "Diseño web para empresas en Puebla. Solicita una cotización para un sitio nuevo, un rediseño o mejoras en formularios, WhatsApp e integraciones.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   return <>
-      <JsonLd data={createServiceSchema("/puebla/diseno-de-paginas-web/", "Diseño de páginas web en Puebla | Alié Digital", "Diseño y desarrollo web B2B en Puebla.")} />
+      <JsonLd data={createServiceSchema("/puebla/diseno-de-paginas-web/", "Diseño de páginas web para empresas en Puebla | Alié Digital", "Diseño y desarrollo de sitios para empresas en Puebla, con opciones de rediseño y mejoras en formularios, canales de contacto e integraciones según el alcance acordado.")} />
       <PueblaDisenoWebPage />
     </>;
 }

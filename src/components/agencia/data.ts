@@ -1,16 +1,7 @@
-export interface Metrica {
-  valor: string;
-  count: number;
-  prefix: string;
-  suffix: string;
+export interface ProyectoAgencia {
   titulo: string;
   desc: string;
-}
-
-export interface Caso {
-  valor: string;
-  titulo: string;
-  desc: string;
+  href: string;
 }
 
 export interface Grupo {
@@ -21,64 +12,30 @@ export interface Grupo {
 export interface Servicio {
   titulo: string;
   desc: string;
+  href: string;
 }
 
-export interface Pilar {
-  num: string;
+export interface PasoProceso {
+  paso: string;
   titulo: string;
   desc: string;
 }
 
-export const METRICAS: Metrica[] = [
+export const PROYECTOS_AGENCIA: ProyectoAgencia[] = [
   {
-    valor: "+50",
-    count: 50,
-    prefix: "+",
-    suffix: "",
-    titulo: "Empresas Impulsadas",
-    desc: "Marcas e industrias en México y Latinoamérica que han transformado su infraestructura comercial y presencia en línea con nosotros.",
+    titulo: "MORECSA",
+    desc: "Desarrollamos un catálogo web de equipos de bombeo y trabajamos el SEO local y las campañas en Google Ads y Meta Ads.",
+    href: "/casos-de-exito/#mision-01-bombas-sumergibles",
   },
   {
-    valor: "320%",
-    count: 320,
-    prefix: "",
-    suffix: "%",
-    titulo: "de Retorno de Inversión Promedio",
-    desc: "Incremento real en el retorno de inversión comercial, medido directamente en las oportunidades de negocio y ventas cerradas de nuestros clientes.",
+    titulo: "Vasos desechables de cartón",
+    desc: "Desarrollamos un sitio con catálogo para solicitudes de cotización mayorista y gestionamos campañas de búsqueda en Google Ads.",
+    href: "/casos-de-exito/#mision-02-vasos-desechables",
   },
   {
-    valor: "5x",
-    count: 5,
-    prefix: "",
-    suffix: "x",
-    titulo: "Más Rápidos",
-    desc: "Reducción del 80% en tiempos de producción e implementación gracias a nuestra arquitectura avanzada de Inteligencia Artificial.",
-  },
-  {
-    valor: "7+",
-    count: 7,
-    prefix: "",
-    suffix: "+",
-    titulo: "Años de Trayectoria Combinada",
-    desc: "Más de siete años erradicando malas prácticas tecnológicas en el mercado corporativo y operando como Alié Digital desde 2021.",
-  },
-];
-
-export const CASOS: Caso[] = [
-  {
-    valor: "+2,190",
-    titulo: "Prospectos Calificados",
-    desc: "Generados para una empresa de bombas de agua sumergibles gracias a nuestro posicionamiento SEO optimizado por inteligencia artificial en el primer lugar de Google para palabras clave de alta competencia, sumado a una automatización multicanal que mantiene 57 prospectos mensuales sostenidos.",
-  },
-  {
-    valor: "+1,900",
-    titulo: "Leads de Alto Valor",
-    desc: "Creados para una empresa comercializadora de vasos personalizados para café mediante una estrategia integral de campañas de rendimiento y optimización del retorno de inversión publicitaria, alcanzando picos de 105 prospectos calificados al mes.",
-  },
-  {
-    valor: "+$366,000 MXN",
-    titulo: "en Ventas Directas",
-    desc: "Facturados para una tienda de refacciones de motocicletas únicamente en lo que va del año 2026 mediante la aceleración de su tienda en línea.",
+    titulo: "Argüello Motopartes",
+    desc: "Desarrollamos una tienda en línea de refacciones con búsqueda interna y opciones de pago.",
+    href: "/casos-de-exito/#mision-06-motopartes-ecommerce",
   },
 ];
 
@@ -172,81 +129,60 @@ export const SERVICIOS: Servicio[] = [
   {
     titulo: "SEO Técnico & AI",
     desc: "Rankea en Google y motores de IA como ChatGPT y Perplexity. Optimizamos tu código, Schema y contenidos para que los LLMs recomienden tu marca.",
+    href: "/seo",
   },
   {
     titulo: "Diseño de páginas web",
     desc: "Creamos sitios web y páginas de conversión enfocados en comunicar tu propuesta de valor y captar oportunidades comerciales. Diseños rápidos y optimizados.",
+    href: "/diseno-paginas-web",
   },
   {
     titulo: "Ecommerce",
     desc: "Desarrollamos tiendas en línea y plataformas transaccionales robustas preparadas para vender de forma eficiente, rápida y optimizada para conversiones.",
+    href: "/ecommerce",
   },
   {
     titulo: "Paid media",
     desc: "Gestionamos campañas de pauta digital en Google Ads y Meta Ads para capturar intención de compra y generar leads calificados de alto valor.",
+    href: "/paid-media",
   },
   {
     titulo: "Redes sociales",
     desc: "Gestionamos redes sociales para fortalecer tu presencia digital y atraer audiencia con contenido y anuncios pensados para aumentar la conversión.",
+    href: "/redes-sociales",
   },
   {
     titulo: "Email marketing",
     desc: "Diseñamos campañas y automatizaciones de email marketing para nutrir contactos, reactivar clientes e impulsar ventas continuas sin esfuerzo manual.",
+    href: "/email-marketing",
   },
   {
     titulo: "Asistentes IA & Automatizaciones",
     desc: "Implementamos asistentes virtuales personalizados y flujos de trabajo inteligentes que califican y atienden prospectos 24/7 de forma autónoma con tecnología de IA.",
+    href: "/ia",
   },
   {
     titulo: "Identidad Gráfica & Branding",
     desc: "Construimos marcas memorables desde el logotipo, tono de voz y directrices visuales completas. Diseñamos marcas que destacan y transmiten confianza.",
+    href: "/identidad-grafica",
   },
 ];
 
-export const PILARES: Pilar[] = [
+export const PROCESO_TRABAJO: PasoProceso[] = [
   {
-    num: "UNO",
-    titulo: "Impulsado por Inteligencia Artificial",
-    desc: "La Inteligencia Artificial es nuestro motor central. No es solo una herramienta adicional; la Inteligencia Artificial es el motor subyacente de cada campaña, anuncio y estrategia que construimos en nuestra agencia digital potenciada por inteligencia artificial.",
+    paso: "PASO 01",
+    titulo: "Revisamos el punto de partida",
+    desc: "Conversamos con tu equipo para entender qué vendes, cómo llegan las consultas y qué quieres mejorar. Revisamos los materiales y datos disponibles.",
   },
   {
-    num: "DOS",
-    titulo: "Operación 24 / 7",
-    desc: "Agentes inteligentes que trabajan mientras duermes. Agentes autónomos de Inteligencia Artificial monitorean tus campañas, ajustan ofertas en tiempo real y generan reportes sin interrupciones ni tiempos muertos.",
+    paso: "PASO 02",
+    titulo: "Acordamos el alcance",
+    desc: "Definimos las prioridades, los entregables y las responsabilidades. También acordamos qué revisará tu equipo antes de publicar el sitio o activar las campañas.",
   },
   {
-    num: "TRES",
-    titulo: "Hasta 5 Veces Más Rápidos",
-    desc: "Entregas aceleradas sin perder calidad. La automatización inteligente reduce el tiempo de producción en un 80%. La misma calidad de nivel corporativo, lanzada al mercado antes de lo que esperas.",
-  },
-  {
-    num: "CUATRO",
-    titulo: "320% de Retorno Promedio",
-    desc: "Rentabilidad medible en tu cuenta bancaria. Generamos ingresos reales en tu bolsillo, no métricas de vanidad. Resultados cuantitativos que transforman directamente tu estado de resultados.",
-  },
-];
-
-/* Contraste para el toggle del Sector 7 (modelo tradicional vs. motor Alié) */
-export const TRADICIONAL: Pilar[] = [
-  {
-    num: "UNO",
-    titulo: "Dependencia de procesos manuales",
-    desc: "Cada campaña depende del esfuerzo manual de un equipo limitado: lenta de escalar, propensa a errores y con resultados inconsistentes.",
-  },
-  {
-    num: "DOS",
-    titulo: "Horarios de oficina",
-    desc: "Tu campaña duerme cuando el equipo descansa. Sin monitoreo fuera de horario ni ajustes en tiempo real.",
-  },
-  {
-    num: "TRES",
-    titulo: "Entregas lentas",
-    desc: "Ciclos de producción largos que retrasan tu lanzamiento al mercado y dejan pasar oportunidades comerciales.",
-  },
-  {
-    num: "CUATRO",
-    titulo: "Métricas de vanidad",
-    desc: "Reportes de impresiones y likes que no se reflejan en tu estado de resultados ni en ventas reales.",
+    paso: "PASO 03",
+    titulo: "Implementamos y revisamos",
+    desc: "Desarrollamos o configuramos lo acordado. Según el proyecto, comprobamos los puntos de contacto y revisamos los primeros datos disponibles para decidir qué ajustar.",
   },
 ];
 

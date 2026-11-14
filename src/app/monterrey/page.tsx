@@ -4,8 +4,8 @@ import JsonLd from "@/components/JsonLd";
 import { createServiceSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "SEO y Marketing Digital en Monterrey | Alié Digital",
-  description: "Agencia de marketing digital en Monterrey especializada en empresas B2B. Impulsa tu negocio con diseño web, SEO técnico, paid media y automatizaciones.",
+  title: "Marketing digital B2B en Monterrey | Alié Digital",
+  description: "Diseño web, SEO y campañas de Google Ads y Meta Ads para empresas B2B en Monterrey. Solicita información para revisar por dónde empezar.",
   alternates: {
     canonical: "https://aliedigital.com/monterrey/",
     languages: {
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Alié Digital",
-    title: "Agencia de Marketing Digital B2B en Monterrey | Alié Digital",
-    description: "Agencia de marketing digital en Monterrey especializada en empresas B2B. Impulsa tu negocio regio con diseño web, SEO técnico, paid media y automatizaciones con IA.",
+    title: "Marketing digital B2B en Monterrey | Alié Digital",
+    description: "Diseño web, SEO y campañas de Google Ads y Meta Ads para empresas B2B en Monterrey. Solicita información para revisar por dónde empezar.",
     url: "https://aliedigital.com/monterrey/",
     images: [
       {
@@ -31,17 +31,17 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@AlieDigital",
-    title: "Agencia de Marketing Digital B2B en Monterrey | Alié Digital",
-    description: "Agencia de marketing digital en Monterrey especializada en empresas B2B. Impulsa tu negocio regio con diseño web, SEO técnico, paid media y automatizaciones con IA.",
+    title: "Marketing digital B2B en Monterrey | Alié Digital",
+    description: "Diseño web, SEO y campañas de Google Ads y Meta Ads para empresas B2B en Monterrey. Solicita información para revisar por dónde empezar.",
     images: ["https://aliedigital.com/og-home.webp"],
   },
-};;
+};
 
 export default function Page() {
   const pageSchema = createServiceSchema(
     "/monterrey/",
-    "Agencia de marketing digital en Monterrey | Alié Digital",
-    "Alié Digital Monterrey: Expertos en diseño web, SEO, Paid Media, ecommerce y automatizaciones de Inteligencia Artificial para empresas B2B en Monterrey. Impulsa tu negocio con servicios de marketing digital en Monterrey."
+    "Marketing digital B2B en Monterrey | Alié Digital",
+    "Servicios de diseño web, SEO y publicidad digital para empresas B2B en Monterrey, con medición y seguimiento de consultas según el alcance del proyecto."
   );
 
   return (
