@@ -29,6 +29,8 @@ function LenisPageTrigger() {
           } catch {
             // Selector no válido en DOM
           }
+          // Si el hash no existe en la página montada, asegurar scroll al inicio
+          lenis.scrollTo(0, { immediate: true });
         }
       }, 100);
 
@@ -52,6 +54,9 @@ function LenisPageTrigger() {
         } catch {
           // Selector no válido en DOM
         }
+      } else {
+        // Al regresar en el historial (Atrás) a la página sin fragmento
+        lenis.scrollTo(0, { immediate: false });
       }
     };
     window.addEventListener("hashchange", handleHashChange);
