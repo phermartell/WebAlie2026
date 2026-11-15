@@ -236,16 +236,16 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
     },
     {
       name: "Argüello Motopartes",
-      category: "E-commerce B2B / Catálogo Masivo",
-      desc: "Plataforma transaccional B2B estructurada para gestionar un inventario masivo de refacciones, agilizar la búsqueda de productos especializados y hacer más eficientes los procesos de cotización y venta.",
+      category: "Tienda en línea · Refacciones para motocicletas",
+      desc: "Tienda con catálogo, búsqueda de productos y proceso de compra para facilitar la consulta y adquisición de refacciones para motocicletas.",
       logo: "/logos/arguello.webp",
       video: "/videos/arguello.mp4",
       url: "arguellomotopartes.com",
     },
     {
       name: "Universidad de Oriente",
-      category: "Portal Educativo Multicampus / Captación Institucional",
-      desc: "Ecosistema digital de alta concurrencia diseñado para estructurar la oferta académica de múltiples campus, optimizar la experiencia de navegación y acelerar la captación de nuevos alumnos en procesos de admisión.",
+      category: "Sitio institucional · Educación superior",
+      desc: "Portal para organizar la oferta académica, presentar información de sus campus y facilitar consultas de personas interesadas en estudiar.",
       logo: "/logos/uo.webp",
       video: "/videos/uo.mp4",
       url: "uo.edu.mx",
@@ -276,20 +276,20 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
             transition={{ duration: 1, delay: 0.4 }}
           >
             <span className="text-base font-mono tracking-[0.4em] text-orangeleader uppercase block mb-10">
-              AGENCIA DE MARKETING DIGITAL B2B // MONTERREY Y PUEBLA
+              AGENCIA DE MARKETING DIGITAL · MONTERREY Y PUEBLA
             </span>
             <h1 className="text-3xl md:text-6xl font-black uppercase text-white leading-[0.95] tracking-tighter mb-10">
-              AGENCIA DE MARKETING DIGITAL B2B PARA EMPRESAS QUE QUIEREN GENERAR MÁS DEMANDA Y VENTAS
+              Marketing digital y desarrollo web para atraer oportunidades comerciales
             </h1>
-            <p className="text-base md:text-base text-starlight/70 max-w-2xl mx-auto leading-relaxed font-light mb-12">
-              Ayudamos a empresas B2B a posicionarse en buscadores, atraer prospectos calificados y convertir más oportunidades comerciales. Combinamos marketing digital, diseño web, automatización e inteligencia artificial para construir una presencia online que impulse resultados reales.
+            <p className="text-base md:text-base text-starlight/85 max-w-2xl mx-auto leading-relaxed font-light mb-12">
+              Ayudamos a tu empresa a presentar su oferta, atraer prospectos y mejorar su seguimiento comercial. Integramos sitios web, campañas y automatización según las necesidades de tu negocio.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <a href="#puerto-de-enlace" className="bg-[#eb3f1b] hover:bg-[#ff8643] text-white rounded-full h-14 px-10 font-black text-base uppercase tracking-widest shadow-[0_10px_30px_rgba(235,63,27,0.5)] transition-all flex items-center justify-center cursor-none">
-                Agendar sesión de estrategia
+                Solicitar información
               </a>
               <a href="#mapa-estelar" className="glass-l2 rounded-full h-14 px-10 font-black text-base uppercase tracking-widest text-white flex items-center justify-center cursor-none">
-                Ver servicios B2B
+                Conocer servicios
               </a>
             </div>
             {/* Decorative planet */}
@@ -318,9 +318,12 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
       <section id="combate" className="relative min-h-screen flex flex-col items-center justify-center px-4 py-24 z-10">
         <span className="text-base font-mono tracking-[0.3em] text-orangeleader uppercase mb-10">Sector 2 · El Motor</span>
         <h2 className="text-3xl md:text-5xl font-black uppercase text-white mb-6 text-center">
-          INTELIGENCIA ARTIFICIAL Y GROWTH MARKETING B2B PARA GENERAR MÁS OPORTUNIDADES DE NEGOCIO
+          Estrategia, tecnología y seguimiento para impulsar tu negocio
         </h2>
-        <p className="text-base text-starlight/60 mb-20 text-center max-w-md">
+        <p className="text-base md:text-base text-starlight/85 mb-4 text-center max-w-2xl mx-auto leading-relaxed font-light">
+          Identificamos qué necesita mejorar tu presencia digital y conectamos las acciones que pueden ayudarte a atraer y atender oportunidades comerciales.
+        </p>
+        <p className="text-base text-starlight/85 mb-20 text-center max-w-md mx-auto">
           Dispara a los asteroides para eliminar los obstáculos del mercado y conoce nuestros motores de crecimiento.
         </p>
 
@@ -362,9 +365,9 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
           >
             <Image src="/iconos/ia.webp" alt="IA" width={56} height={56} className="w-14 h-14 object-contain" />
             <span className="text-base font-mono text-cyan-400 uppercase tracking-widest">Propulsor A</span>
-            <h3 className="text-xl font-black uppercase text-white">INTELIGENCIA ARTIFICIAL Y VELOCIDAD DE EJECUCIÓN</h3>
-            <p className="text-base text-starlight/60 leading-relaxed">
-              Aplicamos inteligencia artificial para empresas B2B que necesitan agilizar procesos, analizar mejor a sus compradores y mejorar su comunicación comercial. Con IA puedes acelerar la creación de mensajes, detectar patrones de interés y tomar decisiones con más contexto y menos fricción.
+            <h3 className="text-xl font-black uppercase text-white">Tecnología para simplificar tu operación</h3>
+            <p className="text-base text-starlight/85 leading-relaxed">
+              Creamos sitios web y conectamos herramientas para facilitar el contacto y reducir tareas repetitivas. Incorporamos automatización e inteligencia artificial cuando aportan valor al proceso de tu negocio.
             </p>
           </motion.div>
           <motion.div
@@ -376,9 +379,9 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
           >
             <Image src="/iconos/growth.webp" alt="Growth" width={56} height={56} className="w-14 h-14 object-contain" />
             <span className="text-base font-mono text-tangerine uppercase tracking-widest">Propulsor B</span>
-            <h3 className="text-xl font-black uppercase text-white">GROWTH MARKETING Y CAPTACIÓN CONSTANTE</h3>
-            <p className="text-base text-starlight/60 leading-relaxed">
-              Implementamos growth marketing B2B para atraer prospectos con intención real de compra y convertir más visitas en oportunidades comerciales. Diseñamos sistemas de posicionamiento, contenido y automatización enfocados en generar demanda de forma constante y escalable.
+            <h3 className="text-xl font-black uppercase text-white">Marketing orientado a oportunidades comerciales</h3>
+            <p className="text-base text-starlight/85 leading-relaxed">
+              Coordinamos campañas, contenido y medición para acercar tu oferta a personas interesadas. Revisamos los resultados para mejorar la captación y apoyar el seguimiento de tus prospectos.
             </p>
           </motion.div>
         </div>
@@ -393,7 +396,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
             <div className="w-[300px] md:w-[360px] shrink-0 flex flex-col gap-2">
               <span className="text-base font-mono tracking-[0.3em] text-tangerine uppercase">Sector 3 · Mapa Estelar</span>
               <h2 className="text-3xl font-black uppercase text-white leading-tight">SELECCIONA TU<br/>DESTINO DE CRECIMIENTO</h2>
-              <p className="text-base text-starlight/50 mt-2">8 sistemas de crecimiento para tu empresa B2B.</p>
+              <p className="text-base text-starlight/85 mt-2">Soluciones digitales para las necesidades de tu negocio.</p>
             </div>
 
             {services.map((svc, i) => (
@@ -409,17 +412,26 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
                   <span className="text-base font-mono text-tangerine/70 uppercase tracking-widest">{svc.alias}</span>
                   <h3 className="text-lg font-black uppercase text-white mt-1 leading-tight">{svc.name}</h3>
                 </div>
-                <p className="text-base text-starlight/50 leading-relaxed">{svc.desc}</p>
+                <p className="text-base text-starlight/85 leading-relaxed">{svc.desc}</p>
                 <div className="mt-auto h-0.5 w-8 bg-gradient-to-r from-orangeleader to-transparent rounded-full group-hover:w-16 transition-all" />
               </Link>
             ))}
 
-            <div className="w-[300px] md:w-[360px] shrink-0 glass-liquid rounded-[40px] p-7 md:p-10 flex flex-col items-center justify-center gap-5 text-center">
-              <div className="w-16 h-16 rounded-full border-2 border-dashed border-orangeleader/40 flex items-center justify-center">
+            <a
+              href="#puerto-de-enlace"
+              className="w-[300px] md:w-[360px] shrink-0 glass-liquid rounded-[40px] p-7 md:p-10 flex flex-col items-center justify-center gap-5 text-center group cursor-none hover:border-orangeleader/40 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orangeleader focus-visible:ring-offset-2 focus-visible:ring-offset-[#060a14]"
+            >
+              <div className="w-16 h-16 rounded-full border-2 border-dashed border-orangeleader/40 flex items-center justify-center group-hover:border-orangeleader transition-colors">
                 <span className="text-orangeleader text-2xl font-black">+</span>
               </div>
-              <p className="text-base text-starlight/50 font-light">¿No encuentras tu solución?<br/>Hablemos.</p>
-            </div>
+              <div>
+                <h3 className="text-lg font-black uppercase text-white leading-tight">¿No sabes qué servicio necesitas?</h3>
+                <p className="text-base text-starlight/85 font-light mt-2">Cuéntanos qué quieres mejorar y te orientamos.</p>
+              </div>
+              <span className="text-base font-mono text-orangeleader uppercase tracking-widest mt-1 group-hover:text-tangerine transition-colors">
+                Contactar &rarr;
+              </span>
+            </a>
           </motion.div>
         </div>
       </section>
@@ -427,10 +439,10 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
       <section id="bitacora" ref={bitacoraRef} className="relative min-h-screen flex flex-col items-center justify-center z-10 py-24 px-4">
         <span className="text-base font-mono tracking-[0.3em] text-orangeleader uppercase mb-10">Sector 4 · Bitácora de Misión</span>
         <h2 className="text-3xl md:text-5xl font-black uppercase text-white mb-6 text-center">
-          MARCAS EN ÓRBITA Y<br/>RESULTADOS REALES.
+          Proyectos destacados
         </h2>
-        <p className="text-base text-starlight/60 mb-12 text-center max-w-md">
-          Proyectos que han despegado con nuestra ingeniería. Resultados comprobables, no promesas vacías.
+        <p className="text-base text-starlight/85 mb-12 text-center max-w-md">
+          Conoce algunos proyectos en los que hemos ayudado a empresas a presentar su oferta y desarrollar su presencia digital.
         </p>
 
         {/* Full‑screen project showcase — one video at a time */}
@@ -493,7 +505,7 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
                   <h3 className="text-xl md:text-2xl font-black uppercase text-white mt-1.5">
                     {projects[activeProject].name}
                   </h3>
-                  <p className="text-base text-starlight/50 leading-relaxed mt-2">
+                  <p className="text-base text-starlight/85 leading-relaxed mt-2">
                     {projects[activeProject].desc}
                   </p>
                 </div>
@@ -535,13 +547,17 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
         <div className="max-w-3xl w-full mx-auto pointer-events-auto">
           <div className="bg-[#101b39]/60 backdrop-blur-3xl border border-white/10 rounded-[50px] p-7 md:p-20 text-center shadow-[0_0_100px_rgba(16,27,57,0.8)] cursor-none">
             <span className="text-base font-mono tracking-[0.3em] text-orangeleader uppercase block mb-4">ATERRIZAJE 100% REMOTO</span>
-            <h2 className="text-3xl md:text-5xl font-black uppercase text-white mb-6">CONEXIÓN DIRECTA VÍA VIDEOLLAMADA.</h2>
-            <p className="text-base md:text-base text-starlight/80 mb-10 leading-relaxed font-light">
-              Atendemos a empresas en Monterrey, Puebla, CDMX y toda Latinoamérica mediante Google Meet, sin procesos burocráticos ni visitas innecesarias a oficina. Esta forma de trabajo nos permite avanzar más rápido, coordinar mejor cada proyecto y dar una atención cercana, eficiente y enfocada en resultados.
-              <br/><br/>
-              <span className="font-bold text-white">¿Quieres hablar con nosotros?</span> Escríbenos por Facebook o Instagram, o agenda una llamada de estrategia con el formulario de abajo.
+            <h2 className="text-3xl md:text-5xl font-black uppercase text-white mb-6">Cuéntanos qué necesita tu negocio</h2>
+            <p className="text-base md:text-base text-starlight/85 mb-4 leading-relaxed font-light">
+              ¿Buscas una página web, campañas publicitarias o apoyo con tu comunicación digital? Comparte qué quieres mejorar y te orientamos sobre el servicio y el alcance para tu proyecto.
             </p>
-            <LeadForm />
+            <p className="text-base md:text-base text-starlight/85 mb-6 leading-relaxed font-light">
+              Trabajamos de forma remota con empresas de Monterrey, Puebla y otras ciudades. Coordinamos los proyectos mediante videollamada y canales digitales.
+            </p>
+            <p className="text-base text-starlight/85 mb-10 font-medium">
+              Déjanos tus datos para conversar sobre tu proyecto.
+            </p>
+            <LeadForm submitLabel="Solicitar información" />
             <div className="mt-10 pt-6 border-t border-white/10 flex flex-col items-center gap-1 opacity-50">
               <span className="text-base font-bold text-white uppercase">&quot;SUEÑA GRANDE, LLEGA LEJOS&quot;</span>
               <span className="text-base font-mono tracking-widest uppercase">Por un mundo lleno de marcas increíbles</span>
