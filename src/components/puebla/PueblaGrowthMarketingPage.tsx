@@ -490,7 +490,7 @@ export default function PueblaGrowthMarketingPage() {
               </div>
               <div className="pt-6">
                 <Link
-                  href="/casos-de-exito/#mision-01-bombas-sumergibles"
+                  href="/casos-de-exito#mision-01-bombas-sumergibles"
                   className="inline-flex items-center gap-2 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-colors"
                 >
                   Ver ficha del proyecto →
@@ -519,7 +519,7 @@ export default function PueblaGrowthMarketingPage() {
               </div>
               <div className="pt-6">
                 <Link
-                  href="/casos-de-exito/#mision-04-postes-infraestructura"
+                  href="/casos-de-exito#mision-04-postes-infraestructura"
                   className="inline-flex items-center gap-2 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-colors"
                 >
                   Ver ficha del proyecto →
@@ -602,14 +602,14 @@ export default function PueblaGrowthMarketingPage() {
 
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-xs font-mono uppercase tracking-wider text-starlight/70">
             <Link
-              href="/puebla/diseno-de-paginas-web/"
+              href="/puebla/diseno-de-paginas-web"
               className="text-white/80 hover:text-orangeleader transition-colors inline-flex items-center gap-2"
             >
               Diseño de páginas web en Puebla →
             </Link>
             <span className="hidden sm:inline text-white/20">·</span>
             <Link
-              href="/puebla/"
+              href="/puebla"
               className="text-white/80 hover:text-orangeleader transition-colors inline-flex items-center gap-2"
             >
               Ver servicios de marketing digital en Puebla →

@@ -92,7 +92,7 @@ export default function Capitulo03Cierre() {
 
             <motion.div variants={item} className="mt-10 flex flex-col items-center gap-4">
               <Link
-                href="/servicios/"
+                href="/servicios"
                 className="glass-l2 rounded-full h-14 px-10 font-black text-base uppercase tracking-widest text-white inline-flex items-center justify-center"
               >
                 Explorar Servicios

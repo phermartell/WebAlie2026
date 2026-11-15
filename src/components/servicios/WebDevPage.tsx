@@ -462,12 +462,12 @@ export default function WebDevPageClient() {
                         target.src = "/og-home.webp";
                       }}
                     />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-black/35 [@media(hover:hover)]:bg-black/0 [@media(hover:hover)]:group-hover:bg-black/40 group-focus-within:bg-black/40 transition-colors duration-300 flex items-center justify-center">
                       <a
                         href={site.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-orangeleader text-white text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-[0_10px_20px_rgba(235,63,27,0.4)] text-center cursor-pointer"
+                        className="opacity-100 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100 focus:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white transition-opacity duration-300 bg-orangeleader text-white text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-full shadow-[0_10px_20px_rgba(235,63,27,0.4)] text-center cursor-pointer"
                       >
                         Visitar Sitio →
                       </a>

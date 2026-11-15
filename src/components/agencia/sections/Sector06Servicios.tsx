@@ -58,7 +58,7 @@ export default function Sector06Servicios() {
         {/* Enlace al pie */}
         <div className="mt-14 flex justify-center">
           <Link
-            href="/servicios/"
+            href="/servicios"
             className="w-full sm:w-auto glass-l2 rounded-full h-14 px-8 font-black text-sm uppercase tracking-widest text-white flex items-center justify-center cursor-pointer hover:bg-white/5 transition-all"
           >
             Ver todos los servicios

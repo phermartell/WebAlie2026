@@ -25,17 +25,17 @@ export const PROYECTOS_AGENCIA: ProyectoAgencia[] = [
   {
     titulo: "MORECSA",
     desc: "Desarrollamos un catálogo web de equipos de bombeo y trabajamos el SEO local y las campañas en Google Ads y Meta Ads.",
-    href: "/casos-de-exito/#mision-01-bombas-sumergibles",
+    href: "/casos-de-exito#mision-01-bombas-sumergibles",
   },
   {
     titulo: "Vasos desechables de cartón",
     desc: "Desarrollamos un sitio con catálogo para solicitudes de cotización mayorista y gestionamos campañas de búsqueda en Google Ads.",
-    href: "/casos-de-exito/#mision-02-vasos-desechables",
+    href: "/casos-de-exito#mision-02-vasos-desechables",
   },
   {
     titulo: "Argüello Motopartes",
     desc: "Desarrollamos una tienda en línea de refacciones con búsqueda interna y opciones de pago.",
-    href: "/casos-de-exito/#mision-06-motopartes-ecommerce",
+    href: "/casos-de-exito#mision-06-motopartes-ecommerce",
   },
 ];
 

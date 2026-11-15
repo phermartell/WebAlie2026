@@ -555,14 +555,14 @@ export default function MonterreyGrowthMarketingPage() {
 
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 text-xs font-mono uppercase tracking-wider text-starlight/70">
             <Link
-              href="/monterrey/diseno-de-paginas-web/"
+              href="/monterrey/diseno-de-paginas-web"
               className="text-white/80 hover:text-orangeleader transition-colors inline-flex items-center gap-2"
             >
               Diseño de páginas web en Monterrey →
             </Link>
             <span className="hidden sm:inline text-white/20">·</span>
             <Link
-              href="/monterrey/"
+              href="/monterrey"
               className="text-white/80 hover:text-orangeleader transition-colors inline-flex items-center gap-2"
             >
               Ver servicios de marketing digital en Monterrey →
