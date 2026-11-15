@@ -31,13 +31,6 @@ export const metadata: Metadata = {
   robots: "index, follow",
   title: "Marketing Digital B2B y Desarrollo Web | Alié Digital",
   description: "Somos Alié Digital, agencia de marketing digital B2B. Creamos páginas web headless, growth marketing y ecommerce para generar leads y acelerar ventas.",
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    apple: "/apple-icon.png",
-  },
   alternates: {
     canonical: "https://aliedigital.com/",
     languages: {
