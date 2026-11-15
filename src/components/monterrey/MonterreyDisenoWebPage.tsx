@@ -575,7 +575,7 @@ export default function MonterreyDisenoWebPage() {
 
           <div className="text-center">
             <Link
-              href="/diseno-de-paginas-web/#casos-orbita"
+              href="/diseno-de-paginas-web#casos-orbita"
               className="inline-flex items-center gap-2 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-colors"
             >
               Ver portafolio de diseño web →

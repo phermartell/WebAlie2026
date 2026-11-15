@@ -17,12 +17,46 @@ function LenisPageTrigger() {
   useEffect(() => {
     if (lenis) {
       // Forzar que Lenis recalcule el alto de la nueva página montada
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         lenis.resize();
+        if (window.location.hash) {
+          try {
+            const target = document.querySelector(window.location.hash);
+            if (target && target instanceof HTMLElement) {
+              lenis.scrollTo(target, { immediate: false, offset: -80 });
+              return;
+            }
+          } catch {
+            // Selector no válido en DOM
+          }
+        }
       }, 100);
-      lenis.scrollTo(0, { immediate: true });
+
+      if (!window.location.hash) {
+        lenis.scrollTo(0, { immediate: true });
+      }
+
+      return () => clearTimeout(timer);
     }
   }, [pathname, lenis]);
+
+  useEffect(() => {
+    if (!lenis) return;
+    const handleHashChange = () => {
+      if (window.location.hash) {
+        try {
+          const target = document.querySelector(window.location.hash);
+          if (target && target instanceof HTMLElement) {
+            lenis.scrollTo(target, { immediate: false, offset: -80 });
+          }
+        } catch {
+          // Selector no válido en DOM
+        }
+      }
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, [lenis]);
 
   return null;
 }

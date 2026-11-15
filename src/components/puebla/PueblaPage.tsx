@@ -496,13 +496,13 @@ export default function PueblaPage() {
           {/* Enlaces directos a servicios en Puebla */}
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/puebla/diseno-de-paginas-web/"
+              href="/puebla/diseno-de-paginas-web"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full glass-l2 border border-white/10 hover:border-orangeleader/50 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-all duration-300"
             >
               Diseño de páginas web en Puebla →
             </Link>
             <Link
-              href="/puebla/growth-marketing-b2b/"
+              href="/puebla/growth-marketing-b2b"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full glass-l2 border border-white/10 hover:border-orangeleader/50 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-all duration-300"
             >
               Growth marketing B2B en Puebla →
@@ -629,7 +629,7 @@ export default function PueblaPage() {
                   </div>
                   <div className="pt-2">
                     <Link
-                      href="/casos-de-exito/#mision-01-bombas-sumergibles"
+                      href="/casos-de-exito#mision-01-bombas-sumergibles"
                       className="inline-flex items-center gap-2 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-colors"
                     >
                       Ver ficha del proyecto →
@@ -662,7 +662,7 @@ export default function PueblaPage() {
                   </div>
                   <div className="pt-2">
                     <Link
-                      href="/casos-de-exito/#mision-06-motopartes-ecommerce"
+                      href="/casos-de-exito#mision-06-motopartes-ecommerce"
                       className="inline-flex items-center gap-2 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-colors"
                     >
                       Ver ficha del proyecto →

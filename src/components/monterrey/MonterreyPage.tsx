@@ -652,7 +652,7 @@ export default function MonterreyPage() {
                   </div>
                   <div className="pt-2">
                     <Link
-                      href="/identidad-grafica/#showcase"
+                      href="/identidad-grafica#showcase"
                       className="inline-flex items-center gap-2 text-white hover:text-orangeleader font-mono text-xs uppercase tracking-wider transition-colors"
                     >
                       Ver el portafolio de identidad visual →

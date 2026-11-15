@@ -53,7 +53,7 @@ export default function Sector09Ignicion() {
             </motion.div>
             <motion.div variants={item} className="mt-6 flex justify-center">
               <Link
-                href="/contacto/"
+                href="/contacto"
                 className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-orangeleader hover:text-tangerine transition-colors group/link cursor-pointer"
               >
                 <span>Ver canales de contacto</span>
