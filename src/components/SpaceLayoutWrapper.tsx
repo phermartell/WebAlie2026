@@ -7,7 +7,6 @@ import dynamic from "next/dynamic";
 import CalmSpaceBackground from "./CalmSpaceBackground";
 import AttributionTracker from "./AttributionTracker";
 
-const NebulaBackground = dynamic(() => import("./NebulaBackground"), { ssr: false });
 const SpaceScene = dynamic(() => import("./SpaceScene"), { ssr: false });
 
 function LenisPageTrigger() {
@@ -28,8 +27,6 @@ function LenisPageTrigger() {
 }
 
 export default function SpaceLayoutWrapper({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const isHome = pathname === "/";
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
@@ -47,8 +44,8 @@ export default function SpaceLayoutWrapper({ children }: { children: React.React
         <AttributionTracker />
       </Suspense>
       <LenisPageTrigger />
-      {/* Fondo: nebulosa WebGL solo en home y desktop; fondo calmo estático en el resto */}
-      {isHome && isDesktop ? <NebulaBackground /> : <CalmSpaceBackground />}
+      {/* Fondo: CalmSpaceBackground en todo el sitio, eliminando la sobrecarga de la nebulosa WebGL en Inicio */}
+      <CalmSpaceBackground />
       {/* Estrellas con parallax de scroll (solo en desktop) */}
       {isDesktop && <SpaceScene />}
       
