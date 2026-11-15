@@ -417,15 +417,21 @@ const handleLaserPosition = useCallback((bolts: { x: number; y: number }[]) => {
               </Link>
             ))}
 
-            <div className="w-[300px] md:w-[360px] shrink-0 glass-liquid rounded-[40px] p-7 md:p-10 flex flex-col items-center justify-center gap-5 text-center">
-              <div className="w-16 h-16 rounded-full border-2 border-dashed border-orangeleader/40 flex items-center justify-center">
+            <a
+              href="#puerto-de-enlace"
+              className="w-[300px] md:w-[360px] shrink-0 glass-liquid rounded-[40px] p-7 md:p-10 flex flex-col items-center justify-center gap-5 text-center group cursor-none hover:border-orangeleader/40 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orangeleader focus-visible:ring-offset-2 focus-visible:ring-offset-[#060a14]"
+            >
+              <div className="w-16 h-16 rounded-full border-2 border-dashed border-orangeleader/40 flex items-center justify-center group-hover:border-orangeleader transition-colors">
                 <span className="text-orangeleader text-2xl font-black">+</span>
               </div>
               <div>
                 <h3 className="text-lg font-black uppercase text-white leading-tight">¿No sabes qué servicio necesitas?</h3>
                 <p className="text-base text-starlight/85 font-light mt-2">Cuéntanos qué quieres mejorar y te orientamos.</p>
               </div>
-            </div>
+              <span className="text-base font-mono text-orangeleader uppercase tracking-widest mt-1 group-hover:text-tangerine transition-colors">
+                Contactar &rarr;
+              </span>
+            </a>
           </motion.div>
         </div>
       </section>
