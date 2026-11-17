@@ -65,7 +65,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0B0F1A",
+  viewportFit: "cover",
+  themeColor: "#02040a",
 };
 
 export default function RootLayout({
@@ -76,7 +77,7 @@ export default function RootLayout({
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
   return (
-    <html lang="es" className={`${spaceGrotesk.variable} h-full antialiased dark`}>
+    <html lang="es" className={`${spaceGrotesk.variable} h-full antialiased dark bg-oled`}>
       <body className="min-h-full flex flex-col bg-oled text-starlight selection:bg-orangeleader selection:text-white">
         {gtmId && (
           <>

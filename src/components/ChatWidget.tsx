@@ -113,7 +113,7 @@ export default function ChatWidget({ onOpenSocial }: ChatWidgetProps) {
   return (
     <div
       ref={rootRef}
-      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[90] flex flex-col items-end gap-3"
+      className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-[calc(1rem+env(safe-area-inset-right,0px))] md:bottom-6 md:right-6 z-[90] flex flex-col items-end gap-3"
     >
       <AnimatePresence>
         {open && (
@@ -122,7 +122,7 @@ export default function ChatWidget({ onOpenSocial }: ChatWidgetProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="w-[320px] max-w-[calc(100vw-2rem)] origin-bottom-right overflow-hidden rounded-[24px] border border-white/10 bg-[#0a0f1e]/85 backdrop-blur-[60px] shadow-[0_40px_120px_-20px_rgba(0,0,0,0.85)]"
+            className="w-[320px] max-w-[calc(100vw-2rem-env(safe-area-inset-left,0px)-env(safe-area-inset-right,0px))] origin-bottom-right overflow-hidden rounded-[24px] border border-white/10 bg-[#0a0f1e]/85 backdrop-blur-[60px] shadow-[0_40px_120px_-20px_rgba(0,0,0,0.85)]"
           >
             {/* Header */}
             <div className="relative flex items-center gap-3 bg-gradient-to-r from-[#101b39] to-[#16264f] px-5 py-4">

@@ -5,7 +5,7 @@ import { SERVICES, CITIES } from "@/lib/site";
 export default function Footer() {
   return (
     <footer className="relative z-10 border-t border-white/10 bg-transparent">
-      <div className="mx-auto max-w-7xl px-6 py-14 md:py-16">
+      <div className="mx-auto max-w-7xl pt-14 pb-[calc(3.5rem+env(safe-area-inset-bottom,0px))] pl-[calc(1.5rem+env(safe-area-inset-left,0px))] pr-[calc(1.5rem+env(safe-area-inset-right,0px))] md:px-8 md:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           <div className="col-span-2 md:col-span-1">
             <Image src="/isotipo_GRADIENT.svg" alt="Alié Digital" width={64} height={64} className="w-16 h-16 mb-4 drop-shadow-[0_0_16px_rgba(235,63,27,0.5)]" />
