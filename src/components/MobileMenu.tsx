@@ -133,14 +133,13 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
           </motion.div>
 
           {/* Marco HUD (esquinas) */}
-          {["top-3 left-3 border-t border-l", "top-3 right-3 border-t border-r", "bottom-3 left-3 border-b border-l", "bottom-3 right-3 border-b border-r"].map(
-            (pos) => (
-              <span key={pos} aria-hidden="true" className={`pointer-events-none absolute z-0 h-6 w-6 border-white/20 ${pos}`} />
-            )
-          )}
+          <span aria-hidden="true" className="pointer-events-none absolute z-0 h-6 w-6 border-white/20 border-t border-l top-[calc(0.75rem+env(safe-area-inset-top,0px))] left-[calc(0.75rem+env(safe-area-inset-left,0px))]" />
+          <span aria-hidden="true" className="pointer-events-none absolute z-0 h-6 w-6 border-white/20 border-t border-r top-[calc(0.75rem+env(safe-area-inset-top,0px))] right-[calc(0.75rem+env(safe-area-inset-right,0px))]" />
+          <span aria-hidden="true" className="pointer-events-none absolute z-0 h-6 w-6 border-white/20 border-b border-l bottom-[calc(0.75rem+env(safe-area-inset-bottom,0px))] left-[calc(0.75rem+env(safe-area-inset-left,0px))]" />
+          <span aria-hidden="true" className="pointer-events-none absolute z-0 h-6 w-6 border-white/20 border-b border-r bottom-[calc(0.75rem+env(safe-area-inset-bottom,0px))] right-[calc(0.75rem+env(safe-area-inset-right,0px))]" />
 
           {/* ── Cabecera ───────────────────────────────────────────────── */}
-          <div className="relative z-10 flex items-center justify-between px-6 py-6">
+          <div className="relative z-10 flex items-center justify-between pt-[calc(1.5rem+env(safe-area-inset-top,0px))] pb-6 pl-[calc(1.5rem+env(safe-area-inset-left,0px))] pr-[calc(1.5rem+env(safe-area-inset-right,0px))]">
             <motion.img
               src="/isotipo_GRADIENT.svg"
               alt="Alié"
@@ -161,7 +160,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
           </div>
 
           {/* ── Navegación: destinos orbitales ─────────────────────────── */}
-          <nav className="relative z-10 flex-1 overflow-y-auto scrollbar-none px-8">
+          <nav className="relative z-10 flex-1 overflow-y-auto scrollbar-none pl-[calc(2rem+env(safe-area-inset-left,0px))] pr-[calc(2rem+env(safe-area-inset-right,0px))]">
             <ul className="relative flex flex-col gap-1 py-4">
               {/* Riel orbital (línea de trayectoria) */}
               <span
@@ -266,7 +265,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
           </nav>
 
           {/* ── Pie: telemetría + CTA de lanzamiento ───────────────────── */}
-          <div className="relative z-10 px-8 pb-8 pt-2 flex flex-col gap-4">
+          <div className="relative z-10 pl-[calc(2rem+env(safe-area-inset-left,0px))] pr-[calc(2rem+env(safe-area-inset-right,0px))] pb-[calc(2rem+env(safe-area-inset-bottom,0px))] pt-2 flex flex-col gap-4">
             <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.22em] text-white/30">
               <span>MTY · 25.68 N</span>
               <span className="flex items-center gap-2">

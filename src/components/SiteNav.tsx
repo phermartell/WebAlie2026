@@ -31,7 +31,7 @@ export default function SiteNav() {
 
   return (
     <>
-      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-8 py-6">
+      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between pt-[calc(1.5rem+env(safe-area-inset-top,0px))] pb-6 pl-[calc(1.5rem+env(safe-area-inset-left,0px))] pr-[calc(1.5rem+env(safe-area-inset-right,0px))] md:px-8 md:pt-6">
         <Link href="/" aria-label="Alié Digital — Home">
           <Image src="/isotipo_GRADIENT.svg" alt="Alié" width={112} height={112} priority className="w-20 h-20 md:w-28 md:h-28 drop-shadow-[0_0_20px_rgba(235,63,27,0.6)]" />
         </Link>
