@@ -49,6 +49,30 @@ class AlieCore_HubSpot {
 	}
 
 	/**
+	 * Determina si la entrega automática a HubSpot está pausada.
+	 *
+	 * Por diseño de seguridad, la entrega automática está PAUSADA por defecto:
+	 * 1. Si HUBSPOT_SYNC_PAUSED está definida como true en wp-config.php (override mandatorio).
+	 * 2. Si el filtro alie_hubspot_sync_paused devuelve true.
+	 * 3. Si la opción de WordPress alie_hubspot_sync_active no es '1' (inactivo por defecto).
+	 *
+	 * @return bool True si la sincronización está pausada, false si está activa.
+	 */
+	public static function is_sync_paused() {
+		if ( defined( 'HUBSPOT_SYNC_PAUSED' ) && HUBSPOT_SYNC_PAUSED ) {
+			return true;
+		}
+
+		$filtered = apply_filters( 'alie_hubspot_sync_paused', null );
+		if ( null !== $filtered ) {
+			return (bool) $filtered;
+		}
+
+		$active = get_option( 'alie_hubspot_sync_active', '0' );
+		return ( '1' !== (string) $active );
+	}
+
+	/**
 	 * URL base de la API de HubSpot (filtrable para pruebas y simulaciones).
 	 */
 	public static function get_api_base_url() {
@@ -70,6 +94,15 @@ class AlieCore_HubSpot {
 			return array(
 				'success' => false,
 				'message' => 'HUBSPOT_ACCESS_TOKEN no configurado. Sincronización en espera.',
+				'synced'  => 0,
+			);
+		}
+
+		// Control de pausa explícito para la entrega automática
+		if ( self::is_sync_paused() ) {
+			return array(
+				'success' => false,
+				'message' => 'Entrega automática a HubSpot pausada (sincronización inactiva o HUBSPOT_SYNC_PAUSED activo).',
 				'synced'  => 0,
 			);
 		}
@@ -101,6 +134,180 @@ class AlieCore_HubSpot {
 			'synced'  => count( array_filter( $results, fn( $r ) => $r['status'] === 'SYNCED' ) ),
 			'items'   => $results,
 		);
+	}
+
+	/**
+	 * Prueba de conexión de solo lectura a HubSpot.
+	 * Consulta únicamente metadatos:
+	 * - Propiedad whatsapp_e164 en Contactos
+	 * - Propiedad submission_id en Tickets
+	 * - Pipelines y etapas de Tickets
+	 *
+	 * CERO llamadas POST/PUT/DELETE. 100% de solo lectura.
+	 *
+	 * @return array Diagnóstico detallado.
+	 */
+	public static function test_connection_read_only() {
+		$token = self::get_access_token();
+		if ( empty( $token ) ) {
+			return array(
+				'success' => false,
+				'message' => 'HUBSPOT_ACCESS_TOKEN no está definido en wp-config.php.',
+			);
+		}
+
+		$api_url = self::get_api_base_url();
+		$headers = array(
+			'Authorization' => 'Bearer ' . $token,
+			'Content-Type'  => 'application/json',
+		);
+
+		$result = array(
+			'success'          => true,
+			'contact_property' => array(
+				'exists' => false,
+				'unique' => false,
+				'type'   => '',
+				'label'  => '',
+				'error'  => null,
+			),
+			'ticket_property'  => array(
+				'exists' => false,
+				'unique' => false,
+				'type'   => '',
+				'label'  => '',
+				'error'  => null,
+			),
+			'pipeline'         => array(
+				'found'       => false,
+				'pipeline_id' => '',
+				'label'       => '',
+				'stage_id'    => '',
+				'stage_label' => '',
+				'stages'      => array(),
+				'error'       => null,
+			),
+		);
+
+		// 1. GET /crm/v3/properties/contacts/whatsapp_e164
+		$res_contact = wp_remote_get(
+			"{$api_url}/crm/v3/properties/contacts/whatsapp_e164",
+			array(
+				'headers' => $headers,
+				'timeout' => 15,
+			)
+		);
+
+		if ( is_wp_error( $res_contact ) ) {
+			$result['contact_property']['error'] = $res_contact->get_error_message();
+			$result['success']                   = false;
+		} else {
+			$code = wp_remote_retrieve_response_code( $res_contact );
+			$body = json_decode( wp_remote_retrieve_body( $res_contact ), true );
+			if ( 200 === $code && ! empty( $body['name'] ) ) {
+				$result['contact_property']['exists'] = true;
+				$result['contact_property']['unique'] = ! empty( $body['hasUniqueValue'] );
+				$result['contact_property']['type']   = isset( $body['type'] ) ? $body['type'] : '';
+				$result['contact_property']['label']  = isset( $body['label'] ) ? $body['label'] : '';
+				if ( empty( $body['hasUniqueValue'] ) ) {
+					$result['success'] = false;
+				}
+			} elseif ( 404 === $code ) {
+				$result['contact_property']['exists'] = false;
+				$result['contact_property']['error']  = 'La propiedad personalizada "whatsapp_e164" no existe en Contactos.';
+				$result['success']                    = false;
+			} else {
+				$msg = isset( $body['message'] ) ? $body['message'] : "Error HTTP {$code}";
+				$result['contact_property']['error'] = $msg;
+				$result['success']                   = false;
+			}
+		}
+
+		// 2. GET /crm/v3/properties/tickets/submission_id
+		$res_ticket = wp_remote_get(
+			"{$api_url}/crm/v3/properties/tickets/submission_id",
+			array(
+				'headers' => $headers,
+				'timeout' => 15,
+			)
+		);
+
+		if ( is_wp_error( $res_ticket ) ) {
+			$result['ticket_property']['error'] = $res_ticket->get_error_message();
+			$result['success']                  = false;
+		} else {
+			$code = wp_remote_retrieve_response_code( $res_ticket );
+			$body = json_decode( wp_remote_retrieve_body( $res_ticket ), true );
+			if ( 200 === $code && ! empty( $body['name'] ) ) {
+				$result['ticket_property']['exists'] = true;
+				$result['ticket_property']['unique'] = ! empty( $body['hasUniqueValue'] );
+				$result['ticket_property']['type']   = isset( $body['type'] ) ? $body['type'] : '';
+				$result['ticket_property']['label']  = isset( $body['label'] ) ? $body['label'] : '';
+				if ( empty( $body['hasUniqueValue'] ) ) {
+					$result['success'] = false;
+				}
+			} elseif ( 404 === $code ) {
+				$result['ticket_property']['exists'] = false;
+				$result['ticket_property']['error']  = 'La propiedad personalizada "submission_id" no existe en Tickets.';
+				$result['success']                   = false;
+			} else {
+				$msg = isset( $body['message'] ) ? $body['message'] : "Error HTTP {$code}";
+				$result['ticket_property']['error'] = $msg;
+				$result['success']                  = false;
+			}
+		}
+
+		// 3. GET /crm/v3/pipelines/tickets
+		$res_pipeline = wp_remote_get(
+			"{$api_url}/crm/v3/pipelines/tickets",
+			array(
+				'headers' => $headers,
+				'timeout' => 15,
+			)
+		);
+
+		if ( is_wp_error( $res_pipeline ) ) {
+			$result['pipeline']['error'] = $res_pipeline->get_error_message();
+			$result['success']           = false;
+		} else {
+			$code = wp_remote_retrieve_response_code( $res_pipeline );
+			$body = json_decode( wp_remote_retrieve_body( $res_pipeline ), true );
+			if ( 200 === $code && ! empty( $body['results'] ) ) {
+				$result['pipeline']['found'] = true;
+				$chosen_pipeline             = null;
+				foreach ( $body['results'] as $pipe ) {
+					if ( '0' === (string) $pipe['id'] ) {
+						$chosen_pipeline = $pipe;
+						break;
+					}
+				}
+				if ( ! $chosen_pipeline && ! empty( $body['results'][0] ) ) {
+					$chosen_pipeline = $body['results'][0];
+				}
+
+				if ( $chosen_pipeline ) {
+					$result['pipeline']['pipeline_id'] = (string) $chosen_pipeline['id'];
+					$result['pipeline']['label']       = isset( $chosen_pipeline['label'] ) ? $chosen_pipeline['label'] : '';
+					if ( ! empty( $chosen_pipeline['stages'] ) ) {
+						foreach ( $chosen_pipeline['stages'] as $stg ) {
+							$result['pipeline']['stages'][] = array(
+								'id'    => (string) $stg['id'],
+								'label' => isset( $stg['label'] ) ? $stg['label'] : '',
+							);
+						}
+						$first_stage                       = $chosen_pipeline['stages'][0];
+						$result['pipeline']['stage_id']    = (string) $first_stage['id'];
+						$result['pipeline']['stage_label'] = isset( $first_stage['label'] ) ? $first_stage['label'] : '';
+					}
+				}
+			} else {
+				$msg = isset( $body['message'] ) ? $body['message'] : "Error HTTP {$code}";
+				$result['pipeline']['error'] = $msg;
+				$result['success']           = false;
+			}
+		}
+
+		return $result;
 	}
 
 	/**
