@@ -35,10 +35,34 @@ class AlieCore_REST {
 			set_transient( $key, $count + 1, 10 * MINUTE_IN_SECONDS );
 		}
 
+		$submission_id = sanitize_text_field( $request->get_param( 'submission_id' ) );
+		$email         = sanitize_email( $request->get_param( 'email' ) );
+		$empresa       = sanitize_text_field( $request->get_param( 'empresa' ) );
+
+		// Autenticación de servidor a servidor para el flujo piloto con submission_id
+		// Si falta el secreto o es incorrecto, el flujo piloto debe fallar sin guardar
+		if ( ! empty( $submission_id ) ) {
+			$pilot_secret = defined( 'ALIE_PILOT_SECRET' ) ? ALIE_PILOT_SECRET : get_option( 'alie_pilot_secret', '' );
+			$auth_header  = $request->get_header( 'x-alie-pilot-token' );
+			if ( empty( $auth_header ) ) {
+				$raw_auth = $request->get_header( 'authorization' );
+				if ( $raw_auth && str_starts_with( $raw_auth, 'Bearer ' ) ) {
+					$auth_header = substr( $raw_auth, 7 );
+				}
+			}
+			if ( empty( $pilot_secret ) || empty( $auth_header ) || ! hash_equals( (string) $pilot_secret, (string) $auth_header ) ) {
+				return new WP_Error( 'unauthorized', 'No autorizado para el flujo piloto', array( 'status' => 401 ) );
+			}
+		}
+
 		$nombre     = sanitize_text_field( $request->get_param( 'nombre' ) );
 		$whatsapp   = sanitize_text_field( $request->get_param( 'whatsapp' ) );
 		$servicio   = sanitize_text_field( $request->get_param( 'servicio' ) );
 		$mensaje    = sanitize_textarea_field( $request->get_param( 'mensaje' ) );
+		$wp_mensaje = sanitize_textarea_field( $request->get_param( 'wp_mensaje' ) );
+		if ( empty( $wp_mensaje ) ) {
+			$wp_mensaje = $mensaje;
+		}
 		$canal      = sanitize_text_field( $request->get_param( 'canal' ) );
 		$website    = sanitize_text_field( $request->get_param( 'website' ) ); // honeypot
 		$pagina     = sanitize_text_field( $request->get_param( 'pagina' ) );
@@ -56,13 +80,192 @@ class AlieCore_REST {
 			return new WP_Error( 'missing_fields', 'Faltan datos obligatorios', array( 'status' => 400 ) );
 		}
 
+		$queue_id     = null;
+		$is_recovered = false;
+
+		// 1. Guarda PRIMERO en la tabla del piloto.
+		// La inserción atómica con submission_id UNIQUE decide qué petición creó la solicitud.
+		if ( ! empty( $submission_id ) ) {
+			$content_hash = AlieCore_DB::calculate_content_hash(
+				array(
+					'nombre'     => $nombre,
+					'whatsapp'   => $whatsapp,
+					'email'      => $email,
+					'empresa'    => $empresa,
+					'servicio'   => $servicio,
+					'mensaje'    => $mensaje, // Conserva completo el mensaje que escribió el prospecto
+					'canal'      => $canal,
+					'formulario' => $formulario,
+					'pagina'     => $pagina,
+				)
+			);
+
+			$existing = AlieCore_DB::get_by_submission_id( $submission_id );
+
+			if ( $existing ) {
+				// Mismo submission_id con datos canónicos idénticos: recuperación idempotente
+				if ( hash_equals( $existing->content_hash, $content_hash ) ) {
+					$queue_id     = (int) $existing->id;
+					$is_recovered = true;
+
+					// Si ya tiene un CPT lead post vinculado, reutilizarlo sin duplicar post ni email
+					if ( ! empty( $existing->wp_post_id ) ) {
+						return rest_ensure_response(
+							array(
+								'success'       => true,
+								'id'            => (int) $existing->wp_post_id,
+								'queue_id'      => $queue_id,
+								'submission_id' => $existing->submission_id,
+								'status'        => $existing->hubspot_status,
+								'recovered'     => true,
+							)
+						);
+					}
+
+					// Si wp_post_id es null, comprobar si el post ya existe en postmeta
+					// (caso de interrupción después de crear el registro y antes de enlazarlo)
+					global $wpdb;
+					$dangling_post = $wpdb->get_var(
+						$wpdb->prepare(
+							"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_alie_submission_id' AND meta_value = %s LIMIT 1",
+							$submission_id
+						)
+					);
+					if ( ! empty( $dangling_post ) ) {
+						AlieCore_DB::link_post_id( $queue_id, (int) $dangling_post );
+						return rest_ensure_response(
+							array(
+								'success'       => true,
+								'id'            => (int) $dangling_post,
+								'queue_id'      => $queue_id,
+								'submission_id' => $existing->submission_id,
+								'status'        => $existing->hubspot_status,
+								'recovered'     => true,
+							)
+						);
+					}
+
+					// Si wp_post_id y postmeta son null (el proceso original se interrumpió tras guardar la fila
+					// y antes de crear el registro lead), este reintento asume la finalización:
+					// crea el registro lead, lo enlaza a la fila existente y confirma el envío sin quedarse en 503.
+				} else {
+					// Mismo submission_id con datos distintos: conflicto 409
+					return new WP_Error(
+						'submission_conflict',
+						'El submission_id ya fue utilizado con datos distintos.',
+						array( 'status' => 409 )
+					);
+				}
+			} else {
+				// Inserción primaria en wp_alie_hubspot_queue
+				$whatsapp_e164 = AlieCore_DB::normalize_e164( $whatsapp );
+				$inserted_id   = AlieCore_DB::insert_lead(
+					array(
+						'submission_id' => $submission_id,
+						'content_hash'  => $content_hash,
+						'nombre'        => $nombre,
+						'whatsapp'      => $whatsapp,
+						'whatsapp_e164' => $whatsapp_e164,
+						'email'         => $email,
+						'empresa'       => $empresa,
+						'servicio'      => $servicio,
+						'mensaje'       => $mensaje, // Mensaje completo del prospecto
+						'canal'         => $canal,
+						'pagina'        => $pagina,
+						'formulario'    => $formulario,
+						'attribution'   => $attribution,
+						'wp_post_id'    => null,
+					)
+				);
+
+				if ( false === $inserted_id ) {
+					// Carrera concurrente: otra petición insertó el submission_id en este microsegundo
+					$concurrent = AlieCore_DB::get_by_submission_id( $submission_id );
+					if ( $concurrent ) {
+						if ( hash_equals( $concurrent->content_hash, $content_hash ) ) {
+							$queue_id     = (int) $concurrent->id;
+							$is_recovered = true;
+
+							// Espera de sincronización de cortesía si la primera petición está en curso
+							global $wpdb;
+							$retries = 0;
+							while ( empty( $concurrent->wp_post_id ) && $retries < 10 ) {
+								usleep( 100000 ); // 100ms
+								$concurrent = AlieCore_DB::get_by_submission_id( $submission_id );
+								$retries++;
+							}
+
+							if ( ! empty( $concurrent->wp_post_id ) ) {
+								return rest_ensure_response(
+									array(
+										'success'       => true,
+										'id'            => (int) $concurrent->wp_post_id,
+										'queue_id'      => $queue_id,
+										'submission_id' => $concurrent->submission_id,
+										'status'        => $concurrent->hubspot_status,
+										'recovered'     => true,
+									)
+								);
+							}
+
+							// Comprobar si quedó huérfano en postmeta
+							$dangling = $wpdb->get_var(
+								$wpdb->prepare(
+									"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_alie_submission_id' AND meta_value = %s LIMIT 1",
+									$submission_id
+								)
+							);
+							if ( ! empty( $dangling ) ) {
+								AlieCore_DB::link_post_id( $queue_id, (int) $dangling );
+								return rest_ensure_response(
+									array(
+										'success'       => true,
+										'id'            => (int) $dangling,
+										'queue_id'      => $queue_id,
+										'submission_id' => $concurrent->submission_id,
+										'status'        => $concurrent->hubspot_status,
+										'recovered'     => true,
+									)
+								);
+							}
+
+							// Si superó el límite de espera y aún no está el post: solicitud en progreso
+							// Jamás crear un post duplicado ni enviar correo duplicado
+							return new WP_Error(
+								'request_in_progress',
+								'La solicitud ya está siendo procesada en el servidor. Intenta de nuevo en unos momentos.',
+								array( 'status' => 503 )
+							);
+						} else {
+							return new WP_Error(
+								'submission_conflict',
+								'El submission_id ya fue utilizado con datos distintos.',
+								array( 'status' => 409 )
+							);
+						}
+					} else {
+						// Falla real al insertar en tabla: error 500 y cero conversiones
+						return new WP_Error(
+							'queue_insert_failed',
+							'Error al guardar la solicitud en la base de datos.',
+							array( 'status' => 500 )
+						);
+					}
+				} else {
+					$queue_id = (int) $inserted_id;
+				}
+			}
+		}
+
+		// 2. Crear CPT lead por compatibilidad (solo el creador primario o flujo legacy)
 		$title = ! empty( $nombre ) ? $nombre : $whatsapp;
 
 		$post_id = wp_insert_post(
 			array(
-				'post_type'   => 'lead',
-				'post_status' => 'publish',
-				'post_title'  => $title,
+				'post_type'    => 'lead',
+				'post_status'  => 'publish',
+				'post_title'   => $title,
+				'post_content' => $wp_mensaje,
 			)
 		);
 
@@ -73,10 +276,22 @@ class AlieCore_REST {
 		update_post_meta( $post_id, 'nombre', $nombre );
 		update_post_meta( $post_id, 'whatsapp', $whatsapp );
 		update_post_meta( $post_id, 'servicio', $servicio );
-		update_post_meta( $post_id, 'mensaje', $mensaje );
+		update_post_meta( $post_id, 'mensaje', $wp_mensaje );
 		update_post_meta( $post_id, 'canal', $canal );
 		update_post_meta( $post_id, 'pagina', $pagina );
 		update_post_meta( $post_id, 'formulario', $formulario );
+		if ( ! empty( $email ) ) {
+			update_post_meta( $post_id, 'email', $email );
+		}
+		if ( ! empty( $empresa ) ) {
+			update_post_meta( $post_id, 'empresa', $empresa );
+		}
+		if ( ! empty( $submission_id ) ) {
+			update_post_meta( $post_id, '_alie_submission_id', $submission_id );
+			if ( $queue_id ) {
+				AlieCore_DB::link_post_id( $queue_id, $post_id );
+			}
+		}
 
 		// C5.6A: persiste la attribution estructurada (snapshot versionado + meta promovidos).
 		// Fuente de verdad: alie_attribution. Los alie_* son copias consultables.
@@ -122,21 +337,28 @@ class AlieCore_REST {
 			}
 		}
 
-		// Notificación por correo (destinatario configurable en Ajustes → Alié Digital).
-		$to = AlieCore_Settings::get_notification_email();
-		if ( $to ) {
-			$subject = 'Nuevo lead desde la web: ' . $title;
-			$body    = "Nombre: {$nombre}\nWhatsApp/Teléfono: {$whatsapp}\nServicio: {$servicio}\nMensaje: {$mensaje}\nCanal: {$canal}\n";
-			$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
-			wp_mail( $to, $subject, $body, $headers );
+		// Notificación por correo: solo si NO es una solicitud recuperada (evita duplicar correos)
+		if ( ! $is_recovered ) {
+			$to = AlieCore_Settings::get_notification_email();
+			if ( $to ) {
+				$subject = 'Nuevo lead desde la web: ' . $title;
+				$body    = "Nombre: {$nombre}\nWhatsApp/Teléfono: {$whatsapp}\nServicio: {$servicio}\nMensaje: {$wp_mensaje}\nCanal: {$canal}\n";
+				$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
+				wp_mail( $to, $subject, $body, $headers );
+			}
 		}
 
-		return rest_ensure_response(
-			array(
-				'success' => true,
-				'id'      => $post_id,
-			)
+		$response_data = array(
+			'success' => true,
+			'id'      => $post_id,
 		);
+		if ( ! empty( $submission_id ) ) {
+			$response_data['submission_id'] = $submission_id;
+			$response_data['queue_id']      = $queue_id;
+			$response_data['status']        = 'PENDING';
+		}
+
+		return rest_ensure_response( $response_data );
 	}
 
 	/**
