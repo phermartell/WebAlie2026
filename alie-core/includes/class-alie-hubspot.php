@@ -325,10 +325,11 @@ class AlieCore_HubSpot {
 			$lastname   = isset( $name_parts[1] ) ? $name_parts[1] : '';
 
 			$contact_props = array(
-				'whatsapp_e164' => $item->whatsapp_e164,
-				'phone'         => $item->whatsapp_e164,
-				'mobilephone'   => $item->whatsapp,
-				'firstname'     => $firstname,
+				'whatsapp_e164'            => $item->whatsapp_e164,
+				'hs_whatsapp_phone_number' => $item->whatsapp_e164,
+				'phone'                    => $item->whatsapp_e164,
+				'mobilephone'              => $item->whatsapp,
+				'firstname'                => $firstname,
 			);
 			if ( ! empty( $lastname ) ) {
 				$contact_props['lastname'] = $lastname;
@@ -338,6 +339,10 @@ class AlieCore_HubSpot {
 			}
 			if ( ! empty( $item->empresa ) ) {
 				$contact_props['company'] = $item->empresa;
+			}
+			$clean_servicio = ! empty( $item->servicio ) ? explode( ' [', $item->servicio )[0] : '';
+			if ( ! empty( $clean_servicio ) ) {
+				$contact_props['cul_es_el_servicio_de_tu_inters'] = $clean_servicio;
 			}
 
 			$contact_payload = array(
@@ -376,15 +381,13 @@ class AlieCore_HubSpot {
 			$contact_id = (string) $contact_body['results'][0]['id'];
 
 			// 2. Upsert de Ticket por submission_id (identificador único del envío)
-			$clean_servicio = explode( ' [', $item->servicio )[0];
 			$ticket_props = array(
-				'submission_id'      => $item->submission_id,
-				'subject'            => "Lead: {$item->nombre} - {$clean_servicio}",
-				'content'            => $item->mensaje,
-				'hs_pipeline'        => '0',
-				'hs_pipeline_stage'  => '1',
-				'hs_ticket_category' => $clean_servicio,
-				'source_type'        => ( 'whatsapp' === $item->canal ) ? 'WHATSAPP' : 'WEB',
+				'submission_id'     => $item->submission_id,
+				'subject'           => "Lead: {$item->nombre} - {$clean_servicio}",
+				'content'           => $item->mensaje,
+				'hs_pipeline'       => '0',
+				'hs_pipeline_stage' => '1',
+				'source_type'       => ( 'whatsapp' === $item->canal ) ? 'CHAT' : 'FORM',
 			);
 
 			$ticket_payload = array(
