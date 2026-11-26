@@ -17,6 +17,9 @@ interface LeadPayload {
   pagina?: unknown;
   formulario?: unknown;
   attribution?: unknown;
+  submissionId?: unknown;
+  email?: unknown;
+  empresa?: unknown;
 }
 
 // Convierte a string solo si ya es string; nunca coacciona otros tipos.
@@ -86,6 +89,47 @@ export async function POST(req: NextRequest) {
   const formulario = toStr(body.formulario).trim();
   const website = toStr(body.website);
   const recaptchaToken = toStr(body.recaptchaToken);
+  const submissionId = toStr(body.submissionId).trim();
+  const email = toStr(body.email).trim();
+  const empresa = toStr(body.empresa).trim();
+
+  // 1. Cierra el alcance: Exige la ruta exacta de Puebla / Diseño web para el formulario principal y el flotante
+  let paginaPathname = "";
+  try {
+    const parsedUrl = new URL(pagina, "https://aliedigital.com");
+    paginaPathname = parsedUrl.pathname.replace(/\/+$/, "");
+  } catch {
+    paginaPathname = pagina.split("?")[0].replace(/\/+$/, "");
+  }
+
+  const isExactPueblaRoute = paginaPathname === "/puebla/diseno-de-paginas-web";
+  const isPilotForm =
+    isExactPueblaRoute &&
+    (formulario === "Formulario de Landing (Estrategia)" ||
+      formulario === "Chat WhatsApp Puebla");
+
+  // Validación de identificador UUID válido
+  const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  const isValidSubmissionId = UUID_REGEX.test(submissionId);
+
+  // Con el piloto activo, rechaza un identificador ausente o inválido en esos dos formularios
+  if (process.env.HUBSPOT_PILOT_ENABLED === "true" && isPilotForm) {
+    if (!submissionId || !isValidSubmissionId) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Identificador de solicitud (submissionId) ausente o inválido para el piloto.",
+          code: "INVALID_SUBMISSION_ID",
+        },
+        { status: 400 }
+      );
+    }
+  }
+
+  const isPilotRequest =
+    process.env.HUBSPOT_PILOT_ENABLED === "true" &&
+    isPilotForm &&
+    isValidSubmissionId;
 
   // Atribución: metadata opcional. Nunca invalida un lead por sí sola.
   const attribution = sanitizeAttribution(body.attribution);
@@ -163,28 +207,86 @@ export async function POST(req: NextRequest) {
     wpMensaje += formatAttributionSummary(attribution);
   }
 
-  // 2. Guardar en WordPress (CPT "lead" vía AlieCore)
+  // 2. Guardar en WordPress (CPT "lead" y tabla wp_alie_hubspot_queue vía AlieCore)
   const wpUrl = process.env.NEXT_PUBLIC_WP_API_URL;
   if (wpUrl) {
     try {
+      const pilotSecret = process.env.ALIE_PILOT_SECRET || "";
+      const wpHeaders: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
+      if (isPilotRequest && pilotSecret) {
+        wpHeaders["X-Alie-Pilot-Token"] = pilotSecret;
+      }
+
       const wpRes = await fetch(`${wpUrl.replace(/\/+$/, "")}/wp-json/alie/v1/lead`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: wpHeaders,
         body: JSON.stringify({
           nombre,
           whatsapp,
           servicio,
-          mensaje: wpMensaje,
+          mensaje, // Mensaje limpio para cálculo de hash canónico en la cola
+          wp_mensaje: wpMensaje, // Mensaje enriquecido con diagnóstico para el CPT de WordPress
           canal,
           pagina,
           formulario,
+          ...(isPilotRequest ? { submission_id: submissionId } : {}),
+          ...(email ? { email } : {}),
+          ...(empresa ? { empresa } : {}),
           // C5.6A: atribución estructurada (objeto ya sanitizado por sanitizeAttribution).
           // Solo se añade si existe; nunca bloquea el lead si es null.
           ...(attribution ? { attribution } : {}),
         }),
       });
-      if (wpRes.ok) savedTo.push("wordpress");
-      else errors.push(`wordpress:${wpRes.status}`);
+
+      if (wpRes.status === 409) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Submission ID conflict: el identificador ya fue utilizado con datos distintos.",
+            code: "SUBMISSION_ID_CONFLICT",
+          },
+          { status: 409 }
+        );
+      }
+
+      if (wpRes.ok) {
+        try {
+          const wpData = await wpRes.json();
+          const wpId = wpData?.id;
+          // Contrato documentado de AlieCore (wp_insert_post): entero seguro positivo
+          const isValidIntId =
+            (typeof wpId === "number" && Number.isSafeInteger(wpId) && wpId > 0) ||
+            (typeof wpId === "string" && /^[1-9]\d*$/.test(wpId.trim()) && Number.isSafeInteger(Number(wpId)));
+
+          if (isPilotRequest) {
+            // Confirmación estricta de piloto: ID de post válido, queue_id válido y submission_id esperado
+            const queueId = wpData?.queue_id;
+            const isValidQueueId =
+              (typeof queueId === "number" && Number.isSafeInteger(queueId) && queueId > 0) ||
+              (typeof queueId === "string" && /^[1-9]\d*$/.test(queueId.trim()) && Number.isSafeInteger(Number(queueId)));
+            const isExpectedSubmission = wpData?.submission_id === submissionId;
+
+            if (wpData && wpData.success === true && isValidIntId && isValidQueueId && isExpectedSubmission) {
+              savedTo.push("wordpress");
+            } else {
+              errors.push("wordpress:unconfirmed_pilot");
+            }
+          } else {
+            // Flujo regular fuera del piloto
+            if (wpData && wpData.success === true && isValidIntId) {
+              savedTo.push("wordpress");
+            } else {
+              errors.push("wordpress:invalid_response");
+            }
+          }
+        } catch {
+          errors.push("wordpress:invalid_json");
+        }
+      } else {
+        errors.push(`wordpress:${wpRes.status}`);
+      }
     } catch {
       errors.push("wordpress:unreachable");
     }
@@ -212,12 +314,61 @@ export async function POST(req: NextRequest) {
           zonaHoraria: "America/Mexico_City",
         }),
       });
-      if (crmRes.ok) savedTo.push("crm");
-      else errors.push(`crm:${crmRes.status}`);
+      if (crmRes.ok) {
+        try {
+          const crmData = await crmRes.json();
+          // Contrato verificado en AgencyMCC (/api/webhooks/webalie/route.ts):
+          // Emite { success: true, contact: { id, externalId, ... } } tras la transacción atómica de Prisma
+          const hasConfirmedContact =
+            crmData &&
+            typeof crmData === "object" &&
+            crmData.success === true &&
+            crmData.contact &&
+            typeof crmData.contact === "object" &&
+            crmData.contact.id !== undefined &&
+            crmData.contact.id !== null;
+
+          if (hasConfirmedContact) {
+            savedTo.push("crm");
+          } else {
+            errors.push("crm:unconfirmed");
+          }
+        } catch {
+          // Status 2xx sin JSON (ej. 204 No Content, texto plano o 200 con HTML): no confirma guardado real
+          errors.push("crm:invalid_response");
+        }
+      } else {
+        errors.push(`crm:${crmRes.status}`);
+      }
     } catch {
       errors.push("crm:unreachable");
     }
   }
 
-  return NextResponse.json({ success: true, savedTo, errors });
+  // Criterio de éxito:
+  // - En flujo piloto: confirmación estricta de WordPress (AlieCore en cola atómica)
+  // - Fuera del piloto: confirmación de al menos un destino (WordPress o CRM)
+  const isConfirmed = isPilotRequest
+    ? savedTo.includes("wordpress")
+    : savedTo.length > 0;
+
+  if (!isConfirmed) {
+    return NextResponse.json(
+      {
+        success: false,
+        error:
+          "No pudimos registrar tu solicitud en este momento. Por favor intenta de nuevo en unos momentos o contáctanos por WhatsApp.",
+        savedTo,
+        errors,
+      },
+      { status: 502 }
+    );
+  }
+
+  return NextResponse.json({
+    success: true,
+    savedTo,
+    errors,
+    ...(submissionId ? { submissionId } : {}),
+  });
 }

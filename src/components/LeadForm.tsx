@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
 import { getAttribution, type AttributionPayload } from "@/lib/attribution";
 
@@ -21,6 +21,7 @@ export default function LeadForm({
   const [website, setWebsite] = useState(""); // honeypot anti-bots
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState("");
+  const submissionIdRef = useRef<string | null>(null);
 
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
 
@@ -35,6 +36,13 @@ export default function LeadForm({
     if (!nombre.trim() || !telefono.trim()) {
       setError("Nombre y teléfono son obligatorios.");
       return;
+    }
+
+    if (!submissionIdRef.current) {
+      submissionIdRef.current =
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
     }
 
     setStatus("submitting");
@@ -76,12 +84,19 @@ export default function LeadForm({
           pagina: typeof window !== "undefined" ? window.location.href : "",
           formulario: "Formulario de Landing (Estrategia)",
           attribution,
+          submissionId: submissionIdRef.current,
+          email: correo.trim() || undefined,
+          empresa: empresa.trim() || undefined,
         }),
       });
       const data = await res.json();
       if (!data.success) {
+        if (data.code === "SUBMISSION_ID_CONFLICT") {
+          submissionIdRef.current = null;
+        }
         throw new Error(data.error || "No se pudo enviar tu solicitud.");
       }
+      submissionIdRef.current = null;
       setStatus("success");
       // Emitir evento de conversión únicamente tras confirmación del servidor.
       // GTM escuchará "lead_success" para disparar la etiqueta GA4 CTAContacto.

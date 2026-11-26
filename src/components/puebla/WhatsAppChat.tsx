@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getRecaptchaToken, loadRecaptcha } from "@/lib/recaptcha";
 import { getAttribution, type AttributionPayload } from "@/lib/attribution";
@@ -23,6 +23,7 @@ export default function WhatsAppChat({ services, isOpen: externalIsOpen, setIsOp
   const [website, setWebsite] = useState(""); // honeypot anti-bots
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState("");
+  const submissionIdRef = useRef<string | null>(null);
 
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
   const whatsappNumber = "522213279555";
@@ -49,6 +50,13 @@ export default function WhatsAppChat({ services, isOpen: externalIsOpen, setIsOp
     if (!nombre.trim() || !tel.trim() || !servicio) {
       setError("Completa tu nombre, teléfono y servicio de interés.");
       return;
+    }
+
+    if (!submissionIdRef.current) {
+      submissionIdRef.current =
+        typeof crypto !== "undefined" && crypto.randomUUID
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
     }
 
     setStatus("submitting");
@@ -82,13 +90,19 @@ export default function WhatsAppChat({ services, isOpen: externalIsOpen, setIsOp
           pagina: typeof window !== "undefined" ? window.location.href : "",
           formulario: "Chat WhatsApp Puebla",
           attribution,
+          submissionId: submissionIdRef.current,
         }),
       });
 
       const data = await res.json();
       if (!data.success) {
+        if (data.code === "SUBMISSION_ID_CONFLICT") {
+          submissionIdRef.current = null;
+        }
         throw new Error(data.error || "No se pudo registrar la solicitud.");
       }
+
+      submissionIdRef.current = null;
 
       // Generate WhatsApp link text
       const text = `Hola, mi nombre es ${nombre.trim()}. Me interesa el servicio de: ${servicio}.${
