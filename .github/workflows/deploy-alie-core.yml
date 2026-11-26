@@ -87,12 +87,14 @@ jobs:
             alie-core/README.md \
             alie-core/CHANGELOG.md \
             alie-core/includes/class-alie-cpt.php \
+            alie-core/includes/class-alie-db.php \
+            alie-core/includes/class-alie-hubspot.php \
             alie-core/includes/class-alie-meta.php \
             alie-core/includes/class-alie-rest.php \
             alie-core/includes/class-alie-settings.php \
             | tar -x -C build
 
-      - name: Validar allowlist (exactamente 7 archivos, sin extras)
+      - name: Validar allowlist (exactamente 9 archivos, sin extras)
         shell: bash
         run: |
           set -euo pipefail
@@ -101,6 +103,8 @@ jobs:
             CHANGELOG.md \
             README.md \
             includes/class-alie-cpt.php \
+            includes/class-alie-db.php \
+            includes/class-alie-hubspot.php \
             includes/class-alie-meta.php \
             includes/class-alie-rest.php \
             includes/class-alie-settings.php | sort)"
@@ -267,6 +271,8 @@ jobs:
           files = [
             ('alie-core/alie-core.php', 'alie-core.php'),
             ('alie-core/includes/class-alie-cpt.php', 'includes/class-alie-cpt.php'),
+            ('alie-core/includes/class-alie-db.php', 'includes/class-alie-db.php'),
+            ('alie-core/includes/class-alie-hubspot.php', 'includes/class-alie-hubspot.php'),
             ('alie-core/includes/class-alie-meta.php', 'includes/class-alie-meta.php'),
             ('alie-core/includes/class-alie-rest.php', 'includes/class-alie-rest.php'),
             ('alie-core/includes/class-alie-settings.php', 'includes/class-alie-settings.php'),
